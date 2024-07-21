@@ -1,0 +1,129 @@
+.main{
+    width:fit-content;
+    min-width: 60px;
+    height: 100vh;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    position: fixed;
+}
+.main2{
+    min-width: 60px;
+    width: 230px;
+    height: 100vh;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    position: fixed;
+}
+.main3{
+    width: 230px;
+
+}
+.main4{
+    width: 80px;
+}
+.menuList{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    /* gap: 10px; */
+    padding-top: 75px;
+    width: 80px;
+}
+.menuList div{
+    /* background: rgb(60, 60, 60); */
+    height: 60px;
+    width: 70px;
+    margin-left: 2.5px;
+    align-content: center;
+    border-radius: 10px;
+}
+.menuList div:hover{
+    background: rgb(60, 60, 60);
+}
+.menuList i{
+    font-size: 20px;
+}
+.menuList span{
+    font-size: 8px;
+}
+.menuList2{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+    padding-top: 75px;
+}
+.menuList2 div{
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+}
+hr{
+    border: 0.1px solid gray;
+}
+.menuList2 div:hover{
+    background: rgb(61, 61, 61);
+}
+.menuList2 i{
+    font-size: 20px;
+    margin-right: 20px;
+}
+.menuList2 span{
+    font-size: 15px;
+}
+.upload{
+    display: none;
+}
+@media screen and (max-width:750px) {
+    .main{
+        height:fit-content;
+        width: 100%;
+        background-color: rgb(0, 0, 0);
+        color: white;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+    .menuList{
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        /* gap: 10px; */
+        padding-top: 3px;
+        width: 100%;
+        justify-content: space-evenly;
+        border-top: 1px solid gray;
+        margin-bottom: 3px;
+    }
+    .menuList div{
+        /* background: rgb(60, 60, 60); */
+        height: 45px;
+        width: 70px;
+        max-width: 70px;
+        align-content: center;
+        border-radius: 10px;
+        line-height: 12px;
+    }
+    .menuList div:hover{
+        background: rgb(60, 60, 60);
+    }
+    .menuList i{
+        font-size: 18px;
+    }
+    .menuList span{
+        font-size: 8px;
+    }
+    .download{
+        display: none;
+    }
+    .upload{
+        display: block;
+        border: 1px solid gray;
+
+    }
+}
+@media screen and (max-width:450px) {
+    .menuList{
+        justify-content: space-between;
+    }
+}

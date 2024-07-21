@@ -1,0 +1,156 @@
+.bigBox{
+    display: flex;
+}
+.videos{
+    margin-top: 60px;
+    width: 100%;
+    padding: 10px;
+    /* padding-right: 5px; */
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    gap: 0.5vw;
+    row-gap: 1.5vw;
+    justify-content: space-between;
+    /* border: 2px solid white; */
+    padding-bottom: 50px;
+}
+.singleVid{
+    background-color: black;
+    width: 24%;
+    /* max-width: 32%; */
+    /* padding: 0.5%; */
+    border-radius: 20px;
+}
+.thumbnail{
+    height: 12.5vw;
+    background-color: aqua;
+    border-radius: 15px;
+    width: 100%;
+}
+.videoDetail{
+    display: flex;
+    margin-top: 0.7vw;
+    gap: 1vw;
+    color: white;
+}
+.icon{
+    height: 3vw;
+    min-height: 3vw;
+    width: 3vw;
+    min-width: 3vw;
+    background-color: azure;
+    border-radius: 100%;
+}
+.title{
+    font-size: 1.1vw;
+    /* border: 1px solid white; */
+    font-weight: 800;
+    max-height: 2.6vw;
+    margin-top: 0.2vw;
+    overflow: hidden;
+}
+.channel{
+    font-size: 0.9vw;
+    max-height: 2.2vw;
+    overflow: hidden;
+    /* border: 1px solid white; */
+}
+@media screen and (max-width:1100px) {
+    .singleVid{
+        width: 32.5%;
+    }
+    .thumbnail{
+        height: 16.5vw;
+    }
+    .icon{
+        height: 4vw;
+        min-height: 4vw;
+        width: 4vw;
+        min-width: 4vw;
+    }
+    .title{
+        font-size: 1.5vw;
+        /* border: 1px solid white; */
+        font-weight: 800;
+        /* height: 3.5vw; */
+        max-height: 3.7vw;
+    }
+    .channel{
+        font-size: 1.3vw;
+        max-height: 3.2vw;
+        overflow: hidden;
+        /* border: 1px solid white; */
+    }
+}
+@media screen and (max-width:750px) {
+    .Sidenav{
+        display: none;
+    }
+    .videos{
+        margin-top: 0;
+        row-gap: 2vw;
+    }
+    .videoDetail{
+        gap: 2vw;
+    }
+    .singleVid{
+        width: 49%;
+    }
+    .thumbnail{
+        height: 25vw;
+    }
+    .icon{
+        height: 5.5vw;
+        min-height: 5.5vw;
+        width: 5.5vw;
+        min-width: 5.5vw;
+    }
+    .title{
+        font-size: 2vw;
+        /* border: 1px solid white; */
+        font-weight: 800;
+        /* height: 5vw; */
+        max-height: 4.9vw;
+    }
+    .channel{
+        font-size: 1.8vw;
+        max-height: 4.4vw;
+        /* border: 1px solid white; */
+        overflow: hidden;
+    }
+}
+@media screen and (max-width:450px) {
+    .videos{
+        row-gap: 3vw;
+    }
+    .videoDetail{
+        gap: 3vw;
+    }
+    .singleVid{
+        width: 100%;
+    }
+    .thumbnail{
+        height: 50vw;
+    }
+    .icon{
+        height: 10vw;
+        min-height: 10vw;
+        width: 10vw;
+        min-width: 10vw;
+    }
+    .title{
+        font-size: 3.8vw;
+        /* border: 1px solid white; */
+        font-weight: 800;
+        /* height: 3.5vw; */
+        max-height: 9vw;
+    }
+    .channel{
+        font-size: 3vw;
+        /* height: 7vw; */
+        max-height: 7.3vw;
+        overflow: hidden;
+        /* border: 1px solid white; */
+    }
+}
