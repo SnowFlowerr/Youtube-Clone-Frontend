@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
 import styles from "./Sidenav.module.css"
+import { useSelector } from 'react-redux'
 
 
-export default function Sidenav({showMenu}) {
-    
+export default function Sidenav() {
+    const menu = useSelector((state) => state.menu.value)
     return (
         <>
-        <div className={showMenu ? styles.main2 : styles.main}>
-            {showMenu ? <div className={styles.menuList2}>
+        <div className={menu ? styles.main2 : styles.main}>
+            {menu ? <div className={styles.menuList2}>
+                <a href="./">
                 <div>
                     <i class="fa-solid fa-house"></i>
                     <span>Home</span>
                 </div>
+                </a>
                 <div>
                     <i class="fa-solid fa-video"></i>
                     <span>Shorts</span>
@@ -35,34 +38,34 @@ export default function Sidenav({showMenu}) {
             </div>
                 :
                 <div className={styles.menuList}>
-                    <div>
+                    <a href="./">
                         <i class="fa-solid fa-house"></i><br />
                         <span>Home</span>
-                    </div>
-                    <div>
+                        </a>
+                    <a href="./">
                         <i class="fa-solid fa-video"></i><br />
                         <span>Shorts</span>
-                    </div>
-                    <div className={styles.upload}>
+                    </a>
+                    <a href="./" className={styles.upload}>
                         <i class="fa-solid fa-upload"></i><br />
                         <span>Upload</span>
-                    </div>
-                    <div>
+                    </a>
+                    <a href="./">
                         <i class="fa-solid fa-music"></i><br />
                         <span>Music</span>
-                    </div>
-                    <div>
+                    </a>
+                    <a href="./">
                         <i class="fa-solid fa-tv"></i><br />
                         <span>Subscription</span>
-                    </div>
-                    <div className={styles.download}>
+                    </a>
+                    <a href="./" className={styles.download}>
                         <i class="fa-solid fa-download"></i><br />
                         <span>Download</span>
-                    </div>
+                    </a>
                 </div>}
                 
         </div>
-        <div className={showMenu ? styles.main3 : styles.main4}>
+        <div className={menu ? styles.main3 : styles.main4}>
         </div>
         </>
     )

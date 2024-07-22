@@ -1,0 +1,29 @@
+.bigBox{
+    display: flex;
+}
+.box{
+    margin-top: 60px;
+    padding: 10px;
+}
+.singleVideo{
+    display: flex;
+    gap: 10px;
+}
+.video{
+    height: 18vw;
+    width: 30vw;
+    min-height: 150px;
+    min-width:250px;
+    background-color: brown;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+@media screen and (max-width:750px) {
+    .Sidenav{
+        /* display: none; */
+    }
+    .box{
+        margin-top: 0;
+    }
+}

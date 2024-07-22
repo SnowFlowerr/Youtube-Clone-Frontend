@@ -4,6 +4,7 @@ import { lightTheme,darkTheme } from "./themes";
 import Signin from "./components/auth/Signin";
 import Signup from "./components/auth/Signup";
 import VideoPlay from "./components/videoplay/VideoPlay";
+import SearchedVid from "./components/searchedVid/SearchedVid";
 import styles from "./App.module.css"
 
 
@@ -16,6 +17,7 @@ function App() {
         <Route path='/signup' element={<Signup />} />
         <Route path='/signin' element={<Signin />} />
         <Route path='/player' element={<VideoPlay />} />
+        <Route path='/searchedvideo' element={<SearchedVid />} />
       </Routes>
     </div>
   );

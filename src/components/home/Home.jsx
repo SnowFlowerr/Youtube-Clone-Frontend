@@ -5,9 +5,10 @@ import Sidenav from '../navbar/Sidenav'
 import styles from './Home.module.css'
 
 
+
 export default function Home() {
-    const [showMenu, setshowMenu] = useState(false)
     const [videos, setVideos] = useState([1,2,2,2,2,2,22,2,2,2,2,2,2,2,2,2])
+    
     useEffect(() => {
         const fetchVideo = async () => {
             try {
@@ -23,10 +24,10 @@ export default function Home() {
     }, [])
     return (
         <>
-            <Navbar showMenu={showMenu} setshowMenu={setshowMenu}></Navbar>
+            <Navbar></Navbar>
             <div className={styles.bigBox}>
                 <div className={styles.Sidenav}>
-                <Sidenav showMenu={showMenu}></Sidenav>
+                <Sidenav></Sidenav>
                 </div>
                 <div className={styles.videos}>
                     {
@@ -53,8 +54,8 @@ export default function Home() {
                         )
                     }
 
-                <div>
-                <Sidenav showMenu={showMenu}></Sidenav>
+                <div className={styles.bottomNav}>
+                <Sidenav></Sidenav>
                 </div>
                 </div>
 

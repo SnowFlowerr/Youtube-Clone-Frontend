@@ -1,11 +1,18 @@
 import React, { useRef, useState } from 'react'
-import styles from "./Navbar.module.css"
+import { useDispatch, useSelector } from 'react-redux'
+import { showMenu } from '../../redux/Data/menuSlice'
 import logo from "../assets/Logo.png"
+import styles from "./Navbar.module.css"
 
-export default function Navbar({ showMenu, setshowMenu }) {
+export default function Navbar() {
     const [isSearch, setisSearch] = useState(true)
     const inputRef = useRef(null);
-    async function searchInp(){
+    const menu = useSelector((state) => state.menu.value)
+    const dispach = useDispatch();
+
+
+
+    function searchInp(){
             setisSearch(false)
             setTimeout(()=>{
                 inputRef.current.focus();
@@ -19,10 +26,10 @@ export default function Navbar({ showMenu, setshowMenu }) {
                         <>
                             <div className={styles.logoDetail}>
                                 <div className={styles.menu}>
-                                    {showMenu ?
-                                        <i className="fa-solid fa-xmark" onClick={() => setshowMenu(!showMenu)}></i>
+                                    {menu ?
+                                        <i className="fa-solid fa-xmark" onClick={() => dispach(showMenu())}></i>
                                         :
-                                        <i className="fa-solid fa-bars" onClick={() => setshowMenu(!showMenu)}></i>}
+                                        <i className="fa-solid fa-bars" onClick={() => dispach(showMenu())}></i>}
                                 </div>
                                 <a href="/" className={styles.logoDetail}>
                                     <img src={logo} alt="logoImg" height="30px" />
@@ -31,8 +38,8 @@ export default function Navbar({ showMenu, setshowMenu }) {
                             </div>
                             <div className={styles.search}>
                                 <div>
-                                    <input type="text" placeholder='Search here...' id='search'/>
-                                    <label htmlFor='search'><span><i className="fa-solid fa-magnifying-glass"></i></span></label>
+                                    <input type="text" placeholder='Search here...'/>
+                                    <span><i className="fa-solid fa-magnifying-glass"></i></span>
                                 </div>
                             </div>
                             <div className={styles.profile}>
@@ -44,12 +51,12 @@ export default function Navbar({ showMenu, setshowMenu }) {
                         </>
                         :
                         <div className={styles.smallSearch}>
-                            <div className={styles.back} onClick={() => setisSearch(true)}>
-                                <i className="fa-solid fa-xmark" ></i>
-                            </div>
                             <div className={styles.searchInp}>
                                 <input type="text" id='searchBtn' placeholder='Search here...' ref={inputRef}/>
                                 <span><i className="fa-solid fa-magnifying-glass"></i></span>
+                            </div>
+                            <div className={styles.back} onClick={() => setisSearch(true)}>
+                                <i className="fa-solid fa-xmark" ></i>
                             </div>
                         </div>
                 }
