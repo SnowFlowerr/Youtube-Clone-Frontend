@@ -187,6 +187,7 @@
 
     .Sidenav2{
         display: block;
+        z-index: 10;
     }
 
     .videoStatus {
@@ -246,5 +247,6 @@
         align-items: center;
         justify-content:left;
         width: 100%;
+        
     }
 }

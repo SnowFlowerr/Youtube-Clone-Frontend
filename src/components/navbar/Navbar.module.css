@@ -80,6 +80,24 @@ a{
 .search2{
     display: none;
 }
+.lastNav{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.upload i{
+    display: block;
+    font-size: 18px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    align-content: center;
+    border-radius: 100%;
+    background-color: rgb(44, 44, 44);
+}
+.upload i:hover{
+    background-color: rgb(76, 76, 76);
+}
 .profile{
     display: flex;
     gap: 15px;
@@ -93,6 +111,19 @@ a{
 }
 .smallSearch{
     display: none;
+}
+.signin{
+    padding: 8px 12px;
+    border: 1px solid rgb(75, 255, 47);
+    background-color: transparent;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    text-wrap: nowrap;
+}
+.signin:hover{
+    background-color: rgb(45, 45, 45);
 }
 @media screen and (max-width:750px) {
     .mainNav{
@@ -179,5 +210,8 @@ a{
     }
     .searchInp span:hover{
         font-size: larger;
+    }
+    .upload{
+        display: none;
     }
 }

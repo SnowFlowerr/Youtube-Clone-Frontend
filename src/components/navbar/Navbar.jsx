@@ -6,17 +6,18 @@ import styles from "./Navbar.module.css"
 
 export default function Navbar() {
     const [isSearch, setisSearch] = useState(true)
+    const [isSign, setisSign] = useState(false)
     const inputRef = useRef(null);
     const menu = useSelector((state) => state.menu.value)
     const dispach = useDispatch();
 
 
 
-    function searchInp(){
-            setisSearch(false)
-            setTimeout(()=>{
-                inputRef.current.focus();
-            },0)
+    function searchInp() {
+        setisSearch(false)
+        setTimeout(() => {
+            inputRef.current.focus();
+        }, 0)
     }
     return (
         <div className={styles.mainNav}>
@@ -38,21 +39,32 @@ export default function Navbar() {
                             </div>
                             <div className={styles.search}>
                                 <div>
-                                    <input type="text" placeholder='Search here...'/>
+                                    <input type="text" placeholder='Search here...' />
                                     <span><i className="fa-solid fa-magnifying-glass"></i></span>
                                 </div>
                             </div>
                             <div className={styles.profile}>
                                 <div className={styles.search2}>
-                                    <span><i className="fa-solid fa-magnifying-glass" onClick={searchInp}></i></span>
+                                    <span>
+                                        <i className="fa-solid fa-magnifying-glass" onClick={searchInp}></i>
+                                    </span>
                                 </div>
-                                <span className={styles.pro}></span>
+                                <div className={styles.lastNav}>
+                                    <div className={styles.upload}>
+                                        <i class="fa-solid fa-upload"></i>
+                                    </div>
+                                    {isSign ?
+                                        <span className={styles.pro}></span>
+                                        :
+                                        <a href="/signin"><button className={styles.signin}>Sign in</button></a>
+                                    }
+                                </div>
                             </div>
                         </>
                         :
                         <div className={styles.smallSearch}>
                             <div className={styles.searchInp}>
-                                <input type="text" id='searchBtn' placeholder='Search here...' ref={inputRef}/>
+                                <input type="text" id='searchBtn' placeholder='Search here...' ref={inputRef} />
                                 <span><i className="fa-solid fa-magnifying-glass"></i></span>
                             </div>
                             <div className={styles.back} onClick={() => setisSearch(true)}>
