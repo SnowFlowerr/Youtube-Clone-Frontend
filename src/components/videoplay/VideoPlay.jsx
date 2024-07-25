@@ -4,11 +4,16 @@ import Navbar from '../navbar/Navbar'
 import Sidenav from '../navbar/Sidenav'
 import { useSelector } from 'react-redux'
 import vid from "./VIDEO-2024-07-21-10-47-29.mp4"
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+import { darkTheme, lightTheme } from '../../themes'
+
 // import { useNavigate } from 'react-router-dom'
 
 export default function VideoPlay() {
 
     const menu = useSelector((state) => state.menu.value)
+    const theme = useSelector((state) => state.theme.value)
     // const navigate = useNavigate()
     const playRef = useRef(null)
     const boxRef = useRef(null)
@@ -16,6 +21,22 @@ export default function VideoPlay() {
     const [isSubs, setisSubs] = useState(false)
     const [isLike, setisLike] = useState(false)
     const [isDislike, setisDislike] = useState(false)
+    const [videoData, setvideoData] = useState({title:"jhgvvhj"})
+    const { id } = useParams();
+
+    useEffect(()=>{
+        async function fetchData(){
+            try{
+                const vidData=await axios.get(`http://localhost:800/api/videos/${id}`)
+                setvideoData(vidData.data)
+                // console.log(vidData.data)
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+        fetchData()
+    },[])
 
     useEffect(() => {
         if (menu) {
@@ -35,7 +56,21 @@ export default function VideoPlay() {
         playRef.current.style.display = 'block'
     }
     function handleSubscribe() {
-        setisSubs(!isSubs)
+        async function fetchData(){
+            try{
+                if(isSubs){
+                    await axios.put(`http://localhost:800/api/users/unsubscribe/${videoData.userId}`)
+                }
+                else{
+                    await axios.put(`http://localhost:800/api/users/subscribe/${videoData.userId}`)
+                }
+                setisSubs(!isSubs)
+            }
+            catch(err){
+                console.log(err.message)
+            }
+        }
+        fetchData()
     }
     function handleLike() {
         setisLike(!isLike)
@@ -75,14 +110,14 @@ export default function VideoPlay() {
                         />
 
                     </video>
-                    <div className={styles.pause} onClick={handlePlay} ref={playRef}><i class="fa-solid fa-play"></i></div>
+                    <div className={styles.pause} onClick={handlePlay} ref={playRef}><i className="fa-solid fa-play"></i></div>
                 </div>
 
             </div>
             <div className={styles.videoDetails} ref={boxRef}>
                 <div className={styles.videoDet}>
                     <div className={styles.title}>
-                        bcfkebckjbkds gr gre g reg
+                        {videoData?.title}
                     </div>
                     <div className={styles.videoStatus}>
                         <div className={styles.channel}>
@@ -97,25 +132,25 @@ export default function VideoPlay() {
                             </div> */}
                         </div>
                         <div className={styles.status2}>
-                            <div className={styles.subscribe} style={!isSubs?{backgroundColor:"white",color:"black"}:{}} onClick={handleSubscribe}>
+                            <div className={styles.subscribe} style={theme?lightTheme:darkTheme} onClick={handleSubscribe}>
                                 {isSubs?"Unsubscribe":"Subscribe"}
                             </div>
                             <div className={styles.status}>
-                                <div className={styles.likeDislike}>
-                                    <span className={styles.like} onClick={handleLike}>
-                                        {isLike?<i class="fa-solid fa-thumbs-up"></i>:<i class="fa-regular fa-thumbs-up"></i>} 0
+                                <div className={styles.likeDislike} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
+                                    <span className={styles.like} onClick={handleLike} >
+                                        {isLike?<i className="fa-solid fa-thumbs-up"></i>:<i className="fa-regular fa-thumbs-up"></i>} 0
                                     </span>
                                     <span className={styles.dislike} onClick={handleDislike}>
-                                        {isDislike?<i class="fa-solid fa-thumbs-down fa-flip-horizontal"></i>:<i class="fa-regular fa-thumbs-down fa-flip-horizontal"></i>} 0
+                                        {isDislike?<i className="fa-solid fa-thumbs-down fa-flip-horizontal"></i>:<i className="fa-regular fa-thumbs-down fa-flip-horizontal"></i>} 0
                                     </span>
                                 </div>
-                                <div className={styles.share}>
-                                    <i class="fa-solid fa-share"></i> Share
+                                <div className={styles.share} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
+                                    <span><i className="fa-solid fa-share"></i> Share</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className={styles.descript}>
+                    <div className={styles.descript} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
                         <b>views</b> <br />
                         kdjbckscksbzckjbs k k s b bs bdk bksbf
                     </div>
@@ -138,6 +173,21 @@ export default function VideoPlay() {
                     fefsdz <br />
                     efvfesv
 
+                    fefsdz <br />
+                    efvfesv
+                    v
+                    fefsdz <br />
+                    efvfesv
+                    v
+                    fefsdz <br />
+                    efvfesv
+                    fefsdz <br />
+                    efvfesv
+
+                    fefsdz <br />
+                    efvfesv
+                    fefsdz <br />
+                    efvfesv
                     fefsdz <br />
                     efvfesv
                     v

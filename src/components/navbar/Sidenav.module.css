@@ -36,9 +36,15 @@
     margin-left: 2.5px;
     align-content: center;
     border-radius: 10px;
+    overflow: hidden;
 }
-.menuList a:hover{
+.menuList div:hover{
     background: rgb(60, 60, 60);
+    height: 100%;
+    width: 100%;
+    color: white;
+    align-content: center;
+    text-align: center;
 }
 .menuList i{
     font-size: 20px;
@@ -60,13 +66,14 @@
 }
 a{
     text-decoration: none;
-    color: white;
+    /* color: white; */
 }
 hr{
     border: 0.1px solid gray;
 }
 .menuList2 div:hover{
     background: rgb(61, 61, 61);
+    color: white;
 }
 .menuList2 i{
     font-size: 20px;

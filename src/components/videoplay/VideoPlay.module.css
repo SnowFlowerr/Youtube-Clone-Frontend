@@ -15,6 +15,7 @@
 
 .video {
     width: 100%;
+    background-color: black;
 }
 
 .Sidenav {
@@ -111,19 +112,22 @@
     align-content: center;
     border-radius: 25px;
     font-size: 17px;
-    padding: 10px 15px;
     overflow: hidden;
     text-wrap: nowrap;
+    padding: 10px 15px;
 }
-
-.subscribe:hover,
-.share:hover {
-    background-color: rgb(73, 73, 73);
+.share{
+    padding: 10px 0px;
 }
-.subscribe{
-    
+.share span {
+    padding: 10px 15px;
+    width: 100%;
+    height: 100%;
 }
-
+.share span:hover {
+    background-color: rgb(102, 102, 102);
+    color: white;
+}
 .likeDislike {
     padding: 1px 0px;
     display: flex;
@@ -137,7 +141,8 @@
 }
 
 .likeDislike span:hover {
-    background-color: rgb(73, 73, 73);
+    background-color: rgb(95, 95, 95);
+    color: white;
 }
 
 .status2 {
@@ -183,6 +188,10 @@
 
     .title {
         font-size: 19px;
+    }
+
+    .videoDetails{
+        margin-bottom: 50px;
     }
 
     .Sidenav2{

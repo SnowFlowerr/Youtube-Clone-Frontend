@@ -13,7 +13,8 @@
     row-gap: 1.5vw;
     /* justify-content:space-between; */
     /* border: 2px solid white; */
-    padding-bottom: 50px;
+    /* padding-bottom: 50px; */
+   
 }
 .singleVid{
     background-color: rgb(0, 0, 0);
@@ -23,12 +24,16 @@
     border-radius: 20px;
     cursor: pointer;
     padding-bottom: 5px;
+    border-radius: 15px;
 }
 .thumbnail{
     height: 12.5vw;
-    background-color: aqua;
+    background-color: rgb(34, 34, 34);
     border-radius: 15px;
     width: 100%;
+    text-align: center;
+    align-content: center;
+    overflow: hidden;
 }
 .videoDetail{
     display: flex;
@@ -43,6 +48,7 @@
     min-width: 3vw;
     background-color: azure;
     border-radius: 100%;
+    overflow: hidden;
 }
 .title{
     font-size: 1.1vw;
@@ -95,6 +101,7 @@
     .videos{
         margin-top: 0;
         row-gap: 2vw;
+        margin-bottom: 50px;
     }
     .videoDetail{
         gap: 2vw;

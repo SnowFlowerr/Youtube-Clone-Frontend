@@ -4,5 +4,5 @@ export const lightTheme = {
 }
 export const darkTheme = {
     color:"white",
-    background: 'black',
+    backgroundColor: 'black',
 }

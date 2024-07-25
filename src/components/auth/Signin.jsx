@@ -5,14 +5,23 @@ import google from "../assets/google.png"
 import apple from "../assets/apple.png"
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
-
+import { useCookies } from 'react-cookie'
 
 export default function Signin() {
+
     const [viewPass, setviewPass] = useState(false);
     const [user, setUser] = useState({ username: "", password: "" });
     const [err, setErr] = useState("");
     const [tc, setTc] = useState(false);
     const navigate = useNavigate()
+    const [cookies, setCookie] = useCookies(['access_token'])
+
+    const handleSetCookie = () => {
+        const value = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OWE2YjhhOWNiODk1NzMzYmNmZWJjZiIsImlhdCI6MTcyMTM5NjQ0NH0.Yak4B_Pv7Vot6PXsCdrFCAWxkXo2c0jurENjih6C4Y4';
+        setCookie('access_token', value, { path: '/', secure: false });
+    };
+    
+    
     function handleChange(e) {
         setUser({ ...user, [e.target.id]: e.target.value.trim() })
         setErr("")
@@ -31,8 +40,9 @@ export default function Signin() {
         try {
             const userData = await axios.post("http://localhost:800/api/auth/login", { username: user.username, password: user.password }, { headers: { "Content-Type": "application/json" } });
             console.log("User signed in")
-            console.log(userData.data)
-            navigate("/")
+            // console.log(userData.data)
+            handleSetCookie()
+            // navigate("/")
         }
         catch (err) {
             setErr(err.response.data.message)
