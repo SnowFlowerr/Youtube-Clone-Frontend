@@ -10,9 +10,10 @@ export default function Shorts() {
     let { id } = useParams();
     
     return (
-        
         <div className={styles.bigBox}>
-            <Navbar></Navbar>
+            <div className={styles.nav}>
+                <Navbar></Navbar>
+            </div>
             <div className={styles.main}>
                 <div className={styles.sidenav}>
                     <Sidenav></Sidenav>
