@@ -38,7 +38,7 @@ export default function Signin() {
             return setErr("Agree to the Terms and Policy")
         }
         try {
-            const userData = await axios.post("http://localhost:800/api/auth/login", { username: user.username, password: user.password }, { headers: { "Content-Type": "application/json" } });
+            const userData = await axios.post("http://localhost:8000/api/auth/login", { username: user.username, password: user.password }, { headers: { "Content-Type": "application/json" } });
             console.log("User signed in")
             // console.log(userData.data)
             handleSetCookie()

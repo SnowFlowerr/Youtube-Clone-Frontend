@@ -27,7 +27,7 @@ export default function VideoPlay() {
     useEffect(()=>{
         async function fetchData(){
             try{
-                const vidData=await axios.get(`http://localhost:800/api/videos/${id}`)
+                const vidData=await axios.get(`http://localhost:8000/api/videos/${id}`)
                 setvideoData(vidData.data)
                 // console.log(vidData.data)
             }
@@ -47,14 +47,14 @@ export default function VideoPlay() {
         }
     }, [menu])
 
-    function handlePlay() {
-        videoRef.current.play()
-        playRef.current.style.display = 'none'
-    }
+    // function handlePlay() {
+    //     videoRef.current.play()
+    //     playRef.current.style.display = 'none'
+    // }
 
-    function handlePause() {
-        playRef.current.style.display = 'block'
-    }
+    // function handlePause() {
+    //     playRef.current.style.display = 'block'
+    // }
     function handleSubscribe() {
         async function fetchData(){
             try{
@@ -96,12 +96,12 @@ export default function VideoPlay() {
                 <div className={styles.player} ref={boxRef}>
                     <video
                         className={styles.video}
-                        // autoPlay
+                        autoPlay
                         controls
                         id='videos'
                         ref={videoRef}
-                        onPlay={handlePlay}
-                        onPause={handlePause}
+                        // onPlay={handlePlay}
+                        // onPause={handlePause}
                         poster={null}>
 
                         <source
@@ -110,7 +110,7 @@ export default function VideoPlay() {
                         />
 
                     </video>
-                    <div className={styles.pause} onClick={handlePlay} ref={playRef}><i className="fa-solid fa-play"></i></div>
+                    {/* <div className={styles.paus} onClick={handlePlay} ref={playRef}><i className="fa-solid fa-play"></i></div> */}
                 </div>
 
             </div>

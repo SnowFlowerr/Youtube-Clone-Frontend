@@ -35,7 +35,7 @@ export default function Signup() {
             return setErr("Agree to the Terms and Policy")
         }
         try{
-            await axios.post("http://localhost:800/api/auth/signup", {  name:user.name, username:user.username, email:user.email, password:user.password}, { headers: { "Content-Type": "application/json" } });
+            await axios.post("http://localhost:8000/api/auth/signup", {  name:user.name, username:user.username, email:user.email, password:user.password}, { headers: { "Content-Type": "application/json" } });
             console.log("User signed up")
             navigate("/")
         }

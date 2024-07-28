@@ -8,6 +8,7 @@ import SearchedVid from "./components/searchedVid/SearchedVid";
 import styles from "./App.module.css"
 import { useEffect } from "react";
 import { useSelector } from 'react-redux'
+import Shorts from "./components/shorts/Shorts";
 
 function App() {
   const theme = useSelector((state) => state.theme.value)
@@ -24,7 +25,8 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/player/:id' element={<VideoPlay />} />
-          <Route path='/searchedvideo' element={<SearchedVid />} />
+          <Route path='/searchedvideo/:search' element={<SearchedVid />} />
+          <Route path='/shorts/:id' element={<Shorts />} />
         </Routes>
     </div>
   );
