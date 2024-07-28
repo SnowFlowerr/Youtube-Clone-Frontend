@@ -24,7 +24,6 @@
     scroll-snap-type: y mandatory;
     scrollbar-width: none;
     text-align: center;
-    position: relative;
 }
 .video{
     min-width: 420px;
@@ -37,17 +36,6 @@
     scroll-snap-align: start;
     scroll-snap-stop: always;
     /* background-color: antiquewhite; */
-}
-.dot{
-    position: fixed;
-    background-color: white;
-    top: 100%;
-    left: 50%;
-    z-index: 100;
-    height: 1px;
-    width: 50px;
-    /* visibility: hidden; */
-    /* transform: translate(-50%, -50%); */
 }
 
 @media screen and (max-width:750px) {
