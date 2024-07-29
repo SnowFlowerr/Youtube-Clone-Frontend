@@ -27,26 +27,65 @@
     text-align: center;
 }
 .card{
-    /* border: 1px solid rgb(255, 255, 255); */
+    border: 1px solid rgb(255, 255, 255);
     width: 100%;
     display: flex;
     align-items: center;
     height: 100%;
     min-height: 100%;
-}
-.video{
-    min-width: 420px;
-    width: 30%;
-    height: 100%;
-    min-height: 100%;
-    margin: auto;
     margin-bottom: 10px;
-    border-radius: 10px;
+    justify-content:center;
     scroll-snap-align: start;
     scroll-snap-stop: always;
+    position: relative;
+    /* gap: 0; */
+}
+.video{
+    border: 1px solid rgb(255, 255, 255);
+    /* max-width: 420px; */
+    /* max-width: 35%; */
+    padding: 0;
+    height: 100%;
+    min-height: 100%;
+    /* margin: auto; */
+    border-radius: 10px;
     /* background-color: antiquewhite; */
 }
-
+.span{
+    height: 100%;
+    position: relative;
+    border: 1px solid rgb(255, 255, 255);
+}
+.details{
+    height: 100%;
+    right: 0%;
+    width:80px;
+    min-width: 50px;
+    /* position: absolute; */
+    border: 1px solid rgb(255, 255, 255);
+    /* background-color: rgb(0, 136, 255); */
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 15px;
+}
+.details i{
+    background-color: rgb(123, 123, 123);
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    align-content: center;
+    text-align: center;
+}
+.name{
+    position: absolute;
+    width: 100%;
+    bottom: 75px;
+    text-align: left;
+    border: 1px solid rgb(255, 255, 255);
+}
 @media screen and (max-width:750px) {
     .nav{
         display: none;
@@ -58,20 +97,35 @@
         padding-top: 10px;
     }
     .video{
-        min-width: 448px;
-        width: 30%;
+        /* min-width: 448px;
+        width: 30%; */
         height: 100%;
+        width: 100%;
+    }
+    .details{
+        height: calc(100% - 80px);
+        right: 0%;
+        bottom: 80px;
+        max-width: 20vw;
+        min-width: 20vw;
+        position: absolute;
+        z-index: 10;
+        border: 1px solid rgb(255, 255, 255);
+        
     }
 }
-@media screen and (max-width:450px) {
+@media screen and (max-width:500px) {
     .box{
         padding: 0px;
+    }
+    .card{
+        margin-bottom: 0px;
     }
     .videoBox{
         /* background-color: aqua; */
         /* border: 1px solid rgb(255, 255, 255); */
         width: 100%;
-        height:100%;
+        height: 100%;
         min-height: 100%;
     }
     .video{
@@ -79,6 +133,7 @@
         width: 100%;
         min-width: 100%;
         max-width: 100%;
-        min-height: 100%;
+        /* min-height: 100%; */
     }
+    
 }
