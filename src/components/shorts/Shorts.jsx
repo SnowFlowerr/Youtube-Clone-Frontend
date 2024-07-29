@@ -21,7 +21,7 @@ export default function Shorts() {
                 <div className={styles.box}>
                     <div className={styles.videoBox}>
                         {arr.map((shorts, index) =>
-                            <div key={index}>
+                            <div key={index} className={styles.card}>
                                 <VideoCard src={index}></VideoCard>
                             </div>
                         )}
