@@ -1,8 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import styles from "./Shorts.module.css"
 import video from "./videoplayback.mp4"
+import { darkTheme, lightTheme } from '../../themes'
+import { useSelector } from 'react-redux'
 export const VideoCard = ({ src, onPlay }) => {
     const videoRef = useRef(null);
+    const theme = useSelector((state) => state.theme.value)
 
     useEffect(() => {
         const handlePlayStop = (entries) => {
@@ -43,25 +46,45 @@ export const VideoCard = ({ src, onPlay }) => {
             <span className={styles.span}>
                 <video className={styles.video} ref={videoRef} src={video} controls />
                 <div className={styles.name}>
-                    ch name
+                    <div className={styles.icon}>
+
+                    </div>
+                    <div>
+                        gbdvrgbrdtgrtg
+                    </div>
+                    <div className={styles.subs}>
+                        Subscribe
+                    </div>
                 </div>
             </span>
             <div className={styles.details}>
-                <div>
-                    <i class="fa-solid fa-thumbs-up"></i>
-                    <br />like
+                <div className={styles.first}>
+                    <div className={styles.span1} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
+                        <i class="fa-solid fa-thumbs-up"></i>
+                    </div>
+                    like
+                </div>
+                <div className={styles.first}>
+                    <div className={styles.span1} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
+                        <i class="fa-solid fa-thumbs-down fa-flip-horizontal"></i>
+                    </div>
+                    Dislike
+                </div>
+                <div className={styles.first}>
+                    <div className={styles.span1} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
+                        <i class="fa-solid fa-comment"></i>
+                    </div>
+                    Comment
+                </div>
+                <div className={styles.first}>
+                    <div className={styles.span1} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
+                        <i class="fa-solid fa-share"></i>
+                    </div>
+                    Share
                 </div>
                 <div>
-                    <i class="fa-solid fa-thumbs-down fa-flip-horizontal"></i>
-                    <br />Dislike
-                </div>
-                <div>
-                    <i class="fa-solid fa-comment"></i>
-                    <br />Comment
-                </div>
-                <div>
-                    <i class="fa-solid fa-share"></i>
-                    <br />Share
+                    <div className={styles.span2} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
+                    </div>
                 </div>
             </div>
         </>

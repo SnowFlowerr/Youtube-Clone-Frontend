@@ -15,7 +15,7 @@ export default function VideoPlay() {
     const menu = useSelector((state) => state.menu.value)
     const theme = useSelector((state) => state.theme.value)
     // const navigate = useNavigate()
-    const playRef = useRef(null)
+    // const playRef = useRef(null)
     const boxRef = useRef(null)
     const videoRef = useRef(null)
     const [isSubs, setisSubs] = useState(false)
