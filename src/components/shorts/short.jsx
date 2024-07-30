@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import styles from "./Shorts.module.css"
 import video from "./videoplayback.mp4"
-import { darkTheme, lightTheme } from '../../themes'
+
 import { useSelector } from 'react-redux'
 export const VideoCard = ({ src, onPlay }) => {
     const videoRef = useRef(null);
