@@ -52,7 +52,6 @@ export default function Shorts() {
                         )}
                     </div>
                 </div>
-                {id}
             </div>
         </div>
     )
