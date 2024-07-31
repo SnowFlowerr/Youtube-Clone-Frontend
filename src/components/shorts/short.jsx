@@ -11,8 +11,8 @@ export const VideoCard = ({ src, onPlay }) => {
         const handlePlayStop = (entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    videoRef.current.currentTime = 0; // Reset video to the beginning
                     onPlay(src);  // Notify parent component that this video is playing
+                    videoRef.current.currentTime = 0; // Reset video to the beginning
                     videoRef.current.play().then(() => {
                     }).catch((error) => {
                         console.error('Error trying to play video:', error);
@@ -44,13 +44,13 @@ export const VideoCard = ({ src, onPlay }) => {
     return (
         <>
             <span className={styles.span}>
-                <video className={styles.video} ref={videoRef} src={video} controls />
+                <video className={styles.video} ref={videoRef} src={video} autoPlay controls />
                 <div className={styles.name}>
                     <div className={styles.icon}>
 
                     </div>
                     <div>
-                        gbdvrgbrdtgrtg
+                        {src}
                     </div>
                     <div className={styles.subs}>
                         Subscribe
@@ -60,25 +60,25 @@ export const VideoCard = ({ src, onPlay }) => {
             <div className={styles.details}>
                 <div className={styles.first}>
                     <div className={styles.span1} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
-                        <i class="fa-solid fa-thumbs-up"></i>
+                        <i className="fa-solid fa-thumbs-up"></i>
                     </div>
                     like
                 </div>
                 <div className={styles.first}>
                     <div className={styles.span1} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
-                        <i class="fa-solid fa-thumbs-down fa-flip-horizontal"></i>
+                        <i className="fa-solid fa-thumbs-down fa-flip-horizontal"></i>
                     </div>
                     Dislike
                 </div>
                 <div className={styles.first}>
                     <div className={styles.span1} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
-                        <i class="fa-solid fa-comment"></i>
+                        <i className="fa-solid fa-comment"></i>
                     </div>
                     Comment
                 </div>
                 <div className={styles.first}>
                     <div className={styles.span1} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
-                        <i class="fa-solid fa-share"></i>
+                        <i className="fa-solid fa-share"></i>
                     </div>
                     Share
                 </div>

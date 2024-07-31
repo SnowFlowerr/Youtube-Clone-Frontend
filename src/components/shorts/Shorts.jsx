@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { VideoCard } from './short'
 import { darkTheme, lightTheme } from '../../themes'
 import { useSelector } from 'react-redux'
+import logo from "../assets/Logo.png"
 
 export default function Shorts() {
     const arr = [3, 4, 4, 4, 3, 3, 33, 3]
@@ -16,8 +17,14 @@ export default function Shorts() {
     const handlePlay = (index) => {
         setCurrentVideoIndex(index);
     };
+    const [url, setUrl] = useState(null);
     useEffect(() => {
-        navigate(`/shorts/${currentVideoIndex}`)
+        setUrl(id)
+    }, [])
+    useEffect(() => {
+        if (currentVideoIndex !== null) {
+            navigate(`/shorts/${currentVideoIndex}`)
+        }
         const handlePopState = (event) => {
             if (window.location.pathname !== '/') {
                 navigate('/'); // Redirect to root
@@ -32,7 +39,13 @@ export default function Shorts() {
     }, [currentVideoIndex])
 
     return (
-        <div className={styles.bigBox} style={theme?darkTheme:lightTheme}>
+        <div className={styles.bigBox} style={theme ? darkTheme : lightTheme}>
+            <div className={styles.mainLogo}>
+                <a href="/" className={styles.logoDetail} style={theme ? {color:"white"} : {color:"black"}}>
+                    <img src={logo} alt="logoImg" height="30px" />
+                    <span>StreamSphere</span>
+                </a>
+            </div>
             <div className={styles.nav}>
                 <Navbar></Navbar>
             </div>
@@ -43,11 +56,11 @@ export default function Shorts() {
                 <div className={styles.box}>
                     <div className={styles.videoBox}>
                         <div className={styles.card}>
-                            <VideoCard src={id} onPlay={handlePlay}></VideoCard>
+                            <VideoCard src={url} onPlay={handlePlay}></VideoCard>
                         </div>
                         {arr.map((shorts, index) =>
                             <div key={index} className={styles.card}>
-                                <VideoCard src={index} onPlay={handlePlay}></VideoCard>
+                                <VideoCard src={index} index={index} onPlay={handlePlay}></VideoCard>
                             </div>
                         )}
                     </div>

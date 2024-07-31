@@ -1,20 +1,26 @@
+.mainBox{
+    height: 100vh;
+    overflow: auto;
+}
 .bigBox{
     display: flex;
+    /* height: 100%; */
 }
 .videos{
+    /* border: 2px solid white; */
     margin-top: 60px;
     width: 100%;
     padding: 10px;
+    /* height: 100%; */
     /* padding-right: 5px; */
     display: flex;
     flex-direction: row;
     flex-flow: wrap;
     gap: 1vw;
     row-gap: 1.5vw;
+    overflow:   auto;
     /* justify-content:space-between; */
-    /* border: 2px solid white; */
     /* padding-bottom: 50px; */
-   
 }
 .singleVid{
     background-color: rgb(0, 0, 0);

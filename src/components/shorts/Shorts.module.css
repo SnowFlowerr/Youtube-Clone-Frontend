@@ -3,6 +3,22 @@
     position: fixed;
     width: 100%;
 }
+.mainLogo{
+    position: fixed;
+    z-index: 40;
+    top: 10px;
+    left: 10px;
+    display: none;
+}
+.logoDetail{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 25px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+}
 .main{
     display: flex;
     height: 100%;
@@ -236,5 +252,7 @@
         max-width: 100%;
         /* min-height: 100%; */
     }
-    
+    .mainLogo{
+        display: block;
+    }
 }
