@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Navbar() {
     const [isSearch, setisSearch] = useState(true)
-    const [isSign, setisSign] = useState(false)
+    const [isSign, setisSign] = useState(true)
     const inputRef = useRef(null);
     const inputRef2 = useRef(null);
     const menu = useSelector((state) => state.menu.value)

@@ -17,7 +17,7 @@ export default function Sidenav() {
                             <span>Home</span>
                         </div>
                     </a>
-                    <a href="shorts/jhv" style={theme?darkTheme:lightTheme}>
+                    <a href="/shorts/jhv" style={theme?darkTheme:lightTheme}>
                         <div>
                             <i className="fa-solid fa-video"></i>
                             <span>Shorts</span>

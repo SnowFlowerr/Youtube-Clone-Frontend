@@ -60,7 +60,7 @@ export default function Shorts() {
                         </div>
                         {arr.map((shorts, index) =>
                             <div key={index} className={styles.card}>
-                                <VideoCard src={index} index={index} onPlay={handlePlay}></VideoCard>
+                                <VideoCard src={index} data={shorts} onPlay={handlePlay}></VideoCard>
                             </div>
                         )}
                     </div>

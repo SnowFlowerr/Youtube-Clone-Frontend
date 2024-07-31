@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import styles from "./Shorts.module.css"
 import video from "./videoplayback.mp4"
-
 import { useSelector } from 'react-redux'
-export const VideoCard = ({ src, onPlay }) => {
+import Share from '../Share/Share';
+export const VideoCard = ({ src, onPlay, data }) => {
     const videoRef = useRef(null);
     const theme = useSelector((state) => state.theme.value)
 
@@ -50,7 +50,7 @@ export const VideoCard = ({ src, onPlay }) => {
 
                     </div>
                     <div>
-                        {src}
+                        {data?.title}
                     </div>
                     <div className={styles.subs}>
                         Subscribe
@@ -59,31 +59,36 @@ export const VideoCard = ({ src, onPlay }) => {
             </span>
             <div className={styles.details}>
                 <div className={styles.first}>
-                    <div className={styles.span1} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
+                    <div className={styles.span1} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
                         <i className="fa-solid fa-thumbs-up"></i>
                     </div>
                     like
                 </div>
                 <div className={styles.first}>
-                    <div className={styles.span1} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
+                    <div className={styles.span1} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
                         <i className="fa-solid fa-thumbs-down fa-flip-horizontal"></i>
                     </div>
                     Dislike
                 </div>
                 <div className={styles.first}>
-                    <div className={styles.span1} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
+                    <div className={styles.span1} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
                         <i className="fa-solid fa-comment"></i>
                     </div>
                     Comment
                 </div>
-                <div className={styles.first}>
-                    <div className={styles.span1} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
-                        <i className="fa-solid fa-share"></i>
-                    </div>
-                    Share
-                </div>
+                <Share
+                    text={data?.title}
+                    title={data?.title}
+                    url={window.location.href}
+                    share={<div className={styles.first}>
+                        <div className={styles.span1} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
+                            <i className="fa-solid fa-share"></i>
+                        </div>
+                        Share
+                    </div>}
+                />
                 <div>
-                    <div className={styles.span2} style={theme?{}:{backgroundColor: "rgb(220, 220, 220)"}}>
+                    <div className={styles.span2} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
                     </div>
                 </div>
             </div>
