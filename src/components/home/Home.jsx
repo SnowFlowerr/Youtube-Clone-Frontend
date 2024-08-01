@@ -5,8 +5,9 @@ import Sidenav from '../navbar/Sidenav'
 import styles from './Home.module.css'
 import pic from './pic.jpg'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { lightTheme, darkTheme } from '../../themes'
+import { offMic } from '../../redux/Data/micSlice'
 
 
 
@@ -14,6 +15,7 @@ export default function Home() {
     const [videos, setVideos] = useState([1, 2, 2, 2, 2, 2, 22, 2, 2, 2, 2])
     const theme = useSelector((state) => state.theme.value)
     const lastVid = useRef(null)
+    const dispatch=useDispatch()
 
     useEffect(() => {
         const fetchVideo = async () => {
@@ -26,7 +28,9 @@ export default function Home() {
             }
         }
         fetchVideo();
+        dispatch(offMic())
     }, [])
+    
 
     function handleScroll() {
         let divHeight = lastVid.current.offsetHeight

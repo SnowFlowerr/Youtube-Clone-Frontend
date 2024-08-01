@@ -6,6 +6,8 @@ import styles from "./Navbar.module.css"
 import { useDispatch, useSelector } from 'react-redux'
 import { lightTheme, darkTheme } from '../../themes'
 import { useNavigate } from 'react-router-dom'
+import Speech from '../Speech/Speech'
+import { offMic } from '../../redux/Data/micSlice'
 
 export default function Navbar() {
     const [isSearch, setisSearch] = useState(true)
@@ -14,22 +16,20 @@ export default function Navbar() {
     const inputRef2 = useRef(null);
     const menu = useSelector((state) => state.menu.value)
     const theme = useSelector((state) => state.theme.value)
+    const [searchInput, setsearchInput] = useState("")
     const dispach = useDispatch();
     const navigate = useNavigate()
-
-    const [searchInput, setsearchInput] = useState("")
     function handleSearch(e) {
         e.preventDefault();
         setsearchInput(e.target.value)
     }
     function handleSubmit(e) {
         if (searchInput.trim()) {
-            navigate(`searchedvideo/${searchInput}`)
+            navigate(`/searchedvideo/${searchInput}`)
         }
+        dispach(offMic())
     }
-    useEffect(() => {
-
-    }, [])
+    
     function handleClearAll(e) {
         setsearchInput("")
         if (e.target.id === "search" || e.target.id === "search3") {
@@ -70,8 +70,9 @@ export default function Navbar() {
                                     {searchInput &&
                                         <span className={styles.clear} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)", color: "black" }} onClick={handleClearAll} id="search"><i className="fa-solid fa-xmark" style={theme ? { color: "white" } : { color: "black" }} id='search3'></i>
                                         </span>}
-                                    <span style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)", color: "black" }} onClick={handleSubmit}><i className="fa-solid fa-magnifying-glass"></i></span>
+                                    <span style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)", color: "black" }} onClick={handleSubmit} ><i className="fa-solid fa-magnifying-glass"></i></span>
                                 </form>
+                                <Speech setsearchInput={setsearchInput} input={inputRef2}></Speech>
                             </div>
                             <div className={styles.profile}>
                                 <div className={styles.search2} >
@@ -104,6 +105,7 @@ export default function Navbar() {
 
                                 </div>
                             </form>
+                            <Speech setsearchInput={setsearchInput} input={inputRef}></Speech>
                             {!searchInput && <div className={styles.back} onClick={() => setisSearch(true)}>
                                 <i className="fa-solid fa-xmark" ></i>
                             </div>}

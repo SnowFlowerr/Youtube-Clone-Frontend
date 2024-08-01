@@ -44,7 +44,7 @@ export const VideoCard = ({ src, onPlay, data }) => {
     return (
         <>
             <span className={styles.span}>
-                <video className={styles.video} ref={videoRef} src={video} autoPlay controls />
+                <video className={styles.video} ref={videoRef} src={video} controls />
                 <div className={styles.name}>
                     <div className={styles.icon}>
 

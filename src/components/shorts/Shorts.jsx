@@ -5,14 +5,16 @@ import Sidenav from '../navbar/Sidenav'
 import { useNavigate, useParams } from 'react-router-dom'
 import { VideoCard } from './short'
 import { darkTheme, lightTheme } from '../../themes'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import logo from "../assets/Logo.png"
+import { offMic } from '../../redux/Data/micSlice'
 
 export default function Shorts() {
     const arr = [3, 4, 4, 4, 3, 3, 33, 3]
     let { id } = useParams();
     const navigate = useNavigate()
     const [currentVideoIndex, setCurrentVideoIndex] = useState(null);
+    const dispatch=useDispatch()
     const theme = useSelector((state) => state.theme.value)
     const handlePlay = (index) => {
         setCurrentVideoIndex(index);
@@ -20,6 +22,7 @@ export default function Shorts() {
     const [url, setUrl] = useState(null);
     useEffect(() => {
         setUrl(id)
+        dispatch(offMic())
     }, [])
     useEffect(() => {
         if (currentVideoIndex !== null) {
