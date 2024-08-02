@@ -25,6 +25,7 @@
     /* color: white; */
     /* position: absolute;
     z-index: 30; */
+    z-index: 20;
 }
 .menu{
     margin-left: 5px;
@@ -47,11 +48,45 @@
     background-color: rgb(52, 52, 52);
     color: white;
 }
+.suggCont{
+    background-color: transparent;
+    width: 100vw;
+    position: absolute;
+    height: 100vh;
+    top: 0;
+    width: 100vw;
+    visibility: hidden;
+    z-index: 0;
+}
+.suggestion{
+    width: calc(100% - 68px);
+    position: absolute;
+    max-height: 410px;
+    background-color: #363636;
+    top: 42px;
+    left: 2px;
+    border-radius: 10px 0px 0px 10px;
+    overflow: auto;
+    padding: 5px;
+    scrollbar-width: none;
+    z-index: 50;
+    visibility: hidden;
+}
+.suggestion div{
+    padding: 3px 10px;
+    border-radius: 5px;
+    max-height: 25px;
+}
+.suggestion div:hover{
+    background-color: rgb(138, 138, 138);
+}
 .search{
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
+    position: relative;
+    z-index: 20;
 }
 .search form{
     width: 45vw;
@@ -62,7 +97,7 @@
     border-radius: 25px;
     padding-right: 68px;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 .search span{
     position: absolute;
@@ -111,6 +146,7 @@ a{
     display: flex;
     gap: 2px;
     align-items: center;
+    z-index: 20;
 }
 .upload i{
     display: block;

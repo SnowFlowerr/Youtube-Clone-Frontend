@@ -11,25 +11,31 @@ import { offMic } from '../../redux/Data/micSlice'
 
 export default function Navbar() {
     const [isSearch, setisSearch] = useState(true)
-    const [isSign, setisSign] = useState(true)
+    const [isSign, setisSign] = useState(false)
     const inputRef = useRef(null);
     const inputRef2 = useRef(null);
+    const suggRef = useRef(null);
+    const suggRef2 = useRef(null);
     const menu = useSelector((state) => state.menu.value)
     const theme = useSelector((state) => state.theme.value)
     const [searchInput, setsearchInput] = useState("")
     const dispach = useDispatch();
     const navigate = useNavigate()
+    const arr = [3,3,46,575,6,76,"575",56,765,7,655,657,56,676,65,7,6,5,67]
+
     function handleSearch(e) {
         e.preventDefault();
         setsearchInput(e.target.value)
     }
     function handleSubmit(e) {
-        if (searchInput.trim()) {
+        if (searchInput.trim()!=="") {
             navigate(`/searchedvideo/${searchInput}`)
         }
         dispach(offMic())
+        suggRef.current.style.visibility= 'hidden';
+        suggRef2.current.style.visibility="hidden"
     }
-    
+
     function handleClearAll(e) {
         setsearchInput("")
         if (e.target.id === "search" || e.target.id === "search3") {
@@ -46,9 +52,13 @@ export default function Navbar() {
             inputRef.current.focus();
         }, 0)
     }
+    function handleSuggestion(ele){
+        setsearchInput(ele)
+        inputRef2.current.focus();
+    }
     return (
         <div className={styles.mainNav}>
-            <div className={styles.navbar} style={theme ? darkTheme : lightTheme}>
+            <div className={styles.navbar} style={theme ? darkTheme : lightTheme} >
                 {
                     isSearch ?
                         <>
@@ -66,13 +76,21 @@ export default function Navbar() {
                             </div>
                             <div className={styles.search} >
                                 <form onSubmit={handleSubmit}>
-                                    <input type="text" placeholder='Search here...' ref={inputRef2} style={theme ? darkTheme : lightTheme} onChange={handleSearch} value={searchInput} />
+                                    <input type="text" placeholder='Search here...' ref={inputRef2} style={theme ? darkTheme : lightTheme} onChange={handleSearch} onClick={()=>{suggRef.current.style.visibility="visible";suggRef2.current.style.visibility="visible"}} spellCheck="true" value={searchInput} />
+                                    
+                                    <div className={styles.suggestion} ref={suggRef} style={theme?{}:{backgroundColor: "#dadada"}}>
+                                        {arr.map((ele, ind) =>
+                                            <div key={ind} onClick={()=>handleSuggestion(ele)}>{ele}</div>
+                                        )}
+                                    </div>
+
                                     {searchInput &&
                                         <span className={styles.clear} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)", color: "black" }} onClick={handleClearAll} id="search"><i className="fa-solid fa-xmark" style={theme ? { color: "white" } : { color: "black" }} id='search3'></i>
                                         </span>}
                                     <span style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)", color: "black" }} onClick={handleSubmit} ><i className="fa-solid fa-magnifying-glass"></i></span>
                                 </form>
-                                <Speech setsearchInput={setsearchInput} input={inputRef2}></Speech>
+                                <Speech setsearchInput={setsearchInput} input1={inputRef2} input2={suggRef} input3={suggRef2}></Speech>
+
                             </div>
                             <div className={styles.profile}>
                                 <div className={styles.search2} >
@@ -112,7 +130,7 @@ export default function Navbar() {
                         </div>
                 }
             </div>
-
+            <div className={styles.suggCont} ref={suggRef2} onClick={()=>{suggRef.current.style.visibility="hidden";suggRef2.current.style.visibility="hidden"}}></div>
         </div>
     )
 }
