@@ -21,7 +21,7 @@ export default function Navbar() {
     const [searchInput, setsearchInput] = useState("")
     const dispach = useDispatch();
     const navigate = useNavigate()
-    const arr = [3,3,46,575,6,76,"575",56,765,7,655,657,56,676,65,7,6,5,67]
+    const arr = ['3','3','46','575','6','76',"575",'56','765','7','655','657','56','676','65','7','6','5','67']
 
     function handleSearch(e) {
         e.preventDefault();

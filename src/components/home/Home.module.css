@@ -47,6 +47,9 @@
     gap: 1vw;
     color: white;
 }
+.videoDetail .details{
+    width: 100%;
+}
 .icon{
     height: 3vw;
     min-height: 3vw;

@@ -1,3 +1,7 @@
+.mainBox{
+    height: 100vh;
+    overflow: auto;
+}
 .box {
     display: flex;
 }

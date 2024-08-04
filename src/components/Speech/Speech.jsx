@@ -27,13 +27,13 @@ export default function Speech({ setsearchInput,input1,input2,input3 }) {
       stopSpeechToText()
       input1.current.focus()
       input2.current.style.visibility= 'visible';
-      input3.current.style.visibility="visivle"
+      input3.current.style.visibility="visible"
     }
     else {
       startSpeechToText()
       input1.current.focus()
       input2.current.style.visibility= 'visible';
-      input3.current.style.visibility="visivle"
+      input3.current.style.visibility="visible"
     }
   }
   

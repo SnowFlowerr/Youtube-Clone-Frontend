@@ -15,15 +15,12 @@ export default function VideoPlay() {
 
     const menu = useSelector((state) => state.menu.value)
     const theme = useSelector((state) => state.theme.value)
-    // const navigate = useNavigate()
-    // const playRef = useRef(null)
     const boxRef = useRef(null)
     const videoRef = useRef(null)
     const [isSubs, setisSubs] = useState(false)
     const [isLike, setisLike] = useState(false)
     const [isDislike, setisDislike] = useState(false)
-    const [isShare, setisShare] = useState(false)
-    const [videoData, setvideoData] = useState({ title: "jhgvvhj" })
+    const [videoData, setvideoData] = useState({ title: "Title" })
     const { id } = useParams();
 
     useEffect(() => {
@@ -101,7 +98,6 @@ export default function VideoPlay() {
                         />
 
                     </video>
-                    {/* <div className={styles.paus} onClick={handlePlay} ref={playRef}><i className="fa-solid fa-play"></i></div> */}
                 </div>
 
 

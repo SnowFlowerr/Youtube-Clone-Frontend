@@ -63,8 +63,8 @@ export default function Home() {
                                             <img src={pic} width="100%" height="100%" alt="" />
                                         </a>
                                     </div>
-                                    <div>
-                                        <a href={`player/${video?._id}`} style={theme ? { color: "white" } : { color: "black" }}>
+                                    <div className={styles.details}>
+                                        <a href={`/player/${video?._id}`} style={theme ? { color: "white" } : { color: "black" }}>
                                             <div className={styles.title}>
                                                 {video?.title}fyhv
                                             </div>
