@@ -33,7 +33,7 @@
     border-radius: 15px;
 }
 .thumbnail{
-    height: 12.5vw;
+    height: 13vw;
     background-color: rgb(34, 34, 34);
     border-radius: 15px;
     width: 100%;
@@ -78,7 +78,7 @@
 }
 @media screen and (max-width:1100px) {
     .singleVid{
-        width: 32.5%;
+        width: 32.4%;
     }
     .thumbnail{
         height: 16.5vw;
@@ -116,7 +116,7 @@
         gap: 2vw;
     }
     .singleVid{
-        width: 49%;
+        width: 49.4%;
     }
     .thumbnail{
         height: 25vw;
