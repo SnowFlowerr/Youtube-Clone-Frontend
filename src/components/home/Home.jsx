@@ -11,7 +11,7 @@ import { offMic } from '../../redux/Data/micSlice'
 
 
 export default function Home() {
-    const [videos, setVideos] = useState([1, 2, 2, 2, 2, 2, 22, 2, 2, 2, 2])
+    const [videos, setVideos] = useState([{title:"vaevs"},{title:"vaevs"},{title:"vaevs"},{title:"vaevs"},{title:"vaevs"},{title:"vaevs"},{title:"vaevs"},{title:"vaevs"},{title:"vaevs"},])
     const theme = useSelector((state) => state.theme.value)
     const lastVid = useRef(null)
     const dispatch = useDispatch()
@@ -65,7 +65,7 @@ export default function Home() {
                                     <div className={styles.details}>
                                         <a href={`/player/${video?._id}`} style={theme ? { color: "white" } : { color: "black" }}>
                                             <div className={styles.title}>
-                                                {video?.title}fyhv
+                                                {video?.title}
                                             </div>
                                             <div className={styles.channel}>
                                                 channel name
