@@ -30,7 +30,6 @@ export default function Home() {
         dispatch(offMic())
     }, [])
 
-
     function handleScroll() {
         let divHeight = lastVid.current.offsetHeight
         let scrollHeight = lastVid.current.scrollHeight

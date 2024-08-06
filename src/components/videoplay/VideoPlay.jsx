@@ -21,14 +21,19 @@ export default function VideoPlay() {
     const [isLike, setisLike] = useState(false)
     const [isDislike, setisDislike] = useState(false)
     const [videoData, setvideoData] = useState({ title: "Title" })
+    const [userData, setuserData] = useState({})
     const { id } = useParams();
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const vidData = await axios.get(`http://localhost:8000/api/videos/${id}`)
+                const userD= await axios.get(`http://localhost:8000/api/users/${vidData.data.userId}`)
                 setvideoData(vidData.data)
-                // console.log(vidData.data)
+                setuserData(userD.data)
+                if(userD.data.followedUser.indexOf('669b3f0247fef352b02613c6')!==-1){
+                    setisSubs(true)
+                }
             }
             catch (err) {
                 console.log(err)
@@ -36,6 +41,21 @@ export default function VideoPlay() {
         }
         fetchData()
     }, [])
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const userD= await axios.get(`http://localhost:8000/api/users/${videoData.userId}`)
+                setuserData(userD.data)
+                if(userD.data.followedUser.indexOf('669b3f0247fef352b02613c6')!==-1){
+                    setisSubs(true)
+                }
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        fetchData()
+    }, [isSubs])
 
     useEffect(() => {
         if (menu) {
@@ -48,16 +68,25 @@ export default function VideoPlay() {
     function handleSubscribe() {
         async function fetchData() {
             try {
-                if (isSubs) {
-                    await axios.put(`http://localhost:800/api/users/unsubscribe/${videoData.userId}`)
+                if(isSubs){
+                    await axios.put(`http://localhost:8000/api/users/unsubscribe/${videoData.userId}`,
+                        {},
+                        { withCredentials: true }
+                    );
+                    console.log("Unsubscribe")
                 }
-                else {
-                    await axios.put(`http://localhost:800/api/users/subscribe/${videoData.userId}`)
+                else{
+                    await axios.put(`http://localhost:8000/api/users/subscribe/${videoData.userId}`,
+                        {},
+                        { withCredentials: true }
+                    );
+                    console.log("Subscribe")
                 }
                 setisSubs(!isSubs)
+                // console.log("err?.response?.data")
             }
             catch (err) {
-                console.log(err.message)
+                console.log(err?.response?.data)
             }
         }
         fetchData()
@@ -67,6 +96,14 @@ export default function VideoPlay() {
     }
     function handleDislike() {
         setisDislike(!isDislike)
+    }
+    async function play(){
+        try{
+            await axios.put(`http://localhost:8000/api/videos/view/${id}`)
+        }
+        catch(err){
+            console.log(err)
+        }
     }
 
     return (
@@ -90,7 +127,9 @@ export default function VideoPlay() {
                         controls
                         id='videos'
                         ref={videoRef}
+                        onPlay={play}
                         poster={null}>
+                            
 
                         <source
                             src={vid}
@@ -105,32 +144,32 @@ export default function VideoPlay() {
             <div className={styles.videoDetails} ref={boxRef}>
                 <div className={styles.videoDet}>
                     <div className={styles.title}>
-                        {videoData?.title}
+                        {videoData?.title} {videoData?.userId}
                     </div>
 
                     <div className={styles.videoStatus}>
                         <div className={styles.channel}>
                             <div className={styles.icon}></div>
                             <div className={styles.channelName}>
-                                <span className={styles.name}>Channel Name</span>
+                                <span className={styles.name}>{userData?.name}</span>
                                 <br />
-                                <span className={styles.subs}>0 subs</span>
+                                <span className={styles.subs}>{userData?.followers} subs</span>
                             </div>
                             {/* <div className={styles.subscribe}>
                                 Subscribe
                             </div> */}
                         </div>
                         <div className={styles.status2}>
-                            <div className={styles.subscribe} style={theme ? lightTheme : darkTheme} onClick={handleSubscribe}>
+                            <div className={styles.subscribe} style={theme ? isSubs?{backgroundColor:"#2e2e2e"}:lightTheme : isSubs?{backgroundColor:"rgb(220, 220, 220)"}:darkTheme} onClick={handleSubscribe}>
                                 {isSubs ? "Unsubscribe" : "Subscribe"}
                             </div>
                             <div className={styles.status}>
                                 <div className={styles.likeDislike} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
                                     <span className={styles.like} onClick={handleLike} >
-                                        {isLike ? <i className="fa-solid fa-thumbs-up"></i> : <i className="fa-regular fa-thumbs-up"></i>} 0
+                                        {isLike ? <i className="fa-solid fa-thumbs-up"></i> : <i className="fa-regular fa-thumbs-up"></i>} {videoData?.likes}
                                     </span>
                                     <span className={styles.dislike} onClick={handleDislike}>
-                                        {isDislike ? <i className="fa-solid fa-thumbs-down fa-flip-horizontal"></i> : <i className="fa-regular fa-thumbs-down fa-flip-horizontal"></i>} 0
+                                        {isDislike ? <i className="fa-solid fa-thumbs-down fa-flip-horizontal"></i> : <i className="fa-regular fa-thumbs-down fa-flip-horizontal"></i>} {videoData?.dislikes}
                                     </span>
                                 </div>
                                 <Share
@@ -147,8 +186,8 @@ export default function VideoPlay() {
                         </div>
                     </div>
                     <div className={styles.descript} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
-                        <b>views</b> <br />
-                        kdjbckscksbzckjbs k k s b bs bdk bksbf
+                        <b>{videoData?.views} views</b> <br />
+                        {videoData?.description}
                     </div>
                 </div>
 

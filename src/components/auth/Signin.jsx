@@ -5,7 +5,7 @@ import google from "../assets/google.png"
 import apple from "../assets/apple.png"
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
-import { useCookies } from 'react-cookie'
+import { useCookies } from 'react-cookie';
 
 export default function Signin() {
 
@@ -14,12 +14,8 @@ export default function Signin() {
     const [err, setErr] = useState("");
     const [tc, setTc] = useState(false);
     const navigate = useNavigate()
-    const [cookies, setCookie] = useCookies(['access_token'])
-
-    const handleSetCookie = () => {
-        const value = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OWE2YjhhOWNiODk1NzMzYmNmZWJjZiIsImlhdCI6MTcyMTM5NjQ0NH0.Yak4B_Pv7Vot6PXsCdrFCAWxkXo2c0jurENjih6C4Y4';
-        setCookie('access_token', value, { path: '/', secure: false });
-    };
+    const [cookies, setCookie] = useCookies(['access_token']);
+    // const cooki=cookies.access_token
     
     
     function handleChange(e) {
@@ -38,14 +34,14 @@ export default function Signin() {
             return setErr("Agree to the Terms and Policy")
         }
         try {
-            const userData = await axios.post("http://localhost:8000/api/auth/login", { username: user.username, password: user.password }, { headers: { "Content-Type": "application/json" } });
+            const userData = await axios.post("http://localhost:8000/api/auth/login", { username: user.username, password: user.password },{ withCredentials: true } );
+            setCookie('access_token', userData.data.access_token, { path: '/' });
             console.log("User signed in")
-            // console.log(userData.data)
-            handleSetCookie()
-            // navigate("/")
+            console.log(userData)
+            navigate("/")
         }
         catch (err) {
-            setErr(err.response.data.message)
+            setErr(err?.response?.data?.message)
         }
     }
 
