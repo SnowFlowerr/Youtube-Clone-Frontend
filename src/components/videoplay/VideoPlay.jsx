@@ -28,8 +28,8 @@ export default function VideoPlay() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const vidData = await axios.get(`http://localhost:8000/api/videos/${id}`)
-                const userD = await axios.get(`http://localhost:8000/api/users/${vidData.data.userId}`)
+                const vidData = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/${id}`)
+                const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/${vidData.data.userId}`)
                 setvideoData(vidData.data)
                 setuserData(userD.data)
                 if (userD.data.followedUser.indexOf(sign?.data?._id) !== -1) {
@@ -51,7 +51,7 @@ export default function VideoPlay() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const userD = await axios.get(`http://localhost:8000/api/users/${videoData.userId}`)
+                const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/${videoData.userId}`)
                 setuserData(userD.data)
                 if (userD.data.followedUser.indexOf(sign?.data?._id) !== -1) {
                     setisSubs(true)
@@ -66,7 +66,7 @@ export default function VideoPlay() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const vidData = await axios.get(`http://localhost:8000/api/videos/${id}`)
+                const vidData = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/${id}`)
                 setvideoData(vidData.data)
                 if (vidData.data.likedUser.indexOf(sign?.data?._id) !== -1) {
                     setisLike(true)
@@ -94,14 +94,14 @@ export default function VideoPlay() {
         async function fetchData() {
             try {
                 if (isSubs) {
-                    await axios.put(`http://localhost:8000/api/users/unsubscribe/${videoData.userId}`,
+                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${videoData.userId}`,
                         {},
                         { withCredentials: true }
                     );
                     console.log("Unsubscribe")
                 }
                 else {
-                    await axios.put(`http://localhost:8000/api/users/subscribe/${videoData.userId}`,
+                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/subscribe/${videoData.userId}`,
                         {},
                         { withCredentials: true }
                     );
@@ -125,14 +125,14 @@ export default function VideoPlay() {
         // }
         try {
             if (isLike) {
-                await axios.put(`http://localhost:8000/api/videos/unlike/${id}`,
+                await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/unlike/${id}`,
                     {},
                     { withCredentials: true }
                 );
                 console.log("unlikes")
             }
             else {
-                await axios.put(`http://localhost:8000/api/videos/like/${id}`,
+                await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/like/${id}`,
                     {},
                     { withCredentials: true }
                 );
@@ -151,14 +151,14 @@ export default function VideoPlay() {
         }
         try {
             if (isDislike) {
-                await axios.put(`http://localhost:8000/api/videos/undislike/${id}`,
+                await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/undislike/${id}`,
                     {},
                     { withCredentials: true }
                 );
                 console.log("undislikes")
             }
             else {
-                await axios.put(`http://localhost:8000/api/videos/dislike/${id}`,
+                await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/dislike/${id}`,
                     {},
                     { withCredentials: true }
                 );
@@ -173,7 +173,7 @@ export default function VideoPlay() {
     }
     async function play() {
         try {
-            await axios.put(`http://localhost:8000/api/videos/view/${id}`)
+            await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/view/${id}`)
         }
         catch (err) {
             console.log(err)

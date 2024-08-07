@@ -35,9 +35,9 @@ export default function Signup() {
             return setErr("Agree to the Terms and Policy")
         }
         try{
-            await axios.post("http://localhost:8000/api/auth/signup", {  name:user.name, username:user.username, email:user.email, password:user.password}, { headers: { "Content-Type": "application/json" } });
+            await axios.post("https://honest-stillness-production.up.railway.app/api/auth/signup", {  name:user.name, username:user.username, email:user.email, password:user.password}, { headers: { "Content-Type": "application/json" } });
             console.log("User signed up")
-            navigate("/")
+            navigate("/signin")
         }
         catch(err){
             setErr(err?.response?.data?.message)

@@ -38,10 +38,10 @@ export default function Shorts() {
         async function fetchData() {
             try {
                 if(id!=="nulll"){
-                    const vidData = await axios.get(`http://localhost:8000/api/shorts/${id}`)
+                    const vidData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/${id}`)
                     setvidData(vidData.data)
                 }
-                const videosData = await axios.get(`http://localhost:8000/api/shorts`)
+                const videosData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts`)
                 setvideoData(videosData.data)
             }
             catch (err) {
@@ -50,7 +50,7 @@ export default function Shorts() {
         }
         fetchData()
     }, [])
-    
+
     useEffect(() => {
         if (currentVideoIndex !== null) {
             navigate(`/shorts/${currentVideoIndex}`)
