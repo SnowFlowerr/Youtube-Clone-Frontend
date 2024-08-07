@@ -40,7 +40,7 @@ export default function Signup() {
             navigate("/")
         }
         catch(err){
-            setErr(err.response.data.message)
+            setErr(err?.response?.data?.message)
         }
     }
 

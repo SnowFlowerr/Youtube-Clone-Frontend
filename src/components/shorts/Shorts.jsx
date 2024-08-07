@@ -8,9 +8,13 @@ import { darkTheme, lightTheme } from '../../themes'
 import { useDispatch, useSelector } from 'react-redux'
 import logo from "../assets/Logo.png"
 import { offMic } from '../../redux/Data/micSlice'
+import axios from 'axios'
 
 export default function Shorts() {
-    const arr = [3, 4, 4, 4, 3, 3, 33, 3]
+    
+    const [videoData, setvideoData] = useState([{ title: "Title" },{ title: "Title" }])
+    // const arr=[2,2,2,2,2,2,2,2]
+    const [vidData, setvidData] = useState({ title: "Title" })
     let { id } = useParams();
     const navigate = useNavigate()
     const [currentVideoIndex, setCurrentVideoIndex] = useState(null);
@@ -19,18 +23,41 @@ export default function Shorts() {
     const handlePlay = (index) => {
         setCurrentVideoIndex(index);
     };
-    const [url, setUrl] = useState(null);
-    useEffect(() => {
-        setUrl(id)
+    const [url, setUrl] = useState("url");
+    useEffect(()=>{
+        if(id==="nulll"){
+            setUrl("")
+        }
+        else{
+            setUrl(id)
+        }
         dispatch(offMic())
+    },[])
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                if(id!=="nulll"){
+                    const vidData = await axios.get(`http://localhost:8000/api/shorts/${id}`)
+                    setvidData(vidData.data)
+                }
+                const videosData = await axios.get(`http://localhost:8000/api/shorts`)
+                setvideoData(videosData.data)
+            }
+            catch (err) {
+                console.log(err.message)
+            }
+        }
+        fetchData()
     }, [])
+    
     useEffect(() => {
         if (currentVideoIndex !== null) {
             navigate(`/shorts/${currentVideoIndex}`)
         }
         const handlePopState = (event) => {
             if (window.location.pathname !== '/') {
-                navigate('/'); // Redirect to root
+                navigate('/');
             }
         };
 
@@ -58,12 +85,13 @@ export default function Shorts() {
                 </div>
                 <div className={styles.box}>
                     <div className={styles.videoBox}>
+                        {url!=="" &&
                         <div className={styles.card}>
-                            <VideoCard src={url} onPlay={handlePlay}></VideoCard>
-                        </div>
-                        {arr.map((shorts, index) =>
+                            <VideoCard data={url?vidData:"url"} index={-1} onPlay={handlePlay}></VideoCard>
+                        </div>}
+                        {videoData.map((shorts, index) =>
                             <div key={index} className={styles.card}>
-                                <VideoCard src={index} data={shorts} onPlay={handlePlay}></VideoCard>
+                                <VideoCard data={shorts} index={index} onPlay={handlePlay}></VideoCard>
                             </div>
                         )}
                     </div>

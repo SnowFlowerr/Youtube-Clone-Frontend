@@ -60,7 +60,7 @@
 }
 .video{
     /* border: 1px solid rgb(255, 255, 255); */
-    /* max-width: 420px; */
+    max-width: 420px;
     /* max-width: 35%; */
     padding: 0;
     height: 100%;
@@ -164,10 +164,14 @@
     color: black;
     font-size: 12px;
     /* height: 30px; */
+    margin-left: 10px;
     width: auto;
     padding: 8px 12px;
     border-radius: 20px;
     font-weight: 700;
+}
+.selected i{
+    font-size: 30px;
 }
 @media screen and (max-width:750px) {
     .nav{
@@ -230,7 +234,14 @@
         min-height: 35px;
         min-width: 35px;
     }
+    .mainLogo{
+        display: block;
+    }
+    .selected i{
+        font-size: 8vw;
+    }
 }
+
 @media screen and (max-width:500px) {
     .box{
         padding: 0;
@@ -252,7 +263,5 @@
         max-width: 100%;
         /* min-height: 100%; */
     }
-    .mainLogo{
-        display: block;
-    }
+    
 }

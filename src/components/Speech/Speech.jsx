@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import useSpeechToText from 'react-hook-speech-to-text';
 import styles from "./Speech.module.css"
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,7 +12,7 @@ export default function Speech({ setsearchInput,input1,input2,input3 }) {
   const {
     error,
     interimResult,
-    isRecording,
+    // isRecording,
     // results,
     startSpeechToText,
     stopSpeechToText,
@@ -43,7 +43,7 @@ export default function Speech({ setsearchInput,input1,input2,input3 }) {
         stopSpeechToText()
       }
       catch(err){
-        console.log(err)
+        console.log(err.message)
       }
     }
   },[mic])

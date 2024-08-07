@@ -11,7 +11,7 @@ import { offMic } from '../../redux/Data/micSlice'
 
 
 export default function Home() {
-    const [videos, setVideos] = useState([{title:"vaevs"},{title:"vaevs"},{title:"vaevs"},{title:"vaevs"},{title:"vaevs"},{title:"vaevs"},{title:"vaevs"},{title:"vaevs"},{title:"vaevs"},])
+    const [videos, setVideos] = useState([{title:"vaefesvs"},{title:"esgvgevaevs"},{title:"vevaevfegrs"},{title:"vdcfsfcaevs"},{title:"vaeecsacvs"},{title:"rfesrfvaevs"},{title:"vafevs"},{title:"vaevrvesfs"},{title:"vaecvs"},])
     const theme = useSelector((state) => state.theme.value)
     const lastVid = useRef(null)
     const dispatch = useDispatch()
@@ -40,7 +40,7 @@ export default function Home() {
     }
     return (
         <div className={styles.mainBox} ref={lastVid} onScroll={handleScroll}>
-            <div>
+            <div className={styles.nav}>
                 <Navbar></Navbar>
             </div>
             <div className={styles.bigBox}>

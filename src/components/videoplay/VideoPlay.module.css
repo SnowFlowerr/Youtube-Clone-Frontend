@@ -126,6 +126,8 @@
     text-wrap: nowrap;
     padding: 10px 15px;
     min-width: fit-content;
+    height: 40px;
+    
 }
 .share{
     padding: 10px 0px;
@@ -146,12 +148,16 @@
     justify-content: space-between;
 }
 
-.likeDislike span {
+.like,.dislike {
     width: 100%;
     padding: 9px 15px;
 }
 
-.likeDislike span:hover {
+.like:hover {
+    background-color: rgb(95, 95, 95);
+    color: white;
+}
+.dislike:hover {
     background-color: rgb(95, 95, 95);
     color: white;
 }
@@ -172,13 +178,15 @@
 .like {
     border-right: 1px solid rgb(73, 73, 73);
 }
+.selected{
+    font-size: 22px;
+}
 .descript{
     background-color: rgb(36, 38, 38);
     margin-top: 10px;
     border-radius: 10px;
     padding: 10px;
 }
-
 @media screen and (max-width:830px) {
     .videoDetails {
         flex-direction: column;
@@ -241,6 +249,10 @@
     .share {
         font-size: 14px;
         padding: 7px 10px;
+        height: 30px;
+    }
+    .selected{
+        font-size: 18px;
     }
     .share{
         padding: 7px 0px;
@@ -253,7 +265,11 @@
         padding: 0;
     }
 
-    .likeDislike span {
+    .like {
+        width: 100%;
+        padding: 7px 10px;
+    }
+    .dislike {
         width: 100%;
         padding: 7px 10px;
     }
@@ -315,7 +331,11 @@
         padding: 0;
     }
 
-    .likeDislike span {
+    .like {
+        width: 100%;
+        padding: 7px 10px;
+    }
+    .dislike {
         width: 100%;
         padding: 7px 10px;
     }

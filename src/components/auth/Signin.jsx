@@ -5,16 +5,20 @@ import google from "../assets/google.png"
 import apple from "../assets/apple.png"
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
-import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux'
+import { setSignin } from '../../redux/Data/signSlice'
 
 export default function Signin() {
-
+    
     const [viewPass, setviewPass] = useState(false);
     const [user, setUser] = useState({ username: "", password: "" });
     const [err, setErr] = useState("");
     const [tc, setTc] = useState(false);
     const navigate = useNavigate()
-    const [cookies, setCookie] = useCookies(['access_token']);
+    const dispatch=useDispatch()
+
+    // const [cookies, setCookie] = useCookies(['access_token']);
     // const cooki=cookies.access_token
     
     
@@ -35,9 +39,10 @@ export default function Signin() {
         }
         try {
             const userData = await axios.post("http://localhost:8000/api/auth/login", { username: user.username, password: user.password },{ withCredentials: true } );
-            setCookie('access_token', userData.data.access_token, { path: '/' });
+            // setCookie('access_token', userData.data.access_token, { path: '/' });
+            Cookies.set('access_token', userData.data.access_token, { path: '/',httpOnly: false });
+            dispatch(setSignin(userData.data))
             console.log("User signed in")
-            console.log(userData)
             navigate("/")
         }
         catch (err) {

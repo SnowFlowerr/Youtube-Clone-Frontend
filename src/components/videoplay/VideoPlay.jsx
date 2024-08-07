@@ -15,13 +15,14 @@ export default function VideoPlay() {
 
     const menu = useSelector((state) => state.menu.value)
     const theme = useSelector((state) => state.theme.value)
+    const sign = useSelector((state) => state.sign.value)
     const boxRef = useRef(null)
     const videoRef = useRef(null)
     const [isSubs, setisSubs] = useState(false)
     const [isLike, setisLike] = useState(false)
     const [isDislike, setisDislike] = useState(false)
-    const [videoData, setvideoData] = useState({ title: "Title" })
     const [userData, setuserData] = useState({})
+    const [videoData, setvideoData] = useState({ title: "Title" })
     const { id } = useParams();
 
     useEffect(() => {
@@ -31,13 +32,13 @@ export default function VideoPlay() {
                 const userD = await axios.get(`http://localhost:8000/api/users/${vidData.data.userId}`)
                 setvideoData(vidData.data)
                 setuserData(userD.data)
-                if (userD.data.followedUser.indexOf('669b3f0247fef352b02613c6') !== -1) {
+                if (userD.data.followedUser.indexOf(sign?.data?._id) !== -1) {
                     setisSubs(true)
                 }
-                if (vidData.data.likedUser.indexOf('669b3f0247fef352b02613c6') !== -1) {
+                if (vidData.data.likedUser.indexOf(sign?.data?._id) !== -1) {
                     setisLike(true)
                 }
-                if (vidData.data.dislikedUser.indexOf('669b3f0247fef352b02613c6') !== -1) {
+                if (vidData.data.dislikedUser.indexOf(sign?.data?._id) !== -1) {
                     setisDislike(true)
                 }
             }
@@ -52,7 +53,7 @@ export default function VideoPlay() {
             try {
                 const userD = await axios.get(`http://localhost:8000/api/users/${videoData.userId}`)
                 setuserData(userD.data)
-                if (userD.data.followedUser.indexOf('669b3f0247fef352b02613c6') !== -1) {
+                if (userD.data.followedUser.indexOf(sign?.data?._id) !== -1) {
                     setisSubs(true)
                 }
             }
@@ -67,10 +68,10 @@ export default function VideoPlay() {
             try {
                 const vidData = await axios.get(`http://localhost:8000/api/videos/${id}`)
                 setvideoData(vidData.data)
-                if (vidData.data.likedUser.indexOf('669b3f0247fef352b02613c6') !== -1) {
+                if (vidData.data.likedUser.indexOf(sign?.data?._id) !== -1) {
                     setisLike(true)
                 }
-                if (vidData.data.dislikedUser.indexOf('669b3f0247fef352b02613c6') !== -1) {
+                if (vidData.data.dislikedUser.indexOf(sign?.data?._id) !== -1) {
                     setisDislike(true)
                 }
             }
@@ -169,7 +170,6 @@ export default function VideoPlay() {
         catch (err) {
             console.log(err?.response?.data)
         }
-        setisDislike(!isDislike)
     }
     async function play() {
         try {
@@ -242,10 +242,10 @@ export default function VideoPlay() {
                         <div className={styles.status}>
                             <div className={styles.likeDislike} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
                                 <span className={styles.like} onClick={handleLike} >
-                                    {isLike ? <i className="fa-solid fa-thumbs-up"></i> : <i className="fa-regular fa-thumbs-up"></i>} {videoData?.likes}
+                                    {isLike ? <span className={styles.selected}><i className="fa-solid fa-thumbs-up"></i></span> : <i className="fa-regular fa-thumbs-up"></i>} {videoData?.likes}
                                 </span>
                                 <span className={styles.dislike} onClick={handleDislike}>
-                                    {isDislike ? <i className="fa-solid fa-thumbs-down fa-flip-horizontal"></i> : <i className="fa-regular fa-thumbs-down fa-flip-horizontal"></i>} {videoData?.dislikes}
+                                {videoData?.dislikes} {isDislike ? <span className={styles.selected}> <i className="fa-solid fa-thumbs-down fa-flip-horizontal"></i> </span> : <i className="fa-regular fa-thumbs-down fa-flip-horizontal"></i>}
                                 </span>
                             </div>
                             <Share
@@ -266,9 +266,6 @@ export default function VideoPlay() {
                         {videoData?.description}
                     </div>
                 </div>
-
-
-
 
 
 
