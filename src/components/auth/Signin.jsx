@@ -40,7 +40,7 @@ export default function Signin() {
             const userData = await axios.post("https://honest-stillness-production.up.railway.app/api/auth/login", { username: user.username, password: user.password }, { headers: { "Content-Type": "application/json" } },{ withCredentials: true } );
             // setCookie('access_token', userData.data.access_token, { path: '/' });
             Cookies.set('access_token', userData.data.access_token,
-                { path: '/',httpOnly: true, secure:true, sameSite: 'None', }
+                // { path: '/',httpOnly: true, secure:true, sameSite: 'None', }
             );
             dispatch(setSignin(userData.data))
             console.log("User signed in")
