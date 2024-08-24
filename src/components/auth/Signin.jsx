@@ -10,7 +10,6 @@ import { useDispatch } from 'react-redux'
 import { setSignin } from '../../redux/Data/signSlice'
 
 export default function Signin() {
-    
     const [viewPass, setviewPass] = useState(false);
     const [user, setUser] = useState({ username: "", password: "" });
     const [err, setErr] = useState("");
@@ -38,9 +37,11 @@ export default function Signin() {
             return setErr("Agree to the Terms and Policy")
         }
         try {
-            const userData = await axios.post("https://honest-stillness-production.up.railway.app/api/auth/login", { username: user.username, password: user.password },{ withCredentials: true } );
+            const userData = await axios.post("https://honest-stillness-production.up.railway.app/api/auth/login", { username: user.username, password: user.password }, { headers: { "Content-Type": "application/json" } },{ withCredentials: true } );
             // setCookie('access_token', userData.data.access_token, { path: '/' });
-            Cookies.set('access_token', userData.data.access_token, { path: '/',httpOnly: false });
+            Cookies.set('access_token', userData.data.access_token,
+                { path: '/',httpOnly: true, secure:true, sameSite: 'None', }
+            );
             dispatch(setSignin(userData.data))
             console.log("User signed in")
             navigate("/")

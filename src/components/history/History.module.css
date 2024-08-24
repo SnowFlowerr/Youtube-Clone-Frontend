@@ -1,0 +1,331 @@
+.mainBox{
+    scrollbar-width: none;
+    height: 100dvh;
+    overflow: auto;
+}
+.bigBox{
+    display: flex;
+    width: 100%;
+}
+.Sidenav{
+    z-index: 20;
+}
+.history{
+    margin-top: 60px;
+    padding: 9px;
+    width: 100%;
+    overflow: hidden;
+}
+.history > div{
+    /* border: 2px solid rgb(218, 13, 13); */
+    margin-bottom: 30px;
+}
+.view{
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.userProfile{
+    /* width: 100%; */
+    /* background-color: rgb(61, 223, 223); */
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+}
+.userImg{
+    width: 150px;
+    min-width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    overflow: hidden;
+}
+.channelName{
+    font-size: 50px;
+    font-weight: 900;
+}
+.userName{
+    font-size: 13px;
+    display: flex;
+    gap: 8px;
+    color: rgb(105, 105, 105);
+}
+.switchBtn button{
+    border-radius: 20px;
+    height: 30px;
+    font-size: 15px;
+    width: 130px;
+    background-color: rgb(50, 50, 50);
+    color: aliceblue;
+    margin-top: 6px;
+}
+.main{
+    position: relative;
+}
+.watched{
+    width: calc(100% - 30px);
+    margin-left: 15px;
+    display: flex;
+    /* gap: 5px; */
+    overflow: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    flex-basis: content;
+    scrollbar-width: none;
+}
+.container{
+    padding: 4px;
+}
+.thumbnail{
+    width: 255px;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 10px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    position: relative;
+}
+.duration{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: fit-content;
+    padding: 1px 3px;
+    border-radius: 5px;
+    font-size: 13px;
+    background-color: rgb(0, 0, 0, 0.5);
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+}
+.videoDetail {
+    display: flex;
+    margin-top: 7px;
+    gap: 10px;
+    color: white;
+}
+
+.videoDetail .details {
+    width: 100%;
+}
+
+.icon {
+    height: 37px;
+    min-height: 37px;
+    width: 37px;
+    min-width: 37px;
+    background-color: azure;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.title {
+    font-size: 15px;
+    /* border: 1px solid white; */
+    font-weight: 800;
+    margin-top:2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.channel {
+    font-size: 13px;
+    overflow: hidden;
+    margin-top: 2px;
+    /* border: 1px solid white; */
+}
+.channel .channelNames{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.arrowRight{
+    background-color: rgb(58, 58, 58);
+    position: absolute;
+    right: -5px;
+    top: 50px;
+    height: 50px;
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    font-size: 20px;
+}
+.arrowRight i{
+    height: 50px;
+    width: 50px;
+    align-content: center;
+    text-align: center;
+    border-radius: 100%;
+}
+.arrowRight i:hover{
+    background-color: rgb(111, 111, 111);
+    color: white;
+}
+.arrowLeft{
+    background-color: rgb(58, 58, 58);
+    position: absolute;
+    left: -5px;
+    top: 50px;
+    height: 50px;
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    font-size: 20px;
+}
+.arrowLeft i{
+    height: 50px;
+    width: 50px;
+    align-content: center;
+    text-align: center;
+    border-radius: 100%;
+}
+.arrowLeft i:hover{
+    background-color: rgb(111, 111, 111);
+    color: white;
+}
+
+@media screen and (max-width:750px) {
+    .history {
+        margin-top: 0;
+        /* margin-bottom: 50px; */
+    }
+    .userProfile{
+        width: 100%;
+        /* background-color: rgb(61, 223, 223); */
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+    .userImg{
+        width: 100px;
+        min-width: 100px;
+        height: 100px;
+        border-radius: 100%;
+        overflow: hidden;
+    }
+    .channelName{
+        font-size: 30px;
+        font-weight: 900;
+    }
+    .userName{
+        font-size: 13px;
+        display: flex;
+        gap: 6px;
+        color: rgb(105, 105, 105);
+    }
+    .switchBtn button{
+        border-radius: 20px;
+        height: 25px;
+        font-size: 13px;
+        width: 110px;
+        background-color: rgb(50, 50, 50);
+        color: aliceblue;
+    }
+}
+@media screen and (max-width:450px) {
+    .history {
+        margin-top: 0;
+        padding: 0;
+        /* margin-bottom: 50px; */
+    }
+    .history > div{
+        margin-bottom: 4vw;
+    }
+    .view{
+        font-size: 8vw;
+        font-weight: 700;
+        margin-bottom: 2.5vw;
+        margin-left: 2vw;
+    }
+    .userProfile{
+        gap: 5vw;
+    }
+    .userImg{
+        width: 25vw;
+        min-width: 25vw;
+        height: 25vw;
+    }
+    .channelName{
+        font-size: 8vw;
+    }
+    .userName{
+        font-size: 3vw;
+        display: flex;
+        gap: 1.5vw;
+    }
+    .switchBtn button{
+        height: 7vw;
+        font-size: 3vw;
+        width: 26vw;
+    }
+    .watched{
+        width: calc(100% - 10vw);
+        margin-left: 5vw;
+        display: flex;
+        /* gap: 5px; */
+        overflow: hidden;
+        scroll-behavior: smooth;
+        flex-basis: content;
+        scrollbar-width: none;
+        /* border: 2px solid white; */
+    }
+    .container{
+        padding: 4px;
+    }
+    .thumbnail{
+        width: calc(100vw - (10vw + 4px));
+    }
+    .videoDetail {
+        display: flex;
+        margin-top: 2vw;
+        gap: 2.5vw;
+        color: white;
+    }
+    .icon {
+        height: 10vw;
+        min-height: 10vw;
+        width: 10vw;
+        min-width: 10vw;
+    }
+    
+    .title {
+        font-size: 4vw;
+        /* border: 1px solid white; */
+        font-weight: 800;
+        margin-top:0.5vw;
+    }
+    
+    .channel {
+        font-size: 3vw;
+        margin-top: 0.5vw;
+    }
+    .arrowRight{
+        right: -0px;
+        top: 18vw;
+        height: 12vw;
+        width: 12vw;
+        font-size: 5vw;
+    }
+    .arrowRight i{
+        height: 12vw;
+        width: 12vw;
+    }
+    .arrowLeft{
+        left: -0px;
+        top: 18vw;
+        height: 12vw;
+        width: 12vw;
+        font-size: 5vw;
+    }
+    .arrowLeft i{
+        height: 12vw;
+        width: 12vw;
+    }
+}

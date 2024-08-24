@@ -155,9 +155,11 @@
 }
 .icon{
     height: 40px;
+    width: 40px;
     min-width: 40px;
     border-radius: 100%;
     background-color: antiquewhite;
+    overflow: hidden;
 }
 .subs{
     background-color: rgb(255, 255, 255);
@@ -172,6 +174,67 @@
 }
 .selected i{
     font-size: 30px;
+}
+.comments{
+    width: 0px;
+    min-width: 0px;
+    background-color: rgb(69, 69, 69);
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.5s;
+}
+.comments2{
+    width: 420px;
+    min-width: 420px;
+    background-color: rgb(69, 69, 69);
+    height: 100%;
+    margin-left: 5px;
+    border-radius: 10px;
+    padding: 20px 10px;
+    transition: 0.5s;
+}
+.cross{
+    display: none;
+}
+@media screen and (max-width:1180px) {
+    .comments{
+        width: 0px;
+        min-width: 0px;
+        background-color: rgb(69, 69, 69);
+        height: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: 0.5s;
+        position: absolute;
+    }
+    .comments2{
+        position: absolute;
+        width: 420px;
+        min-width: 420px;
+        background-color: rgb(69, 69, 69);
+        height: 100%;
+        border-radius: 10px;
+        padding: 20px 10px;
+        transition: 0.5s;
+        z-index: 20;
+        margin-left: 0px;
+    }
+    .cross{
+        display: block;
+        height: 40px;
+        width: 40px;
+        min-width: 40px;
+        align-content: center;
+        text-align: center;
+        border-radius: 100%;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+    .cross:hover{
+        background-color: #696969;
+    }
 }
 @media screen and (max-width:750px) {
     .nav{
@@ -240,6 +303,18 @@
     .selected i{
         font-size: 8vw;
     }
+
+    .comments2{
+        position: absolute;
+        width: 100%;
+        min-width: 100%;
+        background-color: rgb(69, 69, 69);
+        height: 100%;
+        padding: 50px 10px;
+        transition: 0.5s;
+        z-index: 20;
+        border-radius: 10px;
+    }
 }
 
 @media screen and (max-width:500px) {
@@ -263,5 +338,22 @@
         max-width: 100%;
         /* min-height: 100%; */
     }
-    
+    .username{
+        font-size: 3.5vw;
+    }
+    .icon{
+        height: 8vw;
+        width: 8vw;
+        min-width: 8vw;
+        border-radius: 100%;
+    }
+    .subs{
+        font-size: 2.5vw;
+        margin-left: 2vw;
+        padding: 1.8vw 2.5vw;
+        font-weight: 700;
+    }
+    .comments2{
+        border-radius: 0px;
+    }
 }

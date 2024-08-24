@@ -26,6 +26,7 @@ export default function SearchedVid() {
                     </div>
                     {
                         searchedVid.map((video, index) =>
+                            <>
                             <div key={index} className={styles.singleVideo}>
                                 <div className={styles.video}>
                                     dcscs
@@ -34,6 +35,11 @@ export default function SearchedVid() {
                                     fsegetth
                                 </div>
                             </div>
+                            {
+                                index===0 &&
+                                <div>refwafe</div>
+                            }
+                            </>
                         )}
                 </div>
             </div>

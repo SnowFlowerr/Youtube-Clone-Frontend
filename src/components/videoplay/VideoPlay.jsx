@@ -8,6 +8,8 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { darkTheme, lightTheme } from '../../themes'
 import Share from '../Share/Share'
+import Comment from '../comment/Comment'
+import SimilarVideos from '../similarVideos/SimilarVideos'
 
 // import { useNavigate } from 'react-router-dom'
 
@@ -20,91 +22,108 @@ export default function VideoPlay() {
     const videoRef = useRef(null)
     const [isSubs, setisSubs] = useState(false)
     const [isLike, setisLike] = useState(false)
+    const [isSaved, setisSaved] = useState(false)
     const [isDislike, setisDislike] = useState(false)
-    const [userData, setuserData] = useState({})
     const [videoData, setvideoData] = useState({ title: "Title" })
+    const [userData, setuserData] = useState({ name: "Title" })
+    const [duration, setDuration] = useState(0)
+    const [view, setView] = useState(0)
+    const [subs, setSubs] = useState(0)
+    const [like, setLike] = useState(0)
+    const [dislike, setDislike] = useState(0)
     const { id } = useParams();
+
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const vidData = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/${id}`)
-                const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/${vidData.data.userId}`)
                 setvideoData(vidData.data)
-                setuserData(userD.data)
-                if (userD.data.followedUser.indexOf(sign?.data?._id) !== -1) {
-                    setisSubs(true)
+                setLike(vidData.data.likes)
+                setDislike(vidData.data.dislikes)
+                setView(vidData.data.views)
+
+                try {
+                    const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/issubscribe/${vidData.data.userId}`,
+                        { withCredentials: true }
+                    )
+                    setisSubs(userD.data)
                 }
-                if (vidData.data.likedUser.indexOf(sign?.data?._id) !== -1) {
-                    setisLike(true)
+                catch (err) {
+                    console.log(err.message)
                 }
-                if (vidData.data.dislikedUser.indexOf(sign?.data?._id) !== -1) {
-                    setisDislike(true)
+
+                try {
+                    const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/isliked/${id}`,
+                        { withCredentials: true }
+                    )
+                    setisLike(userD.data)
                 }
+                catch (err) {
+                    console.log(err.message)
+                }
+                try {
+                    const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/isdisliked/${id}`,
+                        { withCredentials: true }
+                    )
+                    setisDislike(userD.data)
+                }
+                catch (err) {
+                    console.log(err.message)
+                }
+                try {
+                    const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/issaved/${id}`,
+                        { withCredentials: true }
+                    )
+                    setisSaved(userD.data)
+                }
+                catch (err) {
+                    console.log(err.message)
+                }
+                try {
+                    const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get/${vidData.data.userId}`,
+                    )
+                    setSubs(userD.data.followers)
+                    setuserData(userD.data)
+                }
+                catch (err) {
+                    console.log(err.message)
+                }
+
             }
             catch (err) {
-                console.log(err)
+                console.log(err.message)
             }
         }
         fetchData()
     }, [])
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/${videoData.userId}`)
-                setuserData(userD.data)
-                if (userD.data.followedUser.indexOf(sign?.data?._id) !== -1) {
-                    setisSubs(true)
-                }
-            }
-            catch (err) {
-                console.log(err)
-            }
-        }
-        fetchData()
-    }, [isSubs])
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const vidData = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/${id}`)
-                setvideoData(vidData.data)
-                if (vidData.data.likedUser.indexOf(sign?.data?._id) !== -1) {
-                    setisLike(true)
-                }
-                if (vidData.data.dislikedUser.indexOf(sign?.data?._id) !== -1) {
-                    setisDislike(true)
-                }
-            }
-            catch (err) {
-                console.log(err)
-            }
-        }
-        fetchData()
-    }, [isLike, isDislike])
 
-    useEffect(() => {
-        if (menu) {
-            boxRef.current.style.filter = "brightness(0.8)";
-        }
-        else {
-            boxRef.current.style.filter = 'none'
-        }
-    }, [menu])
+    // useEffect(() => {
+    //     if (menu) {
+    //         boxRef.current.style.filter = "brightness(0.8)";
+    //     }
+    //     else {
+    //         boxRef.current.style.filter = 'none'
+    //     }
+    // }, [menu])
+
     function handleSubscribe() {
         async function fetchData() {
             try {
                 if (isSubs) {
-                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${videoData.userId}`,
+                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${videoData?.userId}`,
                         {},
                         { withCredentials: true }
                     );
+                    setSubs(subs - 1)
                     console.log("Unsubscribe")
                 }
                 else {
-                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/subscribe/${videoData.userId}`,
+                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/subscribe/${videoData?.userId}`,
                         {},
                         { withCredentials: true }
                     );
+                    setSubs(subs + 1)
                     console.log("Subscribe")
                 }
                 setisSubs(!isSubs)
@@ -129,6 +148,7 @@ export default function VideoPlay() {
                     {},
                     { withCredentials: true }
                 );
+                setLike(like - 1)
                 console.log("unlikes")
             }
             else {
@@ -136,6 +156,7 @@ export default function VideoPlay() {
                     {},
                     { withCredentials: true }
                 );
+                setLike(like + 1)
                 console.log("likes")
             }
             setisLike(!isLike)
@@ -155,6 +176,7 @@ export default function VideoPlay() {
                     {},
                     { withCredentials: true }
                 );
+                setDislike(dislike - 1)
                 console.log("undislikes")
             }
             else {
@@ -162,6 +184,7 @@ export default function VideoPlay() {
                     {},
                     { withCredentials: true }
                 );
+                setDislike(dislike + 1)
                 console.log("dislikes")
             }
             setisDislike(!isDislike)
@@ -171,14 +194,63 @@ export default function VideoPlay() {
             console.log(err?.response?.data)
         }
     }
-    async function play() {
+    async function addView() {
         try {
             await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/view/${id}`)
+            setView(view + 1)
         }
         catch (err) {
-            console.log(err)
+            console.log(err.message)
         }
     }
+    async function addHistory() {
+        try {
+            await axios.put(`https://honest-stillness-production.up.railway.app/api/users/history/${id}`,
+                {},
+                { withCredentials: true }
+            );
+        }
+        catch (err) {
+            console.log(err.message)
+        }
+    }
+    function totalTime() {
+        setDuration(Math.floor(videoRef.current.duration) / 3)
+        addHistory()
+    }
+    useEffect(() => {
+        if (duration !== 0) {
+            setTimeout(() => {
+                addView()
+                console.log("view added")
+            }, duration * 1000)
+        }
+    }, [duration])
+    async function addSaved() {
+        try {
+            if (isSaved) {
+                await axios.put(`https://honest-stillness-production.up.railway.app/api/users/removesave/${id}`,
+                    {},
+                    { withCredentials: true }
+                );
+                console.log("removed")
+            }
+            else {
+                await axios.put(`https://honest-stillness-production.up.railway.app/api/users/addsave/${id}`,
+                    {},
+                    { withCredentials: true }
+                );
+                console.log("saved")
+            }
+            setisSaved(!isSaved)
+            // console.log("err?.response?.data")
+        }
+        catch (err) {
+            console.log(err?.response?.data)
+        }
+    }
+
+
 
     return (
         <div className={styles.mainBox}>
@@ -201,19 +273,17 @@ export default function VideoPlay() {
                         controls
                         id='videos'
                         ref={videoRef}
-                        onPlay={play}
+                        onPlay={totalTime}
                         poster={null}>
-
 
                         <source
                             src={vid}
                             type='video/mp4'
                         />
 
+
                     </video>
                 </div>
-
-
             </div>
             <div className={styles.videoDetails} ref={boxRef}>
                 <div className={styles.videoDet}>
@@ -224,12 +294,12 @@ export default function VideoPlay() {
                     <div className={styles.videoStatus}>
                         <div className={styles.channel}>
                             <div className={styles.channelDetail}>
-                            <div className={styles.icon}></div>
-                            <div className={styles.channelName}>
-                                <span className={styles.name}>{userData?.name}</span>
-                                <br />
-                                <span className={styles.subs}>{userData?.followers} subs</span>
-                            </div>
+                                <div className={styles.icon}></div>
+                                <div className={styles.channelName}>
+                                    <span className={styles.name}>{userData?.name}</span>
+                                    <br />
+                                    <span className={styles.subs}>{subs} subs</span>
+                                </div>
                             </div>
 
                             <div className={styles.status2}>
@@ -242,10 +312,10 @@ export default function VideoPlay() {
                         <div className={styles.status}>
                             <div className={styles.likeDislike} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
                                 <span className={styles.like} onClick={handleLike} >
-                                    {isLike ? <span className={styles.selected}><i className="fa-solid fa-thumbs-up"></i></span> : <i className="fa-regular fa-thumbs-up"></i>} {videoData?.likes}
+                                    {isLike ? <span className={styles.selected}><i className="fa-solid fa-thumbs-up"></i></span> : <i className="fa-regular fa-thumbs-up"></i>} {like}
                                 </span>
                                 <span className={styles.dislike} onClick={handleDislike}>
-                                {videoData?.dislikes} {isDislike ? <span className={styles.selected}> <i className="fa-solid fa-thumbs-down fa-flip-horizontal"></i> </span> : <i className="fa-regular fa-thumbs-down fa-flip-horizontal"></i>}
+                                    {dislike} {isDislike ? <span className={styles.selected}> <i className="fa-solid fa-thumbs-down fa-flip-horizontal"></i> </span> : <i className="fa-regular fa-thumbs-down fa-flip-horizontal"></i>}
                                 </span>
                             </div>
                             <Share
@@ -258,86 +328,33 @@ export default function VideoPlay() {
                                     </div>
                                 }
                             />
+                            <div className={styles.share} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
+                                {isSaved ?
+                                    <span onClick={addSaved} >
+                                        <i className="fa-solid fa-bookmark"></i> Remove</span>
+                                    :
+                                    <span onClick={addSaved} >
+                                        <i className="fa-regular fa-bookmark"></i> Save
+                                    </span>
+
+                                }
+                            </div>
                         </div>
 
                     </div>
                     <div className={styles.descript} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
-                        <b>{videoData?.views} views</b> <br />
+                        <b>{view} views</b> <br />
                         {videoData?.description}
+                    </div>
+                    <div className={styles.comment}>
+                        <Comment></Comment>
                     </div>
                 </div>
 
 
 
                 <div className={styles.similarVideo}>
-                    fefsdz <br />
-                    efvfesv
-                    fefsdz <br />
-                    efvfesv
-                    v
-
-                    fefsdz <br />
-                    efvfesv
-                    fefsdz <br />
-                    efvfesv
-
-                    fefsdz <br />
-                    efvfesv
-                    v
-                    fefsdz <br />
-                    efvfesv
-                    v
-                    fefsdz <br />
-                    efvfesv
-                    fefsdz <br />
-                    efvfesv
-
-                    fefsdz <br />
-                    efvfesv
-                    fefsdz <br />
-                    efvfesv
-                    fefsdz <br />
-                    efvfesv
-                    v
-                    fefsdz <br />
-                    efvfesv
-                    v
-                    fefsdz <br />
-                    efvfesv
-                    fefsdz <br />
-                    efvfesv
-
-                    fefsdz <br />
-                    efvfesv
-                    fefsdz <br />
-                    v
-                    fefsdz <br />
-                    efvfesv
-                    v
-                    fefsdz <br />
-                    efvfesv
-                    fefsdz <br />
-                    efvfesv
-
-                    fefsdz <br />
-                    efvfesv
-                    fefsdz <br />
-                    efvfesv
-                    fefsdz <br />
-                    efvfesv
-                    v
-                    fefsdz <br />
-                    efvfesv
-                    v
-                    fefsdz <br />
-                    efvfesv
-                    fefsdz <br />
-                    efvfesv
-
-                    fefsdz <br />
-                    efvfesv
-                    fefsdz <br />
-                    efvfesv
+                    <SimilarVideos></SimilarVideos>
                 </div>
             </div>
 

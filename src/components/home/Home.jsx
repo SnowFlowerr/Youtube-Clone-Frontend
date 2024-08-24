@@ -7,20 +7,28 @@ import pic from './pic.jpg'
 import { useDispatch, useSelector } from 'react-redux'
 import { lightTheme, darkTheme } from '../../themes'
 import { offMic } from '../../redux/Data/micSlice'
+import { Link } from 'react-router-dom'
 
 
 
 export default function Home() {
-    const [videos, setVideos] = useState([{title:"vaefesvs"},{title:"esgvgevaevs"},{title:"vevaevfegrs"},{title:"vdcfsfcaevs"},{title:"vaeecsacvs"},{title:"rfesrfvaevs"},{title:"vafevs"},{title:"vaevrvesfs"},{title:"vaecvs"},])
+    const [videos, setVideos] = useState([])
     const theme = useSelector((state) => state.theme.value)
     const lastVid = useRef(null)
     const dispatch = useDispatch()
+    const [last,setLast]=useState(false)
+    // const [limit,setLimit]=useState(20)
+    const [skip,setSkip]=useState(0)
 
     useEffect(() => {
         const fetchVideo = async () => {
             try {
-                const res = await axios.get('https://honest-stillness-production.up.railway.app/api/videos')
-                setVideos(res.data)
+                const res = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/?limit=${20}&skip=${skip}`)
+                // console.log(res.data)
+                setVideos([...videos,...res.data])
+                if(res.data.length!==0){
+                    setLast(true)
+                }
             }
             catch (err) {
                 console.log(err.message)
@@ -28,14 +36,34 @@ export default function Home() {
         }
         fetchVideo();
         dispatch(offMic())
-    }, [])
+    }, [skip])
 
     function handleScroll() {
         let divHeight = lastVid.current.offsetHeight
         let scrollHeight = lastVid.current.scrollHeight
         let scroll = lastVid.current.scrollTop
-        if (divHeight + scroll >= scrollHeight - 5) {
-            console.log("true")
+        if (Math.floor(divHeight + scroll) >= Math.floor(scrollHeight) - 1) {
+            if(last){
+                setSkip(skip+20)
+                setLast(false)
+            }
+        }
+    }
+    function getDuration(duration) {
+        duration=Math.floor(duration)
+        let sec= Math.floor(duration % 60)
+        let min= Math.floor((duration % 3600) / 60)
+        let hr= Math.floor(duration / 3600)
+        sec=sec<=9?"0"+sec:sec
+        min=min<=9?"0"+min:min
+        if(hr){
+            return hr+":"+min+":"+sec
+        }
+        else if(min){
+            return min+":"+sec
+        }
+        else{
+            return min+":"+sec
         }
     }
     return (
@@ -52,27 +80,32 @@ export default function Home() {
                         videos.map((video, index) =>
                             <div key={index} className={styles.singleVid} style={theme ? darkTheme : lightTheme}>
                                 <div className={styles.thumbnail}>
-                                    <a href={`player/${video?._id}`}>
-                                        <img src={pic} width="100%" height="100%" alt="" />
-                                    </a>
+                                    <Link to={`player/${video?._id}`}>
+                                        <img src={pic} width="100%" height="100%" alt="thumbnail" />
+                                    </Link>
+                                    <div className={styles.duration}>{getDuration(166)}</div>
                                 </div>
                                 <div className={styles.videoDetail} style={theme ? darkTheme : lightTheme}>
                                     <div className={styles.icon}>
                                         <a href="/userDetail/userid">
-                                            <img src={pic} width="100%" height="100%" alt="" />
+                                            <img src={pic} width="100%" height="100%" alt="icon" />
                                         </a>
                                     </div>
                                     <div className={styles.details}>
-                                        <a href={`/player/${video?._id}`} style={theme ? { color: "white" } : { color: "black" }}>
+                                        <Link to={`/player/${video?._id}`} style={theme ? { color: "white" } : { color: "black" }}>
                                             <div className={styles.title}>
                                                 {video?.title}
                                             </div>
                                             <div className={styles.channel}>
-                                                channel name
-                                                <br />
-                                                0 views
+                                                <div className={styles.channelNames}>
+                                                    {video?.name}
+                                                </div>
+                                                <div>
+                                                {video?.views} Views
+
+                                                </div>
                                             </div>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

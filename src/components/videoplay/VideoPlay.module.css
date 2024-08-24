@@ -65,13 +65,19 @@
 .title {
     font-size: 23px;
     font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .similarVideo {
     width: 30%;
-    background-color: rgb(160, 154, 154);
+    /* background-color: rgb(160, 154, 154); */
     border-radius: 10px;
-    padding: 10px;
+    padding: 5px;
 }
 
 .videoStatus {
@@ -80,28 +86,31 @@
     align-items: center;
     margin-top: 10px;
     gap: 10px;
+    flex-wrap: wrap;
 }
 .channelDetail{
     display: flex;
     align-items: center;
     gap: 10px;
+    justify-content: space-between;
 }
 
 .channel {
+    /* width: 100%; */
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 25px;
-    
+    /* border: 2px solid white; */
 }
 
-.icon {
+/* .icon {
     height: 50px;
     width: 50px;
     min-width: 50px;
     background-color: brown;
     border-radius: 100%;
-}
+} */
 
 .name {
     font-size: 18px;
@@ -132,7 +141,7 @@
 .share{
     padding: 10px 0px;
 }
-.share span {
+.share > span {
     padding: 10px 15px;
     width: 100%;
     height: 100%;
@@ -170,9 +179,13 @@
     width: 100%;
 }
 .status {
+    /* width: 100%; */
     display: flex;
     gap: 10px;
     align-items: center;
+    /* border: 2px solid white; */
+    overflow: auto;
+    scrollbar-width: none;
 }
 
 .like {
@@ -186,6 +199,9 @@
     margin-top: 10px;
     border-radius: 10px;
     padding: 10px;
+}
+.comment{
+    padding: 20px 0px;
 }
 @media screen and (max-width:830px) {
     .videoDetails {
@@ -257,7 +273,7 @@
     .share{
         padding: 7px 0px;
     }
-    .share span{
+    .share > span{
         padding: 7px 10px;
         /* width: 100%; */
     }
@@ -323,7 +339,7 @@
     .share{
         padding: 7px 0px;
     }
-    .share span{
+    .share > span{
         padding: 7px 10px;
         /* width: 100%; */
     }

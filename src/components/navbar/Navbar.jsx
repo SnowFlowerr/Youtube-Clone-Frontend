@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { showMenu } from '../../redux/Data/menuSlice'
 import { changeTheme } from '../../redux/Data/themeSlice'
 import logo from "../assets/Logo.png"
@@ -9,11 +9,13 @@ import { useNavigate } from 'react-router-dom'
 import Speech from '../Speech/Speech'
 import { offMic } from '../../redux/Data/micSlice'
 import Cookies from 'js-cookie';
+import Upload from '../upload/Upload'
 
 export default function Navbar() {
 
     const [isSearch, setisSearch] = useState(true)
     const [signBtn, setSignBtn] = useState(false)
+    const [isUpload, setisUpload] = useState(false)
     const inputRef = useRef(null);
     const inputRef2 = useRef(null);
     const suggRef = useRef(null);
@@ -43,6 +45,8 @@ export default function Navbar() {
         setsearchInput("")
         if (e.target.id === "search" || e.target.id === "search3") {
             inputRef2.current.focus();
+            suggRef.current.style.visibility = "visible"
+            suggRef2.current.style.visibility = "visible"
         }
         else if (e.target.id === "search2") {
             inputRef.current.focus();
@@ -61,10 +65,10 @@ export default function Navbar() {
     }
     function handleSignMenu() {
         setSignBtn(!signBtn)
-        if(signBtn){
+        if (signBtn) {
             suggRef2.current.style.visibility = "hidden"
         }
-        else{
+        else {
             suggRef2.current.style.visibility = "visible"
         }
     }
@@ -119,22 +123,38 @@ export default function Navbar() {
                                     <div className={styles.theme} onClick={() => dispach(changeTheme())}>
                                         {theme ? <i className="fa-solid fa-sun"></i> : <i className="fa-solid fa-moon"></i>}
                                     </div>
-                                    <div className={styles.upload}>
+                                    <div className={styles.upload} onClick={() => setisUpload(true)}>
                                         <i className="fa-solid fa-upload"></i>
                                     </div>
                                     <div>
                                         {sign.status ?
                                             <>
-                                                <div className={styles.pro} onClick={handleSignMenu}> B </div>
-                                                {signBtn && <div className={styles.signMenu} style={theme ? {} : { backgroundColor: "#dadada" }}>
-                                                    <div onClick={handleLogout}>Logout</div>
+                                                <div className={styles.pro} onClick={handleSignMenu}>{sign.data.img === "img" ? sign.data.name.substr(0, 1) :
+                                                    <img src={sign.data.img} height="100%" width="100%" />}
+                                                </div>
+                                                {signBtn &&
+                                                <div className={styles.signMenu} style={theme ? {} : { backgroundColor: "#dadada" }}>
+                                                    <div className={styles.menuProfile}>
+                                                        <div className={styles.pro2}>
+                                                            {sign.data.img === "img" ? sign.data.name.substr(0, 1) : <img src={sign.data.img} height="100%" width="100%" />}
+                                                        </div>
+                                                        <div>
+                                                            <div className={styles.channelName}>{sign.data.name}</div>
+                                                            <div className={styles.username}>@{sign.data.username}</div>
+                                                            <div className={styles.myChannel}><a href="/">view your channel</a></div>
+                                                        </div>
+                                                    </div>
+                                                    <hr />
                                                     <div>fesf</div>
                                                     <div>sfdv</div>
                                                     <div>fdvsvf</div>
+                                                    <div onClick={handleLogout}>Logout</div>
                                                 </div>}
                                             </>
                                             :
-                                            <a href="/signin" style={theme ? darkTheme : lightTheme}><div className={styles.signin}>Sign in</div></a>
+                                            <a href="/signin" style={theme ? darkTheme : lightTheme}>
+                                                <div className={styles.signin}>Sign in</div>
+                                            </a>
                                         }
                                     </div>
                                 </div>
@@ -157,7 +177,10 @@ export default function Navbar() {
                         </div>
                 }
             </div>
-            <div className={styles.suggCont} ref={suggRef2} onClick={() => { suggRef.current.style.visibility = "hidden"; suggRef2.current.style.visibility = "hidden";setSignBtn(false) }}></div>
+            <div className={styles.suggCont} ref={suggRef2} onClick={() => { suggRef.current.style.visibility = "hidden"; suggRef2.current.style.visibility = "hidden"; setSignBtn(false) }}></div>
+            <div>
+                <Upload isUpload={isUpload} setisUpload={setisUpload}></Upload>
+            </div>
         </div>
     )
 }

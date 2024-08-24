@@ -5,6 +5,9 @@ import google from "../assets/google.png"
 import apple from "../assets/apple.png"
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux'
+import { setSignin } from '../../redux/Data/signSlice'
 
 
 export default function Signup() {
@@ -12,6 +15,7 @@ export default function Signup() {
     const [user, setUser] = useState({name:"",username:"",email:"",password:""});
     const [err, setErr] = useState("");
     const [tc, setTc] = useState(false);
+    const dispatch=useDispatch()
     const navigate=useNavigate()
     function handleChange(e){
         setUser({...user,[e.target.id]:e.target.value.trim()})
@@ -35,9 +39,12 @@ export default function Signup() {
             return setErr("Agree to the Terms and Policy")
         }
         try{
-            await axios.post("https://honest-stillness-production.up.railway.app/api/auth/signup", {  name:user.name, username:user.username, email:user.email, password:user.password}, { headers: { "Content-Type": "application/json" } });
+            const userData =await axios.post("https://honest-stillness-production.up.railway.app/api/auth/signup", {  name:user.name, username:user.username, email:user.email, password:user.password}, { headers: { "Content-Type": "application/json" } },{ withCredentials: true });
+            Cookies.set('access_token', userData.data.access_token,
+                { path: '/',httpOnly: false, secure:true,sameSite: 'None', });
+            dispatch(setSignin(userData.data))
             console.log("User signed up")
-            navigate("/signin")
+            navigate("/")
         }
         catch(err){
             setErr(err?.response?.data?.message)

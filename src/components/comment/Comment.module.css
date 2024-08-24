@@ -1,0 +1,139 @@
+.mainBox{
+    overflow: auto;
+    /* height: 100vh; */
+    /* scroll-behavior: smooth; */
+    padding-bottom: 100px;
+}
+.heading{
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.addComments{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.userIcon{
+    height: 45px;
+    width: 45px;
+    min-width: 45px;
+    aspect-ratio: 1;
+    background-color: gray;
+    border-radius: 100%;
+    overflow: hidden;
+}
+.commentInput,.commentInput2{
+    width: 100%;
+    height: fit-content;
+}
+.commentInput textarea{
+    width: 100%;
+    padding: 0;
+    min-height: 25px;
+    height: 25px;
+    margin: 0;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid gray;
+    background-color: transparent;
+    color: white;
+    resize:none;
+    transition: 1s linear;
+    scroll-behavior: smooth;
+}
+.commentInput2 textarea{
+    width: 100%;
+    padding: 0;
+    min-height: 25px;
+    height: 100px;
+    margin: 0;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid gray;
+    background-color: transparent;
+    color: white;
+    resize:none;
+    transition: 1s linear;
+    scroll-behavior: smooth;
+}
+.commentOption{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.emoji{
+    position: relative;
+    padding-left: 60px;
+    /* top: 50px; */
+}
+.emojiIcon{
+    height: 40px;
+    min-width: 40px;
+    width: 40px;
+    min-height: 40px;
+    border-radius: 100%;
+    overflow: hidden;
+    background-color: rgb(56, 56, 56);
+}
+.emoji i{
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    align-content: center;
+    text-align: center;
+    border-radius: 100%;
+}
+.emoji i:hover{
+    background-color: rgb(99, 99, 99);
+}
+.emojiBtn button{
+    height: 35px;
+    padding: 5px 10px;
+    border-radius: 50px;
+    margin-left: 10px;
+}
+.comments{
+    margin-top: 15px;
+}
+.singleComment{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    /* align-items: center; */
+    margin-top: 20px;
+}
+.userComments{
+    width: 100%;
+    text-align: left;
+}
+.username{
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+}
+.commentText{
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 3px;
+}
+.likeDislike{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: 200;
+}
+.likeDislike > div{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.likeDislike span{
+    font-size: 20px;
+}

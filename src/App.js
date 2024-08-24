@@ -9,6 +9,7 @@ import styles from "./App.module.css"
 import { useEffect } from "react";
 import { useSelector } from 'react-redux'
 import Shorts from "./components/shorts/Shorts";
+import History from "./components/history/Histories";
 
 function App() {
   const theme = useSelector((state) => state.theme.value)
@@ -26,6 +27,7 @@ function App() {
           <Route path='/player/:id' element={<VideoPlay />} />
           <Route path='/searchedvideo/:search' element={<SearchedVid />} />
           <Route path='/shorts/:id' element={<Shorts />} />
+          <Route path='/history' element={<History />} />
         </Routes>
     </div>
   );

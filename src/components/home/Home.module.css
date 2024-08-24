@@ -1,12 +1,14 @@
-.mainBox{
+.mainBox {
     height: 100vh;
     overflow: auto;
 }
-.bigBox{
+
+.bigBox {
     display: flex;
     /* height: 100%; */
 }
-.videos{
+
+.videos {
     /* border: 2px solid white; */
     margin-top: 60px;
     width: 100%;
@@ -18,11 +20,12 @@
     flex-flow: wrap;
     gap: 1vw;
     row-gap: 1.5vw;
-    overflow:   auto;
+    overflow: auto;
     /* justify-content:space-between; */
     /* padding-bottom: 50px; */
 }
-.singleVid{
+
+.singleVid {
     background-color: rgb(0, 0, 0);
     width: 24%;
     /* max-width: 32%; */
@@ -32,25 +35,42 @@
     padding-bottom: 5px;
     border-radius: 15px;
 }
-.thumbnail{
-    height: 13vw;
+
+.thumbnail {
+    /* height: 13vw; */
     background-color: rgb(34, 34, 34);
     border-radius: 15px;
     width: 100%;
+    aspect-ratio: 16/9;
     text-align: center;
     align-content: center;
     overflow: hidden;
+    position: relative;
 }
-.videoDetail{
+.duration{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: fit-content;
+    padding: 1px 3px;
+    border-radius: 5px;
+    font-size: 13px;
+    background-color: rgb(0, 0, 0, 0.5);
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+}
+.videoDetail {
     display: flex;
     margin-top: 0.7vw;
     gap: 1vw;
     color: white;
 }
-.videoDetail .details{
+
+.videoDetail .details {
     width: 100%;
 }
-.icon{
+
+.icon {
     height: 3vw;
     min-height: 3vw;
     width: 3vw;
@@ -59,122 +79,151 @@
     border-radius: 100%;
     overflow: hidden;
 }
-.title{
-    font-size: 1.1vw;
+
+.title {
+    font-size: 1.2vw;
     /* border: 1px solid white; */
     font-weight: 800;
-    max-height: 2.6vw;
+    max-height: 2.8vw;
     margin-top: 0.2vw;
     overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
-.channel{
+
+.channel {
     font-size: 0.9vw;
     max-height: 2.2vw;
     overflow: hidden;
+    margin-top: 0.3vw;
     /* border: 1px solid white; */
 }
-.bottomNav{
+.channel .channelNames{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.bottomNav {
     display: none;
 }
+
 @media screen and (max-width:1100px) {
-    .singleVid{
+    .singleVid {
         width: 32.3%;
     }
-    .thumbnail{
-        height: 16.5vw;
-    }
-    .icon{
+
+    .icon {
         height: 4vw;
         min-height: 4vw;
         width: 4vw;
         min-width: 4vw;
     }
-    .title{
+
+    .title {
         font-size: 1.5vw;
         /* border: 1px solid white; */
         font-weight: 800;
         /* height: 3.5vw; */
         max-height: 3.7vw;
     }
-    .channel{
+
+    .channel {
         font-size: 1.3vw;
         max-height: 3.2vw;
         overflow: hidden;
         /* border: 1px solid white; */
     }
 }
+
 @media screen and (max-width:750px) {
-    .Sidenav{
+    .Sidenav {
         display: none;
     }
-    .videos{
+
+    .videos {
         margin-top: 0;
         row-gap: 2vw;
         margin-bottom: 50px;
     }
-    .videoDetail{
+
+    .videoDetail {
         gap: 2vw;
     }
-    .singleVid{
+
+    .singleVid {
         width: 49.4%;
     }
-    .thumbnail{
-        height: 25vw;
-    }
-    .icon{
+
+    .icon {
         height: 5.5vw;
         min-height: 5.5vw;
         width: 5.5vw;
         min-width: 5.5vw;
     }
-    .title{
+
+    .title {
         font-size: 2vw;
         /* border: 1px solid white; */
         font-weight: 800;
         /* height: 5vw; */
         max-height: 4.9vw;
     }
-    .channel{
+
+    .channel {
         font-size: 1.8vw;
         max-height: 4.4vw;
         /* border: 1px solid white; */
         overflow: hidden;
     }
-    .bottomNav{
+
+    .bottomNav {
         display: block;
     }
 }
+
 @media screen and (max-width:450px) {
-    .videos{
+    .videos {
         row-gap: 3vw;
         padding: 0;
     }
-    .videoDetail{
+
+    .videoDetail {
         gap: 3vw;
         padding: 5px;
     }
-    .singleVid{
+
+    .singleVid {
         width: 100%;
         border-radius: 0px;
     }
-    .thumbnail{
-        height: 50vw;
+
+    .thumbnail {
         border-radius: 0px;
     }
-    .icon{
+
+    .icon {
         height: 10vw;
         min-height: 10vw;
         width: 10vw;
         min-width: 10vw;
     }
-    .title{
+
+    .title {
         font-size: 3.8vw;
         /* border: 1px solid white; */
         font-weight: 800;
         /* height: 3.5vw; */
         max-height: 9vw;
     }
-    .channel{
+
+    .channel {
         font-size: 3vw;
         /* height: 7vw; */
         max-height: 7.3vw;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from "./Shorts.module.css"
 import Navbar from '../navbar/Navbar'
 import Sidenav from '../navbar/Sidenav'
@@ -11,49 +11,60 @@ import { offMic } from '../../redux/Data/micSlice'
 import axios from 'axios'
 
 export default function Shorts() {
-    
-    const [videoData, setvideoData] = useState([{ title: "Title" },{ title: "Title" }])
+
+    const [videoData, setvideoData] = useState([])
     // const arr=[2,2,2,2,2,2,2,2]
     const [vidData, setvidData] = useState({ title: "Title" })
     let { id } = useParams();
     const navigate = useNavigate()
-    const [currentVideoIndex, setCurrentVideoIndex] = useState(null);
-    const dispatch=useDispatch()
+    const [currentUrl, setCurrentUrl] = useState(null);
+    const dispatch = useDispatch()
     const theme = useSelector((state) => state.theme.value)
-    const handlePlay = (index) => {
-        setCurrentVideoIndex(index);
-    };
+    const sign = useSelector((state) => state.sign.value)
+    // const [limit, setLimit] = useState(2)
+    const [skip, setSkip] = useState(0)
+    const lastVid = useRef(null)
+    const [last, setLast] = useState(false)
     const [url, setUrl] = useState("url");
-    useEffect(()=>{
-        if(id==="nulll"){
+
+    const handlePlay = (url) => {
+        setCurrentUrl(url);
+    };
+    
+    
+    useEffect(() => {
+        if (id === "url") {
             setUrl("")
         }
-        else{
+        else {
             setUrl(id)
         }
         dispatch(offMic())
-    },[])
+    }, [])
 
     useEffect(() => {
         async function fetchData() {
             try {
-                if(id!=="nulll"){
-                    const vidData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/${id}`)
+                if (id !== "url") {
+                    const vidData = await axios.get(`http://localhost:8000/api/shorts/${id}`)
                     setvidData(vidData.data)
                 }
-                const videosData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts`)
-                setvideoData(videosData.data)
+                const videosData = await axios.get(`http://localhost:8000/api/shorts/?limit=${2}&skip=${skip}`)
+                setvideoData([...videoData, ...videosData.data])
+                if (videosData.data.length !== 0) {
+                    setLast(true)
+                }
             }
             catch (err) {
                 console.log(err.message)
             }
         }
         fetchData()
-    }, [])
+    }, [skip])
 
     useEffect(() => {
-        if (currentVideoIndex !== null) {
-            navigate(`/shorts/${currentVideoIndex}`)
+        if (currentUrl !== null) {
+            navigate(`/shorts/${currentUrl}`)
         }
         const handlePopState = (event) => {
             if (window.location.pathname !== '/') {
@@ -66,12 +77,24 @@ export default function Shorts() {
         return () => {
             window.removeEventListener('popstate', handlePopState);
         };
-    }, [currentVideoIndex])
+    }, [currentUrl])
+
+    function handleScroll() {
+        let divHeight = lastVid.current.offsetHeight
+        let scrollHeight = lastVid.current.scrollHeight
+        let scroll = lastVid.current.scrollTop
+        if (Math.floor(divHeight + scroll) >= Math.floor(scrollHeight) - 100) {
+            if (last) {
+                setSkip(skip+2)
+                setLast(false)
+            }
+        }
+    }
 
     return (
         <div className={styles.bigBox} style={theme ? darkTheme : lightTheme}>
             <div className={styles.mainLogo}>
-                <a href="/" className={styles.logoDetail} style={theme ? {color:"white"} : {color:"black"}}>
+                <a href="/" className={styles.logoDetail} style={theme ? { color: "white" } : { color: "black" }}>
                     <img src={logo} alt="logoImg" height="30px" />
                     <span>StreamSphere</span>
                 </a>
@@ -84,14 +107,14 @@ export default function Shorts() {
                     <Sidenav></Sidenav>
                 </div>
                 <div className={styles.box}>
-                    <div className={styles.videoBox}>
-                        {url!=="" &&
-                        <div className={styles.card}>
-                            <VideoCard data={url?vidData:"url"} index={-1} onPlay={handlePlay}></VideoCard>
-                        </div>}
+                    <div className={styles.videoBox} ref={lastVid} onScroll={handleScroll}>
+                        {url !== "" &&
+                            <div className={styles.card}>
+                                <VideoCard data={url ? vidData : "url"} index={-1} onPlay={handlePlay}></VideoCard>
+                            </div>}
                         {videoData.map((shorts, index) =>
                             <div key={index} className={styles.card}>
-                                <VideoCard data={shorts} index={index} onPlay={handlePlay}></VideoCard>
+                                <VideoCard data={shorts} index={index + 1} onPlay={handlePlay}></VideoCard>
                             </div>
                         )}
                     </div>
