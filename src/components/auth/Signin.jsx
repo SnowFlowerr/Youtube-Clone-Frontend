@@ -41,7 +41,7 @@ export default function Signin() {
             // setCookie('access_token', userData.data.access_token, { path: '/' });
             Cookies.set('access_token', userData.data.access_token,
                 // { path: '/',httpOnly: true, secure:true, sameSite: 'None', }
-                {domain:"honest-stillness-production.up.railway.app"}
+                {domain:"honest-stillness-production.up.railway.app",secure: true,sameSite: 'None'}
             );
             dispatch(setSignin(userData.data))
             console.log("User signed in")
