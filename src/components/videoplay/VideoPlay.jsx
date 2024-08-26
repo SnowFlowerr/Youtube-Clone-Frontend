@@ -3,7 +3,6 @@ import styles from "./VideoPlay.module.css"
 import Navbar from '../navbar/Navbar'
 import Sidenav from '../navbar/Sidenav'
 import { useSelector } from 'react-redux'
-import vid from "./VIDEO-2024-07-21-10-47-29.mp4"
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { darkTheme, lightTheme } from '../../themes'
