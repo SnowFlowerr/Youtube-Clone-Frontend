@@ -1,15 +1,18 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { showMenu } from '../../redux/Data/menuSlice'
 import { changeTheme } from '../../redux/Data/themeSlice'
 import logo from "../assets/Logo.png"
 import styles from "./Navbar.module.css"
 import { useDispatch, useSelector } from 'react-redux'
 import { lightTheme, darkTheme } from '../../themes'
-import { useNavigate } from 'react-router-dom'
+import { json, useNavigate } from 'react-router-dom'
 import Speech from '../Speech/Speech'
 import { offMic } from '../../redux/Data/micSlice'
 import Cookies from 'js-cookie';
 import Upload from '../upload/Upload'
+import { setSignout, setSignin } from '../../redux/Data/signSlice'
+import axios from 'axios'
+
 
 export default function Navbar() {
 
@@ -22,12 +25,35 @@ export default function Navbar() {
     const suggRef2 = useRef(null);
     const menu = useSelector((state) => state.menu.value)
     const theme = useSelector((state) => state.theme.value)
-    const sign = useSelector((state) => state.sign.value)
+    const sign = useSelector((state) => state.sign?.value)
     const [searchInput, setsearchInput] = useState("")
-    const dispach = useDispatch();
+    const dispatch = useDispatch();
     const navigate = useNavigate()
     const arr = ['3', '3', '46', '575', '6', '76', "575", '56', '765', '7', '655', '657', '56', '676', '65', '7', '6', '5', '67']
 
+    useEffect(() => {
+        async function currentUser() {
+            try {
+                const userD = await axios.get(`http://localhost:8000/api/users/get`,
+                    { withCredentials: true }
+                )
+                // console.log(userD)
+                if(userD?.data?.success===false){
+                    Cookies.remove('access_token', { path: '/' });
+                    dispatch(setSignout())
+                }
+                else{
+                    dispatch(setSignin(userD.data))
+                }
+            }
+            catch (err) {
+                
+                // localStorage.removeItem("userData")
+                console.log(err)
+            }
+        }
+        currentUser()
+    }, [])
     function handleSearch(e) {
         e.preventDefault();
         setsearchInput(e.target.value)
@@ -36,7 +62,7 @@ export default function Navbar() {
         if (searchInput.trim() !== "") {
             navigate(`/searchedvideo/${searchInput}`)
         }
-        dispach(offMic())
+        dispatch(offMic())
         suggRef.current.style.visibility = 'hidden';
         suggRef2.current.style.visibility = "hidden"
     }
@@ -74,8 +100,9 @@ export default function Navbar() {
     }
     function handleLogout() {
         Cookies.remove('access_token', { path: '/' });
-        localStorage.removeItem("userData")
-        window.location.reload()
+        dispatch(setSignout())
+        // localStorage.removeItem("userData")
+        // window.location.reload()
     }
     return (
         <div className={styles.mainNav}>
@@ -86,9 +113,9 @@ export default function Navbar() {
                             <div className={styles.logoDetail}>
                                 <div className={styles.menu}>
                                     {menu ?
-                                        <i className="fa-solid fa-xmark" onClick={() => dispach(showMenu())}></i>
+                                        <i className="fa-solid fa-xmark" onClick={() => dispatch(showMenu())}></i>
                                         :
-                                        <i className="fa-solid fa-bars" onClick={() => dispach(showMenu())}></i>}
+                                        <i className="fa-solid fa-bars" onClick={() => dispatch(showMenu())}></i>}
                                 </div>
                                 <a href="/" className={styles.logoDetail} style={theme ? darkTheme : lightTheme}>
                                     <img src={logo} alt="logoImg" height="30px" />
@@ -120,36 +147,36 @@ export default function Navbar() {
                                     </span>
                                 </div>
                                 <div className={styles.lastNav}>
-                                    <div className={styles.theme} onClick={() => dispach(changeTheme())}>
+                                    <div className={styles.theme} onClick={() => dispatch(changeTheme())}>
                                         {theme ? <i className="fa-solid fa-sun"></i> : <i className="fa-solid fa-moon"></i>}
                                     </div>
-                                    <div className={styles.upload} onClick={() => setisUpload(true)}>
+                                    {sign && <div className={styles.upload} onClick={() => setisUpload(true)}>
                                         <i className="fa-solid fa-upload"></i>
-                                    </div>
+                                    </div>}
                                     <div>
-                                        {sign.status ?
+                                        {sign ?
                                             <>
-                                                <div className={styles.pro} onClick={handleSignMenu}>{sign.data.img === "img" ? sign.data.name.substr(0, 1) :
-                                                    <img src={sign.data.img} height="100%" width="100%" />}
+                                                <div className={styles.pro} onClick={handleSignMenu}>{sign?.img === "img" ? sign?.name.substr(0, 1) :
+                                                    <img src={sign?.img} height="100%" width="100%" />}
                                                 </div>
                                                 {signBtn &&
-                                                <div className={styles.signMenu} style={theme ? {} : { backgroundColor: "#dadada" }}>
-                                                    <div className={styles.menuProfile}>
-                                                        <div className={styles.pro2}>
-                                                            {sign.data.img === "img" ? sign.data.name.substr(0, 1) : <img src={sign.data.img} height="100%" width="100%" />}
+                                                    <div className={styles.signMenu} style={theme ? {} : { backgroundColor: "#dadada" }}>
+                                                        <div className={styles.menuProfile}>
+                                                            <div className={styles.pro2}>
+                                                                {sign?.img === "img" ? sign?.name.substr(0, 1) : <img src={sign?.img} height="100%" width="100%" />}
+                                                            </div>
+                                                            <div>
+                                                                <div className={styles.channelName}>{sign?.name}</div>
+                                                                <div className={styles.username}>@{sign?.username}</div>
+                                                                <div className={styles.myChannel}><a href="/">view your channel</a></div>
+                                                            </div>
                                                         </div>
-                                                        <div>
-                                                            <div className={styles.channelName}>{sign.data.name}</div>
-                                                            <div className={styles.username}>@{sign.data.username}</div>
-                                                            <div className={styles.myChannel}><a href="/">view your channel</a></div>
-                                                        </div>
-                                                    </div>
-                                                    <hr />
-                                                    <div>fesf</div>
-                                                    <div>sfdv</div>
-                                                    <div>fdvsvf</div>
-                                                    <div onClick={handleLogout}>Logout</div>
-                                                </div>}
+                                                        <hr />
+                                                        <div>fesf</div>
+                                                        <div>sfdv</div>
+                                                        <div>fdvsvf</div>
+                                                        <div onClick={handleLogout}>Logout</div>
+                                                    </div>}
                                             </>
                                             :
                                             <a href="/signin" style={theme ? darkTheme : lightTheme}>

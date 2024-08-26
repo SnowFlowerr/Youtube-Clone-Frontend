@@ -39,10 +39,10 @@ export default function Signup() {
             return setErr("Agree to the Terms and Policy")
         }
         try{
-            const userData =await axios.post("https://honest-stillness-production.up.railway.app/api/auth/signup", {  name:user.name, username:user.username, email:user.email, password:user.password}, { headers: { "Content-Type": "application/json" } },{ withCredentials: true });
+            const userData =await axios.post("http://localhost:8000/api/auth/signup", {  name:user.name, username:user.username, email:user.email, password:user.password}, { headers: { "Content-Type": "application/json" } },{ withCredentials: true });
             Cookies.set('access_token', userData.data.access_token,
                 { path: '/',httpOnly: false, secure:true,sameSite: 'None', });
-            dispatch(setSignin(userData.data))
+            dispatch(setSignin())
             console.log("User signed up")
             navigate("/")
         }

@@ -15,12 +15,12 @@ export default function Signin() {
     const [err, setErr] = useState("");
     const [tc, setTc] = useState(false);
     const navigate = useNavigate()
-    const dispatch=useDispatch()
+    const dispatch = useDispatch()
 
     // const [cookies, setCookie] = useCookies(['access_token']);
     // const cooki=cookies.access_token
-    
-    
+
+
     function handleChange(e) {
         setUser({ ...user, [e.target.id]: e.target.value.trim() })
         setErr("")
@@ -37,15 +37,22 @@ export default function Signin() {
             return setErr("Agree to the Terms and Policy")
         }
         try {
-            const userData = await axios.post("https://honest-stillness-production.up.railway.app/api/auth/login", { username: user.username, password: user.password }, { headers: { "Content-Type": "application/json" } },{ withCredentials: true } );
-            // setCookie('access_token', userData.data.access_token, { path: '/' });
+            const userData = await axios.post("http://localhost:8000/api/auth/login", { username: user.username, password: user.password }, { headers: { "Content-Type": "application/json" } }, { withCredentials: true });
+
             Cookies.set('access_token', userData.data.access_token,
-                // { path: '/',httpOnly: true, secure:true, sameSite: 'None', }
-                {domain:"video-streaming-app-frontend-lilac.vercel.app/",secure: true, sameSite: 'None'}
+                // { path: '/',httpOnly: true, secure:true, sameSite: 'None'}
+                {
+                    path: '/',
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: 'none',
+                    // domain: 'honest-stillness-production.up.railway.app',
+                }
             );
             dispatch(setSignin(userData.data))
             console.log("User signed in")
-            navigate("/")
+            // console.log(userData)
+            // navigate("/")
         }
         catch (err) {
             setErr(err?.response?.data?.message)

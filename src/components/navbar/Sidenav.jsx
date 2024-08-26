@@ -53,7 +53,7 @@ export default function Sidenav() {
                             <span>Download</span>
                         </div>
                     </Link>
-                    {sign.status &&
+                    {sign &&
                         <Link to="/history" style={theme ? history ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : history ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme} >
                             <div>
                                 {history ? <i className="fa-solid fa-clock-rotate-left fa-bounce"></i> : <i className="fa-solid fa-clock-rotate-left"></i>}
@@ -106,7 +106,7 @@ export default function Sidenav() {
                                 <span>Subscription</span>
                             </div>
                         </Link>
-                        {sign.status &&
+                        {sign &&
                             <Link to="/history" className={styles.history} style={theme ? history ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : history ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme}>
                                 <div>
                                     {history ? <i className="fa-solid fa-clock-rotate-left fa-bounce"></i> : <i className="fa-solid fa-clock-rotate-left"></i>}

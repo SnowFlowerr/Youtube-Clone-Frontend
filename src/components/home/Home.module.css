@@ -113,6 +113,33 @@
 .bottomNav {
     display: none;
 }
+.loading{
+    height: 150px;
+    /* color: rgb(228, 25, 25); */
+    width: 100%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 2px solid white; */
+}
+.loadingBar{
+    border: 5px solid rgb(255, 255, 255);
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    border-top: none;
+    animation-name: rotate;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+@keyframes rotate {
+    100%{
+        transform: rotate(360deg);
+    }
+}
 
 @media screen and (max-width:1100px) {
     .singleVid {

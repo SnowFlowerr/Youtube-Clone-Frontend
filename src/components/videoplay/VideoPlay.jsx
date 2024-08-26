@@ -269,17 +269,20 @@ export default function VideoPlay() {
                 <div className={styles.player} ref={boxRef}>
                     <video
                         className={styles.video}
+                        src={videoData?.videoUrl}
+                        // src={vid}
                         autoPlay
                         controls
                         id='videos'
                         ref={videoRef}
                         onPlay={totalTime}
-                        poster={null}>
+                        poster={videoData?.imageUrl}
+                        >
 
-                        <source
+                        {/* <source
                             src={vid}
                             type='video/mp4'
-                        />
+                        /> */}
 
 
                     </video>

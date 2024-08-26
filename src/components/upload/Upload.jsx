@@ -2,74 +2,116 @@ import React, { useState } from 'react'
 import styles from "./Upload.module.css"
 import { useSelector } from 'react-redux'
 import { darkTheme, lightTheme } from '../../themes'
+// import Progress from './Progress'
+import axios from 'axios'
+import VideoDetail from './VideoDetail'
 
 export default function Upload({ isUpload, setisUpload }) {
     const theme = useSelector((state) => state.theme.value)
-    const [data, setData] = useState("")
+    const [progress, setProgress] = useState(0)
+    const [uploaded, setUploaded] = useState(false)
+    const [data, setData] = useState({})
+    const [video, setVideo] = useState({ name: "" })
     const [err, setErr] = useState("")
+
     function handleChange(e) {
-        if (e.target.value.substr(-4, 4) === (".mp4") || e.target.value.trim() === "") {
-            setData(e.target.value)
-            setErr("")
+        const file = e.target.files[0]
+        if (file) {
+            if (file.type === "video/mp4") {
+                setErr("")
+                setVideo(file)
+                handleConfirm(file)
+            }
+            else {
+                setData("")
+                setErr("Formate is not correct")
+            }
         }
-        else {
-            setData("")
-            setErr("Formate is not correct")
+    }
+
+    async function handleConfirm(file) {
+        if (file) {
+            setUploaded(() => true)
+            const formData = new FormData();
+            formData.append('file', file)
+            formData.append("upload_preset", process.env.REACT_APP_API_PRESET)
+            try {
+                const data = await axios.post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_API_NAME}/auto/upload`, formData, {
+                    onUploadProgress: event => {
+                        setProgress(Math.round(100 * event.loaded / event.total))
+                    }
+                })
+                setProgress(()=>100)
+                handleCreate(data.data)
+                // setData(data.data)
+                // console.log(data.data)
+            } catch (err) {
+                setProgress("X")
+                console.log(err)
+            }
         }
     }
-    function handleCancel() {
-            setErr("")
-            setData("")
+
+    async function handleCreate(datas) {
+
+        try {
+            const data = await axios.post(`http://localhost:8000/api/videos/`,{title:datas.display_name, videoUrl:datas.secure_url, duration:datas.duration, imageUrl: datas.secure_url.slice(0,-3)+"jpg"},{ withCredentials: true })
+            setData(data.data)
+            // console.log(data.data)
+        } catch (err) {
+            console.log(err)
+        }
     }
-    function handleConfirm() {
-            
-    }
+
     return (
         <div>
             {isUpload && <div className={styles.uploadVid} onClick={() => setisUpload(false)}>
             </div>}
-            {isUpload && <div className={styles.uploadArea} style={theme ? {} : { backgroundColor: "#dadada" }}>
-                <div className={styles.options}>
-                    <div><b>Upload Video</b></div>
-                    <div className={styles.cross} onClick={() => setisUpload(false)}><i className="fa-solid fa-xmark"></i></div>
-                </div>
-                <div className={styles.inputDiv}>
-                    <div className={styles.uploadLogo}>
-                        <div></div>
-                        <div>
-                            <div className={styles.logo} style={theme ? darkTheme : lightTheme}><i className="fa-solid fa-upload"></i></div>
-                            <div>Drag and drop video files or click on <br />
-                                button below to upload
-                                
+            {isUpload &&
+                <div className={styles.uploadArea} style={theme ? {} : { backgroundColor: "#dadada" }}>
+                    {uploaded ?
+                        <>
+                            <VideoDetail progress={progress} video={video.name.slice(0, -4)} data={data}/>
+                        </>
+                        :
+                        <>
+                            <div className={styles.options}>
+                                <div><b>Upload Video</b></div>
+                                <div className={styles.cross} onClick={() => setisUpload(false)}><i className="fa-solid fa-xmark"></i></div>
                             </div>
-                            <div>
-                                <button className={styles.uploadBtn}><label htmlFor="inp">Select files</label></button>
-                            </div>
-                            <div>
+                            <div className={styles.inputDiv}>
+                                <div className={styles.uploadLogo}>
+                                    <div></div>
+                                    <div>
+                                        <div className={styles.logo} style={theme ? darkTheme : lightTheme}><i className="fa-solid fa-upload"></i></div>
+                                        <div>Drag and drop video files or click on <br />
+                                            button below to upload
 
-                                <span style={{ color: "red" }}>{err}</span>
-                            </div>
+                                        </div>
+                                        <div>
+                                            <button className={styles.uploadBtn}>
+                                                <label htmlFor="inp">Select files</label>
+                                            </button>
+                                        </div>
+                                        <div>
 
-                        </div>
-                        <div>
-                            By submitting your videos to StreamSphere, you acknowledge that you agree to StreamSphere's Terms of Service and Community Guidelines.
-                            <br />
-                            Please be sure not to violate other's copyright or privacy rights. Learn more
-                        </div>
-                    </div>
-                    <input type="file" className={styles.uploadInp} value={data} onChange={handleChange} id='inp' accept="video/mp4" title='upload your video' />
-                    {data &&
-                    <div className={styles.confirnBtn}>
-                            <div style={{ color: "green" }}>{data}
+                                            <span style={{ color: "red" }}>{err}</span>
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        By submitting your videos to StreamSphere, you acknowledge that you agree to StreamSphere's Terms of Service and Community Guidelines.
+                                        <br />
+                                        Please be sure not to violate other's copyright or privacy rights. Learn more
+                                    </div>
+                                </div>
+                                <input type="file" className={styles.uploadInp} onChange={handleChange} id='inp' accept="video/mp4" title='upload your video' />
                             </div>
-                            <div className={styles.buttons}>
-                                <button onClick={handleCancel}>Cancel</button>
-                                <button onClick={handleConfirm}>Confirm</button>
-                            </div>
-                    </div>
+                        </>
+
                     }
                 </div>
-            </div>}
+            }
         </div>
     )
 }

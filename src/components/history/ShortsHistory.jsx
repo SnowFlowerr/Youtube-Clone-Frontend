@@ -3,13 +3,13 @@ import styles from './History.module.css'
 import { useSelector } from 'react-redux'
 import { lightTheme, darkTheme } from '../../themes'
 
-export default function History({ userData }) {
+export default function ShortsHistory({userData}) {
     const theme = useSelector((state) => state.theme.value)
     const scrollRef = useRef()
     const widthRef = useRef()
     const thumbnailRef = useRef()
     const [scroll,setScroll]=useState(true)
-
+    
     function scrollRight() {
         scrollRef.current.scrollLeft += widthRef.current.clientWidth
     }
@@ -40,8 +40,8 @@ export default function History({ userData }) {
             <div className={styles.watched} ref={scrollRef}>
                 {
                     userData?.toReversed().map((video, index) =>
-                        <div className={styles.container} key={index} ref={widthRef}>
-                            <div className={styles.thumbnail} ref={thumbnailRef}>
+                        <div className={styles.Shortscontainer} key={index} ref={widthRef}>
+                            <div className={styles.shortsThumbnail} ref={thumbnailRef}>
                                 <a href={`player/${video?._id}`}>
                                     <img src={video?.imageUrl} width="100%" height="100%" alt="thumbnail" />
                                 </a>
@@ -75,10 +75,10 @@ export default function History({ userData }) {
             </div>
 
             {userData &&
-                <><div className={styles.arrowRight} onClick={scrollRight} style={theme ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : { backgroundColor: "rgb(220, 220, 220)", color: "black" }}>
+                <><div className={styles.arrowRightShorts} onClick={scrollRight} style={theme ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : { backgroundColor: "rgb(220, 220, 220)", color: "black" }}>
                     <i className="fa-solid fa-chevron-right"></i>
                 </div>
-                    <div className={styles.arrowLeft} onClick={scrollLeft} style={theme ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : { backgroundColor: "rgb(220, 220, 220)", color: "black" }}>
+                    <div className={styles.arrowLeftShorts} onClick={scrollLeft} style={theme ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : { backgroundColor: "rgb(220, 220, 220)", color: "black" }}>
                         <i className="fa-solid fa-chevron-left"></i>
                     </div>
                 </>}

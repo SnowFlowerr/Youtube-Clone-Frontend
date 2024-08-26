@@ -16,17 +16,17 @@ export default function Home() {
     const theme = useSelector((state) => state.theme.value)
     const lastVid = useRef(null)
     const dispatch = useDispatch()
-    const [last,setLast]=useState(false)
+    const [last, setLast] = useState(false)
     // const [limit,setLimit]=useState(20)
-    const [skip,setSkip]=useState(0)
+    const [skip, setSkip] = useState(0)
 
     useEffect(() => {
         const fetchVideo = async () => {
             try {
-                const res = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/?limit=${20}&skip=${skip}`)
+                const res = await axios.get(`http://localhost:8000/api/videos/?limit=${20}&skip=${skip}`)
                 // console.log(res.data)
-                setVideos([...videos,...res.data])
-                if(res.data.length!==0){
+                setVideos([...videos, ...res.data])
+                if (res.data.length !== 0) {
                     setLast(true)
                 }
             }
@@ -43,27 +43,27 @@ export default function Home() {
         let scrollHeight = lastVid.current.scrollHeight
         let scroll = lastVid.current.scrollTop
         if (Math.floor(divHeight + scroll) >= Math.floor(scrollHeight) - 1) {
-            if(last){
-                setSkip(skip+20)
+            if (last) {
+                setSkip(skip + 20)
                 setLast(false)
             }
         }
     }
     function getDuration(duration) {
-        duration=Math.floor(duration)
-        let sec= Math.floor(duration % 60)
-        let min= Math.floor((duration % 3600) / 60)
-        let hr= Math.floor(duration / 3600)
-        sec=sec<=9?"0"+sec:sec
-        min=min<=9?"0"+min:min
-        if(hr){
-            return hr+":"+min+":"+sec
+        duration = Math.floor(duration)
+        let sec = Math.floor(duration % 60)
+        let min = Math.floor((duration % 3600) / 60)
+        let hr = Math.floor(duration / 3600)
+        sec = sec <= 9 ? "0" + sec : sec
+        min = min <= 9 ? "0" + min : min
+        if (hr) {
+            return hr + ":" + min + ":" + sec
         }
-        else if(min){
-            return min+":"+sec
+        else if (min) {
+            return min + ":" + sec
         }
-        else{
-            return min+":"+sec
+        else {
+            return min + ":" + sec
         }
     }
     return (
@@ -81,9 +81,9 @@ export default function Home() {
                             <div key={index} className={styles.singleVid} style={theme ? darkTheme : lightTheme}>
                                 <div className={styles.thumbnail}>
                                     <Link to={`player/${video?._id}`}>
-                                        <img src={pic} width="100%" height="100%" alt="thumbnail" />
+                                        <img src={video.imageUrl} width="100%" height="100%" alt="thumbnail" />
                                     </Link>
-                                    <div className={styles.duration}>{getDuration(166)}</div>
+                                    <div className={styles.duration}>{getDuration(video?.duration)}</div>
                                 </div>
                                 <div className={styles.videoDetail} style={theme ? darkTheme : lightTheme}>
                                     <div className={styles.icon}>
@@ -101,7 +101,7 @@ export default function Home() {
                                                     {video?.name}
                                                 </div>
                                                 <div>
-                                                {video?.views} Views
+                                                    {video?.views} Views
 
                                                 </div>
                                             </div>
@@ -112,7 +112,11 @@ export default function Home() {
                         )
                     }
 
-                    {/* <div ref={lastVid}>gdrgdrrgr</div> */}
+                {videos.length!==0 &&
+                <div className={styles.loading}>
+                    <div className={styles.loadingBar}>
+                    </div>
+                </div>}
                     <div className={styles.bottomNav}>
                         <Sidenav></Sidenav>
                     </div>

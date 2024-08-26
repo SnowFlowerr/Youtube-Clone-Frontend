@@ -101,7 +101,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
         }
         
         try {
-            const userD = await axios.get(`http://localhost:8000/api/users/isliked/${data?._id}`,
+            const userD = await axios.get(`http://localhost:8000/api/users/islikedshorts/${data?._id}`,
                 { withCredentials: true }
             )
             setisLike(userD.data)
@@ -110,7 +110,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
             console.log(err.message)
         }
         try {
-            const userD = await axios.get(`http://localhost:8000/api/users/isdisliked/${data?._id}`,
+            const userD = await axios.get(`http://localhost:8000/api/users/isdislikedshorts/${data?._id}`,
                 { withCredentials: true }
             )
             setisDislike(userD.data)
@@ -119,7 +119,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
             console.log(err.message)
         }
         try {
-            const userD = await axios.get(`http://localhost:8000/api/users/issaved/${data?._id}`,
+            const userD = await axios.get(`http://localhost:8000/api/users/issavedshorts/${data?._id}`,
                 { withCredentials: true }
             )
             setisSaved(userD.data)
@@ -226,14 +226,13 @@ export const VideoCard = ({ data, onPlay, index }) => {
     async function addHistory() {
         
         try {
-            await axios.put(`http://localhost:8000/api/users/history/${data?._id}`,
+            await axios.put(`http://localhost:8000/api/users/shortshistory/${data?._id}`,
                 {},
                 { withCredentials: true }
             );
-            console.log("jhvjgv")
+            console.log("added to history")
         }
         catch (err) {
-            console.log("fsfsf")
             console.log(err.message)
         }
     }

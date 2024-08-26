@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useSelector } from 'react-redux'
 import Shorts from "./components/shorts/Shorts";
 import History from "./components/history/Histories";
+import PageNotFound from "./components/pageNotFound/PageNotFound";
 
 function App() {
   const theme = useSelector((state) => state.theme.value)
@@ -28,6 +29,7 @@ function App() {
           <Route path='/searchedvideo/:search' element={<SearchedVid />} />
           <Route path='/shorts/:id' element={<Shorts />} />
           <Route path='/history' element={<History />} />
+          <Route path='*' element={<PageNotFound />} />
         </Routes>
     </div>
   );
