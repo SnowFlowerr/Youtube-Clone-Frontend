@@ -23,7 +23,7 @@ export default function Home() {
     useEffect(() => {
         const fetchVideo = async () => {
             try {
-                const res = await axios.get(`http://localhost:8000/api/videos/?limit=${20}&skip=${skip}`)
+                const res = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/?limit=${20}&skip=${skip}`)
                 // console.log(res.data)
                 setVideos([...videos, ...res.data])
                 if (res.data.length !== 0) {
