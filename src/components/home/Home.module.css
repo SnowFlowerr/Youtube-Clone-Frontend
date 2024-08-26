@@ -130,10 +130,12 @@
     height: 60px;
     border-radius: 100%;
     border-top: none;
+    border-bottom: none;
     animation-name: rotate;
     animation-duration: 1s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+    transition: 0.5s;
 }
 @keyframes rotate {
     100%{

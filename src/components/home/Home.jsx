@@ -114,7 +114,7 @@ export default function Home() {
 
                 {videos.length!==0 &&
                 <div className={styles.loading}>
-                    <div className={styles.loadingBar}>
+                    <div className={styles.loadingBar} style={theme?{}:{borderColor:"black"}}>
                     </div>
                 </div>}
                     <div className={styles.bottomNav}>

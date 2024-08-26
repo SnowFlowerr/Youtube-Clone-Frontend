@@ -40,19 +40,17 @@ export default function Signin() {
             const userData = await axios.post("http://localhost:8000/api/auth/login", { username: user.username, password: user.password }, { headers: { "Content-Type": "application/json" } }, { withCredentials: true });
 
             Cookies.set('access_token', userData.data.access_token,
-                // { path: '/',httpOnly: true, secure:true, sameSite: 'None'}
                 {
                     path: '/',
-                    httpOnly: true,
+                    httpOnly: false,
                     secure: true,
                     sameSite: 'none',
-                    // domain: 'honest-stillness-production.up.railway.app',
                 }
             );
             dispatch(setSignin(userData.data))
             console.log("User signed in")
             // console.log(userData)
-            // navigate("/")
+            navigate("/")
         }
         catch (err) {
             setErr(err?.response?.data?.message)
