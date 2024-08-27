@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import styles from "./Upload.module.css"
 import { useSelector } from 'react-redux'
 import { darkTheme, lightTheme } from '../../themes'
+import styles from "./Upload.module.css"
 // import Progress from './Progress'
 import axios from 'axios'
 import VideoDetail from './VideoDetail'
@@ -55,7 +55,7 @@ export default function Upload({ isUpload, setisUpload }) {
     async function handleCreate(datas) {
 
         try {
-            const data = await axios.post(`http://localhost:8000/api/videos/`,{title:datas.display_name, videoUrl:datas.secure_url, duration:datas.duration, imageUrl: datas.secure_url.slice(0,-3)+"jpg"},{ withCredentials: true })
+            const data = await axios.post(`https://honest-stillness-production.up.railway.app/api/videos/`,{title:datas.display_name, videoUrl:datas.secure_url, duration:datas.duration, imageUrl: datas.secure_url.slice(0,-3)+"jpg"},{ withCredentials: true })
             setData(data.data)
             // console.log(data.data)
         } catch (err) {

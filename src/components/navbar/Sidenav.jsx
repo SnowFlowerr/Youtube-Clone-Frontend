@@ -31,7 +31,7 @@ export default function Sidenav() {
                 {menu ? <div className={styles.menuList2}>
                     <Link to="/" style={theme ? home ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : home ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme} >
                         <div>
-                            {home ? <i class="fa-solid fa-house fa-bounce"></i> : <i className="fa-solid fa-house"></i>}
+                            {home ? <i className="fa-solid fa-house fa-bounce"></i> : <i className="fa-solid fa-house"></i>}
                             <span>Home</span>
                         </div>
                     </Link>

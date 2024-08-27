@@ -199,6 +199,10 @@
     margin-top: 10px;
     border-radius: 10px;
     padding: 10px;
+    
+}
+.descLine{
+    min-height: 16px;
 }
 .comment{
     padding: 20px 0px;

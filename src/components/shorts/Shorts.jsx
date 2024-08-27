@@ -1,14 +1,14 @@
+import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
-import styles from "./Shorts.module.css"
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { offMic } from '../../redux/Data/micSlice'
+import { darkTheme, lightTheme } from '../../themes'
+import logo from "../assets/Logo.png"
 import Navbar from '../navbar/Navbar'
 import Sidenav from '../navbar/Sidenav'
-import { useNavigate, useParams } from 'react-router-dom'
 import { VideoCard } from './short'
-import { darkTheme, lightTheme } from '../../themes'
-import { useDispatch, useSelector } from 'react-redux'
-import logo from "../assets/Logo.png"
-import { offMic } from '../../redux/Data/micSlice'
-import axios from 'axios'
+import styles from "./Shorts.module.css"
 
 export default function Shorts() {
 
@@ -46,10 +46,10 @@ export default function Shorts() {
         async function fetchData() {
             try {
                 if (id !== "url") {
-                    const vidData = await axios.get(`http://localhost:8000/api/shorts/${id}`)
+                    const vidData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/${id}`)
                     setvidData(vidData.data)
                 }
-                const videosData = await axios.get(`http://localhost:8000/api/shorts/?limit=${2}&skip=${skip}`)
+                const videosData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/?limit=${2}&skip=${skip}`)
                 setvideoData([...videoData, ...videosData.data])
                 if (videosData.data.length !== 0) {
                     setLast(true)

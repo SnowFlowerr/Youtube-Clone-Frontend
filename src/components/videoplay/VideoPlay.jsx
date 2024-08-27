@@ -135,24 +135,25 @@ export default function VideoPlay() {
         fetchData()
     }
     async function handleLike() {
-        if (isDislike === true) {
-            handleDislike()
-        }
+        
         // else if(isLike===false && isDislike===true){
         //     handleLike()
         // }
         try {
             if (isLike) {
                 await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/unlike/${id}`,
-                    {},
+                    { headers: { "Content-Type": "application/json" } },
                     { withCredentials: true }
                 );
                 setLike(like - 1)
                 console.log("unlikes")
             }
             else {
+                if (isDislike === true) {
+                    handleDislike()
+                }
                 await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/like/${id}`,
-                    {},
+                    { headers: { "Content-Type": "application/json" } },
                     { withCredentials: true }
                 );
                 setLike(like + 1)
@@ -166,9 +167,6 @@ export default function VideoPlay() {
         }
     }
     async function handleDislike() {
-        if (isLike === true) {
-            handleLike()
-        }
         try {
             if (isDislike) {
                 await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/undislike/${id}`,
@@ -179,6 +177,9 @@ export default function VideoPlay() {
                 console.log("undislikes")
             }
             else {
+                if (isLike === true) {
+                    handleLike()
+                }
                 await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/dislike/${id}`,
                     {},
                     { withCredentials: true }
@@ -214,7 +215,7 @@ export default function VideoPlay() {
         }
     }
     function totalTime() {
-        setDuration(Math.floor(videoRef.current.duration) / 3)
+        setDuration(Math.floor(videoRef.current.duration) / 4)
         addHistory()
     }
     useEffect(() => {
@@ -225,6 +226,7 @@ export default function VideoPlay() {
             }, duration * 1000)
         }
     }, [duration])
+
     async function addSaved() {
         try {
             if (isSaved) {
@@ -276,7 +278,7 @@ export default function VideoPlay() {
                         ref={videoRef}
                         onPlay={totalTime}
                         poster={videoData?.imageUrl}
-                        >
+                    >
 
                         {/* <source
                             src={vid}
@@ -345,8 +347,15 @@ export default function VideoPlay() {
 
                     </div>
                     <div className={styles.descript} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
-                        <b>{view} views</b> <br />
-                        {videoData?.description}
+                        <div><b>{view} views</b></div>
+                        {videoData?.description &&
+                            <>
+                                <br />
+                                {videoData?.description?.split("\n").map((line, index) =>
+                                    <div key={index} className={styles.descLine}>{line}</div>
+                                )}
+                            </>
+                        }
                     </div>
                     <div className={styles.comment}>
                         <Comment></Comment>

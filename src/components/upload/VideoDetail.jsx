@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
-import styles from "./VideoDetail.module.css"
-import Progress from './Progress'
 import axios from 'axios'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
+import Progress from './Progress'
+import styles from "./VideoDetail.module.css"
 
 export default function VideoDetail({ progress, video, data}) {
     const textRef = useRef()
@@ -61,7 +61,7 @@ export default function VideoDetail({ progress, video, data}) {
     async function handleSubmit(){
         
         try {
-            await axios.put(`http://localhost:8000/api/videos/${data._id}`,{title, description, imageUrl:thumbnail?.secure_url || ""},{ withCredentials: true })
+            await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/${data._id}`,{title, description, imageUrl:thumbnail?.secure_url || ""},{ withCredentials: true })
             window.location.reload()
         } catch (err) {
             console.log(err)
@@ -91,7 +91,7 @@ export default function VideoDetail({ progress, video, data}) {
 
     async function handleCancel(){
         try {
-            await axios.delete(`http://localhost:8000/api/videos/${data._id}`,{ withCredentials: true })
+            await axios.delete(`https://honest-stillness-production.up.railway.app/api/videos/${data._id}`,{ withCredentials: true })
             console.log("Video Deleted")
             window.location.reload()
 
@@ -171,11 +171,11 @@ export default function VideoDetail({ progress, video, data}) {
                                     video
                                 </div>
                                 <div className={styles.link}>
-                                    <a href={`http://localhost:3000/player/${data?._id}`} style={{color:"lightblue"}}>
-                                        {`http://localhost:3000/player/${data?._id}`}
+                                    <a href={`https://video-streaming-app-frontend-lilac.vercel.app/player/${data?._id}`} style={{color:"lightblue"}}>
+                                        {`https://video-streaming-app-frontend-lilac.vercel.app/player/${data?._id}`}
                                     </a>
                                 </div>
-                                <div className={styles.copyIcon} onClick={async()=>{ await navigator.clipboard.writeText(`http://localhost:3000/player/${data?._id}`);setCopied(true)}}>
+                                <div className={styles.copyIcon} onClick={async()=>{ await navigator.clipboard.writeText(`https://video-streaming-app-frontend-lilac.vercel.app/player/${data?._id}`);setCopied(true)}}>
                                     {copied?
                                         <i className="fa-solid fa-circle-check"></i>
                                         :

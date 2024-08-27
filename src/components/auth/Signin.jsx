@@ -37,16 +37,8 @@ export default function Signin() {
             return setErr("Agree to the Terms and Policy")
         }
         try {
-            const userData = await axios.post("http://localhost:8000/api/auth/login", { username: user.username, password: user.password }, { headers: { "Content-Type": "application/json" } }, { withCredentials: true });
+            const userData = await axios.post("https://honest-stillness-production.up.railway.app/api/auth/login", { username: user.username, password: user.password }, { withCredentials: true });
 
-            Cookies.set('access_token', userData.data.access_token,
-                {
-                    path: '/',
-                    httpOnly: false,
-                    secure: true,
-                    sameSite: 'none',
-                }
-            );
             dispatch(setSignin(userData.data))
             console.log("User signed in")
             // console.log(userData)

@@ -1,17 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { showMenu } from '../../redux/Data/menuSlice'
-import { changeTheme } from '../../redux/Data/themeSlice'
-import logo from "../assets/Logo.png"
-import styles from "./Navbar.module.css"
+import Cookies from 'js-cookie'
+import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { lightTheme, darkTheme } from '../../themes'
-import { json, useNavigate } from 'react-router-dom'
-import Speech from '../Speech/Speech'
+import { useNavigate } from 'react-router-dom'
+import { showMenu } from '../../redux/Data/menuSlice'
 import { offMic } from '../../redux/Data/micSlice'
-import Cookies from 'js-cookie';
+import { setSignout } from '../../redux/Data/signSlice'
+import { changeTheme } from '../../redux/Data/themeSlice'
+import { darkTheme, lightTheme } from '../../themes'
+import logo from "../assets/Logo.png"
+import Speech from '../Speech/Speech'
 import Upload from '../upload/Upload'
-import { setSignout, setSignin } from '../../redux/Data/signSlice'
-import axios from 'axios'
+import styles from "./Navbar.module.css"
 
 
 export default function Navbar() {
@@ -31,29 +30,30 @@ export default function Navbar() {
     const navigate = useNavigate()
     const arr = ['3', '3', '46', '575', '6', '76', "575", '56', '765', '7', '655', '657', '56', '676', '65', '7', '6', '5', '67']
 
-    useEffect(() => {
-        async function currentUser() {
-            try {
-                const userD = await axios.get(`http://localhost:8000/api/users/get`,
-                    { withCredentials: true }
-                )
-                // console.log(userD)
-                if(userD?.data?.success===false){
-                    Cookies.remove('access_token', { path: '/' });
-                    dispatch(setSignout())
-                }
-                else{
-                    dispatch(setSignin(userD.data))
-                }
-            }
-            catch (err) {
+    // useEffect(() => {
+    //     async function currentUser() {
+    //         try {
+    //             const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get`,
+    //                 { withCredentials: true }
+    //             )
+    //             // console.log(userD)
+    //             if(userD?.data?.success===false){
+    //                 Cookies.remove('access_token', { path: '/' });
+    //                 dispatch(setSignout())
+    //             }
+    //             else{
+    //                 dispatch(setSignin(userD.data))
+    //             }
+    //         }
+    //         catch (err) {
                 
-                // localStorage.removeItem("userData")
-                console.log(err)
-            }
-        }
-        currentUser()
-    }, [])
+    //             // localStorage.removeItem("userData")
+    //             console.log(err)
+    //         }
+    //     }
+    //     currentUser()
+    // }, [])
+
     function handleSearch(e) {
         e.preventDefault();
         setsearchInput(e.target.value)
