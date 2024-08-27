@@ -83,7 +83,7 @@ export default function Shorts() {
         let divHeight = lastVid.current.offsetHeight
         let scrollHeight = lastVid.current.scrollHeight
         let scroll = lastVid.current.scrollTop
-        if (Math.floor(divHeight + scroll) >= Math.floor(scrollHeight) - 100) {
+        if (Math.floor(divHeight + scroll) >= Math.floor(scrollHeight) - 60) {
             if (last) {
                 setSkip(skip+2)
                 setLast(false)

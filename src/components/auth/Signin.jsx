@@ -77,7 +77,7 @@ export default function Signin() {
                                 <div className={styles.username}>
                                     <label htmlFor="username">Username</label>
                                     <br />
-                                    <input type="text" id='username' placeholder='Enter Your Username Here' onChange={handleChange} required />
+                                    <input type="text" id='username' placeholder='Enter Your Username Here' onChange={handleChange} required style={theme?{color:"white"}:{}}/>
                                 </div>
                                 <div className={styles.password}>
                                     <div className={styles.forg}>
@@ -85,7 +85,7 @@ export default function Signin() {
                                     </div>
                                     <br />
                                     <div className={styles.viewPass}>
-                                        <input type={viewPass ? "text" : "password"} id='password' placeholder='Enter Your Password Here' onChange={handleChange} required />
+                                        <input type={viewPass ? "text" : "password"} id='password' placeholder='Enter Your Password Here' onChange={handleChange} required style={theme?{color:"white"}:{}}/>
                                         <button type='button' onClick={(e) => { e.preventDefault(); setviewPass(!viewPass) }}>{viewPass ? <i className="fa-solid fa-eye-slash"></i> : <i className="fa-solid fa-eye"></i>}</button>
                                     </div>
                                 </div>
