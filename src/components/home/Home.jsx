@@ -1,13 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { offMic } from '../../redux/Data/micSlice'
-import { darkTheme, lightTheme } from '../../themes'
 import Navbar from '../navbar/Navbar'
 import Sidenav from '../navbar/Sidenav'
 import styles from './Home.module.css'
-import pic from './pic.jpg'
+import Cards from './Cards'
+
+
 
 
 
@@ -23,7 +23,7 @@ export default function Home() {
     useEffect(() => {
         const fetchVideo = async () => {
             try {
-                const res = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/?limit=${20}&skip=${skip}`)
+                const res = await axios.get(`http://localhost:8000/api/videos/?limit=${20}&skip=${skip}`)
                 // console.log(res.data)
                 setVideos([...videos, ...res.data])
                 if (res.data.length !== 0) {
@@ -49,23 +49,7 @@ export default function Home() {
             }
         }
     }
-    function getDuration(duration) {
-        duration = Math.floor(duration)
-        let sec = Math.floor(duration % 60)
-        let min = Math.floor((duration % 3600) / 60)
-        let hr = Math.floor(duration / 3600)
-        sec = sec <= 9 ? "0" + sec : sec
-        min = min <= 9 ? "0" + min : min
-        if (hr) {
-            return hr + ":" + min + ":" + sec
-        }
-        else if (min) {
-            return min + ":" + sec
-        }
-        else {
-            return min + ":" + sec
-        }
-    }
+    
     return (
         <div className={styles.mainBox} ref={lastVid} onScroll={handleScroll}>
             <div className={styles.nav}>
@@ -78,37 +62,7 @@ export default function Home() {
                 <div className={styles.videos}>
                     {
                         videos.map((video, index) =>
-                            <div key={index} className={styles.singleVid} style={theme ? darkTheme : lightTheme}>
-                                <div className={styles.thumbnail}>
-                                    <Link to={`player/${video?._id}`}>
-                                        <img src={video.imageUrl} width="100%" height="100%" alt="thumbnail" />
-                                    </Link>
-                                    <div className={styles.duration}>{getDuration(video?.duration)}</div>
-                                </div>
-                                <div className={styles.videoDetail} style={theme ? darkTheme : lightTheme}>
-                                    <div className={styles.icon}>
-                                        <a href="/userDetail/userid">
-                                            <img src={pic} width="100%" height="100%" alt="icon" />
-                                        </a>
-                                    </div>
-                                    <div className={styles.details}>
-                                        <Link to={`/player/${video?._id}`} style={theme ? { color: "white" } : { color: "black" }}>
-                                            <div className={styles.title}>
-                                                {video?.title}
-                                            </div>
-                                            <div className={styles.channel}>
-                                                <div className={styles.channelNames}>
-                                                    {video?.name}
-                                                </div>
-                                                <div>
-                                                    {video?.views} Views
-
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
+                            <Cards video={video} key={index}/>
                         )
                     }
 

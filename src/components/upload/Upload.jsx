@@ -10,9 +10,11 @@ export default function Upload({ isUpload, setisUpload }) {
     const theme = useSelector((state) => state.theme.value)
     const [progress, setProgress] = useState(0)
     const [uploaded, setUploaded] = useState(false)
+    const [isShort, setisShort] = useState(false)
     const [data, setData] = useState({})
     const [video, setVideo] = useState({ name: "" })
     const [err, setErr] = useState("")
+
 
     function handleChange(e) {
         const file = e.target.files[0]
@@ -20,7 +22,26 @@ export default function Upload({ isUpload, setisUpload }) {
             if (file.type === "video/mp4") {
                 setErr("")
                 setVideo(file)
-                handleConfirm(file)
+                // handleConfirm(file)
+
+                var video = document.createElement('video')
+                video.src = window.URL.createObjectURL(file);
+                video.addEventListener('loadedmetadata', event => {
+                    // console.log(video.videoWidth / video.videoHeight, video.duration)
+                    let shorts=false
+                    if(video.videoWidth / video.videoHeight <= 0.6 && Math.floor(video.duration)<=60){
+                        setisShort(true)
+                        shorts=true
+                    }
+                    else{
+                        setisShort(false)
+                        shorts=false
+                    }
+                    handleConfirm(file, shorts)
+                });
+                
+
+
             }
             else {
                 setData("")
@@ -29,7 +50,7 @@ export default function Upload({ isUpload, setisUpload }) {
         }
     }
 
-    async function handleConfirm(file) {
+    async function handleConfirm(file, shorts) {
         if (file) {
             setUploaded(() => true)
             const formData = new FormData();
@@ -41,10 +62,8 @@ export default function Upload({ isUpload, setisUpload }) {
                         setProgress(Math.round(100 * event.loaded / event.total))
                     }
                 })
-                setProgress(()=>100)
-                handleCreate(data.data)
-                // setData(data.data)
-                // console.log(data.data)
+                setProgress(() => 100)
+                handleCreate(data.data, shorts)
             } catch (err) {
                 setProgress("X")
                 console.log(err)
@@ -52,10 +71,11 @@ export default function Upload({ isUpload, setisUpload }) {
         }
     }
 
-    async function handleCreate(datas) {
+    async function handleCreate(datas, shorts) {
+        console.log(shorts)
 
         try {
-            const data = await axios.post(`https://honest-stillness-production.up.railway.app/api/videos/`,{title:datas.display_name, videoUrl:datas.secure_url, duration:datas.duration, imageUrl: datas.secure_url.slice(0,-3)+"jpg"},{ withCredentials: true })
+            const data = await axios.post(`http://localhost:8000/api/${shorts?"shorts":"videos"}/`, { title: datas.display_name, videoUrl: datas.secure_url, duration: datas.duration, imageUrl: datas.secure_url.slice(0, -3) + "jpg" }, { withCredentials: true })
             setData(data.data)
             // console.log(data.data)
         } catch (err) {
@@ -71,7 +91,7 @@ export default function Upload({ isUpload, setisUpload }) {
                 <div className={styles.uploadArea} style={theme ? {} : { backgroundColor: "#dadada" }}>
                     {uploaded ?
                         <>
-                            <VideoDetail progress={progress} video={video.name.slice(0, -4)} data={data}/>
+                            <VideoDetail progress={progress} video={video.name.slice(0, -4)} data={data} isShort={isShort}/>
                         </>
                         :
                         <>

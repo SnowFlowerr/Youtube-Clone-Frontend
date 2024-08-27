@@ -1,6 +1,7 @@
 .mainBox {
-    min-height: 100vh;
+    min-height: 100dvh;
     align-content: center;
+    overflow: auto;
 }
 
 .bigBox {
@@ -13,15 +14,17 @@
     display: flex;
     gap: 10px;
     overflow: hidden;
-    padding: 3vh;
+    padding: 24px;
+    overflow: auto;
 }
 
-.bigBox div {
+.bigBox>div {
     width: 100%;
 }
 
 .func {
     background-color: black;
+    color: white;
     height: 100%;
     width: 100%;
     border-radius: 20px;
@@ -29,7 +32,7 @@
 
 .box {
     /* border: 2px solid black; */
-    padding: 1.5vh;
+    padding: 14px;
 }
 
 .main {
@@ -39,23 +42,23 @@
 }
 
 .bigText {
-    font-size: 4vh;
+    font-size: 35px;
 }
 
 .smallText {
-    font-size: 1.8vh;
+    font-size: 15px;
 }
 
 .text {
-    margin-bottom: 2vh;
+    margin-bottom: 17px;
 }
 
 .signBtn {
     display: flex;
-    /* height: 5.5vh; */
+    /* height: 45px; */
     gap: 1vw;
     /* flex-direction: column; */
-    margin-bottom: 2vh;
+    margin-bottom: 17px;
 }
 
 .signBtn img {
@@ -63,22 +66,61 @@
 }
 
 .signBtn button {
-    height: 5.5vh;
+    height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.7vh;
+    font-size: 14px;
     border: 1px solid gray;
     width: 100%;
     background-color: white;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+.signBtn label {
+    height: 45px;
+    font-size: 14px;
+    border: 1px solid gray;
+    width: 100%;
+    /* background-color: white; */
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.iconlabel {
+    display: flex;
+}
+
+.signBtn input {
+    visibility: hidden;
+    position: absolute;
+}
+
+.progress {
+    position: absolute;
+    opacity: 0.8;
+}
+
+.iconName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    padding: 0 5px;
 }
 
 .line {
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 2vh;
+    font-size: 17px;
 }
 
 .line hr {
@@ -87,21 +129,21 @@
 }
 
 .inpData {
-    margin-top: 1vh;
+    margin-top: 8px;
     display: flex;
     flex-direction: column;
-    gap: 2vh;
+    gap: 17px;
 }
 
 .inpData label {
-    font-size: 1.7vh;
+    font-size: 14px;
 }
 
 .password .forg {
     display: flex;
     justify-content: space-between;
     height: 0;
-    font-size: 1.7vh;
+    font-size: 14px;
 }
 
 .password span {
@@ -116,26 +158,27 @@
     position: absolute;
     border: none;
     background-color: transparent;
-    font-size: 2vh;
-    right: 1.5vh;
-    bottom: 1vh;
+    font-size: 17px;
+    right: 14px;
+    bottom: 8px;
 }
 
 .inpData input {
     width: 100%;
-    font-size: 1.8vh;
+    font-size: 15px;
     padding-left: 10px;
-    height: 4.5vh;
+    height: 38px;
     border: 0.5px solid gray;
     border-radius: 10px;
     margin-top: 5px;
+    background-color: transparent;
 }
 
 .tandc {
-    font-size: 1.7vh;
+    font-size: 14px;
     display: flex;
     align-items: center;
-    margin-top: 3vh;
+    margin-top: 24px;
 }
 
 .tandc input {
@@ -145,22 +188,22 @@
 }
 
 .submit {
-    margin-top: 2vh;
+    margin-top: 17px;
 }
 
 .submit button {
     width: 100%;
-    height: 4.5vh;
+    height: 38px;
     background-color: rgb(13, 134, 220);
     color: white;
     border-radius: 10px;
-    font-size: 1.8vh;
+    font-size: 15px;
     font-weight: 700;
 }
 
 .haveAcc {
-    font-size: 1.7vh;
-    margin-top: 2vh;
+    font-size: 14px;
+    margin-top: 17px;
 }
 
 .haveAcc a {
@@ -170,25 +213,26 @@
 
 .rights {
     text-align: center;
-    font-size: 1.7vh;
+    font-size: 14px;
     color: gray;
     /* height: 0px; */
 }
 
 .error {
     color: red;
-    font-size: 1.7vh;
+    font-size: 14px;
 }
 
 @media screen and (max-width:750px) {
     .mainBox {
-        min-height: auto;
+        /* min-height: auto; */
+        align-content: normal;
     }
 
     .bigBox {
         width: 100vw;
-        height: auto;
-        padding: 1vh;
+        height: 100vh;
+        padding: 8px;
         margin-top: 0;
         border-radius: 0%;
     }
@@ -206,7 +250,7 @@
         display: flex;
         gap: 4vw;
         flex-direction: column;
-        margin-bottom: 2vh;
+        margin-bottom: 17px;
     }
 
     .detail {
@@ -214,6 +258,6 @@
     }
 
     .rights {
-        margin-top: 2vh;
+        margin-top: 17px;
     }
 }

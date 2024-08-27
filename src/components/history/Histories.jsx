@@ -21,7 +21,7 @@ export default function Histories() {
         }
         async function fetchData() {
             try {
-                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/users/history",
+                const userData = await axios.get("http://localhost:8000/api/users/history",
                     { withCredentials: true }
                 );
                 setuserData(userData.data)

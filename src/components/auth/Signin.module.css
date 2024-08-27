@@ -1,9 +1,11 @@
 .mainBox {
-    min-height: 100vh;
+    min-height: 100dvh;
     align-content: center;
+    overflow: auto;
 }
 .bigBox{
     /* height: 95vh; */
+    overflow: auto;
     width:90vw;
     background-color: white;
     color: black;
@@ -12,20 +14,21 @@
     display: flex;
     gap: 10px;
     overflow: hidden;
-    padding: 3vh;
+    padding: 30px;
 }
-.bigBox div{
+.bigBox > div{
     width: 100%;
 }
 .func{
     background-color: black;
+    color: white;
     height: 100%;
     width: 100%;
     border-radius: 20px;
 }
 .box{
     /* border: 2px solid black; */
-    padding: 1.5vh;
+    padding: 15px;
 }
 .main{
     padding: 4vw;
@@ -33,30 +36,30 @@
     padding-top: 2.5vw;
 }
 .bigText{
-    font-size: 4vh;
+    font-size: 35px;
 }
 .smallText{
-    font-size: 1.8vh;
+    font-size: 16px;
 }
 .text{
-    margin-bottom: 2vh;
+    margin-bottom: 17px;
 }
 .signBtn{
     display: flex;
     /* height: 5.5vh; */
     gap: 1vw;
     /* flex-direction: column; */
-    margin-bottom: 2vh;
+    margin-bottom: 17px;
 }
 .signBtn img{
     margin-right: 5px;
 }
 .signBtn button{
-    height: 5.5vh;
+    height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.7vh;
+    font-size: 14px;
     border: 1px solid gray;
     width: 100%;
     background-color: white;
@@ -66,26 +69,26 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 2vh;
+    font-size: 17px;
 }
 .line hr{
     width: 100%;
     margin-top: 4px;
 }
 .inpData{
-    margin-top: 1vh;
+    margin-top: 8px;
     display: flex;
     flex-direction: column;
-    gap: 2vh;
+    gap: 17px;
 }
 .inpData label{
-    font-size: 1.7vh;
+    font-size: 14px;
 }
 .password .forg{
     display: flex;
     justify-content: space-between;
     height: 0;
-    font-size: 1.7vh;
+    font-size: 14px;
 }
 .password span{
     color: rgb(13, 134, 220);
@@ -97,24 +100,25 @@
     position: absolute;
     border: none;
     background-color: transparent;
-    font-size: 2vh;
-    right: 1.5vh;
-    bottom: 1vh;
+    font-size: 17px;
+    right: 13px;
+    bottom: 10px;
 }
 .inpData input{
     width: 100%;
-    font-size: 1.8vh;
+    font-size: 15px;
     padding-left: 10px;
-    height: 4.5vh;
+    height: 38px;
     border: 0.5px solid gray;
     border-radius: 10px;
     margin-top: 5px;
+    background-color: transparent;
 }
 .tandc{
-    font-size: 1.7vh;
+    font-size: 14px;
     display: flex;
     align-items: center;
-    margin-top: 3vh;
+    margin-top: 24px;
 }
 .tandc input{
     margin-right: 10px;
@@ -122,20 +126,20 @@
     height: 15px;
 }
 .submit{
-    margin-top: 2vh;
+    margin-top: 17px;
 }
 .submit button{
     width: 100%;
-    height: 4.5vh;
+    height: 38px;
     background-color: rgb(13, 134, 220);
     color: white;
     border-radius: 10px;
-    font-size: 1.8vh;
+    font-size: 15px;
     font-weight: 700;
 }
 .haveAcc{
-    font-size: 1.7vh;
-    margin-top: 2vh;
+    font-size: 14px;
+    margin-top: 17px;
 }
 .haveAcc a{
     color: rgb(13, 134, 220);
@@ -143,23 +147,24 @@
 }
 .rights{
     text-align: center;
-    font-size: 1.7vh;
+    font-size: 14px;
     color: gray;
     /* height: 0px; */
 }
 .error{
     color: red;
-    font-size: 1.7vh;
+    font-size: 14px;
 }
 
 @media screen and (max-width:750px){
     .mainBox {
-        min-height: auto;
+        /* min-height: auto; */
+        align-content:normal;
     }
     .bigBox{
         width:100vw;
-        height: auto;
-        padding: 1vh;
+        height: 100dvh;
+        padding: 8px;
         margin-top: 0;
         border-radius: 0%;
     }
@@ -174,12 +179,12 @@
         display: flex;
         gap: 4vw;
         flex-direction: column;
-        margin-bottom: 2vh;
+        margin-bottom: 17px;
     }
     .detail{
         display: none;
     }
     .rights{
-        margin-top: 2vh;
+        margin-top: 17px;
     }
 }

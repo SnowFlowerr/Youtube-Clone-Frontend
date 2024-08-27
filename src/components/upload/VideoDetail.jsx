@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import Progress from './Progress'
 import styles from "./VideoDetail.module.css"
 
-export default function VideoDetail({ progress, video, data}) {
+export default function VideoDetail({ progress, video, data, isShort}) {
     const textRef = useRef()
     const [copied,setCopied]=useState(false)
     const [isdone,setisdone]=useState(false)
@@ -49,7 +49,7 @@ export default function VideoDetail({ progress, video, data}) {
                     }
                 })
                 setProg(()=>100)
-                console.log(data.data)
+                // console.log(data.data)
                 setThumbnail(data.data)
             } catch (err) {
                 setProg("X")
@@ -61,7 +61,7 @@ export default function VideoDetail({ progress, video, data}) {
     async function handleSubmit(){
         
         try {
-            await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/${data._id}`,{title, description, imageUrl:thumbnail?.secure_url || ""},{ withCredentials: true })
+            await axios.put(`http://localhost:8000/api/${isShort?"shorts":"videos"}/${data._id}`,{title, description, imageUrl:thumbnail?.secure_url || ""},{ withCredentials: true })
             window.location.reload()
         } catch (err) {
             console.log(err)
@@ -91,7 +91,7 @@ export default function VideoDetail({ progress, video, data}) {
 
     async function handleCancel(){
         try {
-            await axios.delete(`https://honest-stillness-production.up.railway.app/api/videos/${data._id}`,{ withCredentials: true })
+            await axios.delete(`http://localhost:8000/api/${isShort?"shorts":"videos"}/${data._id}`,{ withCredentials: true })
             console.log("Video Deleted")
             window.location.reload()
 
@@ -127,8 +127,9 @@ export default function VideoDetail({ progress, video, data}) {
                             Thumbnail
                         </div>
                         <div className={styles.heading3}>
-                            Set a thumbnail that stands out and draws viewer's attention if not choosen a random image fron the video will be set as thumbnail.
+                            {isShort?"You cannot set Shorts Thumbnail.":"Set a thumbnail that stands out and draws viewer's attention if not choosen a random image fron the video will be set as thumbnail."}
                         </div>
+                        {!isShort&&
                         <div className={styles.allThumbnails} >
                             <div>
                                 <input type="file" accept='image/jpg, image/jpeg,, image/png, image/svg, image/webp, image/avif' className={styles.uploadThumb} id='thumbnail'  onChange={handleChange}/>
@@ -156,7 +157,7 @@ export default function VideoDetail({ progress, video, data}) {
                                     jvhv
                                 </div>
                             </div> */}
-                        </div>
+                        </div>}
                     </div>
 
                 </div>
@@ -171,11 +172,11 @@ export default function VideoDetail({ progress, video, data}) {
                                     video
                                 </div>
                                 <div className={styles.link}>
-                                    <a href={`https://video-streaming-app-frontend-lilac.vercel.app/player/${data?._id}`} style={{color:"lightblue"}}>
-                                        {`https://video-streaming-app-frontend-lilac.vercel.app/player/${data?._id}`}
+                                    <a href={`https://video-streaming-app-frontend-lilac.vercel.app/${isShort?"shorts":"player"}/${data?._id}`} style={{color:"lightblue"}}>
+                                    {`https://video-streaming-app-frontend-lilac.vercel.app/${isShort?"shorts":"player"}/${data?._id}`}
                                     </a>
                                 </div>
-                                <div className={styles.copyIcon} onClick={async()=>{ await navigator.clipboard.writeText(`https://video-streaming-app-frontend-lilac.vercel.app/player/${data?._id}`);setCopied(true)}}>
+                                <div className={styles.copyIcon} onClick={async()=>{ await navigator.clipboard.writeText(`https://video-streaming-app-frontend-lilac.vercel.app/${isShort?"shorts":"player"}/${data?._id}`);setCopied(true)}}>
                                     {copied?
                                         <i className="fa-solid fa-circle-check"></i>
                                         :

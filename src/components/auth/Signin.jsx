@@ -1,11 +1,12 @@
 import axios from "axios"
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setSignin } from '../../redux/Data/signSlice'
 import logo from "../assets/Logo.png"
-import apple from "../assets/apple.png"
-import google from "../assets/google.png"
+import apple from "../assets/apple.svg"
+import applew from "../assets/appleWhite.svg"
+import google from "../assets/google.svg"
 import styles from "./Signin.module.css"
 
 export default function Signin() {
@@ -15,6 +16,7 @@ export default function Signin() {
     const [tc, setTc] = useState(false);
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const theme = useSelector((state) => state.theme.value)
 
     // const [cookies, setCookie] = useCookies(['access_token']);
     // const cooki=cookies.access_token
@@ -36,7 +38,7 @@ export default function Signin() {
             return setErr("Agree to the Terms and Policy")
         }
         try {
-            const userData = await axios.post("https://honest-stillness-production.up.railway.app/api/auth/login", { username: user.username, password: user.password }, { withCredentials: true });
+            const userData = await axios.post("http://localhost:8000/api/auth/login", { username: user.username, password: user.password }, { withCredentials: true });
 
             dispatch(setSignin(userData.data))
             console.log("User signed in")
@@ -49,8 +51,8 @@ export default function Signin() {
     }
 
     return (
-        <div className={styles.mainBox}>
-            <div className={styles.bigBox}>
+        <div className={styles.mainBox} style={theme?{backgroundColor:"white"}:{backgroundColor:"black"}}>
+            <div className={styles.bigBox} style={theme?{backgroundColor:"black",color:"white"}:{}}>
                 <div className={styles.box}>
                     <div className={styles.logo}>
                         <img src={logo} alt="logo" height="50px" />
@@ -62,8 +64,10 @@ export default function Signin() {
                             <span className={styles.smallText}>Enter Your Details to create an Account</span>
                         </div>
                         <div className={styles.signBtn}>
-                            <button><img src={google} alt="googleImg" height="80%" /> Sign In with Google</button>
-                            <button><img src={apple} alt="googleImg" height="70%" /> Sign In with Apple</button>
+                            <button style={theme?{backgroundColor:"black",color:"white"}:{}}>
+                                <img src={google} alt="googleImg" height="80%" /> Sign In with Google</button>
+                            <button style={theme?{backgroundColor:"black",color:"white"}:{}}>
+                                <img src={theme?applew:apple} alt="googleImg" height="75%"/> Sign In with Apple</button>
                         </div >
                         <div className={styles.line}>
                             <hr />or <hr />
@@ -105,7 +109,7 @@ export default function Signin() {
 
 
                 <div className={styles.detail}>
-                    <div className={styles.func}>
+                    <div className={styles.func} style={theme?{backgroundColor:"white",color:"black"}:{}}>
                     </div>
                 </div>
             </div>

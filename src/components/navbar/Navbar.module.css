@@ -175,9 +175,10 @@ a{
     font-size: 25px;
     font-weight: 700;
     overflow: hidden;
+    border: 1px solid gray;
 }
 .pro:hover{
-    border: 1px solid gray;
+    border: 1px solid rgb(124, 112, 112);
 }
 .signMenu{
     position: absolute;
@@ -227,7 +228,6 @@ a{
     font-size: 14px;
 }
 .pro2{
-    
     height: 35px;
     width: 35px;
     min-width: 35px;
@@ -239,9 +239,10 @@ a{
     font-size: 25px;
     font-weight: 700;
     overflow: hidden;
+    border: 1px solid gray;
 }
 .pro2:hover{
-    border: 1px solid gray;
+    border: 1px solid rgb(128, 116, 116);
 }
 .signMenu .menuProfile:hover{
     background-color: transparent;

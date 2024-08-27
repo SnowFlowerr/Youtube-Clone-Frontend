@@ -30,8 +30,8 @@ export default function Shorts() {
     const handlePlay = (url) => {
         setCurrentUrl(url);
     };
-    
-    
+
+
     useEffect(() => {
         if (id === "url") {
             setUrl("")
@@ -46,10 +46,10 @@ export default function Shorts() {
         async function fetchData() {
             try {
                 if (id !== "url") {
-                    const vidData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/${id}`)
+                    const vidData = await axios.get(`http://localhost:8000/api/shorts/${id}`)
                     setvidData(vidData.data)
                 }
-                const videosData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/?limit=${2}&skip=${skip}`)
+                const videosData = await axios.get(`http://localhost:8000/api/shorts/?limit=${2}&skip=${skip}`)
                 setvideoData([...videoData, ...videosData.data])
                 if (videosData.data.length !== 0) {
                     setLast(true)
@@ -117,6 +117,10 @@ export default function Shorts() {
                                 <VideoCard data={shorts} index={index + 1} onPlay={handlePlay}></VideoCard>
                             </div>
                         )}
+                            <div className={styles.loading}>
+                                <div className={styles.loadingBar} style={theme ? {} : { borderColor: "black" }}>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
