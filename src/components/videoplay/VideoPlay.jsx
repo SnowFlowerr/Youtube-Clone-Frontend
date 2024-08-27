@@ -1,14 +1,14 @@
+import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
-import styles from "./VideoPlay.module.css"
-import Navbar from '../navbar/Navbar'
-import Sidenav from '../navbar/Sidenav'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
 import { darkTheme, lightTheme } from '../../themes'
 import Share from '../Share/Share'
 import Comment from '../comment/Comment'
+import Navbar from '../navbar/Navbar'
+import Sidenav from '../navbar/Sidenav'
 import SimilarVideos from '../similarVideos/SimilarVideos'
+import styles from "./VideoPlay.module.css"
 
 // import { useNavigate } from 'react-router-dom'
 

@@ -1,12 +1,12 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import styles from './History.module.css'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { darkTheme, lightTheme } from '../../themes'
 import Navbar from '../navbar/Navbar'
 import Sidenav from '../navbar/Sidenav'
-import { useSelector } from 'react-redux'
-import { darkTheme, lightTheme } from '../../themes'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 import History from './History'
+import styles from './History.module.css'
 import ShortsHistory from './ShortsHistory'
 
 
@@ -17,7 +17,7 @@ export default function Histories() {
     const sign = useSelector((state) => state.sign.value)
     useEffect(() => {
         if(!sign){
-            navigate("/")
+            // navigate("/")
         }
         async function fetchData() {
             try {

@@ -1,19 +1,19 @@
-import Home from "./components/home/Home";
-import { Routes, Route } from "react-router-dom";
-import { lightTheme, darkTheme } from "./themes";
+import axios from "axios";
+import Cookies from 'js-cookie';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Routes } from "react-router-dom";
+import styles from "./App.module.css";
 import Signin from "./components/auth/Signin";
 import Signup from "./components/auth/Signup";
-import VideoPlay from "./components/videoplay/VideoPlay";
-import SearchedVid from "./components/searchedVid/SearchedVid";
-import styles from "./App.module.css"
-import { useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux'
-import Shorts from "./components/shorts/Shorts";
 import History from "./components/history/Histories";
+import Home from "./components/home/Home";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
-import axios from "axios";
+import SearchedVid from "./components/searchedVid/SearchedVid";
+import Shorts from "./components/shorts/Shorts";
+import VideoPlay from "./components/videoplay/VideoPlay";
 import { setSignin, setSignout } from "./redux/Data/signSlice";
-import Cookies from 'js-cookie'
+import { darkTheme, lightTheme } from "./themes";
 
 function App() {
   const dispatch = useDispatch();

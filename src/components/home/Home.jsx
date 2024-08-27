@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { offMic } from '../../redux/Data/micSlice'
+import { darkTheme, lightTheme } from '../../themes'
 import Navbar from '../navbar/Navbar'
 import Sidenav from '../navbar/Sidenav'
 import styles from './Home.module.css'
 import pic from './pic.jpg'
-import { useDispatch, useSelector } from 'react-redux'
-import { lightTheme, darkTheme } from '../../themes'
-import { offMic } from '../../redux/Data/micSlice'
-import { Link } from 'react-router-dom'
 
 
 

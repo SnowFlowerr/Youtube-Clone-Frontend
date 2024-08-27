@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
-import styles from "./Signup.module.css"
-import logo from "../assets/Logo.png"
-import google from "../assets/google.png"
-import apple from "../assets/apple.png"
 import axios from "axios"
-import { useNavigate } from 'react-router-dom'
-import Cookies from 'js-cookie';
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { setSignin } from '../../redux/Data/signSlice'
+import logo from "../assets/Logo.png"
+import apple from "../assets/apple.png"
+import google from "../assets/google.png"
+import styles from "./Signup.module.css"
 
 
 export default function Signup() {
