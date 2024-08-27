@@ -38,7 +38,7 @@ export default function Signin() {
             return setErr("Agree to the Terms and Policy")
         }
         try {
-            const userData = await axios.post("http://localhost:8000/api/auth/login", { username: user.username, password: user.password }, { withCredentials: true });
+            const userData = await axios.post("https://honest-stillness-production.up.railway.app/api/auth/login", { username: user.username, password: user.password }, { withCredentials: true });
 
             dispatch(setSignin(userData.data))
             console.log("User signed in")

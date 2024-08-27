@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import styles from './Home.module.css'
-import { format } from 'timeago.js'
-import { Link } from 'react-router-dom'
-import { darkTheme, lightTheme } from '../../themes'
-import pic from './pic.jpg'
-import { useSelector } from 'react-redux'
 import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { format } from 'timeago.js'
+import { darkTheme, lightTheme } from '../../themes'
+import styles from './Home.module.css'
 
 
 export default function Cards({ video }) {
@@ -34,7 +33,7 @@ export default function Cards({ video }) {
     useEffect(()=>{
         async function currentUser() {
             try {
-                const userD = await axios.get(`http://localhost:8000/api/users/get/${video?.userId}`,
+                const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get/${video?.userId}`,
                     { withCredentials: true }
                 )
                 setUser(userD.data)

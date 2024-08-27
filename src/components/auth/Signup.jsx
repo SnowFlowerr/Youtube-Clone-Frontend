@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { setSignin } from '../../redux/Data/signSlice'
 import logo from "../assets/Logo.png"
 import google from "../assets/google.svg"
-import styles from "./Signup.module.css"
 import Progress from "../upload/Progress"
+import styles from "./Signup.module.css"
 
 
 export default function Signup() {
@@ -65,7 +65,7 @@ export default function Signup() {
             return setErr("Agree to the Terms and Policy")
         }
         try {
-            const userData = await axios.post("http://localhost:8000/api/auth/signup", { name: user.name, username: user.username, email: user.email, password: user.password, img: icon?.secure_url }, { withCredentials: true });
+            const userData = await axios.post("https://honest-stillness-production.up.railway.app/api/auth/signup", { name: user.name, username: user.username, email: user.email, password: user.password, img: icon?.secure_url }, { withCredentials: true });
 
             dispatch(setSignin(userData.data))
             console.log("User signed up")
