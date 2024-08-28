@@ -47,10 +47,10 @@ export default function Shorts() {
         async function fetchData() {
             try {
                 if (id !== "url" && id) {
-                    const vidData = await axios.get(`https://honeststillness-production.up.railway.app/api/shorts/${id}`)
+                    const vidData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/${id}`)
                     setvidData(vidData.data)
                 }
-                const videosData = await axios.get(`https://honeststillness-production.up.railway.app/api/shorts/?limit=${2}&skip=${skip}`)
+                const videosData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/?limit=${2}&skip=${skip}`)
 
                 // console.log(videosData.data)
                 if (videosData.data.length !== 0) {

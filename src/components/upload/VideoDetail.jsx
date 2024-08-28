@@ -62,7 +62,7 @@ export default function VideoDetail({ progress, video, data, isShort}) {
     async function handleSubmit(){
         
         try {
-            await axios.put(`https://honeststillness-production.up.railway.app/api/${isShort?"shorts":"videos"}/${data._id}`,{title, description, imageUrl:thumbnail?.secure_url || ""},{ withCredentials: true })
+            await axios.put(`https://honest-stillness-production.up.railway.app/api/${isShort?"shorts":"videos"}/${data._id}`,{title, description, imageUrl:thumbnail?.secure_url || ""},{ withCredentials: true })
             window.location.reload()
         } catch (err) {
             console.log(err)
@@ -92,7 +92,7 @@ export default function VideoDetail({ progress, video, data, isShort}) {
 
     async function handleCancel(){
         try {
-            await axios.delete(`https://honeststillness-production.up.railway.app/api/${isShort?"shorts":"videos"}/${data._id}`,{ withCredentials: true })
+            await axios.delete(`https://honest-stillness-production.up.railway.app/api/${isShort?"shorts":"videos"}/${data._id}`,{ withCredentials: true })
             console.log("Video Deleted")
             window.location.reload()
 

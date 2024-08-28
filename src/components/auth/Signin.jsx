@@ -30,7 +30,7 @@ export default function Signin() {
     }
     const GoogleLogin = async (data) => {
         try{
-            const response = await axios.post(`https://honeststillness-production.up.railway.app/api/auth/googlelogin`,
+            const response = await axios.post(`https://honest-stillness-production.up.railway.app/api/auth/googlelogin`,
                 {name:data.displayName, username:data.displayName, email:data.email, img:data.photoURL},
                 {withCredentials:true}
             )
@@ -63,7 +63,7 @@ export default function Signin() {
             return setErr("Agree to the Terms and Policy")
         }
         try {
-            const userData = await axios.post("https://honeststillness-production.up.railway.app/api/auth/login", { username: user.username, password: user.password }, { withCredentials: true });
+            const userData = await axios.post("https://honest-stillness-production.up.railway.app/api/auth/login", { username: user.username, password: user.password }, { withCredentials: true });
 
             dispatch(setSignin(userData.data))
             console.log("User signed in")

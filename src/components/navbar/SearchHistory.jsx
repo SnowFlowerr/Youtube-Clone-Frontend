@@ -8,7 +8,7 @@ export default function SearchHistory({ handleSuggestion, sea, setSea }) {
     useEffect(()=>{
         async function getSearch() {
             try {
-                const userData = await axios.get("https://honeststillness-production.up.railway.app/api/users/getsearchHistory",
+                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/users/getsearchHistory",
                     { withCredentials: true });
                 // console.log(userData.data)
                 setSearch(userData?.data)
@@ -21,7 +21,7 @@ export default function SearchHistory({ handleSuggestion, sea, setSea }) {
     },[sea])
     async function delSearch(ele) {
         try {
-            const userData = await axios.delete(`https://honeststillness-production.up.railway.app/api/users/removesearchHistory/${ele}`,
+            const userData = await axios.delete(`https://honest-stillness-production.up.railway.app/api/users/removesearchHistory/${ele}`,
                 { withCredentials: true });
             setSea(!sea)
         }

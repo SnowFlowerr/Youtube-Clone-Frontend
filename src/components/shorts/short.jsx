@@ -69,7 +69,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
 
     async function fetchUser() {
         try {
-            const user = await axios.get(`https://honeststillness-production.up.railway.app/api/users/get/${data?.userId}`)
+            const user = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get/${data?.userId}`)
             setUserData(user.data)
             setSubs(user.data.followers)
 
@@ -80,7 +80,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
     }
     async function fetchVideo() {
         try {
-            const video = await axios.get(`https://honeststillness-production.up.railway.app/api/shorts/${data?._id}`)
+            const video = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/${data?._id}`)
             setView(video.data.views)
             setLike(video.data.likes)
             setDislike(video.data.dislikes)
@@ -91,7 +91,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
     }
     async function fetchData() {
         try {
-            const userD = await axios.get(`https://honeststillness-production.up.railway.app/api/users/issubscribe/${data.userId}`,
+            const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/issubscribe/${data.userId}`,
                 { withCredentials: true }
             )
             setisSubs(userD.data)
@@ -101,7 +101,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
         }
         
         try {
-            const userD = await axios.get(`https://honeststillness-production.up.railway.app/api/users/islikedshorts/${data?._id}`,
+            const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/islikedshorts/${data?._id}`,
                 { withCredentials: true }
             )
             setisLike(userD.data)
@@ -110,7 +110,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
             console.log(err.message)
         }
         try {
-            const userD = await axios.get(`https://honeststillness-production.up.railway.app/api/users/isdislikedshorts/${data?._id}`,
+            const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/isdislikedshorts/${data?._id}`,
                 { withCredentials: true }
             )
             setisDislike(userD.data)
@@ -119,7 +119,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
             console.log(err.message)
         }
         try {
-            const userD = await axios.get(`https://honeststillness-production.up.railway.app/api/users/issavedshorts/${data?._id}`,
+            const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/issavedshorts/${data?._id}`,
                 { withCredentials: true }
             )
             setisSaved(userD.data)
@@ -133,7 +133,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
         async function fetchData() {
             try {
                 if (isSubs) {
-                    await axios.put(`https://honeststillness-production.up.railway.app/api/users/unsubscribe/${data?.userId}`,
+                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${data?.userId}`,
                         {},
                         { withCredentials: true }
                     );
@@ -141,7 +141,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
                     console.log("Unsubscribe")
                 }
                 else {
-                    await axios.put(`https://honeststillness-production.up.railway.app/api/users/subscribe/${data?.userId}`,
+                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/subscribe/${data?.userId}`,
                         {},
                         { withCredentials: true }
                     );
@@ -163,7 +163,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
         }
         try {
             if (isLike) {
-                await axios.put(`https://honeststillness-production.up.railway.app/api/shorts/unlike/${data._id}`,
+                await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/unlike/${data._id}`,
                     {},
                     { withCredentials: true }
                 );
@@ -171,7 +171,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
                 console.log("unlikes")
             }
             else {
-                await axios.put(`https://honeststillness-production.up.railway.app/api/shorts/like/${data._id}`,
+                await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/like/${data._id}`,
                     {},
                     { withCredentials: true }
                 );
@@ -191,7 +191,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
         }
         try {
             if (isDislike) {
-                await axios.put(`https://honeststillness-production.up.railway.app/api/shorts/undislike/${data._id}`,
+                await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/undislike/${data._id}`,
                     {},
                     { withCredentials: true }
                 );
@@ -199,7 +199,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
                 console.log("undislikes")
             }
             else {
-                await axios.put(`https://honeststillness-production.up.railway.app/api/shorts/dislike/${data._id}`,
+                await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/dislike/${data._id}`,
                     {},
                     { withCredentials: true }
                 );
@@ -215,7 +215,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
     }
     async function handleViews() {
         try {
-            await axios.put(`https://honeststillness-production.up.railway.app/api/shorts/view/${data._id}`)
+            await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/view/${data._id}`)
             setView(view + 1)
             console.log("View added")
         }
@@ -226,7 +226,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
     async function addHistory() {
         if(data?._id !==undefined){
             try {
-                await axios.put(`https://honeststillness-production.up.railway.app/api/users/shortshistory/${data?._id}`,
+                await axios.put(`https://honest-stillness-production.up.railway.app/api/users/shortshistory/${data?._id}`,
                     {},
                     { withCredentials: true }
                 );

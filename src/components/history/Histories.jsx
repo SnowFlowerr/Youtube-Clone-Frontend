@@ -22,7 +22,7 @@ export default function Histories() {
         }
         async function fetchData() {
             try {
-                const userData = await axios.get("https://honeststillness-production.up.railway.app/api/users/history",
+                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/users/history",
                     { withCredentials: true }
                 );
                 setuserData(userData.data)
@@ -35,7 +35,7 @@ export default function Histories() {
         fetchData()
         async function fetchData2() {
             try {
-                const userData = await axios.get("https://honeststillness-production.up.railway.app/api/users/shortshistory",
+                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/users/shortshistory",
                     { withCredentials: true }
                 );
                 setshortsData(userData.data)
