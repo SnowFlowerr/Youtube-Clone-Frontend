@@ -14,6 +14,7 @@ export default function Histories() {
     const theme = useSelector((state) => state.theme.value)
     const navigate = useNavigate()
     const [userData, setuserData] = useState("")
+    const [shortsData, setshortsData] = useState("")
     const sign = useSelector((state) => state.sign.value)
     useEffect(() => {
         if(!sign){
@@ -32,6 +33,19 @@ export default function Histories() {
             }
         }
         fetchData()
+        async function fetchData2() {
+            try {
+                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/users/shortshistory",
+                    { withCredentials: true }
+                );
+                setshortsData(userData.data)
+                // console.log(userData.data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        fetchData2()
     }, [])
 
     return (
@@ -44,7 +58,7 @@ export default function Histories() {
                 <div className={styles.history}>
                     <div className={styles.userProfile}>
                         <div className={styles.userImg}>
-                            <img src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0dXJlfGVufDB8MHwwfHx8MA%3D%3D" alt="profile" width="100%" height="100%" />
+                            <img src={userData?.img} alt="profile" width="100%" height="100%" />
                         </div>
                         <div className={styles.profileDetails}>
                             <div className={styles.channelName}>
@@ -61,24 +75,39 @@ export default function Histories() {
                         </div>
                     </div>
                     {userData?.history?.length!==0 &&  <div>
-                        <div className={styles.view}>History ({userData?.history?.length})</div>
+                        <div className={styles.view}>Videos History ({userData?.history?.length})</div>
                         <History userData={userData.history}></History>
-                        <ShortsHistory userData={userData?.history}/>
                     </div>}
+                    {shortsData?.shortsHistory?.length!==0 &&  <div>
+                        <div className={styles.view}>Shorts History ({shortsData?.shortsHistory?.length})</div>
+                        <ShortsHistory userData={shortsData?.shortsHistory}/>
+                    </div>}
+
                     {userData?.saved?.length!==0 &&  <div>
                         <div className={styles.view}>Watch Later ({userData?.saved?.length})</div>
                         <History userData={userData?.saved}></History>
-                        <ShortsHistory userData={userData?.saved}/>
                     </div>}
+                    {shortsData?.shortsSaved?.length!==0 &&  <div>
+                        <div className={styles.view}>Watch Later Shorts({shortsData?.shortsSaved?.length})</div>
+                        <ShortsHistory userData={shortsData?.shortsSaved}/>
+                    </div>}
+
                     {userData?.liked?.length!==0 && <div>
                         <div className={styles.view}>Liked Videos ({userData?.liked?.length})</div>
                         <History userData={userData?.liked}></History>
-                        <ShortsHistory userData={userData?.liked}/>
                     </div>}
+                    {shortsData?.shortsLiked?.length!==0 && <div>
+                        <div className={styles.view}>Liked Shorts ({shortsData?.shortsLiked?.length})</div>
+                        <ShortsHistory userData={shortsData?.shortsLiked}/>
+                    </div>}
+
                     {userData?.disliked?.length!==0 && <div>
                         <div className={styles.view}>Disliked Videos ({userData?.disliked?.length})</div>
                         <History userData={userData?.disliked}></History>
-                        <ShortsHistory userData={userData?.disliked}/>
+                    </div>}
+                    {shortsData?.shortsDisliked?.length!==0 && <div>
+                        <div className={styles.view}>Disliked Shorts ({shortsData?.shortsDisliked?.length})</div>
+                        <ShortsHistory userData={shortsData?.shortsDisliked}/>
                     </div>}
                 </div>
             </div>

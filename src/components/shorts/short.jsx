@@ -244,7 +244,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
                 
                 <div className={styles.name}>
                     <div className={styles.icon}>
-                        <img src="https://media.istockphoto.com/id/2093686198/photo/digitally-staged-open-concept-living-space.webp?b=1&s=612x612&w=0&k=20&c=-SudmHea0-zYfF3ex8BWDGbhQy8DftAEK_oQWC0BQ7Q=" width="100%" height="100%" alt="icon" />
+                        <img src={userData?.img} width="100%" height="100%" alt="icon" />
                     </div>
                     <div className={styles.username}>
                         @{userData?.username}
@@ -290,7 +290,9 @@ export const VideoCard = ({ data, onPlay, index }) => {
                 />
                 <div>
                     <div className={styles.span2} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
-                        <img src={userData?.img} alt="ChannelIcon" height="100%" width=""/>
+                        <div className={styles.channelIcon}>
+                            <img src={userData?.img} alt="ChannelIcon" height="100%" width="100%"/>
+                        </div>
                     </div>
                 </div>
             </div>

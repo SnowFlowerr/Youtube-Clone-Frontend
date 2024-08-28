@@ -39,6 +39,7 @@
     height: 150px;
     border-radius: 100%;
     overflow: hidden;
+    border: 1px solid gray;
 }
 .channelName{
     font-size: 50px;

@@ -13,14 +13,17 @@
     font-size: 18px;
 }
 .searches:hover .searchText{
-    background-color: rgb(138, 138, 138);
+    background-color: rgb(0, 0, 0);
+    color: white;
 }
 .searches:hover .delete{
     visibility: visible;
-    background-color: rgb(138, 138, 138);
+    background-color: rgb(0, 0, 0);
+    color: white;
 }
 .searchText{
-    max-height: 25px;
+    height: 28px;
+    align-content: center;
     border-radius: 5px;
     padding: 3px 10px;
     /* background-color: aquamarine; */
