@@ -8,15 +8,16 @@ export default function SearchHistory({ handleSuggestion }) {
     useEffect(()=>{
         async function getSearch() {
             try {
-                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/users/getsearchHistory",
+                const userData = await axios.get("https://honeststillness-production.up.railway.app/api/users/getsearchHistory",
                     { withCredentials: true });
-                console.log(userData.data)
+                // console.log(userData.data)
                 setSearch(userData?.data)
             }
             catch (err) {
                 console.log(err)
             }
         }
+        console.log("fs")
         getSearch()
     },[])
 
@@ -27,10 +28,10 @@ export default function SearchHistory({ handleSuggestion }) {
                     {search.toReversed().map((ele, ind) =>
                         <div key={ind}  className={styles.searches}>
                             <div onClick={() => handleSuggestion(ele)} className={styles.searchText}>
-                                {ele}
+                            <div><i className="fa-solid fa-magnifying-glass"></i></div> <div>{ele}</div>
                             </div>
                             <div className={styles.delete}>
-                                <i class="fa-solid fa-xmark"></i>
+                                <i className="fa-solid fa-xmark"></i>
                             </div>
                         </div>
                     )}

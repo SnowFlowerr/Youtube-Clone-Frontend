@@ -35,7 +35,7 @@ export default function Navbar() {
     // useEffect(() => {
     //     async function currentUser() {
     //         try {
-    //             const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get`,
+    //             const userD = await axios.get(`https://honeststillness-production.up.railway.app/api/users/get`,
     //                 { withCredentials: true }
     //             )
     //             // console.log(userD)
@@ -70,7 +70,7 @@ export default function Navbar() {
 
         async function setSearch() {
             try {
-                const userData = await axios.put(`https://honest-stillness-production.up.railway.app/api/users/addsearchHistory/${searchInput}`,
+                const userData = await axios.put(`https://honeststillness-production.up.railway.app/api/users/addsearchHistory/${searchInput}`,
                     {},
                     { withCredentials: true });
                 console.log(userData.data)

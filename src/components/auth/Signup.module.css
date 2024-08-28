@@ -62,7 +62,7 @@
 }
 
 .signBtn img {
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 .signBtn button {
@@ -76,6 +76,7 @@
     background-color: white;
     border-radius: 10px;
     cursor: pointer;
+    padding: 5px 10px;
 }
 
 .signBtn label {

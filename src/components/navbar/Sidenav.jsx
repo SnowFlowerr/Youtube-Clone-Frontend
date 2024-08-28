@@ -61,11 +61,14 @@ export default function Sidenav() {
                                 <span>History</span>
                             </div>
                         </Link>}
-                    <hr />
-                    <div className={styles.subscriptions}>
-                        <span>Subscription</span>
-                        <Subscribers/>
-                    </div>
+                    {sign &&
+                        <>
+                            <hr />
+                            <div className={styles.subscriptions}>
+                                <span>Subscription</span>
+                                <Subscribers />
+                            </div>
+                        </>}
                     <hr />
                     <div className={styles.category}>
                         <span>Category</span>
@@ -101,13 +104,14 @@ export default function Sidenav() {
                                 <span>Music</span>
                             </div>
                         </Link>
-                        <Link to="/" className={styles.subscribe} style={theme ? darkTheme : lightTheme}>
-                            <div>
-                                <i className="fa-solid fa-tv"></i>
-                                <br />
-                                <span>Subscription</span>
-                            </div>
-                        </Link>
+                        {sign &&
+                            <Link to="/" className={styles.subscribe} style={theme ? darkTheme : lightTheme}>
+                                <div>
+                                    <i className="fa-solid fa-tv"></i>
+                                    <br />
+                                    <span>Subscription</span>
+                                </div>
+                            </Link>}
                         {sign &&
                             <Link to="/history" className={styles.history} style={theme ? history ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : history ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme}>
                                 <div>

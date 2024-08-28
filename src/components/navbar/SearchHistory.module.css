@@ -23,12 +23,25 @@
 }
 .searchText{
     height: 28px;
+    display: flex;
     align-content: center;
+    gap: 10px;
     border-radius: 5px;
     padding: 3px 10px;
     /* background-color: aquamarine; */
     width: 100%;
     transition: none;
+}
+.searchText > div{
+    height: 100%;
+    align-content: center;
+    transition: none;
+}
+.searchText div > i{
+    height: 100%;
+    align-content: center;
+    transition: none;
+    /* background-color: aquamarine; */
 }
 .delete{
     visibility: hidden;

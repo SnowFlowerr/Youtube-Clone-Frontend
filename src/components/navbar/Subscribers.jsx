@@ -9,11 +9,9 @@ export default function Subscribers() {
     useEffect(() => {
         async function getSubs() {
             try {
-                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/users/getsubscriber",
-
+                const userData = await axios.get("https://honeststillness-production.up.railway.app/api/users/getsubscriber",
                     { withCredentials: true });
-
-                console.log(userData.data?.followedUser)
+                // console.log(userData.data?.followedUser)
                 setSubsc(userData.data?.followedUser)
 
             }
@@ -27,9 +25,9 @@ export default function Subscribers() {
         <div className={styles.mainBox}>
             {
                 subsc?.map((subs, index) =>
-                    <>
+                    <div key={index} >
                         {subs._id &&
-                        <div key={index} className={styles.main}>
+                        <div className={styles.main}>
                             <div className={styles.Channelicon}>
                                 <img src={subs?.img} alt="" height="100%" width="100%"/>
                             </div>
@@ -37,7 +35,7 @@ export default function Subscribers() {
                                 {subs?.name}
                             </div>
                         </div>}
-                    </>
+                    </div>
                 )
             }
         </div>

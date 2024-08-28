@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setSignin } from '../../redux/Data/signSlice'
 import logo from "../assets/Logo.png"
-import apple from "../assets/apple.svg"
-import applew from "../assets/appleWhite.svg"
 import google from "../assets/google.svg"
 import styles from "./Signin.module.css"
+import { signInWithGooglePopup } from "./firebase"
 
 export default function Signin() {
     const [viewPass, setviewPass] = useState(false);
@@ -18,8 +17,34 @@ export default function Signin() {
     const dispatch = useDispatch()
     const theme = useSelector((state) => state.theme.value)
 
-    // const [cookies, setCookie] = useCookies(['access_token']);
-    // const cooki=cookies.access_token
+
+    const logGoogleUser = async () => {
+        try{
+            const response = await signInWithGooglePopup();
+            // console.log(response.user);
+            GoogleLogin(response.user)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+    const GoogleLogin = async (data) => {
+        try{
+            const response = await axios.post(`https://honeststillness-production.up.railway.app/api/auth/googlelogin`,
+                {name:data.displayName, username:data.displayName, email:data.email, img:data.photoURL},
+                {withCredentials:true}
+            )
+            dispatch(setSignin(response.data))
+            console.log("User signed in")
+            // console.log(userData)
+            navigate("/")
+            // console.log(response.user);
+
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
 
 
     function handleChange(e) {
@@ -38,7 +63,7 @@ export default function Signin() {
             return setErr("Agree to the Terms and Policy")
         }
         try {
-            const userData = await axios.post("https://honest-stillness-production.up.railway.app/api/auth/login", { username: user.username, password: user.password }, { withCredentials: true });
+            const userData = await axios.post("https://honeststillness-production.up.railway.app/api/auth/login", { username: user.username, password: user.password }, { withCredentials: true });
 
             dispatch(setSignin(userData.data))
             console.log("User signed in")
@@ -64,10 +89,10 @@ export default function Signin() {
                             <span className={styles.smallText}>Enter Your Details to create an Account</span>
                         </div>
                         <div className={styles.signBtn}>
-                            <button style={theme?{backgroundColor:"black",color:"white"}:{}}>
-                                <img src={google} alt="googleImg" height="80%" /> Sign In with Google</button>
-                            <button style={theme?{backgroundColor:"black",color:"white"}:{}}>
-                                <img src={theme?applew:apple} alt="googleImg" height="75%"/> Sign In with Apple</button>
+                            <button style={theme?{backgroundColor:"black",color:"white"}:{}} onClick={logGoogleUser}>
+                                <img src={google} alt="googleImg" height="75%" /> Sign In with Google</button>
+                            {/* <button style={theme?{backgroundColor:"black",color:"white"}:{}}>
+                                <img src={theme?applew:apple} alt="googleImg" height="75%"/> Sign In with Apple</button> */}
                         </div >
                         <div className={styles.line}>
                             <hr />or <hr />

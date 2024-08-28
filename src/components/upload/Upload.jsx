@@ -76,7 +76,7 @@ export default function Upload({ isUpload, setisUpload }) {
         console.log(shorts)
 
         try {
-            const data = await axios.post(`https://honest-stillness-production.up.railway.app/api/${shorts?"shorts":"videos"}/`, { title: datas.display_name, videoUrl: datas.secure_url, duration: datas.duration, imageUrl: datas.secure_url.slice(0, -3) + "jpg" }, { withCredentials: true })
+            const data = await axios.post(`https://honeststillness-production.up.railway.app/api/${shorts?"shorts":"videos"}/`, { title: datas.display_name, videoUrl: datas.secure_url, duration: datas.duration, imageUrl: datas.secure_url.slice(0, -3) + "jpg" }, { withCredentials: true })
             setData(data.data)
             // console.log(data.data)
         } catch (err) {

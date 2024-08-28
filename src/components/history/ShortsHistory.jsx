@@ -42,7 +42,7 @@ export default function ShortsHistory({userData}) {
                     userData?.toReversed().map((video, index) =>
                         <div className={styles.Shortscontainer} key={index} ref={widthRef}>
                             <div className={styles.shortsThumbnail} ref={thumbnailRef}>
-                                <a href={`player/${video?._id}`}>
+                                <a href={`shorts/${video?._id}`}>
                                     <img src={video?.imageUrl} width="100%" height="100%" alt="thumbnail" />
                                 </a>
                                 <div className={styles.duration}>{getDuration(video?.duration)}</div>
@@ -54,7 +54,7 @@ export default function ShortsHistory({userData}) {
                                     </a>
                                 </div> */}
                                 <div className={styles.details}>
-                                    <a href={`/player/${video?._id}`} style={theme ? { color: "white" } : { color: "black" }}>
+                                    <a href={`/shorts/${video?._id}`} style={theme ? { color: "white" } : { color: "black" }}>
                                         <div className={styles.title}>
                                             {video?.title}
                                         </div>

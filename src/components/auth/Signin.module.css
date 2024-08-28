@@ -52,7 +52,7 @@
     margin-bottom: 17px;
 }
 .signBtn img{
-    margin-right: 5px;
+    margin-right: 10px;
 }
 .signBtn button{
     height: 45px;
@@ -64,6 +64,8 @@
     width: 100%;
     background-color: white;
     border-radius: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
 }
 .line{
     display: flex;
@@ -136,6 +138,7 @@
     border-radius: 10px;
     font-size: 15px;
     font-weight: 700;
+    cursor: pointer;
 }
 .haveAcc{
     font-size: 14px;

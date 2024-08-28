@@ -7,6 +7,7 @@ import logo from "../assets/Logo.png"
 import google from "../assets/google.svg"
 import Progress from "../upload/Progress"
 import styles from "./Signup.module.css"
+import { signInWithGooglePopup } from "./firebase"
 
 
 export default function Signup() {
@@ -65,7 +66,7 @@ export default function Signup() {
             return setErr("Agree to the Terms and Policy")
         }
         try {
-            const userData = await axios.post("https://honest-stillness-production.up.railway.app/api/auth/signup", { name: user.name, username: user.username, email: user.email, password: user.password, img: icon?.secure_url }, { withCredentials: true });
+            const userData = await axios.post("https://honeststillness-production.up.railway.app/api/auth/signup", { name: user.name, username: user.username, email: user.email, password: user.password, img: icon?.secure_url }, { withCredentials: true });
 
             dispatch(setSignin(userData.data))
             console.log("User signed up")
@@ -73,6 +74,34 @@ export default function Signup() {
         }
         catch (err) {
             setErr(err?.response?.data?.message)
+        }
+    }
+
+    const logGoogleUser = async () => {
+        try{
+            const response = await signInWithGooglePopup();
+            // console.log(response.user);
+            GoogleLogin(response.user)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+    const GoogleLogin = async (data) => {
+        try{
+            const response = await axios.post(`https://honeststillness-production.up.railway.app/api/auth/googlelogin`,
+                {name:data.displayName, username:data.displayName, email:data.email, img:data.photoURL},
+                {withCredentials:true}
+            )
+            dispatch(setSignin(response.data))
+            console.log("User signed in")
+            // console.log(userData)
+            navigate("/")
+            // console.log(response.user);
+
+        }
+        catch(err){
+            console.log(err)
         }
     }
 
@@ -93,7 +122,8 @@ export default function Signup() {
                             <span className={styles.smallText}>Enter Your Details to create an Account</span>
                         </div>
                         <div className={styles.signBtn}>
-                            <button style={theme?{backgroundColor:"black",color:"white"}:{}}><img src={google} alt="googleImg" height="80%" /> Sign In with Google</button>
+                            <button style={theme?{backgroundColor:"black",color:"white"}:{}} onClick={logGoogleUser}>
+                                <img src={google} alt="googleImg" height="50%" /> Sign In with Google</button>
                             <label htmlFor="channelIcon" className={styles.iconlabel}>
                                 {prog !== 0 &&
                                     <div className={styles.progress}>
