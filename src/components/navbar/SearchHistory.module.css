@@ -1,0 +1,45 @@
+.mainBox{
+    padding: 5px;
+    transition: none;
+}
+.searches{
+    transition: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+}
+.searches i:hover{
+    font-size: 18px;
+}
+.searches:hover .searchText{
+    background-color: rgb(138, 138, 138);
+}
+.searches:hover .delete{
+    visibility: visible;
+    background-color: rgb(138, 138, 138);
+}
+.searchText{
+    max-height: 25px;
+    border-radius: 5px;
+    padding: 3px 10px;
+    /* background-color: aquamarine; */
+    width: 100%;
+    transition: none;
+}
+.delete{
+    visibility: hidden;
+    width: 30px;
+    align-content: center;
+    border-radius: 100%;
+    aspect-ratio: 1;
+    /* background-color: rgb(223, 24, 24); */
+    text-align: center;
+    transition: none;
+}
+.delete i{
+    width: 30px;
+    align-content: center;
+    text-align: center;
+    transition: none;
+}

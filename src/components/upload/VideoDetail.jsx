@@ -41,6 +41,7 @@ export default function VideoDetail({ progress, video, data, isShort}) {
         if(file){
             const formData = new FormData();
             formData.append('file', file)
+            formData.append('folder', "VideoThumbnails")
             formData.append("upload_preset", process.env.REACT_APP_API_PRESET)
             try {
                 const data = await axios.post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_API_NAME}/auto/upload`, formData, {

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Comment from '../comment/Comment';
 import Share from '../Share/Share';
 import styles from "./Shorts.module.css";
-import video from "./videoplayback.mp4";
+
 export const VideoCard = ({ data, onPlay, index }) => {
     const videoRef = useRef(null);
     const theme = useSelector((state) => state.theme.value)
@@ -240,7 +240,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
     return (
         <>
             <span className={styles.span}>
-                <video className={styles.video} ref={videoRef} src={video} onPlay={()=>addHistory()} controls onEnded={handleViews} />
+                <video className={styles.video} ref={videoRef} src={data?.videoUrl} onPlay={()=>addHistory()} controls onEnded={handleViews} />
                 
                 <div className={styles.name}>
                     <div className={styles.icon}>
@@ -290,6 +290,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
                 />
                 <div>
                     <div className={styles.span2} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
+                        <img src={userData?.img} alt="ChannelIcon" height="100%" width=""/>
                     </div>
                 </div>
             </div>

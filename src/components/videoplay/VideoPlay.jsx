@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { darkTheme, lightTheme } from '../../themes'
 import Share from '../Share/Share'
 import Comment from '../comment/Comment'
@@ -31,6 +31,7 @@ export default function VideoPlay() {
     const [like, setLike] = useState(0)
     const [dislike, setDislike] = useState(0)
     const { id } = useParams();
+    const navigate=useNavigate()
 
 
     useEffect(() => {
@@ -92,6 +93,7 @@ export default function VideoPlay() {
             }
             catch (err) {
                 console.log(err.message)
+                navigate("/notFound")
             }
         }
         fetchData()

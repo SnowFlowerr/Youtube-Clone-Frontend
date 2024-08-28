@@ -55,6 +55,7 @@ export default function Upload({ isUpload, setisUpload }) {
             setUploaded(() => true)
             const formData = new FormData();
             formData.append('file', file)
+            formData.append('folder', shorts?"Shorts":"Videos")
             formData.append("upload_preset", process.env.REACT_APP_API_PRESET)
             try {
                 const data = await axios.post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_API_NAME}/auto/upload`, formData, {

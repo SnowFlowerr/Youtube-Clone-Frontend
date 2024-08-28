@@ -29,6 +29,13 @@
     padding-top: 75px;
     width: 80px;
 }
+.menuList div{
+    height: 100%;
+    width: 100%;
+    /* color: white; */
+    align-content: center;
+    text-align: center;
+}
 .menuList a{
     /* background: rgb(60, 60, 60); */
     height: 60px;
@@ -40,11 +47,7 @@
 }
 .menuList div:hover{
     background:  rgb(34, 34, 34);
-    height: 100%;
-    width: 100%;
     color: white;
-    align-content: center;
-    text-align: center;
 }
 .menuList i{
     font-size: 20px;
@@ -59,12 +62,12 @@
     padding: 16px;
     padding-top: 75px;
 }
-.menuList2 div{
-    width: 100%;
+.menuList2 .contain{
+    /* width: 100%; */
     border-radius: 10px;
     padding: 10px;
 }
-.menuList2 a{
+.menuList2 > a{
     width: 100%;
     border-radius: 10px;
 }
@@ -76,7 +79,7 @@ a{
 hr{
     border: 0.1px solid gray;
 }
-.menuList2 div:hover{
+.menuList2 .contain:hover{
     background: rgb(34, 34, 34);
     color: white;
 }
@@ -90,6 +93,15 @@ hr{
 .upload{
     display: none;
 }
+.subscriptions, .category{
+    padding: 5px 0;
+}
+.subscriptions > span, .category > span{
+    font-weight: 700;
+    padding: 0px 10px;
+    font-size: 18px;
+}
+
 @media screen and (max-width:750px) {
     .main{
         height:fit-content;

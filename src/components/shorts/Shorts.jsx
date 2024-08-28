@@ -25,6 +25,7 @@ export default function Shorts() {
     const [skip, setSkip] = useState(0)
     const lastVid = useRef(null)
     const [last, setLast] = useState(false)
+    const [noMore, setnoMore] = useState(false)
     const [url, setUrl] = useState("url");
 
     const handlePlay = (url) => {
@@ -45,17 +46,23 @@ export default function Shorts() {
     useEffect(() => {
         async function fetchData() {
             try {
-                if (id !== "url") {
+                if (id !== "url" && id) {
                     const vidData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/${id}`)
                     setvidData(vidData.data)
                 }
                 const videosData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/?limit=${2}&skip=${skip}`)
-                setvideoData([...videoData, ...videosData.data])
+
+                console.log(videosData.data)
                 if (videosData.data.length !== 0) {
+                    setvideoData([...videoData, ...videosData.data])
                     setLast(true)
+                }
+                else {
+                    setnoMore(true)
                 }
             }
             catch (err) {
+                navigate("/notFound")
                 console.log(err.message)
             }
         }
@@ -84,8 +91,8 @@ export default function Shorts() {
         let scrollHeight = lastVid.current.scrollHeight
         let scroll = lastVid.current.scrollTop
         if (Math.floor(divHeight + scroll) >= Math.floor(scrollHeight) - 60) {
-            if (last) {
-                setSkip(skip+2)
+            if (last && noMore === false) {
+                setSkip(skip + 2)
                 setLast(false)
             }
         }
@@ -117,10 +124,15 @@ export default function Shorts() {
                                 <VideoCard data={shorts} index={index + 1} onPlay={handlePlay}></VideoCard>
                             </div>
                         )}
-                            <div className={styles.loading}>
-                                <div className={styles.loadingBar} style={theme ? {} : { borderColor: "black" }}>
+                        <div className={styles.loading}>
+                            {noMore ?
+                                <div>
+                                    No more Shorts is Available
                                 </div>
-                            </div>
+                                :
+                                <div className={styles.loadingBar} style={theme ? {} : { borderColor: "black" }}>
+                                </div>}
+                        </div>
                     </div>
                 </div>
             </div>

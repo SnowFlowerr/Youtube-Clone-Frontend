@@ -64,10 +64,12 @@
     margin-top: 0.7vw;
     gap: 1vw;
     color: white;
+    /* border: 1px solid white; */
 }
 
 .videoDetail .details {
-    width: 100%;
+    width: calc(100% - 4vw);
+    /* border: 1px solid white; */
 }
 
 .icon {
@@ -75,17 +77,20 @@
     min-height: 3vw;
     width: 3vw;
     min-width: 3vw;
-    background-color: azure;
+    border: 1px solid gray;
     border-radius: 100%;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .title {
     font-size: 1.2vw;
     /* border: 1px solid white; */
+    max-width: 100%;
     font-weight: 800;
     max-height: 2.8vw;
     margin-top: 0.2vw;
+    word-wrap: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

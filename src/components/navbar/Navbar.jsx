@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Cookies from 'js-cookie'
 import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,6 +12,7 @@ import logo from "../assets/Logo.png"
 import Speech from '../Speech/Speech'
 import Upload from '../upload/Upload'
 import styles from "./Navbar.module.css"
+import SearchHistory from './SearchHistory'
 
 
 export default function Navbar() {
@@ -65,6 +67,20 @@ export default function Navbar() {
         dispatch(offMic())
         suggRef.current.style.visibility = 'hidden';
         suggRef2.current.style.visibility = "hidden"
+
+        async function setSearch() {
+            try {
+                const userData = await axios.put(`https://honest-stillness-production.up.railway.app/api/users/addsearchHistory/${searchInput}`,
+                    {},
+                    { withCredentials: true });
+                console.log(userData.data)
+                // setSearch(userData?.data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        setSearch()
     }
 
     function handleClearAll(e) {
@@ -127,9 +143,7 @@ export default function Navbar() {
                                     <input type="text" placeholder='Search here...' ref={inputRef2} style={theme ? darkTheme : lightTheme} onChange={handleSearch} onClick={() => { suggRef.current.style.visibility = "visible"; suggRef2.current.style.visibility = "visible" }} spellCheck="true" value={searchInput} />
 
                                     <div className={styles.suggestion} ref={suggRef} style={theme ? {} : { backgroundColor: "#dadada" }}>
-                                        {arr.map((ele, ind) =>
-                                            <div key={ind} onClick={() => handleSuggestion(ele)}>{ele}</div>
-                                        )}
+                                        <SearchHistory handleSuggestion={handleSuggestion}/>
                                     </div>
 
                                     {searchInput &&

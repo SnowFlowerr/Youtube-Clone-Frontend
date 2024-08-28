@@ -3,6 +3,7 @@ import styles from "./Sidenav.module.css"
 import { useSelector } from 'react-redux'
 import { darkTheme, lightTheme } from '../../themes'
 import { Link, useLocation } from 'react-router-dom'
+import Subscribers from './Subscribers'
 
 
 export default function Sidenav() {
@@ -30,42 +31,43 @@ export default function Sidenav() {
             <div className={menu ? styles.main2 : styles.main} style={theme ? darkTheme : lightTheme}>
                 {menu ? <div className={styles.menuList2}>
                     <Link to="/" style={theme ? home ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : home ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme} >
-                        <div>
+                        <div className={styles.contain}>
                             {home ? <i className="fa-solid fa-house fa-bounce"></i> : <i className="fa-solid fa-house"></i>}
                             <span>Home</span>
                         </div>
                     </Link>
                     <a href="/shorts/url" className={styles.shorts} style={theme ? shorts ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : shorts ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme} >
-                        <div>
+                        <div className={styles.contain}>
                             {shorts ? <i className="fa-solid fa-video fa-bounce"></i> : <i className="fa-solid fa-video"></i>}
                             <span>Shorts</span>
                         </div>
                     </a>
                     <Link to="/" className={styles.music} style={theme ? darkTheme : lightTheme}>
-                        <div>
+                        <div className={styles.contain}>
                             <i className="fa-solid fa-music"></i>
                             <span>Music</span>
                         </div>
                     </Link>
                     <Link to="/" className={styles.downloads} style={theme ? darkTheme : lightTheme}>
-                        <div>
+                        <div className={styles.contain}>
                             <i className="fa-solid fa-download"></i>
                             <span>Download</span>
                         </div>
                     </Link>
                     {sign &&
                         <Link to="/history" style={theme ? history ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : history ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme} >
-                            <div>
+                            <div className={styles.contain}>
                                 {history ? <i className="fa-solid fa-clock-rotate-left fa-bounce"></i> : <i className="fa-solid fa-clock-rotate-left"></i>}
                                 <span>History</span>
                             </div>
                         </Link>}
                     <hr />
-                    <div>
+                    <div className={styles.subscriptions}>
                         <span>Subscription</span>
+                        <Subscribers/>
                     </div>
                     <hr />
-                    <div>
+                    <div className={styles.category}>
                         <span>Category</span>
                     </div>
                 </div>
