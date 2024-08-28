@@ -18,6 +18,7 @@ import SearchHistory from './SearchHistory'
 export default function Navbar() {
 
     const [isSearch, setisSearch] = useState(true)
+    const [sea, setSea] = useState(true)
     const [signBtn, setSignBtn] = useState(false)
     const [isUpload, setisUpload] = useState(false)
     const inputRef = useRef(null);
@@ -62,6 +63,7 @@ export default function Navbar() {
     }
     function handleSubmit(e) {
         if (searchInput.trim() !== "") {
+            setSea(!sea)
             navigate(`/searchedvideo/${searchInput}`)
         }
         dispatch(offMic())
@@ -143,7 +145,7 @@ export default function Navbar() {
                                     <input type="text" placeholder='Search here...' ref={inputRef2} style={theme ? darkTheme : lightTheme} onChange={handleSearch} onClick={() => { suggRef.current.style.visibility = "visible"; suggRef2.current.style.visibility = "visible" }} spellCheck="true" value={searchInput} />
 
                                     <div className={styles.suggestion} ref={suggRef} style={theme ? {} : { backgroundColor: "#dadada" }}>
-                                        <SearchHistory handleSuggestion={handleSuggestion}/>
+                                        <SearchHistory handleSuggestion={handleSuggestion} sea={sea} setSea={setSea}/>
                                     </div>
 
                                     {searchInput &&

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styles from "./SearchHistory.module.css";
 
-export default function SearchHistory({ handleSuggestion }) {
+export default function SearchHistory({ handleSuggestion, sea, setSea }) {
     const [search,setSearch]=useState([]);
 
     useEffect(()=>{
@@ -17,9 +17,18 @@ export default function SearchHistory({ handleSuggestion }) {
                 console.log(err)
             }
         }
-        console.log("fs")
         getSearch()
-    },[])
+    },[sea])
+    async function delSearch(ele) {
+        try {
+            const userData = await axios.delete(`https://honeststillness-production.up.railway.app/api/users/removesearchHistory/${ele}`,
+                { withCredentials: true });
+            setSea(!sea)
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
 
     return (
         <>
@@ -30,7 +39,7 @@ export default function SearchHistory({ handleSuggestion }) {
                             <div onClick={() => handleSuggestion(ele)} className={styles.searchText}>
                             <div><i className="fa-solid fa-magnifying-glass"></i></div> <div>{ele}</div>
                             </div>
-                            <div className={styles.delete}>
+                            <div className={styles.delete} onClick={() => delSearch(ele)}>
                                 <i className="fa-solid fa-xmark"></i>
                             </div>
                         </div>
