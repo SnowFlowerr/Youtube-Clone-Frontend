@@ -17,6 +17,7 @@ export default function Signup() {
     const [err, setErr] = useState("");
     const [icon, setIcon] = useState("");
     const [tc, setTc] = useState(false);
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [prog, setProg] = useState(0)
@@ -89,14 +90,16 @@ export default function Signup() {
     }
     const GoogleLogin = async (data) => {
         try{
+            setLoading(()=>true)
             const response = await axios.post(`https://honest-stillness-production.up.railway.app/api/auth/googlelogin`,
                 {name:data.displayName, username:data.displayName, email:data.email, img:data.photoURL},
-                {withCredentials:true}
+                {withCredentials:true},
             )
             dispatch(setSignin(response.data))
             console.log("User signed in")
             // console.log(userData)
             navigate("/")
+            setLoading(()=>false)
             // console.log(response.user);
 
         }
@@ -179,6 +182,12 @@ export default function Signup() {
                         </div>
                     </div>
                     <div className={styles.rights}>2024, All Rights Reserved</div>
+                    {loading &&
+                <div className={styles.loading}>
+                    <div className={styles.loadingBar} style={theme?{}:{borderColor:"black"}}>
+                    </div>
+                        {loading}
+                </div>}
                 </div>
 
 

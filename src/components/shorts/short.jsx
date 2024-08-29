@@ -5,7 +5,7 @@ import Comment from '../comment/Comment';
 import Share from '../Share/Share';
 import styles from "./Shorts.module.css";
 
-export const VideoCard = ({ data, onPlay, index }) => {
+export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
     const videoRef = useRef(null);
     const theme = useSelector((state) => state.theme.value)
     const [isSubs, setisSubs] = useState(false)
@@ -14,13 +14,10 @@ export const VideoCard = ({ data, onPlay, index }) => {
     const [isSaved, setisSaved] = useState(false)
     const [isComment, setisComment] = useState(false)
     const [userData, setUserData] = useState({ name: "Title" })
-    // const [currentUser, setCurrentUser] = useState({ name: "Title" })
-    // const [videoData, setvideoData] = useState({ title: "Title" })
     const [view, setView] = useState(0)
     const [subs, setSubs] = useState(0)
     const [like, setLike] = useState(0)
     const [dislike, setDislike] = useState(0)
-    const sign = useSelector((state) => state.sign.value)
 
     useEffect(() => {
         const handlePlayStop = (entries) => {
@@ -99,7 +96,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
         catch (err) {
             console.log(err.message)
         }
-        
+
         try {
             const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/islikedshorts/${data?._id}`,
                 { withCredentials: true }
@@ -131,86 +128,92 @@ export const VideoCard = ({ data, onPlay, index }) => {
 
     function handleSubscribe() {
         async function fetchData() {
+            if (data?.userId) {
+                try {
+                    if (isSubs) {
+                        await axios.put(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${data?.userId}`,
+                            {},
+                            { withCredentials: true }
+                        );
+                        setSubs(subs - 1)
+                        console.log("Unsubscribe")
+                    }
+                    else {
+                        await axios.put(`https://honest-stillness-production.up.railway.app/api/users/subscribe/${data?.userId}`,
+                            {},
+                            { withCredentials: true }
+                        );
+                        setSubs(subs + 1)
+                        console.log("Subscribe")
+                    }
+                    setisSubs(!isSubs)
+                    // console.log("err?.response?.data")
+                }
+                catch (err) {
+                    console.log(err?.response?.data)
+                }
+            }
+        }
+        fetchData()
+    }
+    async function handleLike() {
+        if (data._id) {
             try {
-                if (isSubs) {
-                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${data?.userId}`,
+                if (isLike) {
+                    await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/unlike/${data._id}`,
                         {},
                         { withCredentials: true }
                     );
-                    setSubs(subs - 1)
-                    console.log("Unsubscribe")
+                    setLike(like - 1)
+                    console.log("unlikes")
                 }
                 else {
-                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/subscribe/${data?.userId}`,
+                    if (isDislike === true) {
+                        handleDislike()
+                    }
+                    await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/like/${data._id}`,
                         {},
                         { withCredentials: true }
                     );
-                    setSubs(subs + 1)
-                    console.log("Subscribe")
+                    setLike(like + 1)
+                    console.log("likes")
                 }
-                setisSubs(!isSubs)
+                setisLike(!isLike)
                 // console.log("err?.response?.data")
             }
             catch (err) {
                 console.log(err?.response?.data)
             }
         }
-        fetchData()
-    }
-    async function handleLike() {
-        if (isDislike === true) {
-            handleDislike()
-        }
-        try {
-            if (isLike) {
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/unlike/${data._id}`,
-                    {},
-                    { withCredentials: true }
-                );
-                setLike(like - 1)
-                console.log("unlikes")
-            }
-            else {
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/like/${data._id}`,
-                    {},
-                    { withCredentials: true }
-                );
-                setLike(like + 1)
-                console.log("likes")
-            }
-            setisLike(!isLike)
-            // console.log("err?.response?.data")
-        }
-        catch (err) {
-            console.log(err?.response?.data)
-        }
     }
     async function handleDislike() {
-        if (isLike === true) {
-            handleLike()
-        }
-        try {
-            if (isDislike) {
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/undislike/${data._id}`,
-                    {},
-                    { withCredentials: true }
-                );
-                setDislike(dislike - 1)
-                console.log("undislikes")
+        if (data._id) {
+            try {
+                if (isDislike) {
+                    await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/undislike/${data._id}`,
+                        {},
+                        { withCredentials: true }
+                    );
+                    setDislike(dislike - 1)
+                    console.log("undislikes")
+                }
+                else {
+                    if (isLike === true) {
+                        handleLike()
+                    }
+                    await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/dislike/${data._id}`,
+                        {},
+                        { withCredentials: true }
+                    );
+                    setDislike(dislike + 1)
+                    console.log("dislikes")
+                }
+                setisDislike(!isDislike)
+                // console.log("err?.response?.data")
             }
-            else {
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/dislike/${data._id}`,
-                    {},
-                    { withCredentials: true }
-                );
-                setDislike(dislike + 1)
-                console.log("dislikes")
+            catch (err) {
+                console.log(err?.response?.data)
             }
-            setisDislike(!isDislike)
-            // console.log("err?.response?.data")
-        }
-        catch (err) {
-            console.log(err?.response?.data)
         }
     }
     async function handleViews() {
@@ -224,7 +227,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
         }
     }
     async function addHistory() {
-        if(data?._id !==undefined){
+        if (data?._id !== undefined) {
             try {
                 await axios.put(`https://honest-stillness-production.up.railway.app/api/users/shortshistory/${data?._id}`,
                     {},
@@ -237,28 +240,67 @@ export const VideoCard = ({ data, onPlay, index }) => {
             }
         }
     }
+    async function addSaved() {
+        if (data?._id !== undefined) {
+            try {
+                if (isSaved) {
+                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/removesaveshorts/${data?._id}`,
+                        {},
+                        { withCredentials: true }
+                    );
+                    console.log("removed")
+                }
+                else {
+                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/addsaveshorts/${data?._id}`,
+                        {},
+                        { withCredentials: true }
+                    );
+                    console.log("saved")
+                }
+                setisSaved(!isSaved)
+                // console.log("err?.response?.data")
+            }
+            catch (err) {
+                console.log(err?.response?.data)
+            }
+        }
+    }
 
     return (
         <>
             <span className={styles.span}>
-                <video className={styles.video} ref={videoRef} src={data?.videoUrl} onPlay={addHistory} controls onEnded={handleViews}/>
-                
-                <div className={styles.name}>
-                    <div className={styles.icon}>
-                        <img src={userData?.img} width="100%" height="100%" alt="icon" />
+                <video className={styles.video} ref={videoRef} src={data?.videoUrl} onPlay={addHistory} controls onEnded={handleViews} />
+
+                {index === length ?
+                    <div className={styles.loading}>
+                        {noMore ?
+                            <div>
+                                No more Shorts is Available
+                            </div>
+                            :
+                            <div className={styles.loadingBar} style={theme ? {} : { borderColor: "black" }}>
+                            </div>}
                     </div>
-                    <div className={styles.username}>
-                        @{userData?.username}
-                    </div>
-                    <div className={styles.subs} onClick={handleSubscribe} style={isSubs ? { backgroundColor: "rgb(255, 255, 255, 0.2)" } : {}}>
-                        {isSubs ? "Unsubscribe" : "Subscribe"}
-                    </div>
-                </div>
+                    :
+                    <div className={styles.name}>
+                        <div className={styles.icon}>
+                            <img src={userData?.img} width="100%" height="100%" alt="icon" />
+                        </div>
+                        <div className={styles.username}>
+                            @{userData?.username}
+                        </div>
+                        <div className={styles.subs} onClick={handleSubscribe} style={isSubs ? { backgroundColor: "rgb(255, 255, 255, 0.2)" } : {}}>
+                            {isSubs ? "Unsubscribe" : "Subscribe"}
+                        </div>
+                    </div>}
             </span>
-                <div className={isComment?styles.comments2:styles.comments}>
+            {index !== length &&
+                <div className={isComment ? styles.comments2 : styles.comments}>
                     <Comment></Comment>
                     <div className={styles.cross} onClick={() => setisComment(false)}><i className="fa-solid fa-xmark"></i></div>
                 </div>
+            }
+
             <div className={styles.details}>
                 <div className={styles.first} onClick={handleLike}>
                     <div className={styles.span1} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
@@ -272,7 +314,7 @@ export const VideoCard = ({ data, onPlay, index }) => {
                     </div>
                     {dislike} Dislike
                 </div>
-                <div className={styles.first} onClick={()=>setisComment(!isComment)}>
+                <div className={styles.first} onClick={() => setisComment(!isComment)}>
                     <div className={styles.span1} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
                         <i className="fa-solid fa-comment"></i>
                     </div>
@@ -289,10 +331,18 @@ export const VideoCard = ({ data, onPlay, index }) => {
                         Share
                     </div>}
                 />
+                <div className={styles.first} onClick={addSaved}>
+                    <div className={styles.span1} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
+                        {isSaved ? <i class="fa-solid fa-bookmark"></i> : <i class="fa-regular fa-bookmark"></i>}
+                    </div>
+                    {isSaved ? "Remove" : "Save"}
+                </div>
                 <div>
                     <div className={styles.span2} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
                         <div className={styles.channelIcon}>
-                            <img src={userData?.img} alt="ChannelIcon" height="100%" width="100%"/>
+                            {index !== length &&
+                                <img src={userData?.img} alt="ChannelIcon" height="100%" width="100%" />
+                            }
                         </div>
                     </div>
                 </div>

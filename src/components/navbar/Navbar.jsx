@@ -18,7 +18,6 @@ import SearchHistory from './SearchHistory'
 export default function Navbar() {
 
     const [isSearch, setisSearch] = useState(true)
-    const [sea, setSea] = useState(true)
     const [signBtn, setSignBtn] = useState(false)
     const [isUpload, setisUpload] = useState(false)
     const inputRef = useRef(null);
@@ -31,58 +30,38 @@ export default function Navbar() {
     const [searchInput, setsearchInput] = useState("")
     const dispatch = useDispatch();
     const navigate = useNavigate()
-    const arr = ['3', '3', '46', '575', '6', '76', "575", '56', '765', '7', '655', '657', '56', '676', '65', '7', '6', '5', '67']
-
-    // useEffect(() => {
-    //     async function currentUser() {
-    //         try {
-    //             const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get`,
-    //                 { withCredentials: true }
-    //             )
-    //             // console.log(userD)
-    //             if(userD?.data?.success===false){
-    //                 Cookies.remove('access_token', { path: '/' });
-    //                 dispatch(setSignout())
-    //             }
-    //             else{
-    //                 dispatch(setSignin(userD.data))
-    //             }
-    //         }
-    //         catch (err) {
-                
-    //             // localStorage.removeItem("userData")
-    //             console.log(err)
-    //         }
-    //     }
-    //     currentUser()
-    // }, [])
+    const [search,setSearch]=useState([]);
 
     function handleSearch(e) {
         e.preventDefault();
-        setsearchInput(e.target.value)
+        if(e.target.value){
+            setsearchInput(e?.target?.value)
+        }
     }
     function handleSubmit(e) {
+        e.preventDefault()
         if (searchInput.trim() !== "") {
-            setSea(!sea)
             navigate(`/searchedvideo/${searchInput}`)
         }
         dispatch(offMic())
-        suggRef.current.style.visibility = 'hidden';
-        suggRef2.current.style.visibility = "hidden"
+        if (e.target.id === "search" || e.target.id === "search3") {
+            suggRef.current.style.visibility = 'hidden';
+            suggRef2.current.style.visibility = "hidden"
+        }
 
-        async function setSearch() {
+        async function setSearch1() {
             try {
                 const userData = await axios.put(`https://honest-stillness-production.up.railway.app/api/users/addsearchHistory/${searchInput}`,
                     {},
                     { withCredentials: true });
-                console.log(userData.data)
-                // setSearch(userData?.data)
+                // console.log(userData.data)
+                setSearch(userData?.data)
             }
             catch (err) {
                 console.log(err)
             }
         }
-        setSearch()
+        setSearch1()
     }
 
     function handleClearAll(e) {
@@ -109,6 +88,7 @@ export default function Navbar() {
     }
     function handleSignMenu() {
         setSignBtn(!signBtn)
+        
         if (signBtn) {
             suggRef2.current.style.visibility = "hidden"
         }
@@ -142,10 +122,10 @@ export default function Navbar() {
                             </div>
                             <div className={styles.search} >
                                 <form onSubmit={handleSubmit}>
-                                    <input type="text" placeholder='Search here...' ref={inputRef2} style={theme ? darkTheme : lightTheme} onChange={handleSearch} onClick={() => { suggRef.current.style.visibility = "visible"; suggRef2.current.style.visibility = "visible" }} spellCheck="true" value={searchInput} />
+                                    <input type="text" placeholder='Search here...' ref={inputRef2} style={theme ? darkTheme : lightTheme} onChange={handleSearch} onClick={() => { suggRef.current.style.visibility = "visible"; suggRef2.current.style.visibility = "visible"; }} spellCheck="true" value={searchInput} />
 
                                     <div className={styles.suggestion} ref={suggRef} style={theme ? {} : { backgroundColor: "#dadada" }}>
-                                        <SearchHistory handleSuggestion={handleSuggestion} sea={sea} setSea={setSea}/>
+                                        <SearchHistory handleSuggestion={handleSuggestion} search={search} setSearch={setSearch}/>
                                     </div>
 
                                     {searchInput &&

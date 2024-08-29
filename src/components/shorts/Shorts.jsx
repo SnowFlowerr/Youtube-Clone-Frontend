@@ -50,11 +50,26 @@ export default function Shorts() {
                     const vidData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/${id}`)
                     setvidData(vidData.data)
                 }
+            }
+            catch (err) {
+                navigate("/notFound")
+                console.log(err.message)
+            }
+        }
+        fetchData()
+    }, [])
+    useEffect(() => {
+        async function fetchData() {
+            try {
                 const videosData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/?limit=${2}&skip=${skip}`)
 
                 // console.log(videosData.data)
                 if (videosData.data.length !== 0) {
-                    setvideoData([...videoData, ...videosData.data])
+                    if(videoData.length!==0){
+                        videoData.pop()
+                    }
+                    // console.log(arr)
+                    setvideoData([...videoData, ...videosData.data,"Loading"])
                     setLast(true)
                 }
                 else {
@@ -62,7 +77,7 @@ export default function Shorts() {
                 }
             }
             catch (err) {
-                navigate("/notFound")
+                // navigate("/notFound")
                 console.log(err.message)
             }
         }
@@ -90,7 +105,7 @@ export default function Shorts() {
         let divHeight = lastVid.current.offsetHeight
         let scrollHeight = lastVid.current.scrollHeight
         let scroll = lastVid.current.scrollTop
-        if (Math.floor(divHeight + scroll) >= Math.floor(scrollHeight) - 60) {
+        if (Math.floor(divHeight + scroll) >= Math.floor(scrollHeight) - 100) {
             if (last && noMore === false) {
                 setSkip(skip + 2)
                 setLast(false)
@@ -119,20 +134,12 @@ export default function Shorts() {
                             <div className={styles.card}>
                                 <VideoCard data={url ? vidData : "url"} index={-1} onPlay={handlePlay}></VideoCard>
                             </div>}
-                        {videoData.map((shorts, index) =>
+                        {videoData.map((shorts, index, length) =>
                             <div key={index} className={styles.card}>
-                                <VideoCard data={shorts} index={index + 1} onPlay={handlePlay}></VideoCard>
+                                <VideoCard data={shorts} index={index + 1} onPlay={handlePlay} length={length.length} noMore={noMore}></VideoCard>
                             </div>
                         )}
-                        <div className={styles.loading}>
-                            {noMore ?
-                                <div>
-                                    No more Shorts is Available
-                                </div>
-                                :
-                                <div className={styles.loadingBar} style={theme ? {} : { borderColor: "black" }}>
-                                </div>}
-                        </div>
+                        
                     </div>
                 </div>
             </div>

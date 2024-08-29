@@ -16,32 +16,35 @@ export default function Signin() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const theme = useSelector((state) => state.theme.value)
+    const [loading, setLoading] = useState(false);
 
 
     const logGoogleUser = async () => {
-        try{
+        try {
             const response = await signInWithGooglePopup();
             // console.log(response.user);
             GoogleLogin(response.user)
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     }
     const GoogleLogin = async (data) => {
-        try{
+        try {
+            setLoading(() => true)
             const response = await axios.post(`https://honest-stillness-production.up.railway.app/api/auth/googlelogin`,
-                {name:data.displayName, username:data.displayName, email:data.email, img:data.photoURL},
-                {withCredentials:true}
+                { name: data.displayName, username: data.displayName, email: data.email, img: data.photoURL },
+                { withCredentials: true }
             )
             dispatch(setSignin(response.data))
             console.log("User signed in")
             // console.log(userData)
             navigate("/")
+            setLoading(() => false)
             // console.log(response.user);
 
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     }
@@ -76,8 +79,8 @@ export default function Signin() {
     }
 
     return (
-        <div className={styles.mainBox} style={theme?{backgroundColor:"white"}:{backgroundColor:"black"}}>
-            <div className={styles.bigBox} style={theme?{backgroundColor:"black",color:"white"}:{}}>
+        <div className={styles.mainBox} style={theme ? { backgroundColor: "white" } : { backgroundColor: "black" }}>
+            <div className={styles.bigBox} style={theme ? { backgroundColor: "black", color: "white" } : {}}>
                 <div className={styles.box}>
                     <div className={styles.logo}>
                         <img src={logo} alt="logo" height="50px" />
@@ -89,7 +92,7 @@ export default function Signin() {
                             <span className={styles.smallText}>Enter Your Details to create an Account</span>
                         </div>
                         <div className={styles.signBtn}>
-                            <button style={theme?{backgroundColor:"black",color:"white"}:{}} onClick={logGoogleUser}>
+                            <button style={theme ? { backgroundColor: "black", color: "white" } : {}} onClick={logGoogleUser}>
                                 <img src={google} alt="googleImg" height="75%" /> Sign In with Google</button>
                             {/* <button style={theme?{backgroundColor:"black",color:"white"}:{}}>
                                 <img src={theme?applew:apple} alt="googleImg" height="75%"/> Sign In with Apple</button> */}
@@ -102,7 +105,7 @@ export default function Signin() {
                                 <div className={styles.username}>
                                     <label htmlFor="username">Username</label>
                                     <br />
-                                    <input type="text" id='username' placeholder='Enter Your Username Here' onChange={handleChange} required style={theme?{color:"white"}:{}}/>
+                                    <input type="text" id='username' placeholder='Enter Your Username Here' onChange={handleChange} required style={theme ? { color: "white" } : {}} />
                                 </div>
                                 <div className={styles.password}>
                                     <div className={styles.forg}>
@@ -110,7 +113,7 @@ export default function Signin() {
                                     </div>
                                     <br />
                                     <div className={styles.viewPass}>
-                                        <input type={viewPass ? "text" : "password"} id='password' placeholder='Enter Your Password Here' onChange={handleChange} required style={theme?{color:"white"}:{}}/>
+                                        <input type={viewPass ? "text" : "password"} id='password' placeholder='Enter Your Password Here' onChange={handleChange} required style={theme ? { color: "white" } : {}} />
                                         <button type='button' onClick={(e) => { e.preventDefault(); setviewPass(!viewPass) }}>{viewPass ? <i className="fa-solid fa-eye-slash"></i> : <i className="fa-solid fa-eye"></i>}</button>
                                     </div>
                                 </div>
@@ -129,12 +132,18 @@ export default function Signin() {
                         </div>
                     </div>
                     <div className={styles.rights}>2024, All Rights Reserved</div>
+                    {loading &&
+                        <div className={styles.loading}>
+                            <div className={styles.loadingBar} style={theme ? {} : { borderColor: "black" }}>
+                            </div>
+                            {loading}
+                        </div>}
                 </div>
 
 
 
                 <div className={styles.detail}>
-                    <div className={styles.func} style={theme?{backgroundColor:"white",color:"black"}:{}}>
+                    <div className={styles.func} style={theme ? { backgroundColor: "white", color: "black" } : {}}>
                     </div>
                 </div>
             </div>

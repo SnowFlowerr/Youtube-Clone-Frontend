@@ -1,9 +1,9 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from "./SearchHistory.module.css";
 
-export default function SearchHistory({ handleSuggestion, sea, setSea }) {
-    const [search,setSearch]=useState([]);
+export default function SearchHistory({ handleSuggestion,search,setSearch }) {
+    
 
     useEffect(()=>{
         async function getSearch() {
@@ -18,12 +18,13 @@ export default function SearchHistory({ handleSuggestion, sea, setSea }) {
             }
         }
         getSearch()
-    },[sea])
+    },[])
+
     async function delSearch(ele) {
         try {
             const userData = await axios.delete(`https://honest-stillness-production.up.railway.app/api/users/removesearchHistory/${ele}`,
                 { withCredentials: true });
-            setSea(!sea)
+            setSearch(userData?.data)
         }
         catch (err) {
             console.log(err)
