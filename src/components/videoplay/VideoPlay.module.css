@@ -30,27 +30,6 @@
     display: none;
 }
 
-.pause {
-    color: white;
-    height: 10vw;
-    width: 10vw;
-    text-align: center;
-    align-content: center;
-    color: rgb(255, 254, 254);
-    background-color: black;
-    font-size: 6vw;
-    position: absolute;
-    top: 49%;
-    transform: translateY(-55%);
-    cursor: pointer;
-    opacity: 0.5;
-    border-radius: 1vw;
-}
-
-.pause i {
-    opacity: 1;
-}
-
 .videoDetails {
     padding: 15px;
     display: flex;
@@ -61,7 +40,16 @@
     width: 70%;
     border-radius: 10px;
 }
-
+.icon {
+    height: 45px;
+    width: 45px;
+    min-width: 45px;
+    overflow: hidden;
+    border: 1px solid gray;
+    flex-shrink: 0;
+    /* background-color: brown; */
+    border-radius: 100%;
+}
 .title {
     font-size: 23px;
     font-weight: 700;
@@ -140,6 +128,7 @@
 }
 .share{
     padding: 10px 0px;
+    /* color: white; */
 }
 .share > span {
     padding: 10px 15px;
@@ -226,7 +215,7 @@
     }
 
     .title {
-        font-size: 19px;
+        font-size: 20px;
     }
 
     .videoDetails{
@@ -238,29 +227,31 @@
         z-index: 10;
     }
 
-    .videoStatus {
-        margin-top: 7px;
+    .channel{
+        width: 100%;
+        flex-wrap: wrap;
     }
-
-    .channel {
-        gap: 15px;
+    .status2 {
+        gap: 10px;
+        align-items: center;
+        justify-content:left;
+        width: fit-content;
     }
 
     .icon {
-        height: 45px;
-        width: 45px;
-        min-width: 45px;
-        background-color: brown;
+        height: 40px;
+        width: 40px;
+        min-width: 40px;
         border-radius: 100%;
     }
 
-    .name {
-        font-size: 14px;
+    /* .name {
+        font-size: 16px;
         
     }
 
     .subs {
-        font-size: 12px;
+        font-size: 13px;
     }
     
 
@@ -268,9 +259,10 @@
     .likeDislike,
     .share {
         font-size: 14px;
-        padding: 7px 10px;
-        height: 30px;
+        padding: 7px 14px;
+        height: 36px;
     }
+
     .selected{
         font-size: 18px;
     }
@@ -278,8 +270,7 @@
         padding: 7px 0px;
     }
     .share > span{
-        padding: 7px 10px;
-        /* width: 100%; */
+        padding: 7px 14px;
     }
     .likeDislike {
         padding: 0;
@@ -287,76 +278,10 @@
 
     .like {
         width: 100%;
-        padding: 7px 10px;
+        padding: 7px 14px;
     }
     .dislike {
         width: 100%;
-        padding: 7px 10px;
-    }
-}
-
-@media screen and (max-width:500px) {
-    .videoStatus {
-        /* flex-direction: column; */
-        flex-wrap: wrap;
-        row-gap: 10px;
-    }
-    
-    .channel{
-        width: 100%;
-        flex-wrap: wrap;
-    }
-    .status2 {
-        /* display: flex; */
-
-        gap: 10px;
-        align-items: center;
-        justify-content:left;
-        width: fit-content;
-    }
-
-    .title {
-        font-size: 18px;
-    }
-
-    .icon {
-        height: 35px;
-        width: 35px;
-        min-width: 35px;
-    }
-
-    .name {
-        font-size: 13px;
-    }
-
-    .subs {
-        font-size: 12px;
-    }
-    
-
-    .subscribe,
-    .likeDislike,
-    .share {
-        font-size: 14px;
-        padding: 7px 10px;
-    }
-    .share{
-        padding: 7px 0px;
-    }
-    .share > span{
-        padding: 7px 10px;
-        /* width: 100%; */
-    }
-    .likeDislike {
-        padding: 0;
-    }
-
-    .like {
-        width: 100%;
-        padding: 7px 10px;
-    }
-    .dislike {
-        width: 100%;
-        padding: 7px 10px;
-    }
+        padding: 7px 14px;
+    } */
 }

@@ -37,14 +37,14 @@ export default function VideoPlay() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const vidData = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/${id}`)
+                const vidData = await axios.get(`http://localhost:8000/api/videos/${id}`)
                 setvideoData(vidData.data)
                 setLike(vidData.data.likes)
                 setDislike(vidData.data.dislikes)
                 setView(vidData.data.views)
 
                 try {
-                    const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/issubscribe/${vidData.data.userId}`,
+                    const userD = await axios.get(`http://localhost:8000/api/users/issubscribe/${vidData.data.userId}`,
                         { withCredentials: true }
                     )
                     setisSubs(userD.data)
@@ -54,7 +54,7 @@ export default function VideoPlay() {
                 }
 
                 try {
-                    const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/isliked/${id}`,
+                    const userD = await axios.get(`http://localhost:8000/api/users/isliked/${id}`,
                         { withCredentials: true }
                     )
                     setisLike(userD.data)
@@ -63,7 +63,7 @@ export default function VideoPlay() {
                     console.log(err.message)
                 }
                 try {
-                    const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/isdisliked/${id}`,
+                    const userD = await axios.get(`http://localhost:8000/api/users/isdisliked/${id}`,
                         { withCredentials: true }
                     )
                     setisDislike(userD.data)
@@ -72,7 +72,7 @@ export default function VideoPlay() {
                     console.log(err.message)
                 }
                 try {
-                    const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/issaved/${id}`,
+                    const userD = await axios.get(`http://localhost:8000/api/users/issaved/${id}`,
                         { withCredentials: true }
                     )
                     setisSaved(userD.data)
@@ -81,7 +81,7 @@ export default function VideoPlay() {
                     console.log(err.message)
                 }
                 try {
-                    const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get/${vidData.data.userId}`,
+                    const userD = await axios.get(`http://localhost:8000/api/users/get/${vidData.data.userId}`,
                     )
                     setSubs(userD.data.followers)
                     setuserData(userD.data)
@@ -112,7 +112,7 @@ export default function VideoPlay() {
         async function fetchData() {
             try {
                 if (isSubs) {
-                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${videoData?.userId}`,
+                    await axios.put(`http://localhost:8000/api/users/unsubscribe/${videoData?.userId}`,
                         {},
                         { withCredentials: true }
                     );
@@ -120,7 +120,7 @@ export default function VideoPlay() {
                     console.log("Unsubscribe")
                 }
                 else {
-                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/subscribe/${videoData?.userId}`,
+                    await axios.put(`http://localhost:8000/api/users/subscribe/${videoData?.userId}`,
                         {},
                         { withCredentials: true }
                     );
@@ -143,7 +143,7 @@ export default function VideoPlay() {
         // }
         try {
             if (isLike) {
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/unlike/${id}`,
+                await axios.put(`http://localhost:8000/api/videos/unlike/${id}`,
                     { headers: { "Content-Type": "application/json" } },
                     { withCredentials: true }
                 );
@@ -154,7 +154,7 @@ export default function VideoPlay() {
                 if (isDislike === true) {
                     handleDislike()
                 }
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/like/${id}`,
+                await axios.put(`http://localhost:8000/api/videos/like/${id}`,
                     { headers: { "Content-Type": "application/json" } },
                     { withCredentials: true }
                 );
@@ -171,7 +171,7 @@ export default function VideoPlay() {
     async function handleDislike() {
         try {
             if (isDislike) {
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/undislike/${id}`,
+                await axios.put(`http://localhost:8000/api/videos/undislike/${id}`,
                     {},
                     { withCredentials: true }
                 );
@@ -182,7 +182,7 @@ export default function VideoPlay() {
                 if (isLike === true) {
                     handleLike()
                 }
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/dislike/${id}`,
+                await axios.put(`http://localhost:8000/api/videos/dislike/${id}`,
                     {},
                     { withCredentials: true }
                 );
@@ -198,7 +198,7 @@ export default function VideoPlay() {
     }
     async function addView() {
         try {
-            await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/view/${id}`)
+            await axios.put(`http://localhost:8000/api/videos/view/${id}`)
             setView(view + 1)
         }
         catch (err) {
@@ -207,7 +207,7 @@ export default function VideoPlay() {
     }
     async function addHistory() {
         try {
-            await axios.put(`https://honest-stillness-production.up.railway.app/api/users/history/${id}`,
+            await axios.put(`http://localhost:8000/api/users/history/${id}`,
                 {},
                 { withCredentials: true }
             );
@@ -228,18 +228,21 @@ export default function VideoPlay() {
             }, duration * 1000)
         }
     }, [duration])
+    function startDownload() {
+        window.location.href = videoData.videoUrl;
+    }
 
     async function addSaved() {
         try {
             if (isSaved) {
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/users/removesave/${id}`,
+                await axios.put(`http://localhost:8000/api/users/removesave/${id}`,
                     {},
                     { withCredentials: true }
                 );
                 console.log("removed")
             }
             else {
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/users/addsave/${id}`,
+                await axios.put(`http://localhost:8000/api/users/addsave/${id}`,
                     {},
                     { withCredentials: true }
                 );
@@ -300,7 +303,9 @@ export default function VideoPlay() {
                     <div className={styles.videoStatus}>
                         <div className={styles.channel}>
                             <div className={styles.channelDetail}>
-                                <div className={styles.icon}></div>
+                                <div className={styles.icon}>
+                                    <img src={userData?.img} alt="" width="100%" height="100%"/>
+                                </div>
                                 <div className={styles.channelName}>
                                     <span className={styles.name}>{userData?.name}</span>
                                     <br />
@@ -344,6 +349,11 @@ export default function VideoPlay() {
                                     </span>
 
                                 }
+                            </div>
+                            <div className={styles.share} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)"}} onClick={startDownload}>
+                                    <span>
+                                        <i class="fa-solid fa-download"></i> Download
+                                    </span>
                             </div>
                         </div>
 
