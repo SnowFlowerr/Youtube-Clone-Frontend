@@ -16,6 +16,7 @@ export default function Histories() {
     const [userData, setuserData] = useState("")
     const [shortsData, setshortsData] = useState("")
     const sign = useSelector((state) => state.sign.value)
+
     useEffect(() => {
         if(!sign){
             // navigate("/")
@@ -58,16 +59,16 @@ export default function Histories() {
                 <div className={styles.history}>
                     <div className={styles.userProfile}>
                         <div className={styles.userImg}>
-                            <img src={userData?.img} alt="profile" width="100%" height="100%" />
+                            <img src={sign?.img} alt="profile" width="100%" height="100%" />
                         </div>
                         <div className={styles.profileDetails}>
                             <div className={styles.channelName}>
-                                {userData?.name}
+                                {sign?.name}
                             </div>
                             <div className={styles.userName}>
-                                <div>@{userData?.username}</div>
+                                <div>@{sign?.username}</div>
                                 .
-                                <div>subs {userData?.followers}</div>
+                                <div>subs {sign?.followers}</div>
                             </div>
                             <div className={styles.switchBtn}>
                                 <button style={theme ? darkTheme : lightTheme} onClick={() => navigate("/signin")}>Switch Account</button>

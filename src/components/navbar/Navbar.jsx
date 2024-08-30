@@ -168,7 +168,7 @@ export default function Navbar() {
                                                             </div>
                                                         </div>
                                                         <hr />
-                                                        <div>fesf</div>
+                                                        <div onClick={()=>setisUpload(true)}>Upload</div>
                                                         <div>sfdv</div>
                                                         <div>fdvsvf</div>
                                                         <div onClick={handleLogout}>Logout</div>
