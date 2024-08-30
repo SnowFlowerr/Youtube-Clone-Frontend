@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { json, Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { format } from 'timeago.js'
 import { darkTheme, lightTheme } from '../../themes'
 import styles from './Home.module.css'
@@ -37,7 +37,7 @@ export default function Cards({ video }) {
     useEffect(() => {
         async function currentUser() {
             try {
-                const userD = await axios.get(`http://localhost:8000/api/users/get/${video?.userId}`,
+                const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get/${video?.userId}`,
                     { withCredentials: true }
                 )
                 setUser(userD.data)

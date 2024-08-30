@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from 'js-cookie';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from "react-router-dom";
 import styles from "./App.module.css";
@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     async function currentUser() {
         try {
-            const userD = await axios.get(`http://localhost:8000/api/users/get`,
+            const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get`,
                 { withCredentials: true }
             )
             // console.log(userD)
