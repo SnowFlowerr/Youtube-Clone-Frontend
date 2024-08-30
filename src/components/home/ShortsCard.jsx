@@ -4,17 +4,16 @@ import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { format } from 'timeago.js'
 import { darkTheme, lightTheme } from '../../themes'
-import styles from './Home.module.css'
+import styles from "./ShortsCard.module.css"
 
-
-export default function Cards({ video }) {
-
+export default function ShortsCard({video , index}) {
     const theme = useSelector((state) => state.theme.value)
     const [user, setUser] = useState("")
     const videoRef = useRef()
     const [isPlaying, setIsPlaying] = useState(false);
     const [time, setTime] = useState(false);
     const navigate = useNavigate()
+
 
     function getDuration(duration) {
         duration = Math.floor(duration)
@@ -71,16 +70,16 @@ export default function Cards({ video }) {
 
     return (
         <>
-            <div className={styles.singleVid} style={theme ? darkTheme : lightTheme} onMouseEnter={handlePlay} onMouseLeave={handleStop} >
+            <div className={index===5?styles.singleVid2:index===4?styles.singleVid3:index===3?styles.singleVid4:index===2?styles.singleVid5:styles.singleVid} style={theme ? darkTheme : lightTheme} onMouseEnter={handlePlay} onMouseLeave={handleStop} >
                 {!isPlaying ?
                     <div className={styles.thumbnail}>
-                        <Link to={`player/${video?._id}`}>
+                        <Link to={`shorts/${video?._id}`}>
                             <img src={video.imageUrl} width="100%" alt="thumbnail" />
                         </Link>
                         <div className={styles.duration}>{getDuration(video?.duration)}</div>
                     </div>
                     :
-                    <div className={styles.thumbnail} onClick={() => { handleStop(); navigate(`player/${video?._id}`) }}>
+                    <div className={styles.thumbnail} onClick={() => { handleStop(); navigate(`shorts/${video?._id}`) }}>
                         <video src={video.videoUrl} width="100%" poster={video.imageUrl} ref={videoRef} onTimeUpdate={()=>setTime(videoRef.current?.currentTime)} muted>
 
                         </video>
@@ -88,14 +87,15 @@ export default function Cards({ video }) {
                     </div>
                 }
                 <div className={styles.videoDetail} style={theme ? darkTheme : lightTheme}>
-                    <div className={styles.icon}>
+                    
+                    {/* <div className={styles.icon}>
                         <a href="/userDetail/userid">
                             <img src={user?.img} width="100%" height="100%" alt="icon" />
                         </a>
-                    </div>
+                    </div> */}
                     {/* {JSON.stringify(isPlaying)} */}
                     <div className={styles.details}>
-                        <Link to={`/player/${video?._id}`} style={theme ? { color: "white" } : { color: "black" }}>
+                        <Link to={`/shorts/${video?._id}`} style={theme ? { color: "white" } : { color: "black" }}>
                             <div className={styles.title}>
                                 {video?.title}
                             </div>

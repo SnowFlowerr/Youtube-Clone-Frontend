@@ -6,10 +6,12 @@ import Navbar from '../navbar/Navbar'
 import Sidenav from '../navbar/Sidenav'
 import Cards from './Cards'
 import styles from './Home.module.css'
+import ShortsCard from './ShortsCard'
 
 
 export default function Home() {
     const [videos, setVideos] = useState([])
+    const [shorts, setShorts] = useState([])
     const theme = useSelector((state) => state.theme.value)
     const lastVid = useRef(null)
     const dispatch = useDispatch()
@@ -36,8 +38,23 @@ export default function Home() {
             }
         }
         fetchVideo();
+
         dispatch(offMic())
     }, [skip])
+    useEffect(() => {
+        const fetchShorts = async () => {
+            try {
+                const res = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/?limit=${6}&skip=${0}`)
+                // console.log(res.data)
+                setShorts(res.data)
+            }
+            catch (err) {
+                console.log(err.message)
+            }
+        }
+        fetchShorts();
+
+    }, [])
 
 
     function handleScroll() {
@@ -62,6 +79,20 @@ export default function Home() {
                     <Sidenav></Sidenav>
                 </div>
                 <div className={styles.videos}>
+                    {shorts.length !== 0 &&
+                        <div className={styles.mainShorts}>
+                            <div className={styles.shortsLogo} style={theme?{backgroundColor:"white",color:"black"}:{backgroundColor:"black",color:"white"}}>
+                                <i class="fa-solid fa-video"></i> Shorts
+                            </div>
+                            <div className={styles.shortsCard}>
+                                {shorts.map((video, index) =>
+                                    <ShortsCard video={video} key={index} index={index} />
+                                )}
+                            </div>
+                            <div style={{ padding: "1vw" }}>
+                                <hr />
+                            </div>
+                        </div>}
                     {
                         videos.map((video, index) =>
                             <Cards video={video} key={index} />
