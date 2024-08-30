@@ -51,7 +51,7 @@ export default function Navbar() {
 
         async function setSearch1() {
             try {
-                const userData = await axios.put(`https://honest-stillness-production.up.railway.app/api/users/addsearchHistory/${searchInput}`,
+                const userData = await axios.put(`http://localhost:8000/api/users/addsearchHistory/${searchInput}`,
                     {},
                     { withCredentials: true });
                 // console.log(userData.data)

@@ -8,9 +8,6 @@ import Cards from './Cards'
 import styles from './Home.module.css'
 
 
-
-
-
 export default function Home() {
     const [videos, setVideos] = useState([])
     const theme = useSelector((state) => state.theme.value)
@@ -24,7 +21,7 @@ export default function Home() {
     useEffect(() => {
         const fetchVideo = async () => {
             try {
-                const res = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/?limit=${20}&skip=${skip}`)
+                const res = await axios.get(`http://localhost:8000/api/videos/?limit=${20}&skip=${skip}`)
                 // console.log(res.data)
                 if (res.data.length !== 0) {
                     setVideos([...videos, ...res.data])
@@ -41,6 +38,7 @@ export default function Home() {
         fetchVideo();
         dispatch(offMic())
     }, [skip])
+
 
     function handleScroll() {
         let divHeight = lastVid.current.offsetHeight

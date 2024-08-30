@@ -285,14 +285,68 @@
     .sidenav{
         display: none;
     }
+    .mainLogo{
+        display: block;
+    }
     .box{
-        padding-top: 10px;
+        padding: 0;
+    }
+    .card{
+        margin-bottom: 0px;
+    }
+    .videoBox{
+        /* background-color: aqua; */
+        /* border: 1px solid rgb(255, 255, 255); */
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
     }
     .video{
-        /* min-width: 448px;
-        width: 30%; */
-        height: 100%;
+        border-radius: 0px;
         width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        /* min-height: 100%; */
+    }
+}
+
+
+@media screen and (max-width:550px) {
+    .box{
+        padding: 0;
+    }
+    .card{
+        margin-bottom: 0px;
+    }
+    .videoBox{
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+    }
+    .video{
+        border-radius: 0px;
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        /* min-height: 100%; */
+    }
+    .username{
+        font-size: 3.5vw;
+    }
+    .icon{
+        height: 10vw;
+        width: 10vw;
+        min-width: 8vw;
+        border-radius: 100%;
+    }
+    .subs{
+        font-size: 3vw;
+        margin-left: 2vw;
+        padding: 2.5vw 4vw;
+        font-weight: 700;
+    }
+    .comments2{
+        border-radius: 0px;
     }
     .details{
         right: 0%;
@@ -344,64 +398,8 @@
         min-height: 35px;
         min-width: 35px;
     }
-    .mainLogo{
-        display: block;
-    }
+    
     .selected i{
         font-size: 6.5vw;
-    }
-
-    .comments2{
-        position: absolute;
-        width: 100%;
-        min-width: 100%;
-        background-color: rgb(69, 69, 69);
-        height: 100%;
-        padding: 50px 10px;
-        transition: 0.5s;
-        z-index: 20;
-        border-radius: 10px;
-    }
-}
-
-
-@media screen and (max-width:500px) {
-    .box{
-        padding: 0;
-    }
-    .card{
-        margin-bottom: 0px;
-    }
-    .videoBox{
-        /* background-color: aqua; */
-        /* border: 1px solid rgb(255, 255, 255); */
-        width: 100%;
-        height: 100%;
-        min-height: 100%;
-    }
-    .video{
-        border-radius: 0px;
-        width: 100%;
-        min-width: 100%;
-        max-width: 100%;
-        /* min-height: 100%; */
-    }
-    .username{
-        font-size: 3.5vw;
-    }
-    .icon{
-        height: 10vw;
-        width: 10vw;
-        min-width: 8vw;
-        border-radius: 100%;
-    }
-    .subs{
-        font-size: 3vw;
-        margin-left: 2vw;
-        padding: 2.5vw 4vw;
-        font-weight: 700;
-    }
-    .comments2{
-        border-radius: 0px;
     }
 }

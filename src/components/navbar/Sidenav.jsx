@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { darkTheme, lightTheme } from '../../themes'
 import { Link, useLocation } from 'react-router-dom'
 import Subscribers from './Subscribers'
+import Upload from '../upload/Upload'
 
 
 export default function Sidenav() {
@@ -14,6 +15,7 @@ export default function Sidenav() {
     const [home, setHome] = useState(false)
     const [shorts, setShorts] = useState(false)
     const [history, setHistory] = useState(false)
+    const [isUpload, setisUpload] = useState(false)
     useEffect(() => {
         const path = location.pathname;
         if (path === '/') {
@@ -91,7 +93,7 @@ export default function Sidenav() {
                             </div>
                         </a>
                         <Link to="/" className={styles.upload} style={theme ? darkTheme : lightTheme}>
-                            <div>
+                            <div onClick={()=>setisUpload(true)}>
                                 <i className="fa-solid fa-upload"></i>
                                 <br />
                                 <span>Upload</span>
@@ -125,6 +127,9 @@ export default function Sidenav() {
 
             </div>
             <div className={menu ? styles.main3 : styles.main4}>
+            </div>
+            <div>
+                <Upload isUpload={isUpload} setisUpload={setisUpload}></Upload>
             </div>
         </>
     )

@@ -101,5 +101,89 @@
     font-weight: 700;
     border-radius: 10vw;
 }
+@media screen and (max-width:750px) {
+    .uploadArea{
+        height: 90vh;
+        width: 90vw;
+        top: 5vh;
+        left: 5vw;
+    }
+    
+    .options{
+        font-size: 3vw;
+        padding: 1vw 2.5vw;
+    }
+    .cross{
+        height: 6vw;
+        width: 6vw;
+        font-size: 2.5vw;
+    }
+    .uploadLogo{
+        padding: 1vw;
+        padding-bottom: 0;
+    }
+    
+    .uploadLogo > div{
+        text-align: center;
+        margin: auto;
+        font-size: 1.5vw;
+    }
+    .uploadLogo > div > div{
+        text-align: center;
+        margin: auto;
+        margin-bottom: 2vw;
+        font-size: 2vw;
+    }
+    .uploadLogo .logo{
+        height: 25vw;
+        width: 25vw;
+        font-size: 9vw;
+    }
+    .uploadBtn{
+        height: 4vw;
+        width: 11vw;
+        font-size: 1.5vw;
+    }
+}
 
+@media screen and (max-width:450px) {
+    .uploadArea{
+        height: 130vw;
+        width: 98vw;
+        top: 50%;
+        left: 1vw;
+        transform: translateY(-50%);
+    }
+    
+    .options{
+        font-size: 4vw;
+        padding: 2vw 3vw;
+    }
+    .cross{
+        height: 9vw;
+        width: 9vw;
+        font-size: 3.5vw;
+    }
+    .uploadLogo{
+        padding: 2vw;
+        padding-bottom: 0;
+    }
+    
+    .uploadLogo > div{
+        font-size: 2vw;
+    }
+    .uploadLogo > div > div{
+        font-size: 2.5vw;
+    }
+    .uploadLogo .logo{
+        height: 40vw;
+        width: 40vw;
+        font-size: 10vw;
+    }
+    .uploadBtn{
+        height: 6vw;
+        width: 18vw;
+        font-size: 2vw;
+    }
+}
 

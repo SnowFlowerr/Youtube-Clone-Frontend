@@ -92,13 +92,6 @@
     /* border: 2px solid white; */
 }
 
-/* .icon {
-    height: 50px;
-    width: 50px;
-    min-width: 50px;
-    background-color: brown;
-    border-radius: 100%;
-} */
 
 .name {
     font-size: 18px;
@@ -140,7 +133,7 @@
     color: white;
 }
 .likeDislike {
-    padding: 1px 0px;
+    padding:0px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -148,7 +141,7 @@
 
 .like,.dislike {
     width: 100%;
-    padding: 9px 15px;
+    padding: 10px 15px;
 }
 
 .like:hover {

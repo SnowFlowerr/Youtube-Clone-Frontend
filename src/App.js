@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from 'js-cookie';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from "react-router-dom";
 import styles from "./App.module.css";
@@ -18,6 +18,7 @@ import { darkTheme, lightTheme } from "./themes";
 function App() {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.value)
+  
   useEffect(()=>{
     if(localStorage.getItem('theme')===null){
       localStorage.setItem('theme',true)
@@ -26,7 +27,7 @@ function App() {
   useEffect(() => {
     async function currentUser() {
         try {
-            const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get`,
+            const userD = await axios.get(`http://localhost:8000/api/users/get`,
                 { withCredentials: true }
             )
             // console.log(userD)
@@ -46,6 +47,8 @@ function App() {
     }
     currentUser()
 }, [])
+
+
   return (
     <div className={styles.mainBox} style={theme?darkTheme:lightTheme}>
         <Routes>
