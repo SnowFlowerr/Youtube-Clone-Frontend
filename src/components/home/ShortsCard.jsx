@@ -36,7 +36,7 @@ export default function ShortsCard({video , index}) {
     useEffect(() => {
         async function currentUser() {
             try {
-                const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get/${video?.userId}`,
+                const userD = await axios.get(`http://localhost:8000/api/users/get/${video?.userId}`,
                     { withCredentials: true }
                 )
                 setUser(userD.data)
@@ -67,16 +67,16 @@ export default function ShortsCard({video , index}) {
 
     return (
         <>
-            <div className={index===5?styles.singleVid2:index===4?styles.singleVid3:index===3?styles.singleVid4:index===2?styles.singleVid5:styles.singleVid} style={theme ? darkTheme : lightTheme}  onMouseLeave={handleStop} >
+            <div className={index===5?styles.singleVid2:index===4?styles.singleVid3:index===3?styles.singleVid4:index===2?styles.singleVid5:styles.singleVid} style={theme ? darkTheme : lightTheme}  onMouseOut={handleStop} >
                 {!isPlaying ?
-                    <div className={styles.thumbnail} onMouseEnter={handlePlay}>
+                    <div className={styles.thumbnail} onMouseOver={handlePlay}>
                         <Link to={`shorts/${video?._id}`}>
                             <img src={video.imageUrl} width="100%" alt="thumbnail" />
                         </Link>
                         <div className={styles.duration}>{getDuration(video?.duration)}</div>
                     </div>
                     :
-                    <div className={Math.floor(time)!==0?styles.thumbnail2:styles.thumbnail} onClick={() => { handleStop(); navigate(`shorts/${video?._id}`) }} onMouseEnter={handlePlay}>
+                    <div className={Math.floor(time)!==0?styles.thumbnail2:styles.thumbnail} onClick={() => { handleStop(); navigate(`shorts/${video?._id}`) }} onMouseOver={handlePlay}>
                         <video src={video.videoUrl} width="100%" poster={video.imageUrl} ref={videoRef} onTimeUpdate={()=>setTime(videoRef.current?.currentTime)} muted>
 
                         </video>
