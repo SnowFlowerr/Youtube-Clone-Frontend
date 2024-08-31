@@ -57,12 +57,9 @@ export default function ShortsCard({video , index}) {
             if (videoRef.current) {
                 videoRef.current.play().then(()=>{videoRef.current.muted=false}).catch((err)=>console.log(err))
             }
-        }, 800)
+        }, 1000)
     }
     function handleStop() {
-        if (videoRef.current) {
-            videoRef.current.pause()
-        }
         clearTimeout(timeout)
         setIsPlaying(() => false)
         setTime(()=>0)
@@ -70,20 +67,22 @@ export default function ShortsCard({video , index}) {
 
     return (
         <>
-            <div className={index===5?styles.singleVid2:index===4?styles.singleVid3:index===3?styles.singleVid4:index===2?styles.singleVid5:styles.singleVid} style={theme ? darkTheme : lightTheme} onMouseEnter={handlePlay} onMouseLeave={handleStop} >
+            <div className={index===5?styles.singleVid2:index===4?styles.singleVid3:index===3?styles.singleVid4:index===2?styles.singleVid5:styles.singleVid} style={theme ? darkTheme : lightTheme}  onMouseLeave={handleStop} >
                 {!isPlaying ?
-                    <div className={styles.thumbnail}>
+                    <div className={styles.thumbnail} onMouseEnter={handlePlay}>
                         <Link to={`shorts/${video?._id}`}>
                             <img src={video.imageUrl} width="100%" alt="thumbnail" />
                         </Link>
                         <div className={styles.duration}>{getDuration(video?.duration)}</div>
                     </div>
                     :
-                    <div className={styles.thumbnail} onClick={() => { handleStop(); navigate(`shorts/${video?._id}`) }}>
+                    <div className={Math.floor(time)!==0?styles.thumbnail2:styles.thumbnail} onClick={() => { handleStop(); navigate(`shorts/${video?._id}`) }} onMouseEnter={handlePlay}>
                         <video src={video.videoUrl} width="100%" poster={video.imageUrl} ref={videoRef} onTimeUpdate={()=>setTime(videoRef.current?.currentTime)} muted>
 
                         </video>
                         <div className={styles.duration}>{getDuration(time || video?.duration)}</div>
+                        {Math.floor(time)!==0&&<div className={styles.range} style={{width:`${(time*100)/videoRef.current?.duration}%`}}>
+                        </div>}
                     </div>
                 }
                 <div className={styles.videoDetail} style={theme ? darkTheme : lightTheme}>

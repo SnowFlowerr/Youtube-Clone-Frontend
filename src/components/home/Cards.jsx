@@ -58,37 +58,41 @@ export default function Cards({ video }) {
             if (videoRef.current) {
                 videoRef.current.play().then(()=>{videoRef.current.muted=false}).catch((err)=>console.log(err))
             }
-        }, 800)
+        }, 1000)
+        // return clearTimeout(timeout)
+        
     }
     function handleStop() {
-        if (videoRef.current) {
-            videoRef.current.pause()
-        }
-        clearTimeout(timeout)
-        setIsPlaying(() => false)
+        // if (videoRef.current) {
+        //     videoRef.current.pause()
+        // }
         setTime(()=>0)
+        clearTimeout(timeout)
+        setIsPlaying(()=>false)
     }
 
     return (
         <>
-            <div className={styles.singleVid} style={theme ? darkTheme : lightTheme} onMouseEnter={handlePlay} onMouseLeave={handleStop} >
+            <div className={styles.singleVid} style={theme ? darkTheme : lightTheme} onMouseLeave={handleStop} >
                 {!isPlaying ?
-                    <div className={styles.thumbnail}>
+                    <div className={styles.thumbnail} onMouseEnter={handlePlay}>
                         <Link to={`player/${video?._id}`}>
                             <img src={video.imageUrl} width="100%" alt="thumbnail" />
                         </Link>
                         <div className={styles.duration}>{getDuration(video?.duration)}</div>
                     </div>
                     :
-                    <div className={styles.thumbnail} onClick={() => { handleStop(); navigate(`player/${video?._id}`) }}>
+                    <div className={Math.floor(time)!==0?styles.thumbnail2:styles.thumbnail} onClick={() => { handleStop(); navigate(`player/${video?._id}`) }} onMouseEnter={handlePlay} >
                         <video src={video.videoUrl} width="100%" poster={video.imageUrl} ref={videoRef} onTimeUpdate={()=>setTime(videoRef.current?.currentTime)} muted>
 
                         </video>
                         <div className={styles.duration}>{getDuration(time || video?.duration)}</div>
+                        {Math.floor(time)!==0&&<div className={styles.range} style={{width:`${(time*100)/videoRef.current?.duration}%`}}>
+                        </div>}
                     </div>
                 }
                 <div className={styles.videoDetail} style={theme ? darkTheme : lightTheme}>
-                    <div className={styles.icon}>
+                    <div className={styles.icon} >
                         <a href="/userDetail/userid">
                             <img src={user?.img} width="100%" height="100%" alt="icon" />
                         </a>

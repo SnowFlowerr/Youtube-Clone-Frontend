@@ -82,14 +82,14 @@ export default function Home() {
                     {shorts.length !== 0 &&
                         <div className={styles.mainShorts}>
                             <div className={styles.shortsLogo} style={theme?{backgroundColor:"white",color:"black"}:{backgroundColor:"black",color:"white"}}>
-                                <i class="fa-solid fa-video"></i> Shorts
+                                <i className="fa-solid fa-video"></i> Shorts
                             </div>
                             <div className={styles.shortsCard}>
                                 {shorts.map((video, index) =>
                                     <ShortsCard video={video} key={index} index={index} />
                                 )}
                             </div>
-                            <div style={{ padding: "1vw" }}>
+                            <div style={{ padding: "0.5vw" }}>
                                 <hr />
                             </div>
                         </div>}

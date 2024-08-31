@@ -34,8 +34,8 @@ export default function Navbar() {
 
     function handleSearch(e) {
         e.preventDefault();
-        if(e.target.value){
-            setsearchInput(e?.target?.value)
+        if(e.target.value==="" || e.target.value){
+            setsearchInput(e.target.value)
         }
     }
     function handleSubmit(e) {
@@ -122,7 +122,7 @@ export default function Navbar() {
                             </div>
                             <div className={styles.search} >
                                 <form onSubmit={handleSubmit}>
-                                    <input type="text" placeholder='Search here...' ref={inputRef2} style={theme ? darkTheme : lightTheme} onChange={handleSearch} onClick={() => { suggRef.current.style.visibility = "visible"; suggRef2.current.style.visibility = "visible"; }} spellCheck="true" value={searchInput} />
+                                    <input type="text" placeholder='Search here...' ref={inputRef2} style={theme ? darkTheme : lightTheme} onChange={handleSearch} onClick={() => { suggRef.current.style.visibility = "visible"; suggRef2.current.style.visibility = "visible"; }}  value={searchInput} />
 
                                     <div className={styles.suggestion} ref={suggRef} style={theme ? {} : { backgroundColor: "#dadada" }}>
                                         <SearchHistory handleSuggestion={handleSuggestion} search={search} setSearch={setSearch}/>
