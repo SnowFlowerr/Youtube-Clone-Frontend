@@ -82,7 +82,7 @@ export default function Home() {
                     {shorts.length !== 0 &&
                         <div className={styles.mainShorts}>
                             <div className={styles.shortsLogo} style={theme?{backgroundColor:"white",color:"black"}:{backgroundColor:"black",color:"white"}}>
-                                <i className="fa-solid fa-video"></i> Shorts
+                                <i className="fa-solid fa-circle-play"></i> Shorts
                             </div>
                             <div className={styles.shortsCard}>
                                 {shorts.map((video, index) =>

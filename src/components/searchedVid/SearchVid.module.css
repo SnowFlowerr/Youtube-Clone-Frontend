@@ -1,3 +1,6 @@
+.main{
+    min-height: 100dvh;
+}
 .bigBox{
     display: flex;
 }
@@ -9,20 +12,96 @@
 .searchFor{
     /* padding: 10px; */
     margin-top: 5px;
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 15px;
+    align-content: center;
 }
-.singleVideo{
+.toggleBtn{
+    width: 120px;
+    height: 30px;
+    border-radius: 100px;
+    border: 1px solid white;
+    /* align-content: center; */
+    padding: 1.5px;
+    display: flex;
+    margin-top: -4px;
+    font-weight: 700;
+}
+.toggleRoll{
+    height: 25px;
+    border: 1px solid white;
+    width: 25px;
+    border-radius: 100px;
+    transition: 0.5s;
+    align-content: center;
+    text-align: center;
+    /* rotate: 360deg; */
+}
+.toggleRoll2{
+    height: 25px;
+    border: 1px solid white;
+    width: 25px;
+    font-size: 13px;
+    border-radius: 100px;
+    transform: translateX(90px);
+    transition: 0.5s;
+    align-content: center;
+    text-align: center;
+}
+.toggleTitle{
+    height: 25px;
+    border: 1px solid white;
+    width: 85px;
+    align-content: center;
+    text-align: center;
+    border-radius: 100px;
+    transition: 0.5s;
+    transform: translateX(5px);
+}
+.toggleTitle2{
+    height: 25px;
+    border: 1px solid white;
+    width: 85px;
+    align-content: center;
+    text-align: center;
+    transform: translateX(-25px);
+    border-radius: 100px;
+    transition: 0.5s;
+}
+.mainShorts{
+    width: 100%;
+}
+.mainVideo{
+    width: 100%;
+
+}
+.shortsCard{
+    width: 100%;
+    /* max-height: 100%; */
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow: hidden;
+    /* border: 2px solid rgb(255, 255, 255); */
+}
+.shortsLogo{
+    padding: 5px 20px;
+    margin-left: 5px;
+    margin-top: 5px;
+    width: fit-content;
+    /* padding-bottom: 10px; */
+    font-size: 20px;
     display: flex;
     gap: 10px;
+    align-items: center;
+    /* background-color: gray; */
+    border-radius: 0 20px 0px;
+    margin-bottom: 3px;
 }
-.video{
-    height: 18vw;
-    width: 30vw;
-    min-height: 150px;
-    min-width:250px;
-    background-color: brown;
-    margin-top: 10px;
-    border-radius: 10px;
-}
+
 
 @media screen and (max-width:750px) {
     .box{

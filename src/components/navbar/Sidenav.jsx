@@ -40,7 +40,7 @@ export default function Sidenav() {
                     </Link>
                     <a href="/shorts/url" className={styles.shorts} style={theme ? shorts ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : shorts ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme} >
                         <div className={styles.contain}>
-                            {shorts ? <i className="fa-solid fa-video fa-bounce"></i> : <i className="fa-solid fa-video"></i>}
+                            {shorts ? <i className="fa-solid fa-circle-play fa-bounce"></i> : <i className="fa-solid fa-circle-play"></i>}
                             <span>Shorts</span>
                         </div>
                     </a>
@@ -87,7 +87,7 @@ export default function Sidenav() {
                         </Link>
                         <a href="/shorts/url" style={theme ? shorts ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : shorts ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme}>
                             <div>
-                                {shorts ? <i className="fa-solid fa-video fa-bounce"></i> : <i className="fa-solid fa-video"></i>}
+                                {shorts ? <i className="fa-solid fa-circle-play fa-bounce"></i> : <i className="fa-solid fa-circle-play"></i>}
                                 <br />
                                 <span>Shorts</span>
                             </div>

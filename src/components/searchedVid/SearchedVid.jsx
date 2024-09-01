@@ -1,18 +1,49 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import styles from "./SearchVid.module.css"
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { offMic } from '../../redux/Data/micSlice'
 import Navbar from '../navbar/Navbar'
 import Sidenav from '../navbar/Sidenav'
-import { offMic } from '../../redux/Data/micSlice'
-import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import Cards from './Cards'
+import styles from "./SearchVid.module.css"
+import ShortsCard from './ShortsCard'
 
 export default function SearchedVid() {
-    const [searchedVid, setsearchedVid] = useState([3, 3, 3, 3, 3, 3, 3, 3])
+    const [searchedVideo, setsearchedVideo] = useState([3, 3, 3, 3, 3, 3, 3, 3])
+    const [searchedShorts, setsearchedShorts] = useState([3, 3, 3, 3, 3, 3])
+    const [isShorts,setisShorts] = useState(true)
+
     const dispatch = useDispatch()
     const { search } = useParams()
+    const theme = useSelector((state) => state.theme.value)
+
     useEffect(() => {
+        const fetchShorts = async () => {
+            try {
+                const res = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/search/${search}`)
+                // console.log(res.data)
+                setsearchedShorts(res.data)
+            }
+            catch (err) {
+                console.log(err.message)
+            }
+        }
+        fetchShorts();
+        const fetchVideos = async () => {
+            try {
+                const res = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/search/${search}`)
+                // console.log(res.data)
+                setsearchedVideo(res.data)
+            }
+            catch (err) {
+                console.log(err.message)
+            }
+        }
+        fetchVideos();
         dispatch(offMic())
-    }, [])
+    }, [search])
+
     return (
         <div className={styles.main}>
             <Navbar></Navbar>
@@ -22,25 +53,45 @@ export default function SearchedVid() {
                 </div>
                 <div className={styles.box}>
                     <div className={styles.searchFor}>
-                        Showing results for <b>{search}</b>
-                    </div>
-                    {
-                        searchedVid.map((video, index) =>
-                            <>
-                            <div key={index} className={styles.singleVideo}>
-                                <div className={styles.video}>
-                                    dcscs
-                                </div>
-                                <div className={styles.detail}>
-                                    fsegetth
-                                </div>
+                        
+                        <div className={styles.toggleBtn} onClick={()=>setisShorts(!isShorts)} style={theme?{}:{borderColor:"black"}}>
+                            <div className={isShorts?styles.toggleRoll:styles.toggleRoll2} style={theme?{}:{borderColor:"black"}}>
+                                {isShorts?<i className="fa-solid fa-circle-play"></i>:<i className="fa-solid fa-video"></i>}
                             </div>
-                            {
-                                index===0 &&
-                                <div>refwafe</div>
-                            }
-                            </>
-                        )}
+                            <div className={isShorts?styles.toggleTitle:styles.toggleTitle2} style={theme?{}:{borderColor:"black"}}>
+                                {isShorts?"Shorts":"Videos"}
+                            </div>
+
+                        </div>
+                            Showing results for <b>{search}</b>
+                    </div>
+                    {isShorts?
+                        <div>
+                        {searchedShorts.length !== 0 &&
+                            <div className={styles.mainShorts}>
+                                {/* <div className={styles.shortsLogo} style={theme ? { backgroundColor: "white", color: "black" } : { backgroundColor: "black", color: "white" }}>
+                                    <i className="fa-solid fa-circle-play"></i> Shorts
+                                </div> */}
+                                <div className={styles.shortsCard}>
+                                    {searchedShorts.map((video, index) =>
+                                        <ShortsCard video={video} key={index} index={index} />
+                                    )}
+                                </div>
+                                {/* <div style={{ padding: "0.5vw" }}>
+                                    <hr />
+                                </div> */}
+                            </div>}
+                    </div>
+                    :
+                    <div className={styles.mainVideo}>
+                        {
+                            searchedVideo.map((video, index) =>
+                                <>
+                                    <Cards video={video} key={index} index={index}></Cards>
+                                </>
+                            )
+                        }
+                    </div>}
                 </div>
             </div>
         </div>

@@ -18,7 +18,7 @@ export default function SearchHistory({ handleSuggestion,search,setSearch }) {
             }
         }
         getSearch()
-    },[])
+    },[search])
 
     async function delSearch(ele) {
         try {

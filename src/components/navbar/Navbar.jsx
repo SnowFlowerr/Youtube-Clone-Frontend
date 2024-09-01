@@ -40,28 +40,31 @@ export default function Navbar() {
     }
     function handleSubmit(e) {
         e.preventDefault()
-        if (searchInput.trim() !== "") {
-            navigate(`/searchedvideo/${searchInput}`)
-        }
+        
         dispatch(offMic())
-        if (e.target.id === "search" || e.target.id === "search3") {
+        if(suggRef.current){
             suggRef.current.style.visibility = 'hidden';
-            suggRef2.current.style.visibility = "hidden"
+        }
+        if(suggRef2.current){
+            suggRef2.current.style.visibility = 'hidden';
         }
 
-        async function setSearch1() {
-            try {
-                const userData = await axios.put(`https://honest-stillness-production.up.railway.app/api/users/addsearchHistory/${searchInput}`,
-                    {},
-                    { withCredentials: true });
-                // console.log(userData.data)
-                setSearch(userData?.data)
+        if(searchInput){
+            async function setSearch1() {
+                try {
+                    const userData = await axios.put(`https://honest-stillness-production.up.railway.app/api/users/addsearchHistory/${searchInput}`,
+                        {},
+                        { withCredentials: true });
+                    console.log(userData.data)
+                    setSearch(userData?.data)
+                }
+                catch (err) {
+                    console.log(err)
+                }
             }
-            catch (err) {
-                console.log(err)
-            }
+            setSearch1()
+            navigate(`/searchedvideo/${searchInput}`)
         }
-        setSearch1()
     }
 
     function handleClearAll(e) {
