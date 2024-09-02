@@ -11,6 +11,9 @@
     gap: 2%;
     padding: 10px;
 }
+.small{
+    display: none;
+}
 .thumbnail {
     /* height: 13vw; */
     background-color: rgb(34, 34, 34);
@@ -66,7 +69,7 @@
     display: flex;
     flex-direction: column-reverse;
     justify-content: start;
-    margin-top: 10px;
+    margin-top: 5px;
     gap: 1vw;
     color: white;
     /* border: 1px solid white; */
@@ -129,4 +132,91 @@
     -webkit-line-clamp: 1;
     line-clamp: 1;
     -webkit-box-orient: vertical;
+}
+@media screen and (max-width:1100px) {
+    .singleVid {
+        gap: 20px;
+    }
+    .thumbnail {
+        width: 330px;
+    }
+    .thumbnail2 {
+        width: 330px;
+    }
+    .videoDetail {
+        width: calc(100% - 350px);
+    }
+}
+@media screen and (max-width:750px) {
+    .singleVid {
+        gap: 10px;
+    }
+    .thumbnail {
+        width: 250px;
+    }
+    .thumbnail2 {
+        width: 250px;
+    }
+    .videoDetail {
+        width: calc(100% - 260px);
+    }
+}
+@media screen and (max-width:450px) {
+    .singleVid {
+        flex-direction: column;
+        gap: 0vw;
+        padding: 0;
+        /* margin-top: 5px; */
+    }
+    .small{
+        display: block;
+        width: calc(100% - 13vw);
+        /* border: 1px solid white; */
+    }
+    .icon {
+        height: 10vw;
+        min-height: 10vw;
+        width: 10vw;
+        min-width: 10vw;
+    }
+    .title {
+        font-size: 3.8vw;
+        /* border: 1px solid white; */
+        font-weight: 800;
+        /* height: 3.5vw; */
+        max-height: 9vw;
+    }
+    .channel {
+        font-size: 3vw;
+        /* height: 7vw; */
+        /* max-height: 7.3vw; */
+        overflow: hidden;
+        margin-top: 0;
+        /* border: 1px solid white; */
+    }
+    .channelNames{
+        font-size: 3.3vw;
+    }
+    .thumbnail {
+        width: 100%;
+        border-radius: 0;
+    }
+    .thumbnail2 {
+        width: 100%;
+        border-radius: 0;
+    }
+    .videoIconDet{
+        /* border: 1px solid white; */
+        display: flex;
+        gap: 2.5vw;
+        align-items: start;
+    }
+    .videoDetail {
+        width: calc(100%);
+        gap: 0;
+        margin-bottom: 5vw;
+    }
+    .large{
+        display: none;
+    }
 }

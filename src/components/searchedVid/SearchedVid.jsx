@@ -10,9 +10,9 @@ import styles from "./SearchVid.module.css"
 import ShortsCard from './ShortsCard'
 
 export default function SearchedVid() {
-    const [searchedVideo, setsearchedVideo] = useState([3, 3, 3, 3, 3, 3, 3, 3])
-    const [searchedShorts, setsearchedShorts] = useState([3, 3, 3, 3, 3, 3])
-    const [isShorts,setisShorts] = useState(true)
+    const [searchedVideo, setsearchedVideo] = useState([])
+    const [searchedShorts, setsearchedShorts] = useState([])
+    const [isShorts, setisShorts] = useState(true)
 
     const dispatch = useDispatch()
     const { search } = useParams()
@@ -53,22 +53,22 @@ export default function SearchedVid() {
                 </div>
                 <div className={styles.box}>
                     <div className={styles.searchFor}>
-                        
-                        <div className={styles.toggleBtn} onClick={()=>setisShorts(!isShorts)} style={theme?{}:{borderColor:"black"}}>
-                            <div className={isShorts?styles.toggleRoll:styles.toggleRoll2} style={theme?{}:{borderColor:"black"}}>
-                                {isShorts?<i className="fa-solid fa-circle-play"></i>:<i className="fa-solid fa-video"></i>}
+
+                        <div className={styles.toggleBtn} onClick={() => setisShorts(!isShorts)} style={theme ? {} : { borderColor: "black" }}>
+                            <div className={isShorts ? styles.toggleRoll : styles.toggleRoll2} style={theme ? {} : { borderColor: "black" }}>
+                                {isShorts ? <i className="fa-solid fa-circle-play"></i> : <i className="fa-solid fa-video"></i>}
                             </div>
-                            <div className={isShorts?styles.toggleTitle:styles.toggleTitle2} style={theme?{}:{borderColor:"black"}}>
-                                {isShorts?"Shorts":"Videos"}
+                            <div className={isShorts ? styles.toggleTitle : styles.toggleTitle2} style={theme ? {} : { borderColor: "black" }}>
+                                {isShorts ? "Shorts" : "Videos"}
                             </div>
 
                         </div>
-                            Showing results for <b>{search}</b>
+                        Showing results for <b>{search}</b>
                     </div>
-                    {isShorts?
-                        <div>
+
+                    <div>
                         {searchedShorts.length !== 0 &&
-                            <div className={styles.mainShorts}>
+                            <div className={isShorts ? styles.mainShorts : styles.mainShorts2}>
                                 {/* <div className={styles.shortsLogo} style={theme ? { backgroundColor: "white", color: "black" } : { backgroundColor: "black", color: "white" }}>
                                     <i className="fa-solid fa-circle-play"></i> Shorts
                                 </div> */}
@@ -82,16 +82,14 @@ export default function SearchedVid() {
                                 </div> */}
                             </div>}
                     </div>
-                    :
-                    <div className={styles.mainVideo}>
+
+                    <div className={isShorts ? styles.mainVideo2 : styles.mainVideo}>
                         {
                             searchedVideo.map((video, index) =>
-                                <>
-                                    <Cards video={video} key={index} index={index}></Cards>
-                                </>
+                                <Cards video={video} key={index} index={index}></Cards>
                             )
                         }
-                    </div>}
+                    </div>
                 </div>
             </div>
         </div>

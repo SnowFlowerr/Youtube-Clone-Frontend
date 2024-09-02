@@ -62,7 +62,7 @@
     scrollbar-width: none;
     z-index: 50;
     visibility: hidden;
-    transition: 0;
+    transition: none;
 }
 
 .search{

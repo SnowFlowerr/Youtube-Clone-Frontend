@@ -48,6 +48,9 @@ export default function Navbar() {
         if(suggRef2.current){
             suggRef2.current.style.visibility = 'hidden';
         }
+        if(inputRef2.current){
+            inputRef2.current.blur();
+        }
 
         if(searchInput){
             async function setSearch1() {
@@ -55,7 +58,7 @@ export default function Navbar() {
                     const userData = await axios.put(`https://honest-stillness-production.up.railway.app/api/users/addsearchHistory/${searchInput}`,
                         {},
                         { withCredentials: true });
-                    console.log(userData.data)
+                    // console.log(userData.data)
                     setSearch(userData?.data)
                 }
                 catch (err) {
@@ -87,7 +90,30 @@ export default function Navbar() {
     }
     function handleSuggestion(ele) {
         setsearchInput(ele)
-        inputRef2.current.focus();
+        if(suggRef.current){
+            suggRef.current.style.visibility = 'hidden';
+        }
+        if(suggRef2.current){
+            suggRef2.current.style.visibility = 'hidden';
+        }
+        if(inputRef2.current){
+            inputRef2.current.blur();
+        }
+        
+        async function setSearch1() {
+            try {
+                const userData = await axios.put(`https://honest-stillness-production.up.railway.app/api/users/addsearchHistory/${ele}`,
+                    {},
+                    { withCredentials: true });
+                // console.log(userData.data)
+                setSearch(userData?.data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        setSearch1()
+        navigate(`/searchedvideo/${ele}`)
     }
     function handleSignMenu() {
         setSignBtn(!signBtn)
@@ -128,7 +154,7 @@ export default function Navbar() {
                                     <input type="text" placeholder='Search here...' ref={inputRef2} style={theme ? darkTheme : lightTheme} onChange={handleSearch} onClick={() => { suggRef.current.style.visibility = "visible"; suggRef2.current.style.visibility = "visible"; }}  value={searchInput} />
 
                                     <div className={styles.suggestion} ref={suggRef} style={theme ? {} : { backgroundColor: "#dadada" }}>
-                                        <SearchHistory handleSuggestion={handleSuggestion} search={search} setSearch={setSearch}/>
+                                        <SearchHistory handleSuggestion={handleSuggestion} search={search} setSearch={setSearch} handleSubmit={handleSubmit}/>
                                     </div>
 
                                     {searchInput &&

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import styles from "./SearchHistory.module.css";
 
-export default function SearchHistory({ handleSuggestion,search,setSearch }) {
+export default function SearchHistory({ handleSuggestion,search,setSearch,handleSubmit }) {
     
 
     useEffect(()=>{
@@ -37,7 +37,7 @@ export default function SearchHistory({ handleSuggestion,search,setSearch }) {
                 <div className={styles.mainBox}>
                     {search.toReversed().map((ele, ind) =>
                         <div key={ind}  className={styles.searches}>
-                            <div onClick={() => handleSuggestion(ele)} className={styles.searchText}>
+                            <div onClick={() =>handleSuggestion(ele)} className={styles.searchText}>
                             <div><i className="fa-solid fa-magnifying-glass"></i></div> <div>{ele}</div>
                             </div>
                             <div className={styles.delete} onClick={() => delSearch(ele)}>

@@ -75,14 +75,14 @@ export default function Cards({ video }) {
         <>
             <div className={styles.singleVid} style={theme ? darkTheme : lightTheme} onMouseOut={handleStop}>
                 {!isPlaying ?
-                    <div className={styles.thumbnail} onMouseOver={handlePlay} >
+                    <div className={styles.thumbnail} onMouseOver={handlePlay} onMouseOut={handleStop}>
                         <Link to={`/player/${video?._id}`}>
                             <img src={video.imageUrl} width="100%" alt="thumbnail" />
                         </Link>
                         <div className={styles.duration}>{getDuration(video?.duration)}</div>
                     </div>
                     :
-                    <div className={Math.floor(time) !== 0 ? styles.thumbnail2 : styles.thumbnail} onClick={() => { handleStop(); navigate(`/player/${video?._id}`) }} onMouseOver={handlePlay}>
+                    <div className={Math.floor(time) !== 0 ? styles.thumbnail2 : styles.thumbnail} onClick={() => { handleStop(); navigate(`/player/${video?._id}`) }} onMouseOver={handlePlay} onMouseOut={handleStop}>
                         <video src={video.videoUrl} width="100%" poster={video.imageUrl} ref={videoRef} onTimeUpdate={() => setTime(videoRef.current?.currentTime)} muted>
                         </video>
                         <div className={styles.duration}>{getDuration(time || video?.duration)}</div>
@@ -97,12 +97,27 @@ export default function Cards({ video }) {
                                 <img src={user?.img} width="100%" height="100%" alt="icon" />
                             </a>
                         </div>
-                        <div className={styles.channelNames}>
-                            {user.name}
+                        <div className={styles.large} onClick={()=>navigate(`/player/${video._id}`)}>
+                            <div className={styles.channelNames} >
+                                {user.name}
+                            </div>
+                        </div>
+                        <div className={styles.small} onClick={()=>navigate(`/player/${video._id}`)}>
+                            <div className={styles.channel}>
+                                <div className={styles.title}>
+                                    {video?.title}
+                                </div>
+                                <div className={styles.channelNames}>
+                                    {user.name}
+                                </div>
+                                <div>
+                                    {video?.views} Views . {format(video.createdAt)}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className={styles.details}>
-                        <Link to={`/player/${video?._id}`} style={theme ? { color: "white" } : { color: "black" }}>
+                        <div style={theme ? { color: "white" } : { color: "black" }} className={styles.large}  onClick={()=>navigate(`/player/${video._id}`)}>
                             <div className={styles.title}>
                                 {video?.title}
                             </div>
@@ -111,7 +126,7 @@ export default function Cards({ video }) {
                                     {video?.views} Views . {format(video.createdAt)}
                                 </div>
                             </div>
-                        </Link>
+                        </div>
                     </div>
                 </div>
             </div>

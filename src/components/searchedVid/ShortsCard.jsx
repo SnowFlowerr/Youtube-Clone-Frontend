@@ -69,14 +69,14 @@ export default function ShortsCard({video , index}) {
         <>
             <div className={styles.singleVid} style={theme ? darkTheme : lightTheme}  onMouseOut={handleStop} >
                 {!isPlaying ?
-                    <div className={styles.thumbnail} onMouseOver={handlePlay}>
+                    <div className={styles.thumbnail} onMouseOver={handlePlay} onMouseOut={handleStop}>
                         <Link to={`/shorts/${video?._id}`}>
                             <img src={video.imageUrl} width="100%" alt="thumbnail" />
                         </Link>
                         <div className={styles.duration}>{getDuration(video?.duration)}</div>
                     </div>
                     :
-                    <div className={Math.floor(time)!==0?styles.thumbnail2:styles.thumbnail} onClick={() => { handleStop(); navigate(`/shorts/${video?._id}`) }} onMouseOver={handlePlay}>
+                    <div className={Math.floor(time)!==0?styles.thumbnail2:styles.thumbnail} onClick={() => { handleStop(); navigate(`/shorts/${video?._id}`) }} onMouseOver={handlePlay}  onMouseOut={handleStop}>
                         <video src={video.videoUrl} width="100%" poster={video.imageUrl} ref={videoRef} onTimeUpdate={()=>setTime(videoRef.current?.currentTime)} muted>
 
                         </video>

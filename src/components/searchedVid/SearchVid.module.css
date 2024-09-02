@@ -4,6 +4,9 @@
 .bigBox{
     display: flex;
 }
+.Sidenav{
+    z-index: 20;
+}
 .box{
     margin-top: 50px;
     padding: 10px;
@@ -11,7 +14,7 @@
 }
 .searchFor{
     /* padding: 10px; */
-    margin-top: 5px;
+    margin-top: 10px;
     display: flex;
     width: 100%;
     gap: 10px;
@@ -71,10 +74,19 @@
     transition: 0.5s;
 }
 .mainShorts{
+    margin-top: -10px;
     width: 100%;
 }
 .mainVideo{
     width: 100%;
+    margin-top: -15px;
+
+}
+.mainShorts2{
+    display: none;
+}
+.mainVideo2{
+    display: none;
 
 }
 .shortsCard{
@@ -103,10 +115,18 @@
 }
 
 
+
 @media screen and (max-width:750px) {
     .box{
         margin-top: -10px;
     }
+    /* .searchFor{
+        margin-top: 10px;
+        display: flex;
+        width: 100%;
+        gap: 10px;
+        margin-bottom: 5px;
+    } */
 }
 @media screen and (max-width:450px) {
     .box{
@@ -123,4 +143,5 @@
         margin-bottom: 0px;
         margin-top: 10px;
     }
+    
 }
