@@ -53,7 +53,6 @@ export default function SearchedVid() {
                 </div>
                 <div className={styles.box}>
                     <div className={styles.searchFor}>
-
                         <div className={styles.toggleBtn} onClick={() => setisShorts(!isShorts)} style={theme ? {} : { borderColor: "black" }}>
                             <div className={isShorts ? styles.toggleRoll : styles.toggleRoll2} style={theme ? {} : { borderColor: "black" }}>
                                 {isShorts ? <i className="fa-solid fa-circle-play"></i> : <i className="fa-solid fa-video"></i>}
@@ -61,33 +60,32 @@ export default function SearchedVid() {
                             <div className={isShorts ? styles.toggleTitle : styles.toggleTitle2} style={theme ? {} : { borderColor: "black" }}>
                                 {isShorts ? "Shorts" : "Videos"}
                             </div>
-
                         </div>
                         Showing results for <b>{search}</b>
                     </div>
-
                     <div>
-                        {searchedShorts.length !== 0 &&
-                            <div className={isShorts ? styles.mainShorts : styles.mainShorts2}>
-                                {/* <div className={styles.shortsLogo} style={theme ? { backgroundColor: "white", color: "black" } : { backgroundColor: "black", color: "white" }}>
-                                    <i className="fa-solid fa-circle-play"></i> Shorts
-                                </div> */}
+                        <div className={isShorts ? styles.mainShorts : styles.mainShorts2}>
+                            {searchedShorts.length !== 0 ?
                                 <div className={styles.shortsCard}>
                                     {searchedShorts.map((video, index) =>
                                         <ShortsCard video={video} key={index} index={index} />
                                     )}
+                                </div> :
+                                <div className={styles.notFound}>
+                                    No Shorts Found
                                 </div>
-                                {/* <div style={{ padding: "0.5vw" }}>
-                                    <hr />
-                                </div> */}
-                            </div>}
+                            }
+                        </div>
                     </div>
-
                     <div className={isShorts ? styles.mainVideo2 : styles.mainVideo}>
-                        {
+                        {searchedVideo.length!==0?
                             searchedVideo.map((video, index) =>
                                 <Cards video={video} key={index} index={index}></Cards>
                             )
+                            :
+                            <div className={styles.notFound}>
+                                    No Videos Found
+                                </div>
                         }
                     </div>
                 </div>
