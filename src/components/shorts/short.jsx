@@ -283,17 +283,23 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                         }
                     </div>
                     :
-                    <div className={styles.name}>
-                        <div className={styles.icon}>
-                            <img src={userData?.img} width="100%" height="100%" alt="icon" />
+                    <div className={styles.shortsDet}>
+                        <div className={styles.name}>
+                            <div className={styles.icon}>
+                                <img src={userData?.img} width="100%" height="100%" alt="icon" />
+                            </div>
+                            <div className={styles.username}>
+                                @{userData?.username}
+                            </div>
+                            <div className={styles.subs} onClick={handleSubscribe} style={isSubs ? { backgroundColor: "rgb(255, 255, 255, 0.2)" } : {}}>
+                                {isSubs ? "Unsubscribe" : "Subscribe"}
+                            </div>
                         </div>
-                        <div className={styles.username}>
-                            @{userData?.username}
+                        <div className={styles.shortsTitle}>
+                            {data?.title}
                         </div>
-                        <div className={styles.subs} onClick={handleSubscribe} style={isSubs ? { backgroundColor: "rgb(255, 255, 255, 0.2)" } : {}}>
-                            {isSubs ? "Unsubscribe" : "Subscribe"}
-                        </div>
-                    </div>}
+                    </div>
+                }
             </span>
             {index !== length &&
                 <div className={isComment ? styles.comments2 : styles.comments}>

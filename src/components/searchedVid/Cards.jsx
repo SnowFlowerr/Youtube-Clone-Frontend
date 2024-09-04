@@ -85,7 +85,7 @@ export default function Cards({ video }) {
                     <div className={Math.floor(time) !== 0 ? styles.thumbnail2 : styles.thumbnail} onClick={() => { handleStop(); navigate(`/player/${video?._id}`) }} onMouseOver={handlePlay} onMouseOut={handleStop}>
                         <video src={video.videoUrl} width="100%" poster={video.imageUrl} ref={videoRef} onTimeUpdate={() => setTime(videoRef.current?.currentTime)} muted>
                         </video>
-                        <div className={styles.duration}>{getDuration(time || video?.duration)}</div>
+                        <div className={styles.duration}>{getDuration((time&&video?.duration-time) || video?.duration)}</div>
                         {Math.floor(time) !== 0 && <div className={styles.range} style={{ width: `${(time * 100) / videoRef.current?.duration}%` }}>
                         </div>}
                     </div>

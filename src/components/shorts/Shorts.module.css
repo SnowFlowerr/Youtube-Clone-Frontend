@@ -153,15 +153,45 @@
     background-color: rgb(95, 95, 95);
     color: white;
 }
-.name{
+.shortsDet{
     position: absolute;
     width: 100%;
     bottom: 75px;
+}
+.shortsTitle{
+    text-align: start;
+    /* border: 1px solid rgb(255, 255, 255); */
+    padding: 0 15px;
+    margin-top: 10px;
+    font-weight: 500;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.name{
     display: flex;
     align-items: center;
     /* border: 1px solid rgb(255, 255, 255); */
     padding: 0px 10px;
-    gap: 5px;
+    gap: 10px;
+}
+.username{
+    max-width: 190px;
+    text-align: start;
+    /* border: 1px solid rgb(255, 255, 255); */
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 .icon{
     height: 40px;
@@ -170,6 +200,7 @@
     border-radius: 100%;
     border: 1px solid gray;
     overflow: hidden;
+    flex-shrink: 0;
 }
 .subs{
     background-color: rgb(255, 255, 255);
@@ -401,5 +432,18 @@
     
     .selected i{
         font-size: 6.5vw;
+    }
+    .name{
+        width: calc(100% - 14vw);
+        bottom: 75px;
+        display: flex;
+        align-items: center;
+        /* border: 1px solid rgb(255, 255, 255); */
+        padding: 0px 10px;
+        gap: 2.5vw;
+    }
+    .shortsTitle{
+        width: calc(100% - 15vw);
+        font-size: 3.5vw;
     }
 }
