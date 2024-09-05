@@ -193,7 +193,7 @@ export default function Navbar() {
                                                             <div>
                                                                 <div className={styles.channelName}>{sign?.name}</div>
                                                                 <div className={styles.username}>@{sign?.username}</div>
-                                                                <div className={styles.myChannel}><a href="/">view your channel</a></div>
+                                                                <div className={styles.myChannel}><a href={`/channels/${sign._id}/featured`}>view your channel</a></div>
                                                             </div>
                                                         </div>
                                                         <hr />

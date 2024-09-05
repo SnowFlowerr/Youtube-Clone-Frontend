@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from "./Sidenav.module.css"
 import { useSelector } from 'react-redux'
 import { darkTheme, lightTheme } from '../../themes'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import Subscribers from './Subscribers'
 import Upload from '../upload/Upload'
 
@@ -16,16 +16,19 @@ export default function Sidenav() {
     const [shorts, setShorts] = useState(false)
     const [history, setHistory] = useState(false)
     const [isUpload, setisUpload] = useState(false)
+    const {category} = useParams()
     useEffect(() => {
-        const path = location.pathname;
-        if (path === '/') {
-            setHome(true)
-        }
-        else if (path.includes('shorts')) {
-            setShorts(true)
-        }
-        else if (path.includes('history')) {
-            setHistory(true)
+        if(!category){
+            const path = location.pathname;
+            if (path === '/') {
+                setHome(true)
+            }
+            else if (path.includes('shorts')) {
+                setShorts(true)
+            }
+            else if (path.includes('history')) {
+                setHistory(true)
+            }
         }
     }, [location.pathname])
     return (

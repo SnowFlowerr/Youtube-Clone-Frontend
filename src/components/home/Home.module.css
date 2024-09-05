@@ -47,6 +47,7 @@
     overflow: hidden;
     position: relative;
     transition: 1s;
+    user-select: auto;
 }
 .thumbnail2 {
     /* height: 13vw; */
@@ -59,6 +60,7 @@
     overflow: hidden;
     transition: 1s;
     position: relative;
+    user-select: auto;
 }
 .duration{
     position: absolute;

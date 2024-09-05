@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import styles from "./App.module.css";
 import Signin from "./components/auth/Signin";
 import Signup from "./components/auth/Signup";
+import Channels from "./components/Channels/Channels";
 import History from "./components/history/Histories";
 import Home from "./components/home/Home";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
@@ -59,6 +60,7 @@ function App() {
           <Route path='/searchedvideo/:search' element={<SearchedVid />} />
           <Route path='/shorts/:id' element={<Shorts />} />
           <Route path='/history' element={<History />} />
+          <Route path='/channels/:id/:category' element={<Channels />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
     </div>
