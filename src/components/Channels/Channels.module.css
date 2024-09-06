@@ -21,14 +21,19 @@
     border: 1px solid white;
     position: relative;
 }
-.banner:hover .addBanner{
-    position: absolute;
-    
+
+.banner:hover .newBanner{
+    opacity: 0.7;
 }
 .addBanner{
     transform: translate(-50%, -50%);
+    position: absolute;
     top: 50%;
     left: 50%;
+    display: none;
+}
+.banner:hover .addBanner{
+    display: block;
 }
 .userDetails{
     display: flex;
@@ -72,6 +77,51 @@
 .about{
     margin-top: 10px;
     color: rgb(132, 132, 132);
+    align-content: center;
+    /* border: 1px solid white; */
+    display: flex;
+    align-items: center;
+}
+.aboutChannel{
+    /* border: 1px solid white; */
+    max-width: 50vw;
+    overflow: hidden;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    /* number of lines to show */
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.textDiv{
+    width: 50vw;
+}
+.aboutInp{
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid white;
+    resize: none;
+    font-size: 15px;
+    height: 35px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    transition: none;
+}
+.textBtn{
+    display: flex;
+    justify-content: right;
+}
+.textBtn button{
+    padding: 5px 20px;
+    border-radius: 100px;
+}
+.pen{
+    margin-left: 10px;
+    cursor: pointer;
 }
 .userLink{
     margin-top: 10px;
@@ -94,11 +144,9 @@
 }
 .subscribe{
     width: fit-content;
-    color: black;
     margin-top: 15px;
     padding: 10px 20px;
     width: fit-content;
-    background-color: white;
     border-radius: 50px;
 }
 .option{
@@ -125,6 +173,7 @@
     justify-content: center;
     flex-wrap: wrap;
     overflow: hidden;
+    row-gap: 15px;
     /* border: 2px solid rgb(255, 255, 255); */
 }
 .shortsLogo{
@@ -153,6 +202,36 @@
     row-gap: 1.5vw;
     overflow: auto;
 }
+.uploadThumb{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    position: absolute;
+}
+.uploadThumbnail{
+    /* width: 11vw; */
+    border: none;
+    text-align: center;
+    align-content: center;
+    color: white;
+    outline: 2px dotted white;
+    border-radius: 5px;
+    font-size: 2vw;
+    font-weight: 200;
+    cursor: pointer;
+    padding: 1vw 2vw;
+    position: relative;
+}
+.progress{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    right: 0%;
+    display: flex;
+    justify-content: center;
+    opacity: 0.8;
+}
 
 
 @media screen and (max-width:750px) {
@@ -164,6 +243,9 @@
     
 }
 @media screen and (max-width:550px) {
+    .banner{
+        border-radius: 0;
+    }
     .userDetails{
         display: flex;
         padding: 1.5vw 0;
@@ -173,7 +255,7 @@
         font-size: 2.5vw;
     }
     .userDet{
-        width: calc(100% - 25vw);
+        width: calc(100% - 25vw - 10px);
         /* border: 1px solid gray; */
     }
     .userIcon{
@@ -223,5 +305,24 @@
         gap: 2vw;
         border-radius: 0 3vw 0px;
         margin-bottom: 3px;
+    }
+    .aboutInp{
+        font-size: 2.5vw;
+        /* height: 7.7vw;
+        padding-bottom: 1vw;
+        padding-top: 1vw;
+        transition: none; */
+    }
+    .textBtn{
+        display: flex;
+        justify-content: right;
+    }
+    .textBtn button{
+        padding: 1vw 3vw;
+        font-size: 2.2vw;
+    }
+    .pen{
+        margin-left: 2vw;
+        cursor: pointer;
     }
 }

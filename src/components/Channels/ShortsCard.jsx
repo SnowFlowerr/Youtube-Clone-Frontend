@@ -33,21 +33,6 @@ export default function ShortsCard({video , index, category}) {
         }
     }
 
-    useEffect(() => {
-        async function currentUser() {
-            try {
-                const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get/${video?.userId}`,
-                    { withCredentials: true }
-                )
-                setUser(userD.data)
-            }
-            catch (err) {
-                console.log(err)
-            }
-        }
-        currentUser()
-    }, [])
-
     let timeout
 
     function handlePlay() {
@@ -99,9 +84,9 @@ export default function ShortsCard({video , index, category}) {
                                 {video?.title}
                             </div>
                             <div className={styles.channel}>
-                                <div className={styles.channelNames}>
+                                {/* <div className={styles.channelNames}>
                                     {user?.name}
-                                </div>
+                                </div> */}
                                 <div>
                                     {video?.views} Views . {format(video.createdAt)}
                                 </div>

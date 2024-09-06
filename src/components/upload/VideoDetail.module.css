@@ -99,6 +99,7 @@
     min-height: 12vw;
     padding: 2vw 1vw;
     font-size: 1.2vw;
+    transition: none;
 }
 .description:invalid{
     outline: 2px solid rgb(255, 0, 0) ;

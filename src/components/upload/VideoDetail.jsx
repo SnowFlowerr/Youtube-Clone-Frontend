@@ -128,7 +128,7 @@ export default function VideoDetail({ progress, video, data, isShort}) {
                             Thumbnail
                         </div>
                         <div className={styles.heading3}>
-                            {isShort?"You cannot set Shorts Thumbnail.":"Set a thumbnail that stands out and draws viewer's attention if not choosen a random image fron the video will be set as thumbnail."}
+                            {isShort?"You cannot set Shorts Thumbnail.":"Set a thumbnail that stands out and draws viewer's attention if not chosen a random image fron the video will be set as thumbnail."}
                         </div>
                         {!isShort&&
                         <div className={styles.allThumbnails} >
