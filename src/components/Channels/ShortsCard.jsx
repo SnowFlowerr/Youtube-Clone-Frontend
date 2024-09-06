@@ -6,7 +6,7 @@ import { format } from 'timeago.js'
 import { darkTheme, lightTheme } from '../../themes'
 import styles from "./ShortsCard.module.css"
 
-export default function ShortsCard({video , index, category}) {
+export default function ShortsCard({video , index}) {
     const theme = useSelector((state) => state.theme.value)
     const [user, setUser] = useState("")
     const videoRef = useRef()
@@ -52,7 +52,7 @@ export default function ShortsCard({video , index, category}) {
 
     return (
         <>
-            <div className={category?index===5?styles.singleVid2:index===4?styles.singleVid3:index===3?styles.singleVid4:index===2?styles.singleVid5:styles.singleVid:styles.singleVid} style={theme ? darkTheme : lightTheme}  onMouseOut={handleStop} >
+            <div className={index===5?styles.singleVid2:index===4?styles.singleVid3:index===3?styles.singleVid4:index===2?styles.singleVid5:styles.singleVid} style={theme ? darkTheme : lightTheme}  onMouseOut={handleStop} >
                 {!isPlaying ?
                     <div className={styles.thumbnail} onMouseOver={handlePlay} onMouseOut={handleStop}>
                         <Link to={`/shorts/${video?._id}`}>

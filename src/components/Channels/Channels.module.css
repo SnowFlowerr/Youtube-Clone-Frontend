@@ -280,11 +280,9 @@
     }
     .subscribe{
         width: fit-content;
-        color: black;
         margin-top: 1.5vw;
         padding: 1.5vw 3vw;
         width: fit-content;
-        background-color: white;
         border-radius: 50px;
         font-size: 2vw;
     }

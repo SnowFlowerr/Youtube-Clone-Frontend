@@ -83,7 +83,7 @@ export default function Channels() {
   async function currentShorts() {
     try {
       const short = await axios.get(
-        `https://honest-stillness-production.up.railway.app/api/shorts/allcurrentshorts/${id}?limit=${category === "shorts" ? 20 : 6}`,
+        `https://honest-stillness-production.up.railway.app/api/shorts/allcurrentshorts/${id}?limit=${20}`,
         { withCredentials: true }
       );
       setShorts(short.data);
@@ -241,7 +241,8 @@ export default function Channels() {
               </div>
               <div className={styles.username}>
                 <span>@{user?.username}</span> .{" "}
-                <span>{subs} subscribers</span>
+                <span>{subs} subscribers</span> .{" "}
+                <span>{videos.length+shorts.length} videos</span>
               </div>
               <div className={styles.about}>
                 {isaboutChannel ?
@@ -307,7 +308,8 @@ export default function Channels() {
                     <div className={styles.shorts}>
                       {
                         shorts.map((video, index) =>
-                          <ShortsCard video={video} key={index} index={index} category={category} />
+                          index < 6 &&
+                          <ShortsCard video={video} key={index} index={index} />
                         )
                       }
                     </div>
