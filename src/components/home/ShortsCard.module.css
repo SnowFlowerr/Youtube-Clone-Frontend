@@ -63,6 +63,22 @@
     overflow: hidden;
     position: relative;
     transition: 1s;
+    display: none;
+}
+.singleVid:hover .thumbnail2 {
+    display: block;
+}
+.singleVid2:hover .thumbnail2 {
+    display: block;
+}
+.singleVid3:hover .thumbnail2 {
+    display: block;
+}
+.singleVid4:hover .thumbnail2 {
+    display: block;
+}
+.singleVid5:hover .thumbnail2 {
+    display: block;
 }
 .duration{
     position: absolute;

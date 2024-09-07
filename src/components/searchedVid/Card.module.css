@@ -39,6 +39,10 @@
     transition: 1s;
     position: relative;
     flex-shrink: 0;
+    display: none;
+}
+.singleVid:hover .thumbnail2 {
+    display: block;
 }
 .duration{
     position: absolute;

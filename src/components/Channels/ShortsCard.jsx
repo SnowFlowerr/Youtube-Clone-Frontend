@@ -1,18 +1,20 @@
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { format } from 'timeago.js'
 import { darkTheme, lightTheme } from '../../themes'
 import styles from "./ShortsCard.module.css"
 
-export default function ShortsCard({video , index}) {
+export default function ShortsCard({video , index, seteditingData, setisEditing, setisShorts}) {
     const theme = useSelector((state) => state.theme.value)
     const [user, setUser] = useState("")
     const videoRef = useRef()
     const [isPlaying, setIsPlaying] = useState(false);
     const [time, setTime] = useState(false);
     const navigate = useNavigate()
+    const {id}=useParams()
+    const sign = useSelector((state) => state.sign?.value)
 
 
     function getDuration(duration) {
@@ -92,6 +94,10 @@ export default function ShortsCard({video , index}) {
                                 </div>
                             </div>
                         </Link>
+                        {id===sign._id &&
+                            <div className={styles.extraOp} style={theme?{backgroundColor:"black"}:{backgroundColor:"white"}} onClick={()=>{seteditingData(video);setisEditing(true);setisShorts(true)}}>
+                            <i className="fa-solid fa-pen-to-square"></i>
+                        </div>}
                     </div>
                 </div>
             </div>

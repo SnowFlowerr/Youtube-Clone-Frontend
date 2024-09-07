@@ -1,5 +1,6 @@
 .main{
     min-height: 100dvh;
+    /* overflow: hidden; */
 }
 .mainbox{
     display: flex;
@@ -12,6 +13,7 @@
     /* border: 1px solid white; */
     width: 100%;
     padding: 10px;
+    position: relative;
 }
 .banner{
     width: 100%;
@@ -56,8 +58,32 @@
     flex-shrink: 0;
     border: 1px solid gray;
     margin-top: 15px;
+    position: relative;
 }
-
+.addIcon{
+    top: 0;
+    position: absolute;
+    display: none;
+}
+.uploadIcon{
+    height: 150px;
+    width: 150px;
+    align-content: center;
+    text-align: center;
+    font-size: 16px;
+}
+.userIcon:hover .addIcon{
+    display: block;
+}
+.userIcon:hover img{
+    opacity: 0.5;
+}
+.progressIcon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 .name{
     font-size: 45px;
     font-weight: 700;
@@ -122,6 +148,7 @@
 .pen{
     margin-left: 10px;
     cursor: pointer;
+    color: red;
 }
 .userLink{
     margin-top: 10px;
@@ -232,7 +259,24 @@
     justify-content: center;
     opacity: 0.8;
 }
-
+.EditVideo{
+    position: fixed;
+    top: 0;
+    /* bottom: 0; */
+    right: 0;
+    height: 100dvh;
+    z-index: 100;
+    width: 100%;
+    /* z-index: 10; */
+    background-color: transparent;
+    padding: 0 5vw;
+    align-content: center;
+}
+.EditVideo > div{
+    box-shadow: 0px 0px 3vw 1vw rgb(0, 0, 0);
+    border-radius: 10px;
+    overflow: hidden;
+}
 
 @media screen and (max-width:750px) {
     .box{
@@ -263,7 +307,11 @@
         width:22.5vw;
         margin-top: 2vw;
     }
-    
+    .uploadIcon{
+        height: 22.5vw;
+        width: 22.5vw;
+        font-size: 2.3vw;
+    }
     .name{
         font-size: 8vw;
     }

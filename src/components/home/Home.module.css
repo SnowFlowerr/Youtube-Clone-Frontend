@@ -61,6 +61,10 @@
     transition: 1s;
     position: relative;
     user-select: auto;
+    display: none;
+}
+.singleVid:hover .thumbnail2 {
+    display: block;
 }
 .duration{
     position: absolute;

@@ -1,19 +1,22 @@
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import Progress from './Progress'
-import styles from "./VideoDetail.module.css"
+import styles from "./EditVideo.module.css"
+import Progress from '../upload/Progress'
 
-export default function VideoDetail({ progress, video, data, isShort }) {
+export default function EditVideo({ data, isShort, setisEditing }) {
     const textRef = useRef()
     const [copied, setCopied] = useState(false)
     const [isdone, setisdone] = useState(false)
-    const [iscancel, setisCancel] = useState(false)
     const [thumbnail, setThumbnail] = useState({ secure_url: data?.imageUrl })
-    const [title, setTitle] = useState(video)
-    const [description, setDescription] = useState("")
+    const [title, setTitle] = useState(data.title)
+    const [description, setDescription] = useState(data.description)
     const [prog, setProg] = useState(0)
     const theme = useSelector((state) => state.theme.value)
+
+    useEffect(() => {
+        autosize()
+    }, [])
 
     function autosize() {
         textRef.current.style.cssText = `min-height:37px; height: 37px;`;
@@ -69,23 +72,15 @@ export default function VideoDetail({ progress, video, data, isShort }) {
         }
     }
     useEffect(() => {
-        if (data._id && (prog === 0 || prog === 100) && progress === 100 && title.trim()) {
+        if (data?._id && (prog === 0 || prog === 100) && title.trim()) {
             setisdone(true)
         }
         else {
             setisdone(false)
         }
 
-    }, [title, prog, progress, data])
+    }, [title, prog, data])
 
-    useEffect(() => {
-        if (data._id && progress === 100) {
-            setisCancel(true)
-        }
-        else {
-            setisCancel(false)
-        }
-    }, [progress, data])
     useEffect(() => {
         setThumbnail({ secure_url: data?.imageUrl })
     }, [data])
@@ -101,11 +96,11 @@ export default function VideoDetail({ progress, video, data, isShort }) {
         }
     }
     return (
-        <>
+        <div className={styles.mainBox}>
             <div className={styles.options} style={theme ? {} : { borderColor: "black" }}>
                 <div><b>{title}</b></div>
-                <div className={styles.cross}>
-                    {/* <i className="fa-solid fa-xmark"></i> */}
+                <div className={styles.cross} onClick={() => setisEditing(false)}>
+                    <i className="fa-solid fa-xmark"></i>
                 </div>
             </div>
             <div className={styles.main}>
@@ -116,7 +111,7 @@ export default function VideoDetail({ progress, video, data, isShort }) {
                     <div>
                         <span className={styles.upperMessage} style={theme ? {} : { color: "rgb(94, 94, 94)" }}>Title (required)</span>
                         <input type='text' id="title" value={title} className={styles.title} maxLength={100} required onChange={handleChange} style={theme ? { color: "white" } : { color: "black" }} />
-                        <span className={styles.lowerMessage} style={theme ? {} : { color: "rgb(94, 94, 94)" }}>{title.length} / {100}</span>
+                        <span className={styles.lowerMessage} style={theme ? {} : { color: "rgb(94, 94, 94)" }}>{title?.length} / {100}</span>
                     </div>
                     <div>
                         <span className={styles.upperMessage} style={theme ? {} : { color: "rgb(94, 94, 94)" }}>Description (optional)</span>
@@ -199,16 +194,15 @@ export default function VideoDetail({ progress, video, data, isShort }) {
                 </div>
             </div>
             <div className={styles.options2} style={theme ? {} : { borderColor: "black" }}>
-                <Progress progress={progress} />
-                {/* <div className={styles.cross} onClick={() => setisUpload(false)}>
-                    <i className="fa-solid fa-xmark"></i>
-                </div> */}
+                {/* <Progress progress={progress} /> */}
+                <button onClick={() => isdone ? handleCancel() : console.log("Something is missing")} style={isdone ? {} : { backgroundColor: "rgb(187, 187, 187)" }}>Delete</button>
                 <div>
-                    <button onClick={() => iscancel ? handleCancel() : console.log("Something is missing")} style={iscancel ? {} : { backgroundColor: "rgb(187, 187, 187)" }}>Cancel</button>
+                    <button onClick={() => setisEditing(false)}>Cancel</button>
                     {" "}
                     <button onClick={() => isdone ? handleSubmit() : console.log("Something is missing")} style={isdone ? {} : { backgroundColor: "rgb(187, 187, 187)" }}>Done</button>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
+
