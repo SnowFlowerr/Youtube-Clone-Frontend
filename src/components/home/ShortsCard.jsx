@@ -55,7 +55,10 @@ export default function ShortsCard({video , index}) {
         timeout = setTimeout(() => {
             setIsPlaying(() => true)
             if (videoRef.current) {
-                videoRef.current.play().then(()=>{videoRef.current.muted=false}).catch((err)=>console.log(err))
+                videoRef.current.play().then(()=>{
+                    // videoRef.current.muted=false
+                }
+            ).catch((err)=>console.log(err))
             }
         }, 1000)
     }

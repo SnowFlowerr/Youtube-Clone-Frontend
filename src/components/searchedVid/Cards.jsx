@@ -56,7 +56,10 @@ export default function Cards({ video }) {
         timeout = setTimeout(() => {
             setIsPlaying(() => true)
             if (videoRef.current) {
-                videoRef.current.play().then(() => { videoRef.current.muted = false }).catch((err) => console.log(err))
+                videoRef.current.play().then(()=>{
+                    // videoRef.current.muted=false
+                }
+            ).catch((err)=>console.log(err))
             }
         }, 1000)
         // return clearTimeout(timeout)

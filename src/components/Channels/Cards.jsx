@@ -5,7 +5,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { format } from "timeago.js";
 import { darkTheme, lightTheme } from "../../themes";
 import styles from "./Cards.module.css";
-import EditVideo from "../editVideo/EditVideo";
 
 export default function Cards({ video, seteditingData, setisEditing, setisShorts }) {
     const theme = useSelector((state) => state.theme.value);
@@ -40,12 +39,10 @@ export default function Cards({ video, seteditingData, setisEditing, setisShorts
         timeout = setTimeout(() => {
             setIsPlaying(() => true);
             if (videoRef.current) {
-                videoRef.current
-                    .play()
-                    .then(() => {
-                        videoRef.current.muted = false;
-                    })
-                    .catch((err) => console.log(err));
+                videoRef.current.play().then(()=>{
+                    // videoRef.current.muted=false
+                }
+            ).catch((err)=>console.log(err))
             }
         }, 1000);
         // return clearTimeout(timeout)
@@ -127,7 +124,7 @@ export default function Cards({ video, seteditingData, setisEditing, setisShorts
                             to={`/player/${video?._id}`}
                             style={theme ? { color: "white" } : { color: "black" }}
                         >
-                            <div className={styles.title}>{video?.title}</div>
+                            <div className={styles.title}>{video?.title}erferfwerfeewrwf</div>
                             <div className={styles.channel}>
                                 <div className={styles.channelNames}>{user?.name}</div>
                                 <div>

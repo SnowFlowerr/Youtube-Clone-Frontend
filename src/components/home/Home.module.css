@@ -61,11 +61,12 @@
     transition: 1s;
     position: relative;
     user-select: auto;
-    display: none;
+    /* display: none; */
 }
-.singleVid:hover .thumbnail2 {
+/* .singleVid:hover .thumbnail2 {
     display: block;
-}
+    border: 2px solid white;
+} */
 .duration{
     position: absolute;
     bottom: 5px;

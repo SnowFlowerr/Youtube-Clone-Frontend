@@ -38,6 +38,7 @@ export default function Cards({ video }) {
                     { withCredentials: true }
                 );
                 setUser(userD.data);
+                // console.log(user.data)
             } catch (err) {
                 console.log(err);
             }
@@ -55,7 +56,7 @@ export default function Cards({ video }) {
                 videoRef.current
                     .play()
                     .then(() => {
-                        videoRef.current.muted = false;
+                        // videoRef.current.muted = false;
                     })
                     .catch((err) => console.log(err));
             }
