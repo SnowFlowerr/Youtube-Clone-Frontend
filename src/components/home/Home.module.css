@@ -34,6 +34,20 @@
     cursor: pointer;
     padding-bottom: 5px;
     border-radius: 15px;
+    position: relative;
+}
+.touchBtn{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    display: none;
+}
+.mouseBtn{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
 }
 .videoCont{
     position: relative;
@@ -310,6 +324,13 @@
         top: 0.8vw;
         right: 0.8vw;
         width: 5vw;
+    }
+    .touchBtn{
+        display: block;
+        /* background-color: antiquewhite; */
+    }
+    .mouseBtn{
+        display: none;
     }
 }
 
