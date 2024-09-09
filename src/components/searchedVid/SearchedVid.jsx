@@ -52,7 +52,7 @@ export default function SearchedVid() {
                     <Sidenav />
                 </div>
                 <div className={styles.box}>
-                    <div className={styles.searchFor}>
+                    <div className={styles.searchFor} style={theme?{backgroundColor:"black"}:{backgroundColor:"white"}}>
                         <div className={styles.toggleBtn} onClick={() => setisShorts(!isShorts)} style={theme ? {} : { borderColor: "black" }}>
                             <div className={isShorts ? styles.toggleRoll : styles.toggleRoll2} style={theme ? {} : { borderColor: "black" }}>
                                 {isShorts ? <i className="fa-solid fa-circle-play"></i> : <i className="fa-solid fa-video"></i>}

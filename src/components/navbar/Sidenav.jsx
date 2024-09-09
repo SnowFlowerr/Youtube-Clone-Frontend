@@ -95,13 +95,13 @@ export default function Sidenav() {
                                 <span>Shorts</span>
                             </div>
                         </a>
-                        <Link to="/" className={styles.upload} style={theme ? darkTheme : lightTheme}>
+                        <div className={styles.upload} style={theme ? darkTheme : lightTheme}>
                             <div onClick={()=>setisUpload(true)}>
                                 <i className="fa-solid fa-upload"></i>
                                 <br />
                                 <span>Upload</span>
                             </div>
-                        </Link>
+                        </div>
                         <Link to="/" className={styles.music} style={theme ? darkTheme : lightTheme}>
                             <div>
                                 <i className="fa-solid fa-music"></i>

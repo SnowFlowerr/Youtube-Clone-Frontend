@@ -72,6 +72,7 @@ export default function Histories() {
                             </div>
                             <div className={styles.switchBtn}>
                                 <button style={theme ? darkTheme : lightTheme} onClick={() => navigate(`/channels/${sign._id}/featured`)}>Your Channel</button>
+                                {" "}
                                 <button style={theme ? darkTheme : lightTheme} onClick={() => navigate("/signin")}>Switch Account</button>
                             </div>
                         </div>

@@ -39,7 +39,9 @@
     padding-bottom: 5px;
     border-radius: 15px;
 }
-
+.videoCont{
+    position: relative;
+}
 .thumbnail {
     /* height: 13vw; */
     background-color: rgb(34, 34, 34);
@@ -61,25 +63,52 @@
     text-align: center;
     align-content: center;
     overflow: hidden;
-    position: relative;
+    position: absolute;
     transition: 1s;
-    /* display: none; */
+    top: 0;
+    transition: 500ms;
+    opacity: 0;
 }
-/* .singleVid:hover .thumbnail2 {
-    display: block;
+.singleVid:hover .thumbnail2 {
+    transition-delay: 500ms;
+    opacity: 1;
+    border-radius: 0px;
 }
 .singleVid2:hover .thumbnail2 {
-    display: block;
+    transition-delay: 500ms;
+    opacity: 1;
+    border-radius: 0px;
 }
 .singleVid3:hover .thumbnail2 {
-    display: block;
+    transition-delay: 500ms;
+    opacity: 1;
+    border-radius: 0px;
 }
 .singleVid4:hover .thumbnail2 {
-    display: block;
+    transition-delay: 500ms;
+    opacity: 1;
+    border-radius: 0px;
 }
 .singleVid5:hover .thumbnail2 {
-    display: block;
-} */
+    transition-delay: 500ms;
+    opacity: 1;
+    border-radius: 0px;
+}
+.volume{
+    position: absolute;
+    top: 0.3vw;
+    right: 0.3vw;
+    background-color: rgb(0, 0, 0, 0.7);
+    width: 2.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    border-radius: 100%;
+}
+.volume svg{
+    width: 55%;
+}
 .duration{
     position: absolute;
     bottom: 5px;
@@ -242,6 +271,11 @@
         font-size: 1.5vw;
         width: 2.5vw;
     }
+    .volume{
+        top: 0.5vw;
+        right: 0.5vw;
+        width: 3.3vw;
+    }
 }
 @media screen and (max-width:850px) {
     .singleVid3{
@@ -280,6 +314,11 @@
         font-size: 2vw;
         width: 3.5vw;
     }
+    .volume{
+        top: 0.7vw;
+        right: 0.7vw;
+        width: 4.5vw;
+    }
 }
 @media screen and (max-width:600px) {
     .singleVid4{
@@ -315,6 +354,11 @@
         font-size: 2.2vw;
         width: 3.8vw;
     }
+    .volume{
+        top: 0.9vw;
+        right: 0.9vw;
+        width: 5.5vw;
+    }
 }
 @media screen and (max-width:450px) {
     .singleVid5{
@@ -347,5 +391,10 @@
         height: 6vw;
         font-size: 4vw;
         width: 6vw;
+    }
+    .volume{
+        top: 1vw;
+        right: 1vw;
+        width: 8vw;
     }
 }

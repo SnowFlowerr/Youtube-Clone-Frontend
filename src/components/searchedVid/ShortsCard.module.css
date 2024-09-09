@@ -1,9 +1,46 @@
+
 .singleVid {
     background-color: rgb(0, 0, 0);
     width: 16.6%;
     padding: 0.5%;
     cursor: pointer;
+    padding-bottom: 5px;
     border-radius: 15px;
+}
+.singleVid2 {
+    background-color: rgb(0, 0, 0);
+    width: 16.6%;
+    padding: 0.5%;
+    cursor: pointer;
+    padding-bottom: 5px;
+    border-radius: 15px;
+}
+.singleVid3 {
+    background-color: rgb(0, 0, 0);
+    width: 16.6%;
+    padding: 0.5%;
+    cursor: pointer;
+    padding-bottom: 5px;
+    border-radius: 15px;
+}
+.singleVid4 {
+    background-color: rgb(0, 0, 0);
+    width: 16.6%;
+    padding: 0.5%;
+    cursor: pointer;
+    padding-bottom: 5px;
+    border-radius: 15px;
+}
+.singleVid5 {
+    background-color: rgb(0, 0, 0);
+    width: 16.6%;
+    padding: 0.5%;
+    cursor: pointer;
+    padding-bottom: 5px;
+    border-radius: 15px;
+}
+.videoCont{
+    position: relative;
 }
 .thumbnail {
     /* height: 13vw; */
@@ -26,13 +63,52 @@
     text-align: center;
     align-content: center;
     overflow: hidden;
-    position: relative;
+    position: absolute;
     transition: 1s;
-    /* display: none; */
+    top: 0;
+    transition: 500ms;
+    opacity: 0;
 }
-/* .singleVid:hover .thumbnail2 {
-    display: block;
-} */
+.singleVid:hover .thumbnail2 {
+    transition-delay: 500ms;
+    opacity: 1;
+    border-radius: 0px;
+}
+.singleVid2:hover .thumbnail2 {
+    transition-delay: 500ms;
+    opacity: 1;
+    border-radius: 0px;
+}
+.singleVid3:hover .thumbnail2 {
+    transition-delay: 500ms;
+    opacity: 1;
+    border-radius: 0px;
+}
+.singleVid4:hover .thumbnail2 {
+    transition-delay: 500ms;
+    opacity: 1;
+    border-radius: 0px;
+}
+.singleVid5:hover .thumbnail2 {
+    transition-delay: 500ms;
+    opacity: 1;
+    border-radius: 0px;
+}
+.volume{
+    position: absolute;
+    top: 0.3vw;
+    right: 0.3vw;
+    background-color: rgb(0, 0, 0, 0.7);
+    width: 2.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    border-radius: 100%;
+}
+.volume svg{
+    width: 55%;
+}
 .duration{
     position: absolute;
     bottom: 5px;
@@ -124,7 +200,19 @@
     -webkit-box-orient: vertical;
 }
 @media screen and (max-width:1100px) {
+    .singleVid2{
+        display: none;
+    }
     .singleVid {
+        width: 20%;
+    }
+    .singleVid3 {
+        width: 20%;
+    }
+    .singleVid4 {
+        width: 20%;
+    }
+    .singleVid5 {
         width: 20%;
     }
     .videoDetail .details {
@@ -148,9 +236,23 @@
     .channel {
         font-size: 1.3vw;
     }
+    .volume{
+        top: 0.5vw;
+        right: 0.5vw;
+        width: 3.3vw;
+    }
 }
 @media screen and (max-width:850px) {
+    .singleVid3{
+        display: none;
+    }
     .singleVid {
+        width: 25%;
+    }
+    .singleVid4 {
+        width: 25%;
+    }
+    .singleVid5 {
         width: 25%;
     }
     .videoDetail .details {
@@ -172,9 +274,20 @@
     .channel {
         font-size: 1.5vw;
     }
+    .volume{
+        top: 0.7vw;
+        right: 0.7vw;
+        width: 4.5vw;
+    }
 }
 @media screen and (max-width:600px) {
+    .singleVid4{
+        display: none;
+    }
     .singleVid {
+        width: 33%;
+    }
+    .singleVid5 {
         width: 33%;
     }
     .videoDetail .details {
@@ -196,8 +309,16 @@
     .channel {
         font-size: 1.9vw;
     }
+    .volume{
+        top: 0.9vw;
+        right: 0.9vw;
+        width: 5.5vw;
+    }
 }
 @media screen and (max-width:450px) {
+    .singleVid5{
+        display: none;
+    }
     .singleVid {
         width: 50%;
         padding: 1%;
@@ -220,5 +341,10 @@
 
     .channel {
         font-size: 3vw;
+    }
+    .volume{
+        top: 1vw;
+        right: 1vw;
+        width: 8vw;
     }
 }
