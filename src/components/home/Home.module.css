@@ -48,6 +48,7 @@
     height: 100%;
     width: 100%;
     top: 0;
+    /* background-color: aquamarine; */
 }
 .videoCont{
     position: relative;

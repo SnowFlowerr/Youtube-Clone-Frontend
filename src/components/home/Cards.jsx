@@ -150,7 +150,7 @@ export default function Cards({ video }) {
                             }
                         </div>
                     </div>
-                    <div className={styles.touchBtn} onTouchStart={handlePlay} onTouchEnd={handleStop}>
+                    <div className={styles.touchBtn} onTouchStart={handlePlay} onTouchEndCapture={handleStop}>
                     </div>
                 </div>
                 {/* } */}
