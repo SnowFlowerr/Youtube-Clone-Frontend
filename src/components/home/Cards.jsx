@@ -176,7 +176,7 @@ export default function Cards({ video }) {
                     </div>
                 </div>
                 <div className={styles.mouseBtn} onMouseLeave={handleStop} onMouseEnter={handlePlay}></div>
-                <div className={styles.touchBtn} onTouchStart={handlePlay} onTouchCancel={handleStop}></div>
+                <div className={styles.touchBtn} onTouchStartCapture={handlePlay} onTouchCancelCapture={handleStop}></div>
             </div>
         </>
     );
