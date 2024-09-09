@@ -98,6 +98,11 @@
     justify-content: center;
     aspect-ratio: 1;
     border-radius: 100%;
+    opacity: 0;
+}
+.mouseBtn:hover .volume {
+    transition-delay: 500ms;
+    opacity: 1;
 }
 .volume svg{
     width: 55%;
