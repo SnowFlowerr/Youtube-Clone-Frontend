@@ -43,13 +43,15 @@
     top: 0;
     display: none;
 }
+
 .mouseBtn{
     position: absolute;
     height: 100%;
     width: 100%;
     top: 0;
-    /* background-color: aquamarine; */
+    /* background-color: aqua; */
 }
+
 .videoCont{
     position: relative;
 }
@@ -101,7 +103,7 @@
     border-radius: 100%;
     opacity: 0;
 }
-.mouseBtn:hover .volume {
+.singleVid:hover .volume {
     transition-delay: 500ms;
     opacity: 1;
 }
