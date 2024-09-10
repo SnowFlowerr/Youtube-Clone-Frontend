@@ -189,7 +189,6 @@ export default function Cards({ video }) {
                             }
                         </div>
                     </div>
-
             </div>
         </>
     );
