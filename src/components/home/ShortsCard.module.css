@@ -1,43 +1,63 @@
 
 .singleVid {
     background-color: rgb(0, 0, 0);
-    width: 16.6%;
-    padding: 0.5%;
+    width: 16%;
+    /* padding: 0.5%; */
     cursor: pointer;
     padding-bottom: 5px;
-    border-radius: 15px;
+    border-radius: 1vw;
+    position: relative;
 }
 .singleVid2 {
     background-color: rgb(0, 0, 0);
-    width: 16.6%;
-    padding: 0.5%;
+    width: 16%;
+    /* padding: 0.5%; */
     cursor: pointer;
     padding-bottom: 5px;
-    border-radius: 15px;
+    border-radius: 1vw;
+    position: relative;
 }
 .singleVid3 {
     background-color: rgb(0, 0, 0);
-    width: 16.6%;
-    padding: 0.5%;
+    width: 16%;
+    /* padding: 0.5%; */
     cursor: pointer;
     padding-bottom: 5px;
-    border-radius: 15px;
+    border-radius: 1vw;
+    position: relative;
 }
 .singleVid4 {
     background-color: rgb(0, 0, 0);
-    width: 16.6%;
-    padding: 0.5%;
+    width: 16%;
+    /* padding: 0.5%; */
     cursor: pointer;
     padding-bottom: 5px;
-    border-radius: 15px;
+    border-radius: 1vw;
+    position: relative;
 }
 .singleVid5 {
     background-color: rgb(0, 0, 0);
-    width: 16.6%;
-    padding: 0.5%;
+    width: 16%;
+    /* padding: 0.5%; */
     cursor: pointer;
     padding-bottom: 5px;
-    border-radius: 15px;
+    border-radius: 1vw;
+    position: relative;
+}
+.touchBtn{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    display: none;
+}
+
+.mouseBtn{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    /* background-color: aqua; */
 }
 .videoCont{
     position: relative;
@@ -105,6 +125,28 @@
     justify-content: center;
     aspect-ratio: 1;
     border-radius: 100%;
+    flex-shrink: 0;
+    opacity: 0;
+}
+.singleVid:hover .volume {
+    transition-delay: 500ms;
+    opacity: 1;
+}
+.singleVid2:hover .volume {
+    transition-delay: 500ms;
+    opacity: 1;
+}
+.singleVid3:hover .volume {
+    transition-delay: 500ms;
+    opacity: 1;
+}
+.singleVid4:hover .volume {
+    transition-delay: 500ms;
+    opacity: 1;
+}
+.singleVid5:hover .volume {
+    transition-delay: 500ms;
+    opacity: 1;
 }
 .volume svg{
     width: 55%;
@@ -204,16 +246,16 @@
         display: none;
     }
     .singleVid {
-        width: 20%;
+        width: 19.5%;
     }
     .singleVid3 {
-        width: 20%;
+        width: 19.5%;
     }
     .singleVid4 {
-        width: 20%;
+        width: 19.5%;
     }
     .singleVid5 {
-        width: 20%;
+        width: 19.5%;
     }
     .videoDetail .details {
         /* width: calc(100% - 4.6vw); */
@@ -247,13 +289,13 @@
         display: none;
     }
     .singleVid {
-        width: 25%;
+        width: 24.5%;
     }
     .singleVid4 {
-        width: 25%;
+        width: 24.5%;
     }
     .singleVid5 {
-        width: 25%;
+        width: 24.5%;
     }
     .videoDetail .details {
         /* width: calc(100% - 4.7vw); */
@@ -278,6 +320,15 @@
         top: 0.7vw;
         right: 0.7vw;
         width: 4.5vw;
+    }
+}
+@media screen and (max-width:750px) {
+    .touchBtn{
+        display: block;
+        /* background-color: antiquewhite; */
+    }
+    .mouseBtn{
+        display: none;
     }
 }
 @media screen and (max-width:600px) {
@@ -320,8 +371,8 @@
         display: none;
     }
     .singleVid {
-        width: 50%;
-        padding: 1%;
+        width: 49%;
+        padding: 0.5%;
     }
     .videoDetail .details {
         /* width: calc(100% - 9vw); */
@@ -343,8 +394,9 @@
         font-size: 3vw;
     }
     .volume{
-        top: 1vw;
-        right: 1vw;
+        top: 2vw;
+        right: 2vw;
         width: 8vw;
+        flex-shrink: 0;
     }
 }

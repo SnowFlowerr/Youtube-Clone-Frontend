@@ -50,6 +50,26 @@
     opacity: 1;
     border-radius: 0px;
 }
+.touchBtn{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    display: none;
+    /* background-color: rgb(162, 189, 189); */
+}
+
+.mouseBtn{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    /* background-color: aqua; */
+}
+.singleVid:hover .volume {
+    transition-delay: 500ms;
+    opacity: 1;
+}
 .volume{
     position: absolute;
     top: 0.3vw;
@@ -61,6 +81,7 @@
     justify-content: center;
     aspect-ratio: 1;
     border-radius: 100%;
+    opacity: 0;
 }
 .volume svg{
     width: 55%;
@@ -194,6 +215,13 @@
         top: 0.8vw;
         right: 0.8vw;
         width: 5vw;
+    }
+    .touchBtn{
+        display: block;
+        /* background-color: antiquewhite; */
+    }
+    .mouseBtn{
+        display: none;
     }
 }
 @media screen and (max-width:450px) {

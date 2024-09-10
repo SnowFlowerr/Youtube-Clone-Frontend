@@ -36,21 +36,6 @@
     border-radius: 15px;
     position: relative;
 }
-.touchBtn{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    display: none;
-}
-
-.mouseBtn{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    /* background-color: aqua; */
-}
 
 .videoCont{
     position: relative;
@@ -102,6 +87,21 @@
     aspect-ratio: 1;
     border-radius: 100%;
     opacity: 0;
+}
+.touchBtn{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    display: none;
+}
+
+.mouseBtn{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    /* background-color: aqua; */
 }
 .singleVid:hover .volume {
     transition-delay: 500ms;
@@ -233,7 +233,9 @@
     margin-bottom: 10px;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 0.5%;
     overflow: hidden;
+    margin-top: 0.5vw;
     /* border: 2px solid rgb(255, 255, 255); */
 }
 .shortsLogo{

@@ -7,6 +7,7 @@
     cursor: pointer;
     padding-bottom: 5px;
     border-radius: 15px;
+    position: relative;
 }
 .videoCont{
     position: relative;
@@ -55,6 +56,27 @@
     justify-content: center;
     aspect-ratio: 1;
     border-radius: 100%;
+    opacity: 0;
+}
+.touchBtn{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    display: none;
+    /* background-color: rgb(98, 103, 103); */
+}
+
+.mouseBtn{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    /* background-color: aqua; */
+}
+.singleVid:hover .volume {
+    transition-delay: 500ms;
+    opacity: 1;
 }
 .volume svg{
     width: 55%;
@@ -243,6 +265,13 @@
         top: 0.8vw;
         right: 0.8vw;
         width: 5vw;
+    }
+    .touchBtn{
+        display: block;
+        /* background-color: antiquewhite; */
+    }
+    .mouseBtn{
+        display: none;
     }
 }
 @media screen and (max-width:450px) {

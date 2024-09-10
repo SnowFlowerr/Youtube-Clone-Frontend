@@ -200,7 +200,8 @@
     justify-content: center;
     flex-wrap: wrap;
     overflow: hidden;
-    row-gap: 15px;
+    gap: 0.5%;
+    row-gap: 2vw;
     /* border: 2px solid rgb(255, 255, 255); */
 }
 .shortsLogo{
