@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Cookies from 'js-cookie'
 import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -26,7 +25,7 @@ export default function Navbar() {
     const suggRef2 = useRef(null);
     const menu = useSelector((state) => state.menu.value)
     const theme = useSelector((state) => state.theme.value)
-    const sign = useSelector((state) => state.sign?.value)
+    const sign = useSelector((state) => state.sign.value)
     const [searchInput, setsearchInput] = useState("")
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -55,7 +54,7 @@ export default function Navbar() {
         if(searchInput){
             async function setSearch1() {
                 try {
-                    const userData = await axios.put(`https://honest-stillness-production.up.railway.app/api/users/addsearchHistory/${searchInput}`,
+                    const userData = await axios.put(`http://localhost:8000/api/users/addsearchHistory/${searchInput}`,
                         {},
                         { withCredentials: true });
                     // console.log(userData.data)
@@ -102,7 +101,7 @@ export default function Navbar() {
         
         async function setSearch1() {
             try {
-                const userData = await axios.put(`https://honest-stillness-production.up.railway.app/api/users/addsearchHistory/${ele}`,
+                const userData = await axios.put(`http://localhost:8000/api/users/addsearchHistory/${ele}`,
                     {},
                     { withCredentials: true });
                 // console.log(userData.data)
@@ -125,11 +124,18 @@ export default function Navbar() {
             suggRef2.current.style.visibility = "visible"
         }
     }
-    function handleLogout() {
-        Cookies.remove('access_token', { path: '/' });
-        dispatch(setSignout())
-        // localStorage.removeItem("userData")
-        // window.location.reload()
+    async function handleLogout() {
+        // Cookies.remove('access_token', { path: '/' });
+        try {
+            const userData = await axios.delete("http://localhost:8000/api/auth/logout", { withCredentials: true });
+
+            dispatch(setSignout())
+            window.location.reload()
+        }
+        catch (err) {
+            console.log(err?.message)
+        }
+
     }
     return (
         <div className={styles.mainNav}>

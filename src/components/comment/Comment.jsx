@@ -17,7 +17,7 @@ export default function Comment({ videoId,isshorts }) {
         async function getComments() {
             if(videoId){
                 try {
-                    const comm = await axios.get(`https://honest-stillness-production.up.railway.app/api/comments/${videoId}`)
+                    const comm = await axios.get(`http://localhost:8000/api/comments/${videoId}`)
                     console.log(comm.data)
                     setComments(comm.data)
                 }
@@ -39,7 +39,7 @@ export default function Comment({ videoId,isshorts }) {
         e.preventDefault()
         if (comment) {
             try {
-                await axios.post(`https://honest-stillness-production.up.railway.app/api/comments/add/${videoId}`, { comment: comment }, { withCredentials: true })
+                await axios.post(`http://localhost:8000/api/comments/add/${videoId}`, { comment: comment }, { withCredentials: true })
             }
             catch (err) {
                 console.log(err)

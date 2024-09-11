@@ -11,7 +11,7 @@ export default function Subscribers() {
     useEffect(() => {
         async function getSubs() {
             try {
-                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/users/getsubscriber",
+                const userData = await axios.get("http://localhost:8000/api/users/getsubscriber",
                     { withCredentials: true });
                 // console.log(userData.data?.followedUser)
                 setSubsc(userData.data?.followedUser)

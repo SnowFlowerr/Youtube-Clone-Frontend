@@ -28,7 +28,7 @@ function App() {
   useEffect(() => {
     async function currentUser() {
         try {
-            const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get`,
+            const userD = await axios.get(`http://localhost:8000/api/users/get`,
                 { withCredentials: true }
             )
             // console.log(userD)
