@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import Emoji from '../emoji/Emoji'
 import styles from "./Comment.module.css"
 
-export default function Comment({ videoId }) {
+export default function Comment({ videoId,isshorts }) {
     const [isEmoji, setIsemoji] = useState(false)
     const [isComment, setisComment] = useState(false)
     const [comment, setComment] = useState(null)
@@ -15,13 +15,15 @@ export default function Comment({ videoId }) {
 
     useEffect(() => {
         async function getComments() {
-            try {
-                const comm = await axios.get(`https://honest-stillness-production.up.railway.app/api/comments/${videoId}`)
-                // console.log(comm.data)
-                setComments(comm.data)
-            }
-            catch (err) {
-                console.log(err)
+            if(videoId){
+                try {
+                    const comm = await axios.get(`https://honest-stillness-production.up.railway.app/api/comments/${videoId}`)
+                    // console.log(comm.data)
+                    setComments(comm.data)
+                }
+                catch (err) {
+                    console.log(err)
+                }
             }
         }
         getComments()
@@ -35,7 +37,7 @@ export default function Comment({ videoId }) {
 
     async function postComments(e) {
         e.preventDefault()
-        if(comment){
+        if (comment) {
             try {
                 await axios.post(`https://honest-stillness-production.up.railway.app/api/comments/add/${videoId}`, { comment: comment }, { withCredentials: true })
             }
@@ -56,41 +58,43 @@ export default function Comment({ videoId }) {
         setComment("")
         setisComment(false)
     }
-    useEffect(()=>{
-        if(comment!==null){
+    useEffect(() => {
+        if (comment !== null) {
             autosize()
         }
-    },[comment])
+    }, [comment])
     return (
         <div className={styles.mainBox}>
-            <div className={styles.heading}>
-                Comments
-            </div>
-            <div className={styles.addComments}>
-                <div className={styles.userIcon}>
-                    <img src={sign?.img} width="100%" height="100%" alt="thumbnail" />
+            <div className={styles.enterDet} style={isshorts?theme?{backgroundColor:"rgb(45, 45, 45)"}:{ backgroundColor: "rgb(220, 220, 220)" }:theme?{backgroundColor:"black"}:{backgroundColor:"white"}}>
+                <div className={styles.heading}>
+                    Comments
                 </div>
-                <form className={styles.commentInput}>
-                    <textarea type="text" placeholder='Add a comment...' value={comment} onClick={() => setisComment(true)} onChange={handleComment} ref={commentRef} />
-                </form>
-            </div>
-            {isComment &&
-                <div className={styles.commentOption}>
-                    <div className={styles.emoji}>
-                        <div className={styles.emojiIcon}>
-                            <i className="fa-solid fa-icons" onClick={() => setIsemoji(!isEmoji)}></i>
+                <div className={styles.addComments}>
+                    <div className={styles.userIcon}>
+                        <img src={sign?.img} width="100%" height="100%" alt="thumbnail" />
+                    </div>
+                    <form className={styles.commentInput}>
+                        <textarea type="text" placeholder='Add a comment...' value={comment} onClick={() => setisComment(true)} onChange={handleComment} ref={commentRef} />
+                    </form>
+                </div>
+                {isComment &&
+                    <div className={styles.commentOption}>
+                        <div className={styles.emoji}>
+                            <div className={styles.emojiIcon}>
+                                <i className="fa-solid fa-icons" onClick={() => setIsemoji(!isEmoji)}></i>
+                            </div>
+
                         </div>
-                        
+                        <div className={styles.emojiBtn}>
+                            <button onClick={handleCancel}>Cancel</button>
+                            <button onClick={postComments}>Comment</button>
+                        </div>
+                        <Emoji setIsemoji={setIsemoji} isEmoji={isEmoji} setComment={setComment} comment={comment} commentRef={commentRef}></Emoji>
                     </div>
-                    <div className={styles.emojiBtn}>
-                        <button onClick={handleCancel}>Cancel</button>
-                        <button onClick={postComments}>Comment</button>
-                    </div>
-                    <Emoji setIsemoji={setIsemoji} isEmoji={isEmoji} setComment={setComment} comment={comment} commentRef={commentRef}></Emoji>
+                }
+                <div className={styles.divLine}>
+                    <hr />
                 </div>
-            }
-            <div className={styles.divLine}>
-                <hr />
             </div>
             <div className={styles.comments}>
                 {

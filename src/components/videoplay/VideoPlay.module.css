@@ -187,8 +187,8 @@
     min-height: 16px;
 }
 .comment{
-    padding: 20px 0px;
-    height: 100dvh;
+    /* margin-top: 20px; */
+    height: calc(100dvh - 60px);
     overflow: auto;
 }
 @media screen and (max-width:830px) {
