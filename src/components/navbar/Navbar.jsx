@@ -127,10 +127,12 @@ export default function Navbar() {
     async function handleLogout() {
         // Cookies.remove('access_token', { path: '/' });
         try {
-            const userData = await axios.delete("https://honest-stillness-production.up.railway.app/api/auth/logout", { withCredentials: true });
+            const userData = await axios.post("https://honest-stillness-production.up.railway.app/api/auth/logout", {}, { withCredentials: true });
 
             dispatch(setSignout())
-            window.location.reload()
+            console.log(userData)
+            
+            // window.location.reload()
         }
         catch (err) {
             console.log(err?.message)
