@@ -58,7 +58,7 @@ export default function Navbar() {
                         {},
                         { withCredentials: true });
                     // console.log(userData.data)
-                    setSearch(userData?.data)
+                    setSearch([...userData?.data])
                 }
                 catch (err) {
                     console.log(err)
@@ -105,7 +105,7 @@ export default function Navbar() {
                     {},
                     { withCredentials: true });
                 // console.log(userData.data)
-                setSearch(userData?.data)
+                setSearch([...userData?.data])
             }
             catch (err) {
                 console.log(err)
@@ -130,9 +130,7 @@ export default function Navbar() {
             const userData = await axios.post("https://honest-stillness-production.up.railway.app/api/auth/logout", {}, { withCredentials: true });
 
             dispatch(setSignout())
-            console.log(userData)
-            
-            // window.location.reload()
+            window.location.reload()
         }
         catch (err) {
             console.log(err?.message)

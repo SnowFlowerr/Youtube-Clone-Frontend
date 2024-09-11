@@ -33,7 +33,7 @@ function App() {
             )
             // console.log(userD)
             if(userD?.data?.success===false){
-                Cookies.remove('access_token', { path: '/' });
+              const userData = await axios.post("https://honest-stillness-production.up.railway.app/api/auth/logout", {}, { withCredentials: true });
                 dispatch(setSignout())
             }
             else{

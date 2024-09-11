@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import styles from "./SearchHistory.module.css";
 
-export default function SearchHistory({ handleSuggestion,search,setSearch,handleSubmit }) {
+export default function SearchHistory({ handleSuggestion,search,setSearch }) {
     
 
     useEffect(()=>{
@@ -11,14 +11,14 @@ export default function SearchHistory({ handleSuggestion,search,setSearch,handle
                 const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/users/getsearchHistory",
                     { withCredentials: true });
                 // console.log(userData.data)
-                setSearch(userData?.data)
+                    setSearch([...userData?.data])
             }
             catch (err) {
                 console.log(err)
             }
         }
         getSearch()
-    },[search])
+    },[])
 
     async function delSearch(ele) {
         try {
@@ -35,7 +35,7 @@ export default function SearchHistory({ handleSuggestion,search,setSearch,handle
         <>
             {search.length !== 0 &&
                 <div className={styles.mainBox}>
-                    {search.toReversed().map((ele, ind) =>
+                    {search.map((ele, ind) =>
                         <div key={ind}  className={styles.searches}>
                             <div onClick={() =>handleSuggestion(ele)} className={styles.searchText}>
                             <div><i className="fa-solid fa-magnifying-glass"></i></div> <div>{ele}</div>
