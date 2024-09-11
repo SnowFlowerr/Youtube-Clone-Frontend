@@ -303,7 +303,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
             </span>
             {index !== length &&
                 <div className={isComment ? styles.comments2 : styles.comments}>
-                    <Comment></Comment>
+                    <Comment videoId={data?._id}></Comment>
                     <div className={styles.cross} onClick={() => setisComment(false)}><i className="fa-solid fa-xmark"></i></div>
                 </div>
             }

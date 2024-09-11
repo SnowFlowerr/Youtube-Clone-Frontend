@@ -5,7 +5,7 @@
 }
 .mainLogo{
     position: fixed;
-    z-index: 40;
+    z-index: 20;
     top: 10px;
     left: 10px;
     display: none;
@@ -223,17 +223,16 @@
     height: 100%;
     border-radius: 10px;
     overflow: hidden;
-    transition: 0.5s;
 }
 .comments2{
     width: 420px;
-    min-width: 420px;
+    /* min-width: 420px; */
     background-color: rgb(69, 69, 69);
     height: 100%;
     margin-left: 5px;
     border-radius: 10px;
-    padding: 20px 10px;
-    transition: 0.5s;
+    padding: 20px;
+    overflow: auto;
 }
 .cross{
     display: none;
@@ -278,18 +277,18 @@
         height: 100%;
         border-radius: 10px;
         overflow: hidden;
-        transition: 0.5s;
+        /* transition: 0.5s; */
         position: absolute;
     }
     .comments2{
         position: absolute;
         width: 420px;
-        min-width: 420px;
+        /* min-width: 420px; */
         background-color: rgb(69, 69, 69);
         height: 100%;
         border-radius: 10px;
-        padding: 20px 10px;
-        transition: 0.5s;
+        /* padding: 20px 10px; */
+        /* transition: 0.5s; */
         z-index: 20;
         margin-left: 0px;
     }
@@ -302,8 +301,8 @@
         text-align: center;
         border-radius: 100%;
         position: absolute;
-        top: 5px;
-        right: 5px;
+        top: 10px;
+        right: 10px;
     }
     .cross:hover{
         background-color: #696969;
@@ -378,6 +377,9 @@
     }
     .comments2{
         border-radius: 0px;
+        width:100%;
+        padding: 10px;
+        margin-left: 0px;
     }
     .details{
         right: 0%;

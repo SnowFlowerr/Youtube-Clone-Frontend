@@ -26,7 +26,7 @@ export default function Emoji({ setIsemoji, isEmoji, setComment, comment, commen
     }
     return (
         <div className={styles.emoji}>
-            <EmojiPicker theme={theme ? "dark" : "light"} reactionsDefaultOpen={true} open={isEmoji} onEmojiClick={(emojiData) => handleEmoji(emojiData)} />
+            <EmojiPicker theme={theme ? "dark" : "light"} reactionsDefaultOpen={true} open={isEmoji} onEmojiClick={(emojiData) => handleEmoji(emojiData)} width={"100%"}/>
         </div>
     )
 }

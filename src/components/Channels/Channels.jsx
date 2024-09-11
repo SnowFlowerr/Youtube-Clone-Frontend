@@ -3,13 +3,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { darkTheme, lightTheme } from "../../themes";
+import EditVideo from "../editVideo/EditVideo";
 import Navbar from "../navbar/Navbar";
 import Sidenav from "../navbar/Sidenav";
 import Progress from "../upload/Progress";
 import Cards from "./Cards";
 import styles from "./Channels.module.css";
 import ShortsCard from "./ShortsCard";
-import EditVideo from "../editVideo/EditVideo";
 
 export default function Channels() {
     const [user, setUser] = useState("");
@@ -189,6 +189,7 @@ export default function Channels() {
 
     async function handleSubmit(e) {
         e.preventDefault()
+        setisaboutChannel(false)
         try {
             const userD = await axios.put(
                 `https://honest-stillness-production.up.railway.app/api/users/update/${id}`,
@@ -196,10 +197,10 @@ export default function Channels() {
                 { withCredentials: true }
             );
             setUser(userD.data);
-            setisaboutChannel(false)
         } catch (err) {
             console.log(err);
         }
+        
     }
 
     async function handleSubscribe() {

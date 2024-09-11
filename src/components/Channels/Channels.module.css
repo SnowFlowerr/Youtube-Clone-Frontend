@@ -71,6 +71,7 @@
     align-content: center;
     text-align: center;
     font-size: 16px;
+    cursor: pointer;
 }
 .userIcon:hover .addIcon{
     display: block;
@@ -175,6 +176,7 @@
     padding: 10px 20px;
     width: fit-content;
     border-radius: 50px;
+    cursor: pointer;
 }
 .option{
     margin-top: 10px;

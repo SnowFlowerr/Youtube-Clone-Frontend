@@ -1,13 +1,14 @@
 .mainBox{
-    overflow: auto;
-    height: 100vh;
-    scroll-behavior: smooth;
-    padding-bottom: 100px;
+    /* overflow: auto; */
+    /* height: 100vh; */
+    /* scroll-behavior: smooth; */
+    /* padding-bottom: 100px; */
 }
 .heading{
     font-size: 25px;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: left;
 }
 .addComments{
     display: flex;
@@ -15,15 +16,15 @@
     gap: 10px;
 }
 .userIcon{
-    height: 45px;
-    width: 45px;
-    min-width: 45px;
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
     aspect-ratio: 1;
     background-color: gray;
     border-radius: 100%;
     overflow: hidden;
 }
-.commentInput,.commentInput2{
+.commentInput{
     width: 100%;
     height: fit-content;
 }
@@ -32,6 +33,7 @@
     padding: 0;
     min-height: 25px;
     height: 25px;
+    /* max-height: 25px; */
     margin: 0;
     font-size: 18px;
     outline: none;
@@ -40,32 +42,20 @@
     background-color: transparent;
     color: white;
     resize:none;
-    transition: 1s linear;
+    transition: none;
     scroll-behavior: smooth;
 }
-.commentInput2 textarea{
-    width: 100%;
-    padding: 0;
-    min-height: 25px;
-    height: 100px;
-    margin: 0;
-    font-size: 18px;
-    outline: none;
-    border: none;
-    border-bottom: 1px solid gray;
-    background-color: transparent;
-    color: white;
-    resize:none;
-    transition: 1s linear;
-    scroll-behavior: smooth;
+.commentInput textarea:focus{
+    border-bottom: 1px solid rgb(255, 255, 255);
 }
 .commentOption{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    position: relative;
 }
 .emoji{
-    position: relative;
     padding-left: 60px;
     /* top: 50px; */
 }
@@ -96,15 +86,20 @@
     border-radius: 50px;
     margin-left: 10px;
 }
+.divLine{
+    height: 40px;
+    align-content: center;
+    /* border: 1px solid white; */
+}
 .comments{
-    margin-top: 15px;
+    margin-top: 0px;
 }
 .singleComment{
     width: 100%;
     display: flex;
     gap: 10px;
     /* align-items: center; */
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .userComments{
     width: 100%;
@@ -112,7 +107,7 @@
 }
 .username{
     width: 100%;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
 }
 .commentText{
@@ -120,13 +115,20 @@
     font-size: 14px;
     font-weight: 500;
     margin-top: 3px;
+    /* border: 1px solid white; */
+    /* padding-left: 10px; */
+}
+.commLine{
+    min-height: 16px;
+    word-break: break-all;
 }
 .likeDislike{
     width: 100%;
     display: flex;
-    gap: 10px;
-    margin-top: 5px;
-    font-size: 16px;
+    gap: 20px;
+    margin-top: 10px;
+    margin-left: -5px;
+    font-size: 18px;
     font-weight: 200;
 }
 .likeDislike > div{
@@ -135,5 +137,85 @@
     gap: 5px;
 }
 .likeDislike span{
-    font-size: 20px;
+    font-size: 19px;
+}
+@media screen and (max-width:550px) {
+    .heading{
+        font-size: 25px;
+        margin-bottom: 20px;
+    }
+    .addComments{
+        gap: 8px;
+    }
+    .userIcon{
+        height: 28px;
+        width: 28px;
+        min-width: 28px;
+        aspect-ratio: 1;
+        flex-shrink: 0;
+    }
+    .commentInput textarea{
+        width: 100%;
+        padding: 0;
+        min-height: 25px;
+        height: 25px;
+        /* max-height: 25px; */
+        margin: 0;
+        font-size: 14px;
+    }
+    .emoji{
+        padding-left: 30px;
+    }
+    .emojiIcon{
+        height: 35px;
+        min-width: 35px;
+        width: 35px;
+        min-height: 35px;
+        font-size: 15px;
+    }
+    .emoji i{
+        height: 35px;
+        min-width: 35px;
+        width: 35px;
+        min-height: 35px;
+    }
+    .emojiBtn button{
+        height: 28px;
+        font-size: 12px;
+        padding: 3px 8px;
+        border-radius: 50px;
+        margin-left: 1.5vw;
+    }
+    .comments{
+        /* margin-top: 15px; */
+    }
+    .singleComment{
+        gap: 8px;
+        margin-top: 15px;
+    }
+    .username{
+        font-size: 14px;
+    }
+    .commentText{
+        font-size: 14px;
+        font-weight: 500;
+        margin-top: 3px;
+    }
+    .commLine{
+        min-height: 14px;
+    }
+    .likeDislike{
+        gap: 20px;
+        margin-top: 10px;
+        font-size: 17px;
+        font-weight: 200;
+    }
+    .likeDislike > div{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .likeDislike span{
+        font-size: 18px;
+    }
 }

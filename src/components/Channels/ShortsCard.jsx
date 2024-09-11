@@ -136,10 +136,10 @@ export default function ShortsCard({video , index, seteditingData, setisEditing,
                 </div>
                 <div className={styles.mouseBtn} onMouseEnter={handlePlay} onClick={() => {
                             handleStop();
-                            navigate(`/player/${video?._id}`);
+                            navigate(`/shorts/${video?._id}`);
                         }}>
                         </div>
-                        <div className={styles.touchBtn} onTouchStart={handlePlay} onTouchEnd={handleStop} onClick={() => { handleStop(); navigate(`/player/${video?._id}`); }}>
+                        <div className={styles.touchBtn} onTouchStart={handlePlay} onTouchEnd={handleStop} onClick={() => { handleStop(); navigate(`/shorts/${video?._id}`); }}>
                 </div>
                 {/* } */}
                 <div className={styles.videoDetail} style={theme ? darkTheme : lightTheme}>

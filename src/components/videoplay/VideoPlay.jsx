@@ -371,7 +371,7 @@ export default function VideoPlay() {
                         }
                     </div>
                     <div className={styles.comment}>
-                        <Comment></Comment>
+                        <Comment videoId={id}></Comment>
                     </div>
                 </div>
 

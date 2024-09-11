@@ -1,8 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import styles from "./EditVideo.module.css"
 import Progress from '../upload/Progress'
+import styles from "./EditVideo.module.css"
 
 export default function EditVideo({ data, isShort, setisEditing }) {
     const textRef = useRef()

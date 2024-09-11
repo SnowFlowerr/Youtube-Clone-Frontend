@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from "./Subscribers.module.css";
 
 export default function Subscribers() {
 
-    const [subsc, setSubsc] = useState([2, 3]);
+    const [subsc, setSubsc] = useState([]);
+    const navigate=useNavigate()
 
     useEffect(() => {
         async function getSubs() {
@@ -27,7 +29,7 @@ export default function Subscribers() {
                 subsc?.map((subs, index) =>
                     <div key={index} >
                         {subs._id &&
-                        <div className={styles.main}>
+                        <div className={styles.main} onClick={()=>navigate(`/channels/${subs._id}/featured`)}>
                             <div className={styles.Channelicon}>
                                 <img src={subs?.img} alt="" height="100%" width="100%"/>
                             </div>

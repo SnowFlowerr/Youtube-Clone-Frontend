@@ -1,13 +1,50 @@
+import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
-import styles from "./Comment.module.css"
+import { useSelector } from 'react-redux'
 import Emoji from '../emoji/Emoji'
+import styles from "./Comment.module.css"
 
-export default function Comment() {
+export default function Comment({ videoId }) {
     const [isEmoji, setIsemoji] = useState(false)
     const [isComment, setisComment] = useState(false)
-    const [comment, setComment] = useState("")
+    const [comment, setComment] = useState(null)
     const commentRef = useRef(null)
-    const [comments, setComments] = useState([1, 2, 3, 4, 2, 3, 4, 2, 3, 4, 2, 3, 4, 2, 3, 4])
+    const sign = useSelector((state) => state.sign?.value)
+    const theme = useSelector((state) => state.theme.value);
+    const [comments, setComments] = useState([])
+
+    useEffect(() => {
+        async function getComments() {
+            try {
+                const comm = await axios.get(`https://honest-stillness-production.up.railway.app/api/comments/${videoId}`)
+                // console.log(comm.data)
+                setComments(comm.data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        getComments()
+    },)
+
+    function autosize() {
+        commentRef.current.style.cssText = `min-height:25px; height: 25px;`;
+        commentRef.current.style.cssText = 'height:' + commentRef.current.scrollHeight + 'px';
+        commentRef.current.style.color = `${theme ? "white" : "black"}`;
+    }
+
+    async function postComments(e) {
+        e.preventDefault()
+        if(comment){
+            try {
+                await axios.post(`https://honest-stillness-production.up.railway.app/api/comments/add/${videoId}`, { comment: comment }, { withCredentials: true })
+            }
+            catch (err) {
+                console.log(err)
+            }
+            handleCancel(e)
+        }
+    }
 
     function handleComment(e) {
         e.preventDefault()
@@ -19,6 +56,11 @@ export default function Comment() {
         setComment("")
         setisComment(false)
     }
+    useEffect(()=>{
+        if(comment!==null){
+            autosize()
+        }
+    },[comment])
     return (
         <div className={styles.mainBox}>
             <div className={styles.heading}>
@@ -26,9 +68,9 @@ export default function Comment() {
             </div>
             <div className={styles.addComments}>
                 <div className={styles.userIcon}>
-                <img src={"https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0dXJlfGVufDB8MHwwfHx8MA%3D%3D"} width="100%" height="100%" alt="thumbnail" />
+                    <img src={sign?.img} width="100%" height="100%" alt="thumbnail" />
                 </div>
-                <form className={isComment ? styles.commentInput2 : styles.commentInput}>
+                <form className={styles.commentInput}>
                     <textarea type="text" placeholder='Add a comment...' value={comment} onClick={() => setisComment(true)} onChange={handleComment} ref={commentRef} />
                 </form>
             </div>
@@ -38,27 +80,33 @@ export default function Comment() {
                         <div className={styles.emojiIcon}>
                             <i className="fa-solid fa-icons" onClick={() => setIsemoji(!isEmoji)}></i>
                         </div>
-                        <Emoji setIsemoji={setIsemoji} isEmoji={isEmoji} setComment={setComment} comment={comment} commentRef={commentRef}></Emoji>
+                        
                     </div>
                     <div className={styles.emojiBtn}>
                         <button onClick={handleCancel}>Cancel</button>
-                        <button>Comment</button>
+                        <button onClick={postComments}>Comment</button>
                     </div>
+                    <Emoji setIsemoji={setIsemoji} isEmoji={isEmoji} setComment={setComment} comment={comment} commentRef={commentRef}></Emoji>
                 </div>
             }
+            <div className={styles.divLine}>
+                <hr />
+            </div>
             <div className={styles.comments}>
                 {
-                    comments.map((data,index) =>
+                    comments.map((data, index) =>
                         <div key={index} className={styles.singleComment}>
                             <div className={styles.userIcon}>
-                            <img src={"https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0dXJlfGVufDB8MHwwfHx8MA%3D%3D"} width="100%" height="100%" alt="thumbnail" />
+                                <img src={data?.userId?.img} width="100%" height="100%" alt="thumbnail" />
                             </div>
                             <div className={styles.userComments}>
                                 <div className={styles.username}>
-                                    @name
+                                    @{data?.userId?.username}
                                 </div>
                                 <div className={styles.commentText}>
-                                    hi i am ...
+                                    {data?.comment?.split("\n").map((line, index) =>
+                                        <div key={index} className={styles.commLine}>{line}</div>
+                                    )}
                                 </div>
                                 <div className={styles.likeDislike}>
                                     <div>

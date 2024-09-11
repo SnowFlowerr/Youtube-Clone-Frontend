@@ -188,6 +188,8 @@
 }
 .comment{
     padding: 20px 0px;
+    height: 100dvh;
+    overflow: auto;
 }
 @media screen and (max-width:830px) {
     .videoDetails {
