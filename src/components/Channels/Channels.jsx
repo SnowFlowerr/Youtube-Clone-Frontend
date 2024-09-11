@@ -49,7 +49,7 @@ export default function Channels() {
     async function currentUser() {
         try {
             const userD = await axios.get(
-                `http://localhost:8000/api/users/get/${id}`,
+                `https://honest-stillness-production.up.railway.app/api/users/get/${id}`,
                 { withCredentials: true }
             );
             setUser(userD.data);
@@ -65,7 +65,7 @@ export default function Channels() {
 
     async function issubscribe() {
         try {
-            const userD = await axios.get(`http://localhost:8000/api/users/issubscribe/${id}`,
+            const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/issubscribe/${id}`,
                 { withCredentials: true }
             )
             setisSubs(userD.data)
@@ -78,7 +78,7 @@ export default function Channels() {
     async function updateUser(url) {
         try {
             const userD = await axios.put(
-                `http://localhost:8000/api/users/update/${id}`,
+                `https://honest-stillness-production.up.railway.app/api/users/update/${id}`,
                 { bannerImg: url },
                 { withCredentials: true }
             );
@@ -92,7 +92,7 @@ export default function Channels() {
     async function updateIcon(url) {
         try {
             const userD = await axios.put(
-                `http://localhost:8000/api/users/update/${id}`,
+                `https://honest-stillness-production.up.railway.app/api/users/update/${id}`,
                 { img: url },
                 { withCredentials: true }
             );
@@ -107,7 +107,7 @@ export default function Channels() {
     async function currentShorts() {
         try {
             const short = await axios.get(
-                `http://localhost:8000/api/shorts/allcurrentshorts/${id}?limit=${20}`,
+                `https://honest-stillness-production.up.railway.app/api/shorts/allcurrentshorts/${id}?limit=${20}`,
                 { withCredentials: true }
             );
             setShorts(short.data);
@@ -119,7 +119,7 @@ export default function Channels() {
     async function currentVideos() {
         try {
             const short = await axios.get(
-                `http://localhost:8000/api/videos/allcurrentvideos/${id}?limit=20`,
+                `https://honest-stillness-production.up.railway.app/api/videos/allcurrentvideos/${id}?limit=20`,
                 { withCredentials: true }
             );
             setVideos(short.data);
@@ -192,7 +192,7 @@ export default function Channels() {
         setisaboutChannel(false)
         try {
             const userD = await axios.put(
-                `http://localhost:8000/api/users/update/${id}`,
+                `https://honest-stillness-production.up.railway.app/api/users/update/${id}`,
                 { channelInfo: aboutChannel },
                 { withCredentials: true }
             );
@@ -206,7 +206,7 @@ export default function Channels() {
     async function handleSubscribe() {
         try {
             if (isSubs) {
-                await axios.put(`http://localhost:8000/api/users/unsubscribe/${id}`,
+                await axios.put(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${id}`,
                     {},
                     { withCredentials: true }
                 );
@@ -214,7 +214,7 @@ export default function Channels() {
                 console.log("Unsubscribe")
             }
             else {
-                await axios.put(`http://localhost:8000/api/users/subscribe/${id}`,
+                await axios.put(`https://honest-stillness-production.up.railway.app/api/users/subscribe/${id}`,
                     {},
                     { withCredentials: true }
                 );
