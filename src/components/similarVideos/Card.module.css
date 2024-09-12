@@ -143,12 +143,12 @@
 }
 
 .title {
-    font-size: 1.2vw;
+    font-size: 1.1vw;
     /* border: 1px solid white; */
     max-width: 100%;
-    font-weight: 600;
+    font-weight: 700;
     /* max-height: 2.8vw; */
-    /* margin-top: 0.2vw; */
+    margin-top: 0.2vw;
     word-wrap: break-word;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -21,6 +21,7 @@ export default function VideoPlay() {
     const [isSaved, setisSaved] = useState(false)
     const [isDislike, setisDislike] = useState(false)
     const [isComment, setisComment] = useState(false)
+    const [isDesc, setisDesc] = useState(false)
     const [videoData, setvideoData] = useState({})
     const [userData, setuserData] = useState({})
     const [duration, setDuration] = useState(0)
@@ -362,19 +363,24 @@ export default function VideoPlay() {
                         </div>
 
                     </div>
-                    <div className={styles.descript} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
+                    <div className={styles.descript} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }} onClick={()=>!isDesc&&setisDesc(true)}>
                         <div><b>{view} views</b></div>
-                        {videoData?.description &&
-                            <>
+                        {isDesc &&
+                        <>
+                            <div className={styles.desc}>
                                 <br />
-                                {videoData?.description?.split("\n").map((line, index) =>
+                                {videoData?.description ?
+                                videoData?.description?.split("\n").map((line, index) =>
                                     <div key={index} className={styles.descLine}>{line}</div>
-                                )}
-                            </>
+                                )
+                                :"No Discription Available"}
+                            </div>
+                        <div className={styles.cross} onClick={() => setisDesc(false)}><i className="fa-solid fa-xmark"></i></div>
+                        </>
                         }
                     </div>
-                    <div className={styles.comment}>
-                        {<Comment videoId={id}></Comment>}
+                    <div className={styles.comment} onClick={()=>!isComment&&setisComment(true)} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
+                        {isComment ? <Comment videoId={id} toClose={setisComment}></Comment>:"Comment"}
                     </div>
                 </div>
 

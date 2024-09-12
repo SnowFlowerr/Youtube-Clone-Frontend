@@ -293,23 +293,6 @@
         z-index: 20;
         margin-left: 0px;
     }
-    .cross{
-        display: block;
-        height: 40px;
-        width: 40px;
-        min-width: 40px;
-        align-content: center;
-        text-align: center;
-        font-size: 20px;
-        border-radius: 100%;
-        /* margin-top: -5px; */
-        position: absolute;
-        right: -5px;
-        top: -2px;
-    }
-    .cross:hover{
-        background-color: #696969;
-    }
 }
 @media screen and (max-width:750px) {
     .nav{

@@ -4,9 +4,9 @@
 }
 .enterDet{
     position: sticky;
-    top: -2px;
+    top: 0px;
     z-index: 20;
-    padding-top: 20px;
+    padding-top: 10px;
 }
 .heading{
     font-size: 25px;
@@ -15,6 +15,24 @@
     text-align: left;
     width: 100%;
     position: relative;
+}
+
+.cross{
+    display: block;
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    align-content: center;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 100%;
+    /* margin-top: -5px; */
+    position: absolute;
+    right: -5px;
+    top: -2px;
+}
+.cross:hover{
+    background-color: #696969;
 }
 .addComments{
     display: flex;
@@ -111,11 +129,29 @@
 .userComments{
     width: 100%;
     text-align: left;
+    position: relative;
 }
 .username{
     width: 100%;
     font-size: 15px;
     font-weight: 700;
+}
+.extraOpt{
+    position: absolute;
+    right: 0px;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    color: white;
+    align-content: center;
+    text-align: center;
+}
+.extraOpt:hover{
+    background-color: #696969;
+}
+.opt{
+    padding: 5px;
 }
 .commentText{
     width: 100%;
@@ -147,6 +183,11 @@
     font-size: 19px;
 }
 @media screen and (max-width:550px) {
+    .enterDet{
+        position: sticky;
+        z-index: 20;
+        padding-top: 10px;
+    }
     .heading{
         font-size: 25px;
         margin-bottom: 20px;

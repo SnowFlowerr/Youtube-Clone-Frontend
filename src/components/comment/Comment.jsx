@@ -4,9 +4,10 @@ import { useSelector } from 'react-redux'
 import Emoji from '../emoji/Emoji'
 import styles from "./Comment.module.css"
 
-export default function Comment({ videoId,isshorts,close }) {
+export default function Comment({ videoId,isshorts,toClose }) {
     const [isEmoji, setIsemoji] = useState(false)
     const [isComment, setisComment] = useState(false)
+    const [option, setOption] = useState(false)
     const [comment, setComment] = useState(undefined)
     const commentRef = useRef(null)
     const sign = useSelector((state) => state.sign?.value)
@@ -67,9 +68,9 @@ export default function Comment({ videoId,isshorts,close }) {
     }, [comment])
     return (
         <div className={styles.mainBox}>
-            <div className={styles.enterDet} style={isshorts?theme?{backgroundColor:"rgb(45, 45, 45)"}:{ backgroundColor: "rgb(220, 220, 220)" }:theme?{backgroundColor:"black"}:{backgroundColor:"white"}}>
+            <div className={styles.enterDet} style={isshorts?theme?{backgroundColor:"rgb(45, 45, 45)"}:{ backgroundColor: "rgb(220, 220, 220)" }:theme?{backgroundColor:" rgb(36, 38, 38)"}:{backgroundColor:"rgb(220, 220, 220)"}}>
                 <div className={styles.heading}>
-                    Comments {close}
+                    Comments <div className={styles.cross} onClick={() => toClose(false)}><i className="fa-solid fa-xmark"></i></div>
                 </div>
                 <div className={styles.addComments}>
                     <div className={styles.userIcon}>
@@ -108,6 +109,7 @@ export default function Comment({ videoId,isshorts,close }) {
                             <div className={styles.userComments}>
                                 <div className={styles.username}>
                                     @{data?.userId?.username}
+                                    
                                 </div>
                                 <div className={styles.commentText}>
                                     {data?.comment?.split("\n").map((line, index) =>
@@ -122,6 +124,13 @@ export default function Comment({ videoId,isshorts,close }) {
                                         <span><i className="fa-regular fa-thumbs-down fa-flip-horizontal"></i></span> 0
                                     </div>
                                 </div>
+                                <div className={styles.extraOpt} onClick={()=> !option&&setOption(true)}>
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </div>
+                                {/* {option&&
+                                    <div className={styles.opt}>
+                                        delete
+                                    </div>} */}
                             </div>
                         </div>
                     )
@@ -130,3 +139,4 @@ export default function Comment({ videoId,isshorts,close }) {
         </div>
     )
 }
+
