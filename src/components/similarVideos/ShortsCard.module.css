@@ -1,44 +1,52 @@
-
 .singleVid {
     background-color: rgb(0, 0, 0);
-    width: 16%;
+    width: 32.5%;
     cursor: pointer;
     padding-bottom: 5px;
     border-radius: 15px;
     position: relative;
+    overflow: hidden;
 }
 .singleVid2 {
     background-color: rgb(0, 0, 0);
-    width: 16%;
+    width: 32.5%;
     cursor: pointer;
     padding-bottom: 5px;
     border-radius: 15px;
     position: relative;
+    overflow: hidden;
 }
 .singleVid3 {
     background-color: rgb(0, 0, 0);
-    width: 16%;
+    width: 32.5%;
     cursor: pointer;
     padding-bottom: 5px;
     border-radius: 15px;
     position: relative;
+    overflow: hidden;
+    display: none;
 }
 .singleVid4 {
     background-color: rgb(0, 0, 0);
-    width: 16.1%;
+    width: 32.5%;
     cursor: pointer;
     padding-bottom: 5px;
     border-radius: 15px;
     position: relative;
+    overflow: hidden;
+    display: none;
 }
 .singleVid5 {
     background-color: rgb(0, 0, 0);
-    width: 16.1%;
+    width: 32.5%;
     cursor: pointer;
     padding-bottom: 5px;
     border-radius: 15px;
     position: relative;
+    overflow: hidden;
+    display: none;
 }
+
 .videoCont{
     position: relative;
 }
@@ -74,26 +82,7 @@
     opacity: 1;
     border-radius: 0px;
 }
-.singleVid2:hover .thumbnail2 {
-    transition-delay: 500ms;
-    opacity: 1;
-    border-radius: 0px;
-}
-.singleVid3:hover .thumbnail2 {
-    transition-delay: 500ms;
-    opacity: 1;
-    border-radius: 0px;
-}
-.singleVid4:hover .thumbnail2 {
-    transition-delay: 500ms;
-    opacity: 1;
-    border-radius: 0px;
-}
-.singleVid5:hover .thumbnail2 {
-    transition-delay: 500ms;
-    opacity: 1;
-    border-radius: 0px;
-}
+
 .touchBtn{
     position: absolute;
     height: 100%;
@@ -128,22 +117,7 @@
     transition-delay: 500ms;
     opacity: 0.7;
 }
-.singleVid2:hover .volume {
-    transition-delay: 500ms;
-    opacity: 0.7;
-}
-.singleVid3:hover .volume {
-    transition-delay: 500ms;
-    opacity: 0.7;
-}
-.singleVid4:hover .volume {
-    transition-delay: 500ms;
-    opacity: 0.7;
-}
-.singleVid5:hover .volume {
-    transition-delay: 500ms;
-    opacity: 0.7;
-}
+
 .volume svg{
     width: 55%;
 }
@@ -223,9 +197,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
     /* number of lines to show */
-    line-clamp: 1;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
 }
 .channel .channelNames{
@@ -238,50 +212,13 @@
     line-clamp: 1;
     -webkit-box-orient: vertical;
 }
-.extraOp{
-    /* border: 1px solid white; */
-    position: absolute;
-    height: 2vw;
-    font-size: 1vw;
-    top: 0.3vw;
-    /* align-content: center; */
-    right: 0px;
-    width: 2vw;
-    text-align: right;
-    box-shadow: black;
-    display: none;
-    color: red;
-}
-.singleVid:hover .extraOp{
-    display: block;
-}
-.singleVid2:hover .extraOp{
-    display: block;
-}
-.singleVid3:hover .extraOp{
-    display: block;
-}
-.singleVid4:hover .extraOp{
-    display: block;
-}
-.singleVid5:hover .extraOp{
-    display: block;
-}
 @media screen and (max-width:1100px) {
-    .singleVid2{
-        display: none;
-    }
     .singleVid {
-        width: 19.5%;
+        width: 49.5%;
     }
-    .singleVid3 {
-        width: 19.5%;
-    }
-    .singleVid4 {
-        width: 19.5%;
-    }
-    .singleVid5 {
-        width: 19.5%;
+    .singleVid2 {
+        width: 49.5%;
+        display: none;
     }
     .videoDetail .details {
         /* width: calc(100% - 4.6vw); */
@@ -304,11 +241,6 @@
     .channel {
         font-size: 1.3vw;
     }
-    .extraOp{
-        height: 2.5vw;
-        font-size: 1.5vw;
-        width: 2.5vw;
-    }
     .volume{
         top: 0.5vw;
         right: 0.5vw;
@@ -316,17 +248,20 @@
     }
 }
 @media screen and (max-width:850px) {
-    .singleVid3{
-        display: none;
-    }
     .singleVid {
-        width: 24.5%;
+        width: 19.5%;
+    }
+    .singleVid2 {
+        width: 19.5%;
+        display: block;
+    }
+    .singleVid3 {
+        width: 19.5%;
+        display: block;
     }
     .singleVid4 {
-        width: 24.5%;
-    }
-    .singleVid5 {
-        width: 24.5%;
+        width: 19.5%;
+        display: block;
     }
     .videoDetail .details {
         /* width: calc(100% - 4.7vw); */
@@ -347,10 +282,44 @@
     .channel {
         font-size: 1.5vw;
     }
-    .extraOp{
-        height: 3.5vw;
-        font-size: 2vw;
-        width: 3.5vw;
+    .volume{
+        top: 0.7vw;
+        right: 0.7vw;
+        width: 4.5vw;
+    }
+}
+@media screen and (max-width:725px) {
+    .singleVid {
+        width: 24.5%;
+    }
+    .singleVid2 {
+        width: 24.5%;
+    }
+    .singleVid3 {
+        width: 24.5%;
+    }
+    .singleVid4 {
+        width: 24.5%;
+        display: none;
+    }
+    .videoDetail .details {
+        /* width: calc(100% - 4.7vw); */
+    }
+    .icon {
+        height: 4.2vw;
+        min-height: 4.2vw;
+        width: 4.2vw;
+        min-width: 4.2vw;
+    }
+
+    .title {
+        font-size: 1.7vw;
+        font-weight: 800;
+        /* max-height: 3.7vw; */
+    }
+
+    .channel {
+        font-size: 1.5vw;
     }
     .volume{
         top: 0.7vw;
@@ -368,14 +337,14 @@
     }
 }
 @media screen and (max-width:600px) {
-    .singleVid4{
-        display: none;
-    }
     .singleVid {
         width: 32.5%;
     }
-    .singleVid5 {
+    .singleVid2{
         width: 32.5%;
+    }
+    .singleVid3 {
+        display: none;
     }
     .videoDetail .details {
         /* width: calc(100% - 6vw); */
@@ -396,11 +365,6 @@
     .channel {
         font-size: 1.9vw;
     }
-    .extraOp{
-        height: 3.8vw;
-        font-size: 2.2vw;
-        width: 3.8vw;
-    }
     .volume{
         top: 0.9vw;
         right: 0.9vw;
@@ -408,11 +372,11 @@
     }
 }
 @media screen and (max-width:450px) {
-    .singleVid5{
-        display: none;
-    }
     .singleVid {
         width: 49%;
+    }
+    .singleVid2{
+        display: none;
     }
     .videoDetail .details {
         /* width: calc(100% - 9vw); */
@@ -432,11 +396,6 @@
 
     .channel {
         font-size: 3vw;
-    }
-    .extraOp{
-        height: 6vw;
-        font-size: 4vw;
-        width: 6vw;
     }
     .volume{
         top: 1vw;

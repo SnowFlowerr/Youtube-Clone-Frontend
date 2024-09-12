@@ -1,26 +1,23 @@
 .singleVid {
-    background-color: rgb(0, 0, 0);
     width: 100%;
-    /* max-width: 32%; */
-    /* padding: 0.5%; */
-    border-radius: 20px;
     cursor: pointer;
-    padding-bottom: 5px;
-    border-radius: 15px;
     display: flex;
-    gap: 2%;
-    padding: 10px;
+    gap: 1%;
+    margin-bottom: 10px;
+    overflow: hidden;
 }
 .small{
     display: none;
+    width: 100%;
 }
 .videoCont{
     position: relative;
+    width: 49%;
 }
 .thumbnail {
     /* height: 13vw; */
     background-color: rgb(34, 34, 34);
-    border-radius: 15px;
+    border-radius: 1vw;
     width: 100%;
     aspect-ratio: 16/9;
     text-align: center;
@@ -113,24 +110,24 @@
 }
 .videoDetail {
     display: flex;
-    flex-direction: column-reverse;
+    /* flex-direction: column; */
     justify-content: start;
-    margin-top: 5px;
-    gap: 1vw;
+    /* margin-top: 5px; */
+    gap: 2%;
     color: white;
     /* border: 1px solid white; */
-    width: calc(100% - 42%);
+    width: 50%;
     flex-shrink: 0;
 }
 
-.videoDetail .details {
+.large{
+    width: calc(98%);
     /* border: 1px solid white; */
 }
 .videoIconDet{
     /* border: 1px solid white; */
     display: flex;
-    gap: 15px;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .icon {
@@ -142,13 +139,14 @@
     border-radius: 100%;
     overflow: hidden;
     flex-shrink: 0;
+    display: none;
 }
 
 .title {
-    font-size: 18px;
+    font-size: 1.2vw;
     /* border: 1px solid white; */
     max-width: 100%;
-    font-weight: 700;
+    font-weight: 600;
     /* max-height: 2.8vw; */
     /* margin-top: 0.2vw; */
     word-wrap: break-word;
@@ -162,55 +160,35 @@
 }
 
 .channel {
-    font-size: 13px;
+    font-size: 0.9vw;
     /* height: 100%; */
     overflow: hidden;
-    margin-top: 10px;
+    margin-top: 0.5vw;
     align-content: center;
     /* border: 1px solid white; */
 }
 .channelNames{
-    /* margin-top: -10px; */
+    margin-bottom: 0.3vw;
     word-wrap: break-word;
-    font-size: 14px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     line-clamp: 1;
     -webkit-box-orient: vertical;
+    /* border: 1px solid white; */
 }
-@media screen and (max-width:1100px) {
+@media screen and (max-width:850px) {
     .singleVid {
-        gap: 20px;
+        /* gap: 10px; */
     }
-    .thumbnail {
-        width: 330px;
-    }
-    .thumbnail2 {
-        width: 330px;
-    }
-    .videoDetail {
-        width: calc(100% - 350px);
-    }
-    .volume{
-        top: 0.5vw;
-        right: 0.5vw;
-        width: 3.3vw;
-    }
-}
-@media screen and (max-width:750px) {
-    .singleVid {
-        gap: 10px;
-    }
-    .thumbnail {
-        width: 250px;
-    }
-    .thumbnail2 {
+    .videoCont{
+        position: relative;
         width: 250px;
     }
     .videoDetail {
         width: calc(100% - 260px);
+        /* border: 1px solid white; */
     }
     .volume{
         top: 0.8vw;
@@ -224,20 +202,78 @@
     .mouseBtn{
         display: none;
     }
+    .title {
+        font-size: 15px;
+        font-weight: 600;
+    }
+    
+    .channel {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+    .channelNames{
+        margin-bottom: 5px;
+    }
+}
+@media screen and (max-width:650px) {
+    .singleVid {
+        gap: 2%;
+    }
+    .videoCont{
+        position: relative;
+        width: 50%;
+    }
+    .videoDetail {
+        width: calc(100% - 48%);
+        /* border: 1px solid white; */
+    }
+    .volume{
+        top: 0.8vw;
+        right: 0.8vw;
+        width: 5vw;
+    }
+    .touchBtn{
+        display: block;
+        /* background-color: antiquewhite; */
+    }
+    .mouseBtn{
+        display: none;
+    }
+    .title {
+        font-size: 2.3vw;
+        font-weight: 600;
+    }
+    
+    .channel {
+        font-size: 2.1vw;
+        margin-top: 1.5vw;
+    }
+    .channelNames{
+        margin-bottom: 1vw;
+    }
 }
 @media screen and (max-width:450px) {
     .singleVid {
         flex-direction: column;
-        gap: 0vw;
+        gap: 0;
         padding: 0;
-        /* margin-top: 5px; */
+        margin: 0;
+    }
+    .videoCont{
+        position: relative;
+        width: 100%;
+    }
+    .videoIconDet{
+        width: 100%;
+        margin-top: 2vw;
     }
     .small{
         display: block;
         width: calc(100% - 13vw);
-        /* border: 1px solid white; */
+        /* border: 1px solid rgb(255, 0, 0); */
     }
     .icon {
+        display: block;
         height: 10vw;
         min-height: 10vw;
         width: 10vw;

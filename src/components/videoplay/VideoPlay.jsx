@@ -303,17 +303,18 @@ export default function VideoPlay() {
 
                     <div className={styles.videoStatus}>
                         <div className={styles.channel}>
-                            {userData.name &&
-                                <div className={styles.channelDetail}>
+                            <div className={styles.channelDetail}>
+                                {userData?.img &&
                                     <div className={styles.icon}>
                                         <img src={userData?.img} alt="" width="100%" height="100%" />
-                                    </div>
+                                    </div>}
+                                {userData.name &&
                                     <div className={styles.channelName}>
                                         <span className={styles.name}>{userData?.name}</span>
                                         <br />
                                         <span className={styles.subs}>{subs} subs</span>
-                                    </div>
-                                </div>}
+                                    </div>}
+                            </div>
 
                             <div className={styles.status2}>
                                 <div className={styles.subscribe} style={theme ? isSubs ? { backgroundColor: "#2e2e2e" } : lightTheme : isSubs ? { backgroundColor: "rgb(220, 220, 220)" } : darkTheme} onClick={handleSubscribe}>
@@ -354,7 +355,7 @@ export default function VideoPlay() {
                             </div>
                             <div className={styles.share} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }} onClick={startDownload}>
                                 <span>
-                                    <i class="fa-solid fa-download"></i> Download
+                                    <i className="fa-solid fa-download"></i> Download
                                 </span>
                             </div>
                         </div>
@@ -377,7 +378,7 @@ export default function VideoPlay() {
                 </div>
 
                 <div className={styles.similarVideo}>
-                    <SimilarVideos></SimilarVideos>
+                    <SimilarVideos current={id}></SimilarVideos>
                 </div>
             </div>
 

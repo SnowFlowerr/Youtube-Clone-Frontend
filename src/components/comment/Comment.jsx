@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux'
 import Emoji from '../emoji/Emoji'
 import styles from "./Comment.module.css"
 
-export default function Comment({ videoId,isshorts }) {
+export default function Comment({ videoId,isshorts,close }) {
     const [isEmoji, setIsemoji] = useState(false)
     const [isComment, setisComment] = useState(false)
-    const [comment, setComment] = useState(null)
+    const [comment, setComment] = useState(undefined)
     const commentRef = useRef(null)
     const sign = useSelector((state) => state.sign?.value)
     const theme = useSelector((state) => state.theme.value);
@@ -18,7 +18,7 @@ export default function Comment({ videoId,isshorts }) {
             if(videoId){
                 try {
                     const comm = await axios.get(`https://honest-stillness-production.up.railway.app/api/comments/${videoId}`)
-                    console.log(comm.data)
+                    // console.log(comm.data)
                     setComments(comm.data)
                 }
                 catch (err) {
@@ -26,8 +26,10 @@ export default function Comment({ videoId,isshorts }) {
                 }
             }
         }
+        console.log("dcsac")
         getComments()
-    },)
+    },[])
+
 
     function autosize() {
         commentRef.current.style.cssText = `min-height:25px; height: 25px;`;
@@ -59,7 +61,7 @@ export default function Comment({ videoId,isshorts }) {
         setisComment(false)
     }
     useEffect(() => {
-        if (comment !== null) {
+        if (comment !== undefined) {
             autosize()
         }
     }, [comment])
@@ -67,7 +69,7 @@ export default function Comment({ videoId,isshorts }) {
         <div className={styles.mainBox}>
             <div className={styles.enterDet} style={isshorts?theme?{backgroundColor:"rgb(45, 45, 45)"}:{ backgroundColor: "rgb(220, 220, 220)" }:theme?{backgroundColor:"black"}:{backgroundColor:"white"}}>
                 <div className={styles.heading}>
-                    Comments
+                    Comments {close}
                 </div>
                 <div className={styles.addComments}>
                     <div className={styles.userIcon}>

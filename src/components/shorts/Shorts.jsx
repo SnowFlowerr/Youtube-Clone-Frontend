@@ -61,7 +61,7 @@ export default function Shorts() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const videosData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/?limit=${2}&skip=${skip}`)
+                const videosData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/?limit=${2}&skip=${0}`)
 
                 // console.log(videosData.data)
                 if (videosData.data.length !== 0) {

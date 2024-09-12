@@ -303,8 +303,9 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
             </span>
             {index !== length &&
                 <div className={isComment ? styles.comments2 : styles.comments} style={theme?{}:{ backgroundColor: "rgb(220, 220, 220)" }}>
-                    <Comment videoId={data?._id} isshorts={true}></Comment>
-                    <div className={styles.cross} onClick={() => setisComment(false)}><i className="fa-solid fa-xmark"></i></div>
+                    {isComment &&<Comment videoId={data?._id} isshorts={true} close={
+                        <div className={styles.cross} onClick={() => setisComment(false)}><i className="fa-solid fa-xmark"></i></div>
+                    }></Comment>}
                 </div>
             }
 
@@ -340,7 +341,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                 />
                 <div className={styles.first} onClick={addSaved}>
                     <div className={styles.span1} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
-                        {isSaved ? <i class="fa-solid fa-bookmark"></i> : <i class="fa-regular fa-bookmark"></i>}
+                        {isSaved ? <i className="fa-solid fa-bookmark"></i> : <i className="fa-regular fa-bookmark"></i>}
                     </div>
                     {isSaved ? "Remove" : "Save"}
                 </div>

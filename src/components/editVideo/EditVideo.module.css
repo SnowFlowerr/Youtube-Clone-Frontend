@@ -260,3 +260,15 @@
     -webkit-box-orient: vertical;
     font-size: 1.1vw;
 }
+@media screen and (max-width:750px) {
+    .main{
+        /* border: 2px solid black; */
+        height: calc(75vw);
+        width: 100%;
+        overflow: auto;
+        position: relative;
+        display: flex;
+        padding: 1vw 3vw;
+        gap: 1vw;
+    }
+}

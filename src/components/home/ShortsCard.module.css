@@ -130,23 +130,23 @@
 }
 .singleVid:hover .volume {
     transition-delay: 500ms;
-    opacity: 1;
+    opacity: 0.7;
 }
 .singleVid2:hover .volume {
     transition-delay: 500ms;
-    opacity: 1;
+    opacity: 0.7;
 }
 .singleVid3:hover .volume {
     transition-delay: 500ms;
-    opacity: 1;
+    opacity: 0.7;
 }
 .singleVid4:hover .volume {
     transition-delay: 500ms;
-    opacity: 1;
+    opacity: 0.7;
 }
 .singleVid5:hover .volume {
     transition-delay: 500ms;
-    opacity: 1;
+    opacity: 0.7;
 }
 .volume svg{
     width: 55%;
