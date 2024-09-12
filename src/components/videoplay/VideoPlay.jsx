@@ -20,6 +20,7 @@ export default function VideoPlay() {
     const [isLike, setisLike] = useState(false)
     const [isSaved, setisSaved] = useState(false)
     const [isDislike, setisDislike] = useState(false)
+    const [isComment, setisComment] = useState(false)
     const [videoData, setvideoData] = useState({})
     const [userData, setuserData] = useState({})
     const [duration, setDuration] = useState(0)
@@ -373,7 +374,7 @@ export default function VideoPlay() {
                         }
                     </div>
                     <div className={styles.comment}>
-                        <Comment videoId={id}></Comment>
+                        {isComment && <Comment videoId={id}></Comment>}
                     </div>
                 </div>
 

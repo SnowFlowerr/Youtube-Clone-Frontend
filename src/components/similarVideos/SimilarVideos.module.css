@@ -43,6 +43,9 @@
     margin-bottom: 10px;
 }
 @media screen and (max-width:450px) {
+    .mainBox{
+        margin-top: 10px;
+    }
     .allTitles{
         gap: 1vw;
     }

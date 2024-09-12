@@ -47,7 +47,7 @@ export default function ShortsCard({video , index}) {
                 .play()
                 .then(() => {
                     // videoRef.current.muted = false;
-                    console.log("wcabw")
+                    // console.log("wcabw")
                 })
                 .catch((err) => console.log(err));
         }

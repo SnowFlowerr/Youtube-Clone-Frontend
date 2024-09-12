@@ -8,8 +8,8 @@ import axios from 'axios'
 
 export default function SimilarVideos({ current }) {
     const titles = ["All", "Similar to This Video",]
-    const [shorts, setShorts] = useState([1, 1, 1, 1, 1, 1])
-    const [videos, setVideos] = useState([2,2,2,2,2,2])
+    const [shorts, setShorts] = useState([])
+    const [videos, setVideos] = useState([])
     const theme = useSelector((state) => state.theme.value)
     
     useEffect(()=>{
@@ -24,7 +24,6 @@ export default function SimilarVideos({ current }) {
                 { withCredentials: true }
             );
             setShorts(short.data);
-            
         } catch (err) {
             console.log(err);
         }
@@ -37,13 +36,12 @@ export default function SimilarVideos({ current }) {
                 { withCredentials: true }
             );
             setVideos(short.data);
-            console.log(short.data)
+            // console.log(short.data)
         } catch (err) {
             console.log(err);
         }
     }
     return (
-        <div>
             <div className={styles.mainBox}>
                 <div className={styles.allTitles}>
                     {
@@ -54,33 +52,33 @@ export default function SimilarVideos({ current }) {
                         )
                     }
                 </div>
-                <div>
+                {shorts.length!==0&&<div>
                     <div className={styles.shortsLogo} style={theme ? { backgroundColor: "white", color: "black" } : { backgroundColor: "black", color: "white" }}>
                         <i className="fa-solid fa-circle-play"></i> Shorts
                     </div>
                     <div className={styles.shortsStorage}>
                         {
                             shorts.map((short, index) =>
-                                <ShortsCard video={short} index={index}></ShortsCard>
+                                <ShortsCard video={short} index={index} key={index}></ShortsCard>
                             )
                         }
                     </div>
                     <hr />
-                </div>
-                <div>
+                </div>}
+                {videos.length!==0&&<div>
                     <div className={styles.shortsLogo} style={theme ? { backgroundColor: "white", color: "black" } : { backgroundColor: "black", color: "white" }}>
                         <i className="fa-solid fa-video"></i> Videos
                     </div>
                     <div className={styles.VideosStorage}>
                         {
                             videos.map((video, index) =>
-                                {video?._id!==current && <Cards video={video} index={index}></Cards>}
+                                video?._id !==current &&
+                                    <Cards video={video} index={index} key={index}></Cards>
                             )
                         }
                     </div>
-                </div>
+                </div>}
 
             </div>
-        </div>
     )
 }
