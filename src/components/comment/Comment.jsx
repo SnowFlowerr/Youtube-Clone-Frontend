@@ -28,7 +28,7 @@ export default function Comment({ videoId,isshorts,close }) {
         }
         console.log("dcsac")
         getComments()
-    },[])
+    },[comment])
 
 
     function autosize() {
