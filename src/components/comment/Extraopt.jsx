@@ -9,7 +9,8 @@ export default function Extraopt({comment}) {
     const sign = useSelector((state) => state.sign?.value)
 
         async function delComment() {
-            if(comment){
+            if(comment._id){
+                setOption(false)
                 try {
                     await axios.delete(`https://honest-stillness-production.up.railway.app/api/comments/${comment._id}`,{withCredentials:true})
                 }
@@ -17,6 +18,10 @@ export default function Extraopt({comment}) {
                     console.log(err)
                 }
             }
+        }
+
+        function RepComment() {
+                setOption(false)
         }
 
     return (
@@ -32,7 +37,7 @@ export default function Extraopt({comment}) {
                         <div onClick={delComment}>
                             <i className="fa-solid fa-trash"></i> Delete
                         </div>}
-                        <div onClick={delComment}>
+                        <div onClick={RepComment}>
                         <i className="fa-solid fa-flag"></i> Report
                         </div>
                     </div>
