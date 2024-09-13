@@ -23,7 +23,6 @@
     overflow: hidden;
     position: relative;
     transition: 1s;
-    user-select: auto;
 }
 .thumbnail2 {
     /* height: 13vw; */

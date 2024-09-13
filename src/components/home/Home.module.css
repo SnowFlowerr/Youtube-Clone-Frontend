@@ -51,7 +51,6 @@
     overflow: hidden;
     position: relative;
     transition: 1s;
-    user-select: auto;
 }
 
 .thumbnail2 {
@@ -64,7 +63,6 @@
     align-content: center;
     overflow: hidden;
     /* position: relative; */
-    user-select: auto;
     position: absolute;
     top: 0;
     transition: 500ms;
