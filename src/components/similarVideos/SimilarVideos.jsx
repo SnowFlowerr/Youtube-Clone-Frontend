@@ -42,11 +42,11 @@ export default function SimilarVideos({ current }) {
         }
     }
     return (
-            <div className={styles.mainBox}>
+            <div className={styles.mainBox} style={theme ? { backgroundColor: "black" } : { backgroundColor: "white" }}>
                 <div className={styles.allTitles}>
                     {
                         titles.map((title, index) =>
-                            <div className={styles.title} key={index}>
+                            <div className={styles.title} key={index} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
                                 {title}
                             </div>
                         )

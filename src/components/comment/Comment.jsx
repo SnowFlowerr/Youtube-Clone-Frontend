@@ -3,11 +3,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Emoji from '../emoji/Emoji'
 import styles from "./Comment.module.css"
+import Extraopt from './Extraopt'
 
 export default function Comment({ videoId,isshorts,toClose }) {
     const [isEmoji, setIsemoji] = useState(false)
     const [isComment, setisComment] = useState(false)
-    const [option, setOption] = useState(false)
+    
     const [comment, setComment] = useState(undefined)
     const commentRef = useRef(null)
     const sign = useSelector((state) => state.sign?.value)
@@ -27,9 +28,8 @@ export default function Comment({ videoId,isshorts,toClose }) {
                 }
             }
         }
-        console.log("dcsac")
         getComments()
-    },[comment])
+    },[comments])
 
 
     function autosize() {
@@ -102,14 +102,13 @@ export default function Comment({ videoId,isshorts,toClose }) {
             <div className={styles.comments}>
                 {
                     comments.map((data, index) =>
-                        <div key={index} className={styles.singleComment}>
+                        <div key={data._id} className={styles.singleComment}>
                             <div className={styles.userIcon}>
                                 <img src={data?.userId?.img} width="100%" height="100%" alt="thumbnail" />
                             </div>
                             <div className={styles.userComments}>
                                 <div className={styles.username}>
                                     @{data?.userId?.username}
-                                    
                                 </div>
                                 <div className={styles.commentText}>
                                     {data?.comment?.split("\n").map((line, index) =>
@@ -124,13 +123,7 @@ export default function Comment({ videoId,isshorts,toClose }) {
                                         <span><i className="fa-regular fa-thumbs-down fa-flip-horizontal"></i></span> 0
                                     </div>
                                 </div>
-                                <div className={styles.extraOpt} onClick={()=> !option&&setOption(true)}>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
-                                {/* {option&&
-                                    <div className={styles.opt}>
-                                        delete
-                                    </div>} */}
+                                <Extraopt comment={data}/>
                             </div>
                         </div>
                     )
