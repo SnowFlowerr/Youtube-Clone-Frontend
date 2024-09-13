@@ -1,0 +1,217 @@
+.main{
+    min-height: 100dvh;
+    /* overflow: hidden; */
+}
+.mainbox{
+    display: flex;
+}
+.Sidenav{
+    z-index: 20;
+}
+.box{
+    margin-top: 60px;
+    /* border: 1px solid white; */
+    width: 100%;
+    padding: 10px;
+    position: relative;
+}
+.subs{
+    display: flex;
+    flex-direction: column;
+    gap: 3vw;
+    /* border: 1px solid white; */
+    padding: 2vw;
+}
+.singleChannel{
+    display: flex;
+    /* align-items: center; */
+    /* gap: 4vw; */
+}
+.singleChannel > div{
+    /* border: 1px solid white; */
+}
+.channelIcon{
+    flex-shrink: 0;
+    height: 12vw;
+    width: 12vw;
+    overflow: hidden;
+    cursor: pointer;
+}
+.channelIcon > img{
+    border: 1px solid gray;
+    border-radius: 100%;
+}
+.channelDetail{
+    flex-shrink: 0;
+    width: calc(100% - 25vw);
+    overflow: hidden;
+    cursor: pointer;
+    /* border: 1px solid gray; */
+    align-content: center;
+    padding: 0 4vw;
+}
+.channelName{
+    font-size: 1.6vw;
+    font-weight: 700;
+}
+.channelDesc{
+    color: rgb(136, 136, 136);
+    font-size: 1vw;
+    font-weight: 400;
+    margin-top: 1vw;
+    display: flex;
+    gap: 1vw;
+}
+.channelInfo{
+    color: rgb(136, 136, 136);
+    font-size: 1vw;
+    font-weight: 400;
+    margin-top: 0.3vw;
+}
+.btns{
+    align-content: center;
+}
+.channelBtn{
+    background-color: rgb(45, 45, 45);
+    flex-shrink: 0;
+    height: 3vw;
+    width: 12vw;
+    font-size: 1.2vw;
+    border-radius: 5vw;
+    align-content: center;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+}
+.channelBtn:hover{
+    font-weight: 500;
+}
+.notSubs{
+    font-weight: 700;
+    text-align: center;
+    align-content: center;
+    font-size: 3vw;
+    height: calc(100dvh - 80px);
+    margin-top: -60px;
+}
+@media screen and (max-width:1100px) {
+    .subs{
+        gap: 20px;
+        padding: 10px;
+    }
+    .singleChannel{
+        /* gap: 30px; */
+    }
+    .channelIcon{
+        flex-shrink: 0;
+        height: 130px;
+        width: 130px;
+    }
+    .channelDetail{
+        padding: 0 30px;
+        width: calc(100% - 280px);
+    }
+    .channelName{
+        font-size: 18px;
+    }
+    .channelDesc{
+        font-size: 12px;
+        margin-top: 10px;
+        gap: 10px;
+    }
+    .channelInfo{
+        font-size: 12px;
+        margin-top: 3px;
+    }
+    .channelBtn{
+        height: 35px;
+        width: 130px;
+        font-size: 12px;
+        border-radius: 150px;
+    }
+    .notSubs{
+        text-align: center;
+        align-content: center;
+        font-size: 3vw;
+        height: calc(100dvh - 80px);
+        margin-top: -60px;
+    }
+}
+@media screen and (max-width:750px) {
+    .box{
+        margin-top: 0px;
+        padding: 10px;
+        margin-bottom: 60px;
+    }
+    .subs{
+        gap: 20px;
+        padding: 0px;
+    }
+    .channelIcon{
+        flex-shrink: 0;
+        height: 100px;
+        width: 100px;
+    }
+    .channelDetail{
+        width: calc(100% - 210px);
+    }
+    .channelName{
+        font-size: 16px;
+    }
+    .channelDesc{
+        font-size: 11px;
+        margin-top: 8px;
+    }
+    .channelInfo{
+        font-size: 11px;
+        margin-top: 3px;
+    }
+    .channelBtn{
+        height: 30px;
+        width: 100px;
+        font-size: 12px;
+        border-radius: 150px;
+    }
+    .notSubs{
+        text-align: center;
+        align-content: center;
+        font-size: 3vw;
+        height: calc(100dvh - 150px);
+        margin-top: 0px;
+    }
+}
+@media screen and (max-width:550px) {
+    .subs{
+        gap: 4vw;
+    }
+    .singleChannel{
+        /* gap: 4vw; */
+    }
+    .channelIcon{
+        flex-shrink: 0;
+        height: 20vw;
+        width: 20vw;
+    }
+    .channelDetail{
+        padding: 0 4vw;
+        width: calc(100% - 42vw);
+    }
+    .channelName{
+        font-size: 3.2vw;
+    }
+    .channelDesc{
+        font-size: 2vw;
+        margin-top: 1vw;
+        gap: 1vw;
+    }
+    .channelInfo{
+        font-size: 2vw;
+        margin-top: 0.2vw;
+    }
+    .channelBtn{
+        height: 5vw;
+        width: 20vw;
+        font-size: 2vw;
+        border-radius: 150px;
+    }
+}

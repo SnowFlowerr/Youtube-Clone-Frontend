@@ -176,7 +176,7 @@ export default function Channels() {
     }
 
     function autosize() {
-        textRef.current.style.cssText = `min-height:37px; height: 37px;`;
+        textRef.current.style.cssText = `min-height:25px; height: 25px;`;
         textRef.current.style.cssText = 'height:' + textRef.current.scrollHeight + 'px';
         textRef.current.style.color = `${theme ? "white" : "black"}`;
     }
@@ -319,6 +319,7 @@ export default function Channels() {
                                             ref={textRef}
                                             onChange={textChange}
                                             value={aboutChannel}
+                                            style={theme?{}:{borderColor:"black",color:"black"}}
                                         />
                                         <div className={styles.textBtn}>
                                             <button onClick={() => { setisaboutChannel(false); setaboutChannel(user.channelInfo) }}>cancel</button>

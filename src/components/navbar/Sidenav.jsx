@@ -70,7 +70,8 @@ export default function Sidenav() {
                         <>
                             <hr />
                             <div className={styles.subscriptions}>
-                                <span>Subscription</span>
+                                <Link to='/subscribes' style={theme ?darkTheme:lightTheme}><span>Subscription</span></Link>
+                                
                                 <Subscribers />
                             </div>
                         </>}
@@ -110,7 +111,7 @@ export default function Sidenav() {
                             </div>
                         </Link>
                         {sign &&
-                            <Link to="/" className={styles.subscribe} style={theme ? darkTheme : lightTheme}>
+                            <Link to='/subscribes' className={styles.subscribe} style={theme ? darkTheme : lightTheme}>
                                 <div>
                                     <i className="fa-solid fa-tv"></i>
                                     <br />

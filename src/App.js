@@ -13,6 +13,7 @@ import PageNotFound from "./components/pageNotFound/PageNotFound";
 import SearchedVid from "./components/searchedVid/SearchedVid";
 import Shorts from "./components/shorts/Shorts";
 import VideoPlay from "./components/videoplay/VideoPlay";
+import Subscribes from "./components/subscribes/Subscribes";
 import { setSignin, setSignout } from "./redux/Data/signSlice";
 import { darkTheme, lightTheme } from "./themes";
 
@@ -60,6 +61,7 @@ function App() {
           <Route path='/searchedvideo/:search' element={<SearchedVid />} />
           <Route path='/shorts/:id' element={<Shorts />} />
           <Route path='/history' element={<History />} />
+          <Route path='/subscribes' element={<Subscribes />} />
           <Route path='/channels/:id/:category' element={<Channels />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
