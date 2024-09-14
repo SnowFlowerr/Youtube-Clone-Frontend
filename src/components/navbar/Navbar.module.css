@@ -285,7 +285,6 @@ a{
     visibility: hidden;
     z-index: 0;
 }
-
 @media screen and (max-width:750px) {
     .mainNav{
         width: 100%;

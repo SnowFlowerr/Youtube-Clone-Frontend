@@ -1,14 +1,15 @@
 .uploadVid{
     position: fixed;
-    background-color: transparent;
+    /* background-color: red; */
     height: 100vh;
     width: 100vw;
     top: 0;
     left: 0;
     z-index: 30;
+    overflow: hidden;
 }
 .uploadArea{
-    position: absolute;
+    position: fixed;
     background-color: rgb(73, 73, 73);
     height: 90vh;
     width: 70vw;
@@ -146,16 +147,18 @@
     }
 }
 
-@media screen and (max-width:450px) {
+@media screen and (max-width:550px) {
+    .uploadVid{
+        width: 100vw;
+    }
     .uploadArea{
-        height: 130vw;
-        width: 98vw;
+        width: 100vw;
         top: 50%;
-        left: 1vw;
+        left: 0vw;
         transform: translateY(-50%);
     }
     
-    .options{
+    /* .options{
         font-size: 4vw;
         padding: 2vw 3vw;
     }
@@ -184,6 +187,6 @@
         height: 6vw;
         width: 18vw;
         font-size: 2vw;
-    }
+    } */
 }
 

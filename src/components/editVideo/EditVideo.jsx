@@ -116,7 +116,7 @@ export default function EditVideo({ data, isShort, setisEditing }) {
                     <div>
                         <span className={styles.upperMessage} style={theme ? {} : { color: "rgb(94, 94, 94)" }}>Description (optional)</span>
                         <textarea id="description" value={description} className={styles.description} maxLength={5000} ref={textRef} onChange={handleChange} style={theme ? { color: "white" } : { color: "black" }}></textarea>
-                        <span className={styles.lowerMessage} style={theme ? {} : { color: "rgb(94, 94, 94)" }}>{description.length} / {5000}</span>
+                        <span className={styles.lowerMessage} style={theme ? {} : { color: "rgb(94, 94, 94)" }}>{description?.length} / {5000}</span>
                     </div>
                     <div className={styles.uploadnails}>
                         <div className={styles.heading2}>

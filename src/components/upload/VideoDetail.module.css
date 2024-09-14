@@ -252,3 +252,154 @@
     -webkit-box-orient: vertical;
     font-size: 1.1vw;
 }
+@media screen and (max-width:750px) {
+    .main{
+        /* border: 2px solid black; */
+        height: calc(85dvh - 40px);
+        width: 100%;
+        overflow: auto;
+        position: relative;
+        flex-direction: column-reverse;
+        display: flex;
+        padding: 1vw 3vw;
+        gap: 1vw;
+        align-items: center;
+    }
+    .options{
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+    .options2{
+        padding: 10px 20px;
+    }
+    .options2 button{
+        height: 30px;
+        width: 70px;
+        font-size: 13px;
+        border-radius: 6vw;
+    }
+    .cross{
+        height: 30px;
+        width: 30px;
+    }
+    .videoPreview{
+        /* border: 2px solid black; */
+        /* max-width: 350px; */
+        width: 100%;
+        align-content: center;
+        padding: 0 1vw;
+        position: relative;
+    }
+    .videoplayer video{
+        width: 100%;
+        max-height: 400px;
+        /* height: 100%; */
+        /* max-width: 60%; */
+        border-radius: 1vw 1vw 0 0;
+        background-color: black;
+        /* border: 2px solid black; */
+    }
+    .videoDetail{
+        width: 100%;
+        height: 100%;
+        padding: 1vw;
+    }
+    .videoDetail > div{
+        margin-bottom: 10px;
+    }
+    .title{
+        min-height: 60px;
+        padding: 10px;
+        font-size: 14px;
+    }
+    .upperMessage{
+        font-size: 10px;
+        top: 5px;
+        left: 5px;
+    }
+    .lowerMessage{
+        font-size: 10px;
+        bottom: 5px;
+        right: 5px;
+        color: rgb(224, 224, 224);
+        opacity: 0;
+    }
+    .description{
+        min-height: 150px;
+        padding: 20px 10px;
+        font-size: 14px;
+        transition: none;
+    }
+    .heading{
+        font-size: 16px;
+        font-weight: 700;
+    }
+    .heading2{
+        font-size: 14px;
+        font-weight: 700;
+    }
+    .heading3{
+        font-size: 12px;
+        font-weight: 400;
+    }
+    .uploadImg{
+        font-size: 12px;
+    }
+    
+    .heading4{
+        font-size: 9px;
+    }
+    .uploadImg{
+        font-size: 1vw;
+        font-weight: 400;
+        overflow: hidden;
+        word-wrap: break-word;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        /* number of lines to show */
+        line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+    .allThumbnails{
+        padding-top: 10px;
+    }
+    .uploadThumbnail{
+        width: 100px;
+        aspect-ratio: 16/9;
+        font-size: 20px;
+        padding: 5px;
+    }
+    .previewOptions{
+        padding: 10px;
+        padding-bottom: 15px;
+        width: 100%;
+        background-color: rgb(33, 33, 33);
+        border-radius: 0 0 1vw 1vw;
+    }
+    .link{
+        /* border: 2px solid black; */
+        width: calc(100% - 20px);
+        overflow: hidden;
+        word-wrap: break-word;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        /* number of lines to show */
+        line-clamp: 1;
+        -webkit-box-orient: vertical;
+        font-size: 11px;
+        margin-bottom: 10px;
+    }
+    .copyIcon{
+        position: absolute;
+        top: -0.25vw;
+        right: -0.5vw;
+        height: 25px;
+        width: 25px;
+        font-size: 12px;
+    }
+    .videoName{
+        font-size: 11px;
+    }
+}

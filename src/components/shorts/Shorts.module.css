@@ -385,37 +385,37 @@
     }
     .span1{
         background-color: rgb(38, 38, 38, 0.5);
-        width: 12vw;
-        height: 12vw;
-        max-width: 12vw;
-        max-height: 12vw;
-        min-height: 35px;
-        min-width: 35px;
+        width: 15vw;
+        height: 15vw;
+        max-width: 15vw;
+        max-height: 15vw;
+        min-height: 15vw;
+        min-width: 15vw;
         margin-bottom: 1vw;
     }
     .span2{
         background-color: rgb(38, 38, 38);
-        width: 12vw;
-        height: 12vw;
-        max-width: 12vw;
-        max-height: 12vw;
-        min-height: 12vw;
-        min-width: 12vw;
+        width: 15vw;
+        height: 15vw;
+        max-width: 15vw;
+        max-height: 15vw;
+        min-height: 15vw;
+        min-width: 15vw;
         margin-bottom: 1vw;
         border-radius: 2vw;
         opacity: 0.7;
     }
     .channelIcon{
-        height: 12vw;
+        height: 15vw;
     }
     .span1 i{
         font-size: 5vw;
-        width: 12vw;
-        height: 12vw;
-        max-width: 12vw;
-        max-height: 12vw;
-        min-height: 35px;
-        min-width: 35px;
+        width: 15vw;
+        height: 15vw;
+        max-width: 15vw;
+        max-height: 15vw;
+        min-height: 15vw;
+        min-width: 15vw;
     }
     
     .selected i{

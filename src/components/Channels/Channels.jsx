@@ -36,15 +36,9 @@ export default function Channels() {
     useEffect(() => {
         currentUser();
         issubscribe();
-    }, []);
-
-    useEffect(() => {
         currentShorts();
         currentVideos()
     }, []);
-    useEffect(() => {
-
-    }, [category]);
 
     async function currentUser() {
         try {
@@ -338,7 +332,8 @@ export default function Channels() {
                                                     setisaboutChannel(() => true);
                                                     setTimeout(() => {
                                                         textRef.current &&
-                                                            textRef.current.focus()
+                                                        textRef.current.focus()
+                                                        autosize();
                                                     }, 0)
                                                 }
                                                 }>

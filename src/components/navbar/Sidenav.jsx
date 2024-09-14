@@ -16,9 +16,9 @@ export default function Sidenav() {
     const [shorts, setShorts] = useState(false)
     const [history, setHistory] = useState(false)
     const [isUpload, setisUpload] = useState(false)
-    const {category} = useParams()
+    const { category } = useParams()
     useEffect(() => {
-        if(!category){
+        if (!category) {
             const path = location.pathname;
             if (path === '/') {
                 setHome(true)
@@ -70,8 +70,8 @@ export default function Sidenav() {
                         <>
                             <hr />
                             <div className={styles.subscriptions}>
-                                <Link to='/subscribes' style={theme ?darkTheme:lightTheme}><span>Subscription</span></Link>
-                                
+                                <Link to='/subscribes' style={theme ? darkTheme : lightTheme}><span>Subscription</span></Link>
+
                                 <Subscribers />
                             </div>
                         </>}
@@ -97,7 +97,7 @@ export default function Sidenav() {
                             </div>
                         </a>
                         <div className={styles.upload} style={theme ? darkTheme : lightTheme}>
-                            <div onClick={()=>setisUpload(true)}>
+                            <div onClick={() => setisUpload(true)}>
                                 <i className="fa-solid fa-upload"></i>
                                 <br />
                                 <span>Upload</span>
@@ -132,8 +132,13 @@ export default function Sidenav() {
             </div>
             <div className={menu ? styles.main3 : styles.main4}>
             </div>
-            <div>
+            {/* <div>
                 <Upload isUpload={isUpload} setisUpload={setisUpload}></Upload>
+            </div> */}
+            <div className={styles.EditVideo} >
+                <div style={theme ? { backgroundColor: "rgb(73, 73, 73)" } : { backgroundColor: "#dadada" }}>
+                    <Upload isUpload={isUpload} setisUpload={setisUpload}></Upload>
+                </div>
             </div>
         </>
     )
