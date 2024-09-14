@@ -113,7 +113,7 @@ export default function Channels() {
     async function currentVideos() {
         try {
             const short = await axios.get(
-                `https://honest-stillness-production.up.railway.app/api/videos/allcurrentvideos/${id}?limit=20`,
+                `https://honest-stillness-production.up.railway.app/api/videos/allcurrentvideos/${id}?limit=${20}`,
                 { withCredentials: true }
             );
             setVideos(short.data);
@@ -380,7 +380,7 @@ export default function Channels() {
                                             {
                                                 shorts.map((video, index) =>
                                                     index < 6 &&
-                                                    <ShortsCard video={video} key={index} index={index} seteditingData={seteditingData} setisEditing={setisEditing} setisShorts={setisShorts} />
+                                                    <ShortsCard video={video} key={index} index={index} seteditingData={seteditingData} setisEditing={setisEditing} setisShorts={setisShorts} isfeatured={true}/>
                                                 )
                                             }
                                         </div>

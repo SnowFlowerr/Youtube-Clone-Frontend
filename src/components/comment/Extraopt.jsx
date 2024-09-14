@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import styles from "./Comment.module.css"
-import { useSelector } from 'react-redux';
 import axios from 'axios';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import styles from "./Comment.module.css";
 
 export default function Extraopt({comment}) {
     const [option, setOption] = useState(false)

@@ -6,7 +6,7 @@ import { format } from 'timeago.js'
 import { darkTheme, lightTheme } from '../../themes'
 import styles from "./ShortsCard.module.css"
 
-export default function ShortsCard({video , index, seteditingData, setisEditing, setisShorts}) {
+export default function ShortsCard({video , index, seteditingData, setisEditing, setisShorts, isfeatured}) {
     const theme = useSelector((state) => state.theme.value)
     const [user, setUser] = useState("")
     const videoRef = useRef()
@@ -47,7 +47,7 @@ export default function ShortsCard({video , index, seteditingData, setisEditing,
                 .play()
                 .then(() => {
                     // videoRef.current.muted = false;
-                    console.log("wcabw")
+                    // console.log("wcabw")
                 })
                 .catch((err) => console.log(err));
         }
@@ -77,7 +77,7 @@ export default function ShortsCard({video , index, seteditingData, setisEditing,
 
     return (
         <>
-            <div className={index===5?styles.singleVid2:index===4?styles.singleVid3:index===3?styles.singleVid4:index===2?styles.singleVid5:styles.singleVid} style={theme ? darkTheme : lightTheme}  onMouseLeave={handleStop}>
+            <div className={isfeatured?index===5?styles.singleVid2:index===4?styles.singleVid3:index===3?styles.singleVid4:index===2?styles.singleVid5:styles.singleVid:styles.singleVid} style={theme ? darkTheme : lightTheme}  onMouseLeave={handleStop}>
                 {/* {!isPlaying ? */}
                 <div className={styles.videoCont}>
                     <div

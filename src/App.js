@@ -1,5 +1,4 @@
 import axios from "axios";
-import Cookies from 'js-cookie';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from "react-router-dom";
@@ -12,8 +11,8 @@ import Home from "./components/home/Home";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 import SearchedVid from "./components/searchedVid/SearchedVid";
 import Shorts from "./components/shorts/Shorts";
-import VideoPlay from "./components/videoplay/VideoPlay";
 import Subscribes from "./components/subscribes/Subscribes";
+import VideoPlay from "./components/videoplay/VideoPlay";
 import { setSignin, setSignout } from "./redux/Data/signSlice";
 import { darkTheme, lightTheme } from "./themes";
 

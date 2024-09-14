@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
-import styles from "./SimilarVideos.module.css"
-import { useSelector } from 'react-redux'
-import { lightTheme, darkTheme } from '../../themes'
-import ShortsCard from './ShortsCard'
-import Cards from './Cards'
 import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import Cards from './Cards'
+import ShortsCard from './ShortsCard'
+import styles from "./SimilarVideos.module.css"
 
 export default function SimilarVideos({ current }) {
     const titles = ["All", "Similar to This Video",]

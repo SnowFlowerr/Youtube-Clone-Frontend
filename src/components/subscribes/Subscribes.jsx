@@ -1,10 +1,10 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import styles from "./Subscribes.module.css"
+import { useNavigate } from 'react-router-dom'
 import Navbar from '../navbar/Navbar'
 import Sidenav from '../navbar/Sidenav'
 import SubsCard from './SubsCard'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import styles from "./Subscribes.module.css"
 
 export default function Subscribes() {
     const [subsc, setSubsc] = useState([]);

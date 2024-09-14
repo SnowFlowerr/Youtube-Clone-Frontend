@@ -79,7 +79,7 @@ export default function VideoDetail({ progress, video, data, isShort }) {
     }, [title, prog, progress, data])
 
     useEffect(() => {
-        if (data._id && progress === 100) {
+        if ((data._id && progress === 100)||progress==="X") {
             setisCancel(true)
         }
         else {

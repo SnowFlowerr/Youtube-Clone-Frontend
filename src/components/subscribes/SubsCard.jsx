@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import styles from "./Subscribes.module.css"
-import { useSelector } from 'react-redux'
-import { darkTheme, lightTheme } from '../../themes'
 import axios from 'axios'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { darkTheme, lightTheme } from '../../themes'
+import styles from "./Subscribes.module.css"
 
 export default function SubsCard({ channel }) {
     const theme = useSelector((state) => state.theme.value)

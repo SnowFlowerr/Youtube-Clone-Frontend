@@ -44,7 +44,7 @@ export default function Cards({ video, seteditingData, setisEditing, setisShorts
                 .play()
                 .then(() => {
                     // videoRef.current.muted = false;
-                    console.log("wcabw")
+                    // console.log("wcabw")
                 })
                 .catch((err) => console.log(err));
         }
@@ -150,7 +150,7 @@ export default function Cards({ video, seteditingData, setisEditing, setisShorts
                             to={`/player/${video?._id}`}
                             style={theme ? { color: "white" } : { color: "black" }}
                         >
-                            <div className={styles.title}>{video?.title}erferfwerfeewrwf</div>
+                            <div className={styles.title}>{video?.title}</div>
                             <div className={styles.channel}>
                                 <div className={styles.channelNames}>{user?.name}</div>
                                 <div>
