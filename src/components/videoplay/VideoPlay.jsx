@@ -9,6 +9,7 @@ import Navbar from '../navbar/Navbar'
 import Sidenav from '../navbar/Sidenav'
 import SimilarVideos from '../similarVideos/SimilarVideos'
 import styles from "./VideoPlay.module.css"
+import Player from '../player/Player'
 
 export default function VideoPlay() {
 
@@ -23,7 +24,7 @@ export default function VideoPlay() {
     const [isComment, setisComment] = useState(false)
     const [isDesc, setisDesc] = useState(false)
     const [videoData, setvideoData] = useState({})
-    const [userData, setuserData] = useState({})
+    const [userData, setuserData] = useState({name:"Title here"})
     const [duration, setDuration] = useState(0)
     const [view, setView] = useState(0)
     const [subs, setSubs] = useState(0)
@@ -276,10 +277,9 @@ export default function VideoPlay() {
                         </div>
                 }
                 <div className={styles.player} ref={boxRef}>
-                    <video
+                    {/* <video
                         className={styles.video}
                         src={videoData?.videoUrl}
-                        // src={vid}
                         autoPlay
                         controls
                         id='videos'
@@ -287,14 +287,8 @@ export default function VideoPlay() {
                         onPlay={totalTime}
                         poster={videoData?.imageUrl}
                     >
-
-                        {/* <source
-                            src={vid}
-                            type='video/mp4'
-                        /> */}
-
-
-                    </video>
+                    </video> */}
+                    <Player url={videoData?.videoUrl} poster={videoData?.imageUrl} />
                 </div>
             </div>
             <div className={styles.videoDetails} ref={boxRef}>
@@ -306,16 +300,14 @@ export default function VideoPlay() {
                     <div className={styles.videoStatus}>
                         <div className={styles.channel}>
                             <div className={styles.channelDetail}>
-                                {userData?.img &&
-                                    <div className={styles.icon}>
-                                        <img src={userData?.img} alt="" width="100%" height="100%" />
-                                    </div>}
-                                {userData.name &&
-                                    <div className={styles.channelName}>
-                                        <span className={styles.name}>{userData?.name}</span>
-                                        <br />
-                                        <span className={styles.subs}>{subs} subs</span>
-                                    </div>}
+                                <div className={styles.icon}>
+                                    <img src={userData?.img} alt="" width="100%" height="100%" />
+                                </div>
+                                <div className={styles.channelName}>
+                                    <span className={styles.name}>{userData?.name}</span>
+                                    <br />
+                                    <span className={styles.subs}>{subs} subs</span>
+                                </div>
                             </div>
 
                             <div className={styles.status2}>
@@ -363,24 +355,24 @@ export default function VideoPlay() {
                         </div>
 
                     </div>
-                    <div className={styles.descript} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }} onClick={()=>!isDesc&&setisDesc(true)}>
+                    <div className={styles.descript} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }} onClick={() => !isDesc && setisDesc(true)}>
                         <div><b>{view} views</b></div>
                         {isDesc &&
-                        <>
-                            <div className={styles.desc}>
-                                <br />
-                                {videoData?.description ?
-                                videoData?.description?.split("\n").map((line, index) =>
-                                    <div key={index} className={styles.descLine}>{line}</div>
-                                )
-                                :"No Discription Available"}
-                            </div>
-                        <div className={styles.cross} onClick={() => setisDesc(false)}><i className="fa-solid fa-xmark"></i></div>
-                        </>
+                            <>
+                                <div className={styles.desc}>
+                                    <br />
+                                    {videoData?.description ?
+                                        videoData?.description?.split("\n").map((line, index) =>
+                                            <div key={index} className={styles.descLine}>{line}</div>
+                                        )
+                                        : "No Discription Available"}
+                                </div>
+                                <div className={styles.cross} onClick={() => setisDesc(false)}><i className="fa-solid fa-xmark"></i></div>
+                            </>
                         }
                     </div>
-                    <div className={styles.comment} onClick={()=>!isComment&&setisComment(true)} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
-                        {isComment ? <Comment videoId={id} toClose={setisComment}></Comment>:"Comment"}
+                    <div className={styles.comment} onClick={() => !isComment && setisComment(true)} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
+                        {isComment ? <Comment videoId={id} toClose={setisComment}></Comment> : "Comment"}
                     </div>
                 </div>
 

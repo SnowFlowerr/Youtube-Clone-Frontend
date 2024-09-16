@@ -1,0 +1,166 @@
+* {
+    box-sizing: border-box;
+}
+.mainBox {
+    width: 100%;
+    max-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    position: relative;
+}
+.mainBox2 {
+    width: 100vw;
+    /* aspect-ratio: 16/9; */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    position: relative;
+}
+.controls {
+    position: absolute;
+    padding: 10px;
+    width: 100%;
+    bottom: 0px;
+    color: white;
+    opacity: 1;
+}
+.controls2 {
+    position: absolute;
+    padding: 10px;
+    width: 100%;
+    bottom: 0px;
+    color: white;
+    opacity: 0;
+}
+.range{
+    position: relative;
+    /* border: 2px solid white; */
+    height: 10px;
+}
+.totalRange{
+    width: 100%;
+    /* Full-width */
+    height: 3px;
+    /* Specified height */
+    background: #5b5b5b;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.3s;
+}
+.passedRange{
+    /* Full-width */
+    height: 3px;
+    /* Specified height */
+    background: #ff0000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: height 0.3s;
+}
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;
+    /* Override default CSS styles */
+    appearance: none;
+    width: 100%;
+    /* Full-width */
+    height: 3px;
+    /* Specified height */
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: transparent;
+    outline: none;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Override default look */
+    appearance: none;
+    width: 3px;
+    /* Set a specific slider handle width */
+    height: 3px;
+    border-radius: 100%;
+    /* Slider handle height */
+    /* Green background */
+    cursor: pointer;
+    /* Cursor on hover */
+    transition: 0.3s;
+}
+.range:hover .totalRange{
+    height: 4px;
+}
+.range:hover .passedRange{
+    height: 4px;
+}
+.range:hover .slider{
+    height: 4px;
+}
+.range:hover .slider::-webkit-slider-thumb{
+    width: 15px;
+    background: #ff0000;
+    /* Set a specific slider handle width */
+    height: 15px;
+}
+
+.features{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.first{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.first > div{
+    display: flex;
+    align-items: center;
+}
+.volume:hover .volumeRange{
+    width: 70px;
+    
+}
+.volume:hover .volumeRange::-webkit-slider-thumb{
+    width: 13px;
+    height: 13px;
+}
+.volumeRange{
+    -webkit-appearance: none;
+    /* Override default look */
+    appearance: none;
+    height: 3px;
+    width: 0px;
+    outline: none;
+    transition: 0.5s;
+}
+.volumeRange::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    /* Override default look */
+    appearance: none;
+    border-radius: 100%;
+    width: 0px;
+    background: #ffffff;
+    /* Set a specific slider handle width */
+    height: 0px;
+    transition: 0.5s;
+}
+.second{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-right: 8px;
+}
+.second > div{
+    display: flex;
+    align-items: center;
+}
