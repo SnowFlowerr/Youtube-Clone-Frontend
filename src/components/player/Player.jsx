@@ -62,7 +62,9 @@ export default function Player({ url, poster }) {
     }
     function handleEnter() {
         setControls(() => false)
-        playerRef.current.style.cursor = 'auto';
+        if(playerRef.current){
+            playerRef.current.style.cursor = 'auto';
+    }
         // if (!isplaying) {
         //     setTimeout(() => {
         //         setControls(true)
@@ -84,7 +86,9 @@ export default function Player({ url, poster }) {
             "mousemove",
             debounce(() => {
                 setControls(true)
-                playerRef.current.style.cursor = 'none';
+                if(playerRef.current){
+                        playerRef.current.style.cursor = 'none';
+                }
             }, /* Wait */ 1500 /* ms */)
         );
     }, [isplaying])

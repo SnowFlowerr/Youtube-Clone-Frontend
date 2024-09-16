@@ -299,7 +299,7 @@ export default function VideoPlay() {
 
                     <div className={styles.videoStatus}>
                         <div className={styles.channel}>
-                            <div className={styles.channelDetail}>
+                            <div className={styles.channelDetail} onClick={()=>navigate(`/channels/${userData?._id}/featured`)}>
                                 <div className={styles.icon}>
                                     <img src={userData?.img} alt="" width="100%" height="100%" />
                                 </div>

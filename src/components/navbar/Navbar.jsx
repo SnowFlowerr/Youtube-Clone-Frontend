@@ -83,9 +83,11 @@ export default function Navbar() {
 
     function searchInp() {
         setisSearch(false)
+        suggRef.current.style.visibility = "visible"; suggRef2.current.style.visibility = "visible";
         setTimeout(() => {
             inputRef.current.focus();
         }, 0)
+        
     }
     function handleSuggestion(ele) {
         setsearchInput(ele)
@@ -221,21 +223,28 @@ export default function Navbar() {
                         :
                         <div className={styles.smallSearch}>
                             <form className={styles.searchInp} onSubmit={handleSubmit}>
-                                <input type="text" id='searchBtn' placeholder='Search here...' ref={inputRef} style={theme ? darkTheme : lightTheme} onChange={handleSearch} value={searchInput} />
+                                <input type="text" id='searchBtn' placeholder='Search here...' ref={inputRef} style={theme ? darkTheme : lightTheme} onChange={handleSearch} value={searchInput} autoComplete='off' onClick={()=>{suggRef.current.style.visibility = "visible"; suggRef2.current.style.visibility = "visible"}}/>
+
                                 <div className={styles.clearAll}>
                                     {searchInput && <i className="fa-solid fa-xmark" style={theme ? { color: "white" } : { color: "black" }} onClick={handleClearAll} id="search2"></i>}
                                     <i className="fa-solid fa-magnifying-glass" style={theme ? { color: "white" } : { color: "black" }} onClick={handleSubmit}></i>
 
                                 </div>
                             </form>
-                            <Speech setsearchInput={setsearchInput} input={inputRef}></Speech>
-                            {!searchInput && <div className={styles.back} onClick={() => setisSearch(true)}>
+                                <div className={styles.suggestion2} ref={suggRef} style={theme ? {} : { backgroundColor: "#dadada" }}>
+                                        <SearchHistory handleSuggestion={handleSuggestion} search={search} setSearch={setSearch} handleSubmit={handleSubmit}/>
+                                    </div>
+                            {/* <Speech setsearchInput={setsearchInput} input={inputRef}></Speech> */}
+                            <Speech setsearchInput={setsearchInput} input1={inputRef} input2={suggRef} input3={suggRef2}></Speech>
+
+                            {!searchInput && <div className={styles.back} onClick={() =>{ setisSearch(true);suggRef.current.style.visibility = "hidden"; suggRef2.current.style.visibility = "hidden"; setSignBtn(false);dispatch(offMic())}}>
                                 <i className="fa-solid fa-xmark" ></i>
                             </div>}
+                            
                         </div>
                 }
             </div>
-            <div className={styles.suggCont} ref={suggRef2} onClick={() => { suggRef.current.style.visibility = "hidden"; suggRef2.current.style.visibility = "hidden"; setSignBtn(false) }}></div>
+            <div className={styles.suggCont} ref={suggRef2} onClick={() => { suggRef.current.style.visibility = "hidden"; suggRef2.current.style.visibility = "hidden"; setSignBtn(false);dispatch(offMic()) }}></div>
             <div>
                 <Upload isUpload={isUpload} setisUpload={setisUpload}></Upload>
             </div>

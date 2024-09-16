@@ -288,8 +288,7 @@ a{
 @media screen and (max-width:750px) {
     .mainNav{
         width: 100%;
-        position: static;
-        z-index: 30;
+        position: sticky;
         border-bottom: 1px solid gray;
     }
     .navbar{
@@ -308,6 +307,7 @@ a{
     .search2{
         display: block;
         margin-right: -10px;
+        z-index: 20;
     }
     .search2 i{
         display: block;
@@ -336,6 +336,8 @@ a{
         display: flex;
         justify-content: space-between;
         gap: 5px;
+        position: relative;
+        z-index: 20;
     }
     .back{
         background-color: rgb(59, 59, 59);
@@ -386,6 +388,21 @@ a{
     }
     .upload{
         display: none;
+    }
+    .suggestion2{
+        width: calc(100%);
+        position: absolute;
+        max-height: 410px;
+        background-color: #363636;
+        top: 45px;
+        left: 0px;
+        border-radius: 0px 0px 10px 10px;
+        overflow: auto;
+        /* padding: 5px; */
+        scrollbar-width: none;
+        z-index: 50;
+        visibility: visible;
+        transition: none;
     }
 }
 @media screen and (max-width:450px) {

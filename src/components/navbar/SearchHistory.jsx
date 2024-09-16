@@ -35,7 +35,7 @@ export default function SearchHistory({ handleSuggestion,search,setSearch }) {
         <>
             {search.length !== 0 &&
                 <div className={styles.mainBox}>
-                    {search.map((ele, ind) =>
+                    {search.toReversed().map((ele, ind) =>
                         <div key={ind}  className={styles.searches}>
                             <div onClick={() =>handleSuggestion(ele)} className={styles.searchText}>
                             <div><i className="fa-solid fa-magnifying-glass"></i></div> <div>{ele}</div>
