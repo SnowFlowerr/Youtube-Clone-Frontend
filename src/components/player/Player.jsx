@@ -52,7 +52,7 @@ export default function Player({ url, poster , videoRef, onPlay }) {
     }
     function handlePlay() {
         if (videoRef.current && isplaying) {
-            videoRef.current.play()
+            videoRef.current.play().then(()=>console.log("play")).catch((err)=>console.log("err"))
         }
         else if (videoRef.current && !isplaying) {
             videoRef.current.pause()
@@ -91,7 +91,7 @@ export default function Player({ url, poster , videoRef, onPlay }) {
                 }
             }, /* Wait */ 1500 /* ms */)
         );
-    }, [isplaying])
+    }, [])
     useEffect(() => {
         setTimeout(() => {
             setControls(true)
@@ -158,7 +158,7 @@ export default function Player({ url, poster , videoRef, onPlay }) {
     return (
         <>
             <div className={isfullScreen ? styles.mainBox2 : styles.mainBox} ref={playerRef} onMouseMove={handleEnter} onMouseLeave={handleLeave} >
-                <video src={url} height={"100%"} width={"100%"} ref={videoRef} onTimeUpdate={() => setRange(videoRef.current.currentTime)} onClick={handlePlay} onDurationChange={() => setDuration(videoRef.current?.duration)} onEnded={handlePlay} poster={poster} muted autoPlay onPlay={() =>{ videoRef.current.muted = false;onPlay()}} onContextMenu={(e) => e.preventDefault() }>
+                <video src={url} height={"100%"} width={"100%"} ref={videoRef} onTimeUpdate={() => setRange(videoRef.current.currentTime)} onClick={handlePlay} onDurationChange={() => setDuration(videoRef.current?.duration)} onEnded={handlePlay} muted autoPlay onPlay={() =>{ videoRef.current.muted = false;onPlay()}} onContextMenu={(e) => e.preventDefault() }>
                 </video>
 
                 <div className={controls ? styles.controls2 : styles.controls}>
