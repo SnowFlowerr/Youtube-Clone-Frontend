@@ -216,7 +216,9 @@ export default function VideoPlay() {
         }
     }
     function totalTime() {
-        setDuration(Math.floor(videoRef.current.duration) / 4)
+        if(videoRef.current.duration){
+            setDuration(Math.floor(videoRef.current.duration) / 4)
+        }
         addHistory()
     }
     useEffect(() => {
@@ -231,6 +233,7 @@ export default function VideoPlay() {
             }
             window.addEventListener('popstate', clear);
         }
+        console.log(duration)
     }, [duration])
 
 
@@ -288,7 +291,7 @@ export default function VideoPlay() {
                         poster={videoData?.imageUrl}
                     >
                     </video> */}
-                    <Player url={videoData?.videoUrl} poster={videoData?.imageUrl} videoRef={videoRef} onPlay={totalTime}/>
+                    <Player url={videoData?.videoUrl} poster={videoData?.imageUrl} videoRef={videoRef} onduration={totalTime}/>
                 </div>
             </div>
             <div className={styles.videoDetails} ref={boxRef}>

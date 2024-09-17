@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './Player.module.css'
 
-export default function Player({ url, poster , videoRef, onPlay }) {
+export default function Player({ url, poster , videoRef, onduration }) {
     const [range, setRange] = useState(0)
     const [volume, setVolume] = useState(100)
     const [duration, setDuration] = useState(0)
@@ -158,7 +158,7 @@ export default function Player({ url, poster , videoRef, onPlay }) {
     return (
         <>
             <div className={isfullScreen ? styles.mainBox2 : styles.mainBox} ref={playerRef} onMouseMove={handleEnter} onMouseLeave={handleLeave} >
-                <video src={url} height={"100%"} width={"100%"} ref={videoRef} onTimeUpdate={() => setRange(videoRef.current.currentTime)} onClick={handlePlay} onDurationChange={() => setDuration(videoRef.current?.duration)} onEnded={handlePlay} muted autoPlay onPlay={() =>{ videoRef.current.muted = false;onPlay()}} onContextMenu={(e) => e.preventDefault() }>
+                <video src={url} height={"100%"} width={"100%"} ref={videoRef} onTimeUpdate={() => setRange(videoRef.current.currentTime)} onClick={handlePlay} onDurationChange={() =>{ setDuration(videoRef.current?.duration); onduration()}} onEnded={handlePlay} muted autoPlay onPlay={() =>{ videoRef.current.muted = false}} onContextMenu={(e) => e.preventDefault() }>
                 </video>
 
                 <div className={controls ? styles.controls2 : styles.controls}>
