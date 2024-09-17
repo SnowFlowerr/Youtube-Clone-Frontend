@@ -155,8 +155,8 @@ export default function Player({ url, poster }) {
     }
     return (
         <>
-            <div className={isfullScreen ? styles.mainBox2 : styles.mainBox} ref={playerRef} onMouseMove={handleEnter} onMouseLeave={handleLeave}>
-                <video src={url} height={"100%"} width={"100%"} ref={videoRef} onTimeUpdate={() => setRange(videoRef.current.currentTime)} onClick={handlePlay} onDurationChange={() => setDuration(videoRef.current?.duration)} onEnded={handlePlay} poster={poster} muted autoPlay onPlay={() => videoRef.current.muted = false} preload="metadata">
+            <div className={isfullScreen ? styles.mainBox2 : styles.mainBox} ref={playerRef} onMouseMove={handleEnter} onMouseLeave={handleLeave} >
+                <video src={url} height={"100%"} width={"100%"} ref={videoRef} onTimeUpdate={() => setRange(videoRef.current.currentTime)} onClick={handlePlay} onDurationChange={() => setDuration(videoRef.current?.duration)} onEnded={handlePlay} poster={poster} muted autoPlay onPlay={() => videoRef.current.muted = false} preload="metadata" controlsList="nodownload" onContextMenu={(e) => e.preventDefault() }>
                 </video>
 
                 <div className={controls ? styles.controls2 : styles.controls}>

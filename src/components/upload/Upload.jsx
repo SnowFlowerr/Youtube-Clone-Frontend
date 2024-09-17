@@ -64,6 +64,7 @@ export default function Upload({ isUpload, setisUpload }) {
                     }
                 })
                 setProgress(() => 100)
+                // console.log(data.data)
                 handleCreate(data.data, shorts)
             } catch (err) {
                 setProgress("X")
