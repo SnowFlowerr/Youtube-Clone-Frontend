@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './Player.module.css'
 
-export default function Player({ url, poster }) {
+export default function Player({ url, poster , videoRef, onPlay }) {
     const [range, setRange] = useState(0)
     const [volume, setVolume] = useState(100)
     const [duration, setDuration] = useState(0)
-    const [isplaying, setisplaying] = useState(false)
+    const [isplaying, setisplaying] = useState(true)
     const [isfullScreen, setisfullScreen] = useState(false)
     const [ispip, setispip] = useState(false)
     const [controls, setControls] = useState(false)
-    const videoRef = useRef(null)
+    // const videoRef = useRef(null)
     const playerRef = useRef(null)
 
     function handleRange(e) {
@@ -96,6 +96,7 @@ export default function Player({ url, poster }) {
         setTimeout(() => {
             setControls(true)
         }, 2000);
+        handlePlay()
     }, [])
     function handleLeave() {
         if (!isplaying) {
@@ -109,6 +110,7 @@ export default function Player({ url, poster }) {
             }, 1500)
         }
     }
+    
 
     async function handleFullScreen() {
         // setisfullScreen(!isfullScreen)
@@ -156,7 +158,7 @@ export default function Player({ url, poster }) {
     return (
         <>
             <div className={isfullScreen ? styles.mainBox2 : styles.mainBox} ref={playerRef} onMouseMove={handleEnter} onMouseLeave={handleLeave} >
-                <video src={url} height={"100%"} width={"100%"} ref={videoRef} onTimeUpdate={() => setRange(videoRef.current.currentTime)} onClick={handlePlay} onDurationChange={() => setDuration(videoRef.current?.duration)} onEnded={handlePlay} poster={poster} muted autoPlay onPlay={() => videoRef.current.muted = false} onContextMenu={(e) => e.preventDefault() }>
+                <video src={url} height={"100%"} width={"100%"} ref={videoRef} onTimeUpdate={() => setRange(videoRef.current.currentTime)} onClick={handlePlay} onDurationChange={() => setDuration(videoRef.current?.duration)} onEnded={handlePlay} poster={poster} muted autoPlay onPlay={() =>{ videoRef.current.muted = false;onPlay()}} onContextMenu={(e) => e.preventDefault() }>
                 </video>
 
                 <div className={controls ? styles.controls2 : styles.controls}>

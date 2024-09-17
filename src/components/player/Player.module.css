@@ -140,10 +140,18 @@
     display: flex;
     align-items: center;
     font-size: 14px;
+    transition: 0.5s;
 }
 
 .volume {
     position: relative;
+    width: 25px;
+}
+.volume svg {
+    flex-shrink: 0;
+}
+.volume:hover {
+    width: 100px;
 }
 
 .volume:hover .volumeRange {

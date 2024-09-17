@@ -288,7 +288,7 @@ export default function VideoPlay() {
                         poster={videoData?.imageUrl}
                     >
                     </video> */}
-                    <Player url={videoData?.videoUrl} poster={videoData?.imageUrl} />
+                    <Player url={videoData?.videoUrl} poster={videoData?.imageUrl} videoRef={videoRef} onPlay={totalTime}/>
                 </div>
             </div>
             <div className={styles.videoDetails} ref={boxRef}>
