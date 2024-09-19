@@ -7,7 +7,7 @@ import SubsCard from './SubsCard'
 import styles from "./Subscribes.module.css"
 
 export default function Subscribes() {
-    const [subsc, setSubsc] = useState([]);
+    const [subsc, setSubsc] = useState(null);
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -36,12 +36,12 @@ export default function Subscribes() {
                 </div>
                 <div className={styles.box}>
                     <div className={styles.subs}>
-                        {subsc.map((channel) =>
+                        { subsc && subsc.map((channel) =>
                             <SubsCard key={channel._id} channel={channel?.channelId}></SubsCard>
                         )}
                     </div>
                     {
-                        subsc.length===0 &&
+                        subsc?.length===0 &&
                         <div className={styles.notSubs}>
                             You have'nt Subscribed any Channel yet
                         </div>

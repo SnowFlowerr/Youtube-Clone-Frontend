@@ -10,8 +10,8 @@ import styles from "./SearchVid.module.css"
 import ShortsCard from './ShortsCard'
 
 export default function SearchedVid() {
-    const [searchedVideo, setsearchedVideo] = useState([])
-    const [searchedShorts, setsearchedShorts] = useState([])
+    const [searchedVideo, setsearchedVideo] = useState(null)
+    const [searchedShorts, setsearchedShorts] = useState(null)
     const [isShorts, setisShorts] = useState(true)
 
     const dispatch = useDispatch()
@@ -65,12 +65,12 @@ export default function SearchedVid() {
                     </div>
                     <div>
                         <div className={isShorts ? styles.mainShorts : styles.mainShorts2}>
-                            {searchedShorts.length !== 0 ?
-                                <div className={styles.shortsCard}>
-                                    {searchedShorts.map((video, index) =>
+                                {<div className={styles.shortsCard}>
+                                    {searchedShorts && searchedShorts.map((video, index) =>
                                         <ShortsCard video={video} key={index} index={index} />
                                     )}
-                                </div> :
+                                </div> }
+                                    {searchedShorts && searchedShorts.length === 0 &&
                                 <div className={styles.notFound}>
                                     No Shorts Found
                                 </div>
@@ -78,11 +78,11 @@ export default function SearchedVid() {
                         </div>
                     </div>
                     <div className={isShorts ? styles.mainVideo2 : styles.mainVideo}>
-                        {searchedVideo.length!==0?
-                            searchedVideo.map((video, index) =>
+                            {searchedVideo && searchedVideo?.map((video, index) =>
                                 <Cards video={video} key={index} index={index}></Cards>
-                            )
-                            :
+                            )}
+                            
+                        {searchedVideo && searchedVideo?.length ===0 &&
                             <div className={styles.notFound}>
                                     No Videos Found
                             </div>
