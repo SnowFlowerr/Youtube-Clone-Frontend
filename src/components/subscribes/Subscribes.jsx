@@ -15,8 +15,8 @@ export default function Subscribes() {
             try {
                 const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/users/getsubscriber",
                     { withCredentials: true });
-                // console.log(userData.data?.followedUser)
-                setSubsc(userData.data?.followedUser)
+                // console.log(userData.data)
+                setSubsc(userData.data)
 
             }
             catch (err) {
@@ -36,8 +36,8 @@ export default function Subscribes() {
                 </div>
                 <div className={styles.box}>
                     <div className={styles.subs}>
-                        {subsc.map((channel, index) =>
-                            <SubsCard key={index} channel={channel}></SubsCard>
+                        {subsc.map((channel) =>
+                            <SubsCard key={channel._id} channel={channel?.channelId}></SubsCard>
                         )}
                     </div>
                     {

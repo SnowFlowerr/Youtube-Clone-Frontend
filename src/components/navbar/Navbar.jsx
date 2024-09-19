@@ -57,16 +57,15 @@ export default function Navbar() {
                     const userData = await axios.put(`https://honest-stillness-production.up.railway.app/api/users/addsearchHistory/${searchInput}`,
                         {},
                         { withCredentials: true });
-                    // console.log(userData.data)
-                    setSearch([...userData?.data])
+                        setSearch([userData?.data,...search])
+                    }
+                    catch (err) {
+                        console.log(err)
+                    }
                 }
-                catch (err) {
-                    console.log(err)
-                }
+                setSearch1()
+                navigate(`/searchedvideo/${searchInput}`)
             }
-            setSearch1()
-            navigate(`/searchedvideo/${searchInput}`)
-        }
     }
 
     function handleClearAll(e) {
@@ -107,7 +106,7 @@ export default function Navbar() {
                     {},
                     { withCredentials: true });
                 // console.log(userData.data)
-                setSearch([...userData?.data])
+                setSearch([userData?.data,...search])
             }
             catch (err) {
                 console.log(err)

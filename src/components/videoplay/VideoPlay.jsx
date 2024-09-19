@@ -7,9 +7,9 @@ import Share from '../Share/Share'
 import Comment from '../comment/Comment'
 import Navbar from '../navbar/Navbar'
 import Sidenav from '../navbar/Sidenav'
+import Player from '../player/Player'
 import SimilarVideos from '../similarVideos/SimilarVideos'
 import styles from "./VideoPlay.module.css"
-import Player from '../player/Player'
 
 export default function VideoPlay() {
 
@@ -24,7 +24,6 @@ export default function VideoPlay() {
     const [isComment, setisComment] = useState(false)
     const [isDesc, setisDesc] = useState(false)
     const [videoData, setvideoData] = useState({})
-    const [userData, setuserData] = useState({name:"Title here"})
     const [duration, setDuration] = useState(0)
     const [view, setView] = useState(0)
     const [subs, setSubs] = useState(0)
@@ -37,65 +36,68 @@ export default function VideoPlay() {
         async function fetchData() {
             try {
                 const vidData = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/${id}`)
-                setvideoData(vidData.data)
-                setLike(vidData.data.likes)
-                setDislike(vidData.data.dislikes)
-                setView(vidData.data.views)
+                setvideoData(() => vidData.data)
+                setLike(() => vidData.data.likes)
+                setDislike(() => vidData.data.dislikes)
+                setView(() => vidData.data.views)
+                setSubs(() => vidData.data.userId.followers)
 
-                try {
-                    const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/issubscribe/${vidData.data.userId}`,
-                        { withCredentials: true }
-                    )
-                    setisSubs(userD.data)
+                async function isSubscribed() {
+                    try {
+                        const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/issubscribe/${vidData.data.userId._id}`,
+                            { withCredentials: true }
+                        )
+                        setisSubs(userD.data)
+                    }
+                    catch (err) {
+                        console.log(err.message)
+                    }
                 }
-                catch (err) {
-                    console.log(err.message)
-                }
-
-                try {
-                    const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/isliked/${id}`,
-                        { withCredentials: true }
-                    )
-                    setisLike(userD.data)
-                }
-                catch (err) {
-                    console.log(err.message)
-                }
-                try {
-                    const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/isdisliked/${id}`,
-                        { withCredentials: true }
-                    )
-                    setisDislike(userD.data)
-                }
-                catch (err) {
-                    console.log(err.message)
-                }
-                try {
-                    const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/issaved/${id}`,
-                        { withCredentials: true }
-                    )
-                    setisSaved(userD.data)
-                }
-                catch (err) {
-                    console.log(err.message)
-                }
-                try {
-                    const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get/${vidData.data.userId}`,
-                    )
-                    setSubs(userD.data.followers)
-                    setuserData(userD.data)
-                }
-                catch (err) {
-                    console.log(err.message)
-                }
-
+                isSubscribed()
             }
             catch (err) {
                 console.log(err.message)
                 navigate("/notFound")
             }
         }
+        async function isLiked() {
+            try {
+                const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/isliked/${id}`,
+                    { withCredentials: true }
+                )
+                setisLike(userD.data)
+            }
+            catch (err) {
+                console.log(err.message)
+            }
+        }
+
+        async function isDisliked() {
+            try {
+                const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/isdisliked/${id}`,
+                    { withCredentials: true }
+                )
+                setisDislike(userD.data)
+            }
+            catch (err) {
+                console.log(err.message)
+            }
+        }
+        async function isSaved() {
+            try {
+                const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/issaved/${id}`,
+                    { withCredentials: true }
+                )
+                setisSaved(userD.data)
+            }
+            catch (err) {
+                console.log(err.message)
+            }
+        }
         fetchData()
+        isLiked()
+        isDisliked()
+        isSaved()
     }, [])
 
     // useEffect(() => {
@@ -109,28 +111,29 @@ export default function VideoPlay() {
 
     function handleSubscribe() {
         async function fetchData() {
-            try {
-                if (isSubs) {
-                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${videoData?.userId}`,
-                        {},
-                        { withCredentials: true }
-                    );
-                    setSubs(subs - 1)
-                    console.log("Unsubscribe")
+            if(videoData?.userId?._id){
+                try {
+                    if (isSubs) {
+                        await axios.delete(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${videoData?.userId?._id}`,
+                            { withCredentials: true }
+                        );
+                        setSubs(subs - 1)
+                        console.log("Unsubscribe")
+                    }
+                    else {
+                        await axios.put(`https://honest-stillness-production.up.railway.app/api/users/subscribe/${videoData?.userId?._id}`,
+                            {},
+                            { withCredentials: true }
+                        );
+                        setSubs(subs + 1)
+                        console.log("Subscribe")
+                    }
+                    setisSubs(!isSubs)
+                    // console.log("err?.response?.data")
                 }
-                else {
-                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/subscribe/${videoData?.userId}`,
-                        {},
-                        { withCredentials: true }
-                    );
-                    setSubs(subs + 1)
-                    console.log("Subscribe")
+                catch (err) {
+                    console.log(err?.response?.data)
                 }
-                setisSubs(!isSubs)
-                // console.log("err?.response?.data")
-            }
-            catch (err) {
-                console.log(err?.response?.data)
             }
         }
         fetchData()
@@ -142,8 +145,7 @@ export default function VideoPlay() {
         // }
         try {
             if (isLike) {
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/unlike/${id}`,
-                    { headers: { "Content-Type": "application/json" } },
+                await axios.delete(`https://honest-stillness-production.up.railway.app/api/videos/unlike/${id}`,
                     { withCredentials: true }
                 );
                 setLike(like - 1)
@@ -154,7 +156,7 @@ export default function VideoPlay() {
                     handleDislike()
                 }
                 await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/like/${id}`,
-                    { headers: { "Content-Type": "application/json" } },
+                    {},
                     { withCredentials: true }
                 );
                 setLike(like + 1)
@@ -170,8 +172,7 @@ export default function VideoPlay() {
     async function handleDislike() {
         try {
             if (isDislike) {
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/undislike/${id}`,
-                    {},
+                await axios.delete(`https://honest-stillness-production.up.railway.app/api/videos/undislike/${id}`,
                     { withCredentials: true }
                 );
                 setDislike(dislike - 1)
@@ -206,7 +207,7 @@ export default function VideoPlay() {
     }
     async function addHistory() {
         try {
-            await axios.put(`https://honest-stillness-production.up.railway.app/api/users/history/${id}`,
+            await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/history/${id}`,
                 {},
                 { withCredentials: true }
             );
@@ -216,7 +217,7 @@ export default function VideoPlay() {
         }
     }
     function totalTime() {
-        if(videoRef.current.duration){
+        if (videoRef.current.duration) {
             setDuration(Math.floor(videoRef.current.duration) / 4)
         }
         addHistory()
@@ -233,7 +234,6 @@ export default function VideoPlay() {
             }
             window.addEventListener('popstate', clear);
         }
-        console.log(duration)
     }, [duration])
 
 
@@ -244,14 +244,13 @@ export default function VideoPlay() {
     async function addSaved() {
         try {
             if (isSaved) {
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/users/removesave/${id}`,
-                    {},
+                await axios.delete(`https://honest-stillness-production.up.railway.app/api/videos/unsave/${id}`,
                     { withCredentials: true }
                 );
                 console.log("removed")
             }
             else {
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/users/addsave/${id}`,
+                await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/save/${id}`,
                     {},
                     { withCredentials: true }
                 );
@@ -291,7 +290,7 @@ export default function VideoPlay() {
                         poster={videoData?.imageUrl}
                     >
                     </video> */}
-                    <Player url={videoData?.videoUrl} poster={videoData?.imageUrl} videoRef={videoRef} onduration={totalTime}/>
+                    <Player url={videoData?.videoUrl} poster={videoData?.imageUrl} videoRef={videoRef} onduration={totalTime} />
                 </div>
             </div>
             <div className={styles.videoDetails} ref={boxRef}>
@@ -302,12 +301,12 @@ export default function VideoPlay() {
 
                     <div className={styles.videoStatus}>
                         <div className={styles.channel}>
-                            <div className={styles.channelDetail} onClick={()=>navigate(`/channels/${userData?._id}/featured`)}>
+                            <div className={styles.channelDetail} onClick={() => navigate(`/channels/${videoData?.userId?._id}/featured`)}>
                                 <div className={styles.icon}>
-                                    <img src={userData?.img} alt="" width="100%" height="100%" />
+                                    <img src={videoData?.userId?.img} alt="" width="100%" height="100%" />
                                 </div>
                                 <div className={styles.channelName}>
-                                    <span className={styles.name}>{userData?.name}</span>
+                                    <span className={styles.name}>{videoData?.userId?.name}</span>
                                     <br />
                                     <span className={styles.subs}>{subs} subs</span>
                                 </div>

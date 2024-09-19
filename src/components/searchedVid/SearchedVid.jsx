@@ -29,7 +29,6 @@ export default function SearchedVid() {
                 console.log(err.message)
             }
         }
-        fetchShorts();
         const fetchVideos = async () => {
             try {
                 const res = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/search/${search}`)
@@ -40,6 +39,7 @@ export default function SearchedVid() {
                 console.log(err.message)
             }
         }
+        fetchShorts();
         fetchVideos();
         dispatch(offMic())
     }, [search])
@@ -85,7 +85,7 @@ export default function SearchedVid() {
                             :
                             <div className={styles.notFound}>
                                     No Videos Found
-                                </div>
+                            </div>
                         }
                     </div>
                 </div>

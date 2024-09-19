@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,7 +7,7 @@ import styles from "./Card.module.css";
 
 export default function Cards({ video }) {
     const theme = useSelector((state) => state.theme.value);
-    const [user, setUser] = useState("");
+    // const [user, setUser] = useState("");
     const videoRef = useRef();
     const [time, setTime] = useState(false);
     const navigate = useNavigate();
@@ -29,21 +28,21 @@ export default function Cards({ video }) {
         }
     }
 
-    useEffect(() => {
-        async function currentUser() {
-            try {
-                const userD = await axios.get(
-                    `https://honest-stillness-production.up.railway.app/api/users/get/${video?.userId}`,
-                    { withCredentials: true }
-                );
-                setUser(userD.data);
-                // console.log(user.data)
-            } catch (err) {
-                console.log(err);
-            }
-        }
-        currentUser();
-    }, []);
+    // useEffect(() => {
+    //     async function currentUser() {
+    //         try {
+    //             const userD = await axios.get(
+    //                 `https://honest-stillness-production.up.railway.app/api/users/get/${video?.userId}`,
+    //                 { withCredentials: true }
+    //             );
+    //             setUser(userD.data);
+    //             // console.log(user.data)
+    //         } catch (err) {
+    //             console.log(err);
+    //         }
+    //     }
+    //     currentUser();
+    // }, []);
 
     // let timeout;
 
@@ -152,11 +151,11 @@ export default function Cards({ video }) {
                 <div className={styles.videoDetail} style={theme ? darkTheme : lightTheme}>
                     <div className={styles.videoIconDet}>
                         <div className={styles.icon} onClick={()=>navigate(`/channels/${video.userId}/featured`)}>
-                                <img src={user?.img} width="100%" height="100%" alt="icon" />
+                                <img src={video?.userId?.img} width="100%" height="100%" alt="icon" />
                         </div>
                         <div className={styles.large} onClick={()=>navigate(`/channels/${video.userId}/featured`)}>
                             <div className={styles.channelNames} >
-                                {user.name}
+                                {video?.userId?.name}
                             </div>
                         </div>
                         <div className={styles.small} onClick={()=>navigate(`/player/${video._id}`)}>
@@ -165,7 +164,7 @@ export default function Cards({ video }) {
                                     {video?.title}
                                 </div>
                                 <div className={styles.channelNames}>
-                                    {user.name}
+                                    {video?.userId?.name}
                                 </div>
                                 <div>
                                     {video?.views} Views . {format(video.createdAt)}

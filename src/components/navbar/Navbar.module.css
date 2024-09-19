@@ -363,7 +363,7 @@ a{
         height: 38px;
         border-radius: 20px;
         padding-left: 15px;
-        padding-right: 50px;
+        padding-right: 80px;
         font-size: 17px;
     }
     .searchInp div{
@@ -420,5 +420,10 @@ a{
     }
     .signMenu{
         width: calc(100% - 10px);
+    }
+    .suggestion2{
+        width: calc(100% + 10px);
+        top: 45px;
+        left: -5px;
     }
 }

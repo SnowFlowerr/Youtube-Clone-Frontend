@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
@@ -8,7 +7,7 @@ import styles from "./ShortsCard.module.css"
 
 export default function ShortsCard({ video, index }) {
     const theme = useSelector((state) => state.theme.value)
-    const [user, setUser] = useState("")
+    // const [user, setUser] = useState("")
     const videoRef = useRef()
     const [time, setTime] = useState(false);
     const navigate = useNavigate()
@@ -32,20 +31,20 @@ export default function ShortsCard({ video, index }) {
         }
     }
 
-    useEffect(() => {
-        async function currentUser() {
-            try {
-                const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get/${video?.userId}`,
-                    { withCredentials: true }
-                )
-                setUser(userD.data)
-            }
-            catch (err) {
-                console.log(err)
-            }
-        }
-        currentUser()
-    }, [])
+    // useEffect(() => {
+    //     async function currentUser() {
+    //         try {
+    //             const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get/${video?.userId}`,
+    //                 { withCredentials: true }
+    //             )
+    //             setUser(userD.data)
+    //         }
+    //         catch (err) {
+    //             console.log(err)
+    //         }
+    //     }
+    //     currentUser()
+    // }, [])
 
     // let timeout
 
@@ -161,7 +160,7 @@ export default function ShortsCard({ video, index }) {
                         </div>
                         <div className={styles.channel}>
                             <div className={styles.channelNames} onClick={() => navigate(`/channels/${video?.userId}/featured`)}>
-                                {user?.name}
+                                {video?.userId?.name}
                             </div>
                             <div onClick={() => `/shorts/${video?._id}`}>
                                 {video?.views} Views . {format(video.createdAt)}

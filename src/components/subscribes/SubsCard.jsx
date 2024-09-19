@@ -14,8 +14,8 @@ export default function SubsCard({ channel }) {
     async function handleSubscribe() {
         try {
             if (isSubs) {
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${channel._id}`,
-                    {},
+                await axios.delete(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${channel._id}`,
+                    
                     { withCredentials: true }
                 );
                 setSubs(subs - 1)

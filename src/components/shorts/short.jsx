@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Comment from '../comment/Comment';
 import Share from '../Share/Share';
 import styles from "./Shorts.module.css";
@@ -13,11 +14,13 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
     const [isDislike, setisDislike] = useState(false)
     const [isSaved, setisSaved] = useState(false)
     const [isComment, setisComment] = useState(false)
-    const [userData, setUserData] = useState({ name: "Title" })
+    const [hist, setHist] = useState(true)
+    const [userData, setUserData] = useState({ username: "username here" })
     const [view, setView] = useState(0)
     const [subs, setSubs] = useState(0)
     const [like, setLike] = useState(0)
     const [dislike, setDislike] = useState(0)
+    const navigate=useNavigate()
 
     useEffect(() => {
         const handlePlayStop = (entries) => {
@@ -26,8 +29,14 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                     entries.forEach((entry) => {
                         if (entry.isIntersecting) {
                             fetchUser()
-                            fetchVideo()
-                            fetchData()
+                            setView(data.views)
+                            setLike(data.likes)
+                            setDislike(data.dislikes)
+                            isSubscribedfun()
+                            isLikedfun()
+                            isDislikedfun()
+                            isSavedfun()
+                            addHistory()
                             // setvideoData(data)
                             onPlay(data?._id);
                             videoRef.current.currentTime = 0; // Reset video to the beginning
@@ -75,64 +84,67 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
             console.log(err.message)
         }
     }
-    async function fetchVideo() {
-        try {
-            const video = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/${data?._id}`)
-            setView(video.data.views)
-            setLike(video.data.likes)
-            setDislike(video.data.dislikes)
-        }
-        catch (err) {
-            console.log(err.message)
+
+    async function isSubscribedfun() {
+        if (data?.userId) {
+            try {
+                const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/issubscribe/${data.userId}`,
+                    { withCredentials: true }
+                )
+                setisSubs(userD.data)
+            }
+            catch (err) {
+                console.log(err.message)
+            }
         }
     }
-    async function fetchData() {
-        try {
-            const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/issubscribe/${data.userId}`,
-                { withCredentials: true }
-            )
-            setisSubs(userD.data)
+    async function isSavedfun() {
+        if (data?._id) {
+            try {
+                const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/issaved/${data?._id}`,
+                    { withCredentials: true }
+                )
+                setisSaved(userD.data)
+            }
+            catch (err) {
+                console.log(err.message)
+            }
         }
-        catch (err) {
-            console.log(err.message)
+    }
+    async function isLikedfun() {
+        if (data?._id) {
+            try {
+                const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/isliked/${data?._id}`,
+                    { withCredentials: true }
+                )
+                setisLike(userD.data)
+            }
+            catch (err) {
+                console.log(err.message)
+            }
         }
 
-        try {
-            const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/islikedshorts/${data?._id}`,
-                { withCredentials: true }
-            )
-            setisLike(userD.data)
-        }
-        catch (err) {
-            console.log(err.message)
-        }
-        try {
-            const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/isdislikedshorts/${data?._id}`,
-                { withCredentials: true }
-            )
-            setisDislike(userD.data)
-        }
-        catch (err) {
-            console.log(err.message)
-        }
-        try {
-            const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/issavedshorts/${data?._id}`,
-                { withCredentials: true }
-            )
-            setisSaved(userD.data)
-        }
-        catch (err) {
-            console.log(err.message)
+    }
+    async function isDislikedfun() {
+        if (data?._id) {
+            try {
+                const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/isdisliked/${data?._id}`,
+                    { withCredentials: true }
+                )
+                setisDislike(userD.data)
+            }
+            catch (err) {
+                console.log(err.message)
+            }
         }
     }
 
-    function handleSubscribe() {
-        async function fetchData() {
+    async function handleSubscribe() {
             if (data?.userId) {
                 try {
                     if (isSubs) {
-                        await axios.put(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${data?.userId}`,
-                            {},
+                        await axios.delete(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${data?.userId}`,
+                            
                             { withCredentials: true }
                         );
                         setSubs(subs - 1)
@@ -153,15 +165,13 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                     console.log(err?.response?.data)
                 }
             }
-        }
-        fetchData()
     }
     async function handleLike() {
         if (data._id) {
             try {
                 if (isLike) {
-                    await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/unlike/${data._id}`,
-                        {},
+                    await axios.delete(`https://honest-stillness-production.up.railway.app/api/shorts/unlike/${data._id}`,
+                        
                         { withCredentials: true }
                     );
                     setLike(like - 1)
@@ -190,8 +200,8 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
         if (data._id) {
             try {
                 if (isDislike) {
-                    await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/undislike/${data._id}`,
-                        {},
+                    await axios.delete(`https://honest-stillness-production.up.railway.app/api/shorts/undislike/${data._id}`,
+                        
                         { withCredentials: true }
                     );
                     setDislike(dislike - 1)
@@ -227,9 +237,10 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
         }
     }
     async function addHistory() {
-        if (data?._id !== undefined) {
+        if (data._id && hist) {
+            setHist(()=>false)
             try {
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/users/shortshistory/${data?._id}`,
+                await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/history/${data._id}`,
                     {},
                     { withCredentials: true }
                 );
@@ -239,19 +250,20 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                 console.log(err.message)
             }
         }
+        
     }
     async function addSaved() {
-        if (data?._id !== undefined) {
+        if (data._id) {
             try {
                 if (isSaved) {
-                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/removesaveshorts/${data?._id}`,
-                        {},
+                    await axios.delete(`https://honest-stillness-production.up.railway.app/api/shorts/unsave/${data?._id}`,
+                        
                         { withCredentials: true }
                     );
                     console.log("removed")
                 }
                 else {
-                    await axios.put(`https://honest-stillness-production.up.railway.app/api/users/addsaveshorts/${data?._id}`,
+                    await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/save/${data?._id}`,
                         {},
                         { withCredentials: true }
                     );
@@ -269,7 +281,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
     return (
         <>
             <span className={styles.span}>
-                <video className={styles.video} ref={videoRef} src={data?.videoUrl} onPlay={addHistory} controls onEnded={handleViews} />
+                <video className={styles.video} ref={videoRef} src={data?.videoUrl} controls onEnded={handleViews} />
 
                 {index === length ?
                     <div className={styles.loading}>
@@ -283,7 +295,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                         }
                     </div>
                     :
-                    <div className={styles.shortsDet}>
+                    <div className={styles.shortsDet} onClick={()=>navigate(`/channels/${userData._id}/featured`)}>
                         <div className={styles.name}>
                             <div className={styles.icon}>
                                 <img src={userData?.img} width="100%" height="100%" alt="icon" />
@@ -291,7 +303,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                             <div className={styles.username}>
                                 @{userData?.username}
                             </div>
-                            <div className={styles.subs} onClick={handleSubscribe} style={isSubs ? { backgroundColor: "rgb(255, 255, 255, 0.2)" } : {}}>
+                            <div className={styles.subs} onClick={handleSubscribe} style={isSubs ? { backgroundColor: "rgb(255, 255, 255, 0.2)" } : {color:"black"}}>
                                 {isSubs ? "Unsubscribe" : "Subscribe"}
                             </div>
                         </div>
@@ -302,10 +314,8 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                 }
             </span>
             {index !== length &&
-                <div className={isComment ? styles.comments2 : styles.comments} style={theme?{}:{ backgroundColor: "rgb(220, 220, 220)" }}>
-                    {isComment &&<Comment videoId={data?._id} isshorts={true} toClose={setisComment}></Comment>}
-
-                    
+                <div className={isComment ? styles.comments2 : styles.comments} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
+                    {isComment && <Comment videoId={data?._id} isshorts={true} toClose={setisComment}></Comment>}
                 </div>
             }
 
@@ -346,7 +356,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                     {isSaved ? "Remove" : "Save"}
                 </div>
                 <div>
-                    <div className={styles.span2} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }}>
+                    <div className={styles.span2} style={theme ? {} : { backgroundColor: "rgb(220, 220, 220)" }} onClick={()=>navigate(`/channels/${userData._id}/featured`)}>
                         <div className={styles.channelIcon}>
                             {index !== length &&
                                 <img src={userData?.img} alt="ChannelIcon" height="100%" width="100%" />

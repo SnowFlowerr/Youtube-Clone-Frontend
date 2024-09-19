@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import styles from './History.module.css'
 import { useSelector } from 'react-redux'
 import { lightTheme, darkTheme } from '../../themes'
+import {format} from 'timeago.js'
 
 export default function History({ userData }) {
     const theme = useSelector((state) => state.theme.value)
@@ -39,13 +40,13 @@ export default function History({ userData }) {
 
             <div className={styles.watched} ref={scrollRef}>
                 {
-                    userData?.toReversed().map((video, index) =>
-                        <div className={styles.container} key={index} ref={widthRef}>
+                    userData?.map((video) =>
+                        <div className={styles.container} key={video._id} ref={widthRef}>
                             <div className={styles.thumbnail} ref={thumbnailRef}>
-                                <a href={`player/${video?._id}`}>
-                                    <img src={video?.imageUrl} width="100%" height="100%" alt="thumbnail" />
+                                <a href={`player/${video?.videoId._id}`}>
+                                    <img src={video?.videoId.imageUrl} width="100%" height="100%" alt="thumbnail" />
                                 </a>
-                                <div className={styles.duration}>{getDuration(video?.duration)}</div>
+                                <div className={styles.duration}>{getDuration(video?.videoId.duration)}</div>
                             </div>
                             <div className={styles.videoDetail} style={theme ? darkTheme : lightTheme}>
                                 {/* <div className={styles.icon}>
@@ -54,16 +55,17 @@ export default function History({ userData }) {
                                     </a>
                                 </div> */}
                                 <div className={styles.details}>
-                                    <a href={`/player/${video?._id}`} style={theme ? { color: "white" } : { color: "black" }}>
+                                    <a href={`/player/${video?.videoId._id}`} style={theme ? { color: "white" } : { color: "black" }}>
                                         <div className={styles.title}>
-                                            {video?.title}
+                                            {video?.videoId.title}
                                         </div>
                                         <div className={styles.channel}>
                                             <div className={styles.channelNames}>
                                                 {video?.name}
                                             </div>
                                             <div>
-                                                {video?.views} Views
+                                                {video?.videoId.views} Views <br />
+                                                {format(video.createdAt)}
                                             </div>
                                         </div>
                                     </a>

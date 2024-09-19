@@ -13,8 +13,8 @@ export default function Subscribers() {
             try {
                 const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/users/getsubscriber",
                     { withCredentials: true });
-                // console.log(userData.data?.followedUser)
-                setSubsc(userData.data?.followedUser)
+                // console.log(userData.data)
+                setSubsc(userData.data)
 
             }
             catch (err) {
@@ -23,20 +23,20 @@ export default function Subscribers() {
         }
         getSubs()
     }, [])
+
     return (
         <div className={styles.mainBox}>
             {
-                subsc?.map((subs, index) =>
-                    <div key={index} >
-                        {subs._id &&
-                        <div className={styles.main} onClick={()=>navigate(`/channels/${subs._id}/featured`)}>
+                subsc.map((subs) =>
+                    <div key={subs.channelId} >
+                        <div className={styles.main} onClick={()=>navigate(`/channels/${subs.channelId._id}/featured`)}>
                             <div className={styles.Channelicon}>
-                                <img src={subs?.img} alt="" height="100%" width="100%"/>
+                                <img src={subs?.channelId?.img} alt="icon" height="100%" width="100%"/>
                             </div>
                             <div>
-                                {subs?.name}
+                                {subs?.channelId?.name}
                             </div>
-                        </div>}
+                        </div>
                     </div>
                 )
             }

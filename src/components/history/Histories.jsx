@@ -13,8 +13,14 @@ import ShortsHistory from './ShortsHistory'
 export default function Histories() {
     const theme = useSelector((state) => state.theme.value)
     const navigate = useNavigate()
-    const [userData, setuserData] = useState("")
-    const [shortsData, setshortsData] = useState("")
+    const [videoHistory, setvideoHistory] = useState([])
+    const [videoLiked, setvideoLiked] = useState([])
+    const [videoDisliked, setvideoDisliked] = useState([])
+    const [videoSaved, setvideoSaved] = useState([])
+    const [shortsHistory, setshortsHistory] = useState([])
+    const [shortsLiked, setshortsLiked] = useState([])
+    const [shortsDisliked, setshortsDisliked] = useState([])
+    const [shortsSaved, setshortsSaved] = useState([])
     const sign = useSelector((state) => state.sign.value)
 
     useEffect(() => {
@@ -23,10 +29,94 @@ export default function Histories() {
         }
         async function fetchData() {
             try {
-                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/users/history",
+                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/videos/history/get",
                     { withCredentials: true }
                 );
-                setuserData(userData.data)
+                setvideoHistory(userData.data)
+                // console.log(userData.data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        async function fetchData2() {
+            try {
+                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/shorts/history/get",
+                    { withCredentials: true }
+                );
+                setshortsHistory(userData.data)
+                // console.log(userData.data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        async function fetchData3() {
+            try {
+                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/videos/liked/get",
+                    { withCredentials: true }
+                );
+                setvideoLiked(userData.data)
+                // console.log(userData.data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        async function fetchData4() {
+            try {
+                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/shorts/liked/get",
+                    { withCredentials: true }
+                );
+                setshortsLiked(userData.data)
+                // console.log(userData.data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        async function fetchData5() {
+            try {
+                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/videos/disliked/get",
+                    { withCredentials: true }
+                );
+                setvideoDisliked(userData.data)
+                // console.log(userData.data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        async function fetchData6() {
+            try {
+                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/shorts/disliked/get",
+                    { withCredentials: true }
+                );
+                setshortsDisliked(userData.data)
+                // console.log(userData.data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        async function fetchData7() {
+            try {
+                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/videos/saved/get",
+                    { withCredentials: true }
+                );
+                setvideoSaved(userData.data)
+                // console.log(userData.data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        async function fetchData8() {
+            try {
+                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/shorts/saved/get",
+                    { withCredentials: true }
+                );
+                setshortsSaved(userData.data)
                 // console.log(userData.data)
             }
             catch (err) {
@@ -34,19 +124,13 @@ export default function Histories() {
             }
         }
         fetchData()
-        async function fetchData2() {
-            try {
-                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/users/shortshistory",
-                    { withCredentials: true }
-                );
-                setshortsData(userData.data)
-                // console.log(userData.data)
-            }
-            catch (err) {
-                console.log(err)
-            }
-        }
         fetchData2()
+        fetchData3()
+        fetchData4()
+        fetchData5()
+        fetchData6()
+        fetchData7()
+        fetchData8()
     }, [])
 
     return (
@@ -77,41 +161,43 @@ export default function Histories() {
                             </div>
                         </div>
                     </div>
-                    {userData?.history?.length!==0 &&  <div>
-                        <div className={styles.view}>Videos History ({userData?.history?.length})</div>
-                        <History userData={userData.history}></History>
+                    <div>
+                    {videoHistory?.length!==0 &&  <div>
+                        <div className={styles.view}>Videos History ({videoHistory?.length})</div>
+                        <History userData={videoHistory}></History>
                     </div>}
-                    {shortsData?.shortsHistory?.length!==0 &&  <div>
-                        <div className={styles.view}>Shorts History ({shortsData?.shortsHistory?.length})</div>
-                        <ShortsHistory userData={shortsData?.shortsHistory}/>
-                    </div>}
-
-                    {userData?.saved?.length!==0 &&  <div>
-                        <div className={styles.view}>Saved Videos ({userData?.saved?.length})</div>
-                        <History userData={userData?.saved}></History>
-                    </div>}
-                    {shortsData?.shortsSaved?.length!==0 &&  <div>
-                        <div className={styles.view}>Saved Shorts ({shortsData?.shortsSaved?.length})</div>
-                        <ShortsHistory userData={shortsData?.shortsSaved}/>
+                    {shortsHistory?.length!==0 &&  <div>
+                        <div className={styles.view}>Shorts History ({shortsHistory?.length})</div>
+                        <ShortsHistory userData={shortsHistory}/>
                     </div>}
 
-                    {userData?.liked?.length!==0 && <div>
-                        <div className={styles.view}>Liked Videos ({userData?.liked?.length})</div>
-                        <History userData={userData?.liked}></History>
+                    {videoSaved?.length!==0 &&  <div>
+                        <div className={styles.view}>Saved Videos ({videoSaved?.length})</div>
+                        <History userData={videoSaved}></History>
                     </div>}
-                    {shortsData?.shortsLiked?.length!==0 && <div>
-                        <div className={styles.view}>Liked Shorts ({shortsData?.shortsLiked?.length})</div>
-                        <ShortsHistory userData={shortsData?.shortsLiked}/>
+                    {shortsSaved?.length!==0 &&  <div>
+                        <div className={styles.view}>Saved Shorts ({shortsSaved?.length})</div>
+                        <ShortsHistory userData={shortsSaved}/>
                     </div>}
 
-                    {userData?.disliked?.length!==0 && <div>
-                        <div className={styles.view}>Disliked Videos ({userData?.disliked?.length})</div>
-                        <History userData={userData?.disliked}></History>
+                    {videoLiked?.length!==0 && <div>
+                        <div className={styles.view}>Liked Videos ({videoLiked?.length})</div>
+                        <History userData={videoLiked}></History>
                     </div>}
-                    {shortsData?.shortsDisliked?.length!==0 && <div>
-                        <div className={styles.view}>Disliked Shorts ({shortsData?.shortsDisliked?.length})</div>
-                        <ShortsHistory userData={shortsData?.shortsDisliked}/>
+                    {shortsLiked?.length!==0 && <div>
+                        <div className={styles.view}>Liked Shorts ({shortsLiked?.length})</div>
+                        <ShortsHistory userData={shortsLiked}/>
                     </div>}
+
+                    {videoDisliked?.length!==0 && <div>
+                        <div className={styles.view}>Disliked Videos ({videoDisliked?.length})</div>
+                        <History userData={videoDisliked}></History>
+                    </div>}
+                    {shortsDisliked?.length!==0 && <div>
+                        <div className={styles.view}>Disliked Shorts ({shortsDisliked?.length})</div>
+                        <ShortsHistory userData={shortsDisliked}/>
+                    </div>}
+                    </div>
                 </div>
             </div>
         </div>

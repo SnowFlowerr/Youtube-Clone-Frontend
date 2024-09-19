@@ -15,6 +15,7 @@ export default function Sidenav() {
     const [home, setHome] = useState(false)
     const [shorts, setShorts] = useState(false)
     const [history, setHistory] = useState(false)
+    const [subscribes, setSubscribes] = useState(false)
     const [isUpload, setisUpload] = useState(false)
     const { category } = useParams()
     useEffect(() => {
@@ -28,6 +29,9 @@ export default function Sidenav() {
             }
             else if (path.includes('history')) {
                 setHistory(true)
+            }
+            else if (path.includes('subscribes')) {
+                setSubscribes(true)
             }
         }
     }, [location.pathname])
@@ -111,9 +115,10 @@ export default function Sidenav() {
                             </div>
                         </Link>
                         {sign &&
-                            <Link to='/subscribes' className={styles.subscribe} style={theme ? darkTheme : lightTheme}>
+                            <Link to='/subscribes' className={styles.subscribe} style={theme ? subscribes ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : subscribes ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme}>
                                 <div>
-                                    <i className="fa-solid fa-tv"></i>
+                                    {subscribes?<i className="fa-solid fa-tv fa-bounce"></i>:<i className="fa-solid fa-tv"></i>
+                                    }
                                     <br />
                                     <span>Subscription</span>
                                 </div>

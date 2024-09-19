@@ -8,7 +8,6 @@ import styles from "./Home.module.css";
 
 export default function Cards({ video }) {
     const theme = useSelector((state) => state.theme.value);
-    const [user, setUser] = useState("");
     const videoRef = useRef();
     const [time, setTime] = useState(false);
     const navigate = useNavigate();
@@ -28,24 +27,6 @@ export default function Cards({ video }) {
             return min + ":" + sec;
         }
     }
-
-    useEffect(() => {
-        async function currentUser() {
-            try {
-                const userD = await axios.get(
-                    `https://honest-stillness-production.up.railway.app/api/users/get/${video?.userId}`,
-                    { withCredentials: true }
-                );
-                setUser(userD.data);
-                // console.log(user.data)
-            } catch (err) {
-                console.log(err);
-            }
-        }
-        currentUser();
-    }, []);
-
-    // let timeout;
 
     const [isMute, setisMute] = useState(true);
 
@@ -158,8 +139,8 @@ export default function Cards({ video }) {
                     style={theme ? darkTheme : lightTheme}
                 >
                     <div className={styles.icon}>
-                        <a href={`/channels/${video.userId}/featured`}>
-                            <img src={user?.img} width="100%" height="100%" alt="icon" />
+                        <a href={`/channels/${video.userId._id}/featured`}>
+                            <img src={video?.userId?.img} width="100%" height="100%" alt="icon" />
                         </a>
                     </div>
                     {/* {JSON.stringify(isPlaying)} */}
@@ -167,7 +148,7 @@ export default function Cards({ video }) {
                         
                             <div className={styles.title} onClick={()=>navigate(`/player/${video?._id}`)}>{video?.title}</div>
                             <div className={styles.channel}>
-                                <div className={styles.channelNames} onClick={()=>navigate(`/channels/${video?.userId}/featured`)}>{user?.name}</div>
+                                <div className={styles.channelNames} onClick={()=>navigate(`/channels/${video?.userId}/featured`)}>{video?.userId?.name}</div>
                                 <div onClick={()=>navigate(`/player/${video?._id}`)}>
                                     {video?.views} Views . {format(video.createdAt)}
                                 </div>

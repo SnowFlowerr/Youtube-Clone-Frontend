@@ -44,7 +44,7 @@ export default function Shorts() {
     }, [])
 
     useEffect(() => {
-        async function fetchData() {
+        async function fetchData1() {
             try {
                 if (id !== "url" && id) {
                     const vidData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/${id}`)
@@ -56,7 +56,7 @@ export default function Shorts() {
                 console.log(err.message)
             }
         }
-        fetchData()
+        fetchData1()
     }, [])
     useEffect(() => {
         async function fetchData() {

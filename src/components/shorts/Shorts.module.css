@@ -96,6 +96,7 @@
     font-size: 12px;
     /* opacity: 0.5 */
     /* color: white; */
+    cursor: pointer;
 }
 .span1{
     background-color: rgb(38, 38, 38);
@@ -157,6 +158,8 @@
     position: absolute;
     width: 100%;
     bottom: 75px;
+    color: white;
+    cursor: pointer;
 }
 .shortsTitle{
     text-align: start;
@@ -204,7 +207,7 @@
 }
 .subs{
     background-color: rgb(255, 255, 255);
-    color: black;
+    color: rgb(255, 255, 255);
     font-size: 12px;
     /* height: 30px; */
     margin-left: 10px;
