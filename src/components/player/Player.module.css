@@ -52,11 +52,22 @@
     /* Full-width */
     height: 3px;
     /* Specified height */
-    background: #5b5b5b;
+    background: #858585;
     position: absolute;
     top: 0;
     left: 0;
     transition: 0.3s;
+}
+
+.buffRange {
+    /* Full-width */
+    height: 3px;
+    /* Specified height */
+    background: #bababa;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: height 0.3s;
 }
 
 .passedRange {
@@ -68,6 +79,28 @@
     top: 0;
     left: 0;
     transition: height 0.3s;
+}
+
+.pointRange {
+    height: 3px;
+    /* Specified height */
+    background: rgb(255, 255, 255, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    transition: height 0.3s;
+}
+
+.tooltip {
+    position: absolute;
+    top: -35px;
+    background: black;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    transform: translateX(-50%);
+    transition: none;
 }
 
 /* The slider itself */
@@ -95,6 +128,7 @@
     /* Override default look */
     appearance: none;
     width: 3px;
+    /* transform: translate(-10%); */
     /* Set a specific slider handle width */
     height: 3px;
     border-radius: 100%;
@@ -110,6 +144,14 @@
 }
 
 .range:hover .passedRange {
+    height: 4px;
+}
+
+.range:hover .buffRange {
+    height: 4px;
+}
+
+.range:hover .pointRange {
     height: 4px;
 }
 
@@ -147,9 +189,11 @@
     position: relative;
     width: 25px;
 }
+
 .volume svg {
     flex-shrink: 0;
 }
+
 .volume:hover {
     width: 100px;
 }
@@ -206,6 +250,7 @@
         height: 0px;
         width: 70px;
     }
+
     .volume:hover .volumeRange {
         width: 70px;
         height: 3px;

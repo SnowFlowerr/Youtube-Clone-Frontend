@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './Player.module.css'
 
-export default function Player({ url, poster , videoRef, onduration }) {
+export default function Player({ url, poster, videoRef, onduration }) {
     const [range, setRange] = useState(0)
     const [volume, setVolume] = useState(100)
     const [duration, setDuration] = useState(0)
@@ -9,6 +9,11 @@ export default function Player({ url, poster , videoRef, onduration }) {
     const [isfullScreen, setisfullScreen] = useState(false)
     const [ispip, setispip] = useState(false)
     const [controls, setControls] = useState(false)
+    const [bufferedTime, setBufferedTime] = useState(0);
+    // const [pointTime, setpointTime] = useState(0);
+    const progressBarRef = useRef(null);
+    const [hoverTime, setHoverTime] = useState(null);
+    const [tooltipPosition, setTooltipPosition] = useState(0);
     // const videoRef = useRef(null)
     const playerRef = useRef(null)
 
@@ -28,6 +33,19 @@ export default function Player({ url, poster , videoRef, onduration }) {
             setispip(!ispip)
         })
     }, [ispip])
+
+
+
+    const handleProgress = () => {
+        const video = videoRef.current;
+        if (video) {
+            const buffered = video.buffered;
+            if (buffered.length > 0) {
+
+                setBufferedTime(buffered.end(buffered.length - 1));
+            }
+        }
+    };
 
     function getDuration(duration) {
         duration = Math.floor(duration - 0);
@@ -52,7 +70,7 @@ export default function Player({ url, poster , videoRef, onduration }) {
     }
     function handlePlay() {
         if (videoRef.current && isplaying) {
-            videoRef.current.play().then(()=>console.log("play")).catch((err)=>console.log("err"))
+            videoRef.current.play().then(() => console.log("play")).catch((err) => console.log("err"))
         }
         else if (videoRef.current && !isplaying) {
             videoRef.current.pause()
@@ -62,9 +80,9 @@ export default function Player({ url, poster , videoRef, onduration }) {
     }
     function handleEnter() {
         setControls(() => false)
-        if(playerRef.current){
+        if (playerRef.current) {
             playerRef.current.style.cursor = 'auto';
-    }
+        }
         // if (!isplaying) {
         //     setTimeout(() => {
         //         setControls(true)
@@ -73,21 +91,22 @@ export default function Player({ url, poster , videoRef, onduration }) {
     }
     useEffect(() => {
         const debounce = (callback, wait) => {
-            
-                let timeoutId = null;
-                return (...args) => {
-                    window.clearTimeout(timeoutId);
-                    timeoutId = window.setTimeout(() => {
-                        callback(args);
-                    }, wait);
-                }
+
+            let timeoutId = null;
+            return (...args) => {
+                window.clearTimeout(timeoutId);
+                timeoutId = window.setTimeout(() => {
+                    callback(args);
+                }, wait);
+            }
         }
-        playerRef.current.addEventListener(
+        videoRef.current.addEventListener(
             "mousemove",
             debounce(() => {
                 setControls(true)
-                if(playerRef.current){
-                        playerRef.current.style.cursor = 'none';
+                if (videoRef.current) {
+                    playerRef.current.style.cursor = 'none';
+                    setHoverTime(null)
                 }
             }, /* Wait */ 1500 /* ms */)
         );
@@ -104,13 +123,19 @@ export default function Player({ url, poster , videoRef, onduration }) {
                 setControls(true)
             }, 1000)
         }
-        else{
+        else {
             setTimeout(() => {
                 setControls(false)
             }, 1500)
         }
     }
-    
+    function onControls(){
+        setControls(()=>false)
+        setTimeout(() => {
+            setControls(false)
+        }, 1500)
+    }
+
 
     async function handleFullScreen() {
         // setisfullScreen(!isfullScreen)
@@ -152,20 +177,45 @@ export default function Player({ url, poster , videoRef, onduration }) {
         catch (err) {
             console.log(err)
         }
-
-        // setisfullScreen(!isfullScreen)
     }
+    const handleMouseMove = (e) => {
+        const progressBar = progressBarRef.current;
+        const rect = progressBar.getBoundingClientRect(); // Get the position of the progress bar
+        const offsetX = e.clientX - rect.left; // Get the X position of the cursor relative to the progress bar
+        const percentage = (offsetX) / (rect.width ); // Get the percentage of the progress bar the cursor is at
+        const time = (percentage*100); // Convert that percentage into the corresponding time
+
+        setHoverTime(time);
+        setTooltipPosition(offsetX); // Set the position of the tooltip
+    };
+    const handleMouseLeave = () => {
+        setHoverTime(null); // Hide the tooltip when the cursor leaves the progress bar
+    };
     return (
         <>
             <div className={isfullScreen ? styles.mainBox2 : styles.mainBox} ref={playerRef} onMouseMove={handleEnter} onMouseLeave={handleLeave} >
-                <video src={url} height={"100%"} width={"100%"} ref={videoRef} onTimeUpdate={() => setRange(videoRef.current.currentTime)} onClick={handlePlay} onDurationChange={() =>{ setDuration(videoRef.current?.duration); onduration()}} onEnded={handlePlay} muted autoPlay onPlay={() =>{ videoRef.current.muted = false}} onContextMenu={(e) => e.preventDefault() }>
+                <video src={url} height={"100%"} width={"100%"} ref={videoRef} onTimeUpdate={() => setRange(videoRef.current.currentTime)} onClick={handlePlay} onDurationChange={() => { setDuration(videoRef.current?.duration); onduration() }} onEnded={handlePlay} muted autoPlay onPlay={() => { videoRef.current.muted = false }} onContextMenu={(e) => e.preventDefault()} onProgress={handleProgress}>
                 </video>
 
-                <div className={controls ? styles.controls2 : styles.controls}>
+                <div className={controls ? styles.controls2 : styles.controls} onMouseMove={onControls}>
                     <div className={styles.range}>
                         <div className={styles.totalRange}></div>
+                        <div className={styles.buffRange} style={{ width: `${(bufferedTime * 100) / duration}%` }}></div>
+                        <div className={styles.pointRange} style={{ width: `${hoverTime!==null?hoverTime:0}%` }}>
+                            
+                        </div>
                         <div className={styles.passedRange} style={{ width: `${(range * 100) / duration}%` }}></div>
-                        <input type="range" name="" id="" min={0} max={duration} step={0.001} value={range} onChange={handleRange} className={styles.slider} />
+                        <input type="range" name="" id="" min={0} max={duration} step={0.001} value={range} onChange={handleRange} className={styles.slider} ref={progressBarRef} onMouseMove={handleMouseMove}
+                            onMouseLeave={handleMouseLeave} />
+                        {hoverTime!==null && <div
+                                className={styles.tooltip}
+                                style={{
+                                    left: `${tooltipPosition}px`,
+                                    // left:"500px"
+                                }}
+                            >
+                                {getDuration((hoverTime*duration)/100)}
+                            </div>}
                     </div>
                     <div className={styles.features}>
                         <div className={styles.first}>
