@@ -143,22 +143,24 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
             if (data?.userId) {
                 try {
                     if (isSubs) {
+                        setisSubs(false)
+                        setSubs(subs - 1)
                         await axios.delete(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${data?.userId}`,
                             
                             { withCredentials: true }
                         );
-                        setSubs(subs - 1)
                         console.log("Unsubscribe")
                     }
                     else {
+                        setisSubs(true)
+                        setSubs(subs + 1)
                         await axios.put(`https://honest-stillness-production.up.railway.app/api/users/subscribe/${data?.userId}`,
                             {},
                             { withCredentials: true }
                         );
-                        setSubs(subs + 1)
                         console.log("Subscribe")
                     }
-                    setisSubs(!isSubs)
+                    // setisSubs(!isSubs)
                     // console.log("err?.response?.data")
                 }
                 catch (err) {
@@ -170,25 +172,27 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
         if (data._id) {
             try {
                 if (isLike) {
+                    setisLike(false)
+                    setLike(like - 1)
                     await axios.delete(`https://honest-stillness-production.up.railway.app/api/shorts/unlike/${data._id}`,
                         
                         { withCredentials: true }
                     );
-                    setLike(like - 1)
                     console.log("unlikes")
                 }
                 else {
                     if (isDislike === true) {
                         handleDislike()
                     }
+                    setLike(like + 1)
+                    setisLike(true)
                     await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/like/${data._id}`,
                         {},
                         { withCredentials: true }
                     );
-                    setLike(like + 1)
                     console.log("likes")
                 }
-                setisLike(!isLike)
+                // setisLike(!isLike)
                 // console.log("err?.response?.data")
             }
             catch (err) {
@@ -200,25 +204,27 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
         if (data._id) {
             try {
                 if (isDislike) {
+                    setDislike(dislike - 1)
+                    setisDislike(false)
                     await axios.delete(`https://honest-stillness-production.up.railway.app/api/shorts/undislike/${data._id}`,
                         
                         { withCredentials: true }
                     );
-                    setDislike(dislike - 1)
                     console.log("undislikes")
                 }
                 else {
                     if (isLike === true) {
                         handleLike()
                     }
+                    setisDislike(true)
+                    setDislike(dislike + 1)
                     await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/dislike/${data._id}`,
                         {},
                         { withCredentials: true }
                     );
-                    setDislike(dislike + 1)
                     console.log("dislikes")
                 }
-                setisDislike(!isDislike)
+                // setisDislike(!isDislike)
                 // console.log("err?.response?.data")
             }
             catch (err) {
@@ -256,6 +262,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
         if (data._id) {
             try {
                 if (isSaved) {
+                    setisSaved(false)
                     await axios.delete(`https://honest-stillness-production.up.railway.app/api/shorts/unsave/${data?._id}`,
                         
                         { withCredentials: true }
@@ -263,13 +270,14 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                     console.log("removed")
                 }
                 else {
+                    setisSaved(true)
                     await axios.put(`https://honest-stillness-production.up.railway.app/api/shorts/save/${data?._id}`,
                         {},
                         { withCredentials: true }
                     );
                     console.log("saved")
                 }
-                setisSaved(!isSaved)
+                // setisSaved(!isSaved)
                 // console.log("err?.response?.data")
             }
             catch (err) {
@@ -295,19 +303,19 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                         }
                     </div>
                     :
-                    <div className={styles.shortsDet} onClick={()=>navigate(`/channels/${userData._id}/featured`)}>
+                    <div className={styles.shortsDet}>
                         <div className={styles.name}>
-                            <div className={styles.icon}>
+                            <div className={styles.icon} onClick={()=>navigate(`/channels/${userData._id}/featured`)}>
                                 <img src={userData?.img} width="100%" height="100%" alt="icon" />
                             </div>
-                            <div className={styles.username}>
+                            <div className={styles.username} onClick={()=>navigate(`/channels/${userData._id}/featured`)}>
                                 @{userData?.username}
                             </div>
                             <div className={styles.subs} onClick={handleSubscribe} style={isSubs ? { backgroundColor: "rgb(255, 255, 255, 0.2)" } : {color:"black"}}>
                                 {isSubs ? "Unsubscribe" : "Subscribe"}
                             </div>
                         </div>
-                        <div className={styles.shortsTitle}>
+                        <div className={styles.shortsTitle} onClick={()=>navigate(`/channels/${userData._id}/featured`)}>
                             {data?.title}
                         </div>
                     </div>

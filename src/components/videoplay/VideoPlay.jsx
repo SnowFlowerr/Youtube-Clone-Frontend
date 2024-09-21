@@ -114,21 +114,23 @@ export default function VideoPlay() {
             if(videoData?.userId?._id){
                 try {
                     if (isSubs) {
+                        setisSubs(false)
+                        setSubs(subs - 1)
                         await axios.delete(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${videoData?.userId?._id}`,
                             { withCredentials: true }
                         );
-                        setSubs(subs - 1)
                         console.log("Unsubscribe")
                     }
                     else {
+                        setisSubs(true)
+                        setSubs(subs + 1)
                         await axios.put(`https://honest-stillness-production.up.railway.app/api/users/subscribe/${videoData?.userId?._id}`,
                             {},
                             { withCredentials: true }
                         );
-                        setSubs(subs + 1)
                         console.log("Subscribe")
                     }
-                    setisSubs(!isSubs)
+                    // setisSubs(!isSubs)
                     // console.log("err?.response?.data")
                 }
                 catch (err) {
@@ -145,24 +147,26 @@ export default function VideoPlay() {
         // }
         try {
             if (isLike) {
+                setisLike(false)
+                setLike(like - 1)
                 await axios.delete(`https://honest-stillness-production.up.railway.app/api/videos/unlike/${id}`,
                     { withCredentials: true }
                 );
-                setLike(like - 1)
                 console.log("unlikes")
             }
             else {
                 if (isDislike === true) {
                     handleDislike()
                 }
+                setisLike(true)
+                setLike(like + 1)
                 await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/like/${id}`,
                     {},
                     { withCredentials: true }
                 );
-                setLike(like + 1)
                 console.log("likes")
             }
-            setisLike(!isLike)
+            // setisLike(!isLike)
             // console.log("err?.response?.data")
         }
         catch (err) {
@@ -172,24 +176,26 @@ export default function VideoPlay() {
     async function handleDislike() {
         try {
             if (isDislike) {
+                setisDislike(false)
+                setDislike(dislike - 1)
                 await axios.delete(`https://honest-stillness-production.up.railway.app/api/videos/undislike/${id}`,
                     { withCredentials: true }
                 );
-                setDislike(dislike - 1)
                 console.log("undislikes")
             }
             else {
                 if (isLike === true) {
                     handleLike()
                 }
+                setisDislike(true)
+                setDislike(dislike + 1)
                 await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/dislike/${id}`,
                     {},
                     { withCredentials: true }
                 );
-                setDislike(dislike + 1)
                 console.log("dislikes")
             }
-            setisDislike(!isDislike)
+            // setisDislike(!isDislike)
             // console.log("err?.response?.data")
         }
         catch (err) {
@@ -218,7 +224,7 @@ export default function VideoPlay() {
     }
     function totalTime() {
         if (videoRef.current.duration) {
-            setDuration(Math.floor(videoRef.current.duration) / 4)
+            setDuration(Math.floor(videoRef.current.duration) / 3)
         }
         addHistory()
     }
@@ -244,19 +250,21 @@ export default function VideoPlay() {
     async function addSaved() {
         try {
             if (isSaved) {
+                setisSaved(false)
                 await axios.delete(`https://honest-stillness-production.up.railway.app/api/videos/unsave/${id}`,
                     { withCredentials: true }
                 );
                 console.log("removed")
             }
             else {
+                setisSaved(true)
                 await axios.put(`https://honest-stillness-production.up.railway.app/api/videos/save/${id}`,
                     {},
                     { withCredentials: true }
                 );
                 console.log("saved")
             }
-            setisSaved(!isSaved)
+            // setisSaved(!isSaved)
             // console.log("err?.response?.data")
         }
         catch (err) {
