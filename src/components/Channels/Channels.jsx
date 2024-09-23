@@ -200,22 +200,24 @@ export default function Channels() {
     async function handleSubscribe() {
         try {
             if (isSubs) {
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${id}`,
-                    {},
+                setisSubs(false)
+                setSubs(subs - 1)
+                await axios.delete(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${id}`,
+                    
                     { withCredentials: true }
                 );
-                setSubs(subs - 1)
                 console.log("Unsubscribe")
             }
             else {
+                setisSubs(true)
+                setSubs(subs + 1)
                 await axios.put(`https://honest-stillness-production.up.railway.app/api/users/subscribe/${id}`,
                     {},
                     { withCredentials: true }
                 );
-                setSubs(subs + 1)
                 console.log("Subscribe")
             }
-            setisSubs(!isSubs)
+            // setisSubs(!isSubs)
             // console.log("err?.response?.data")
         }
         catch (err) {

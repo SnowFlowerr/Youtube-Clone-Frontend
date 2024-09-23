@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { SuggestionMode } from 'emoji-picker-react';
 
 
-export default function Emoji({ setIsemoji, isEmoji, setComment, comment, commentRef }) {
+export default function Emoji({ isEmoji, setComment, comment, commentRef }) {
     const theme = useSelector((state) => state.theme.value)
 
     useEffect(() => {
