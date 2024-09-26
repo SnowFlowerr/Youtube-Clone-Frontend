@@ -40,7 +40,9 @@
     color: white;
     opacity: 0;
 }
-
+video{
+    
+}
 .range {
     position: relative;
     /* border: 2px solid white; */

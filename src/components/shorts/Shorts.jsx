@@ -25,6 +25,7 @@ export default function Shorts() {
     const [skip, setSkip] = useState(0)
     const lastVid = useRef(null)
     const [last, setLast] = useState(false)
+    const [first, setFirst] = useState(true)
     const [noMore, setnoMore] = useState(false)
     const [url, setUrl] = useState("url");
 
@@ -61,7 +62,7 @@ export default function Shorts() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const videosData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/?limit=${2}&skip=${0}`)
+                const videosData = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/?limit=${5}&skip=${0}`)
 
                 // console.log(videosData.data)
                 if (videosData.data.length !== 0) {

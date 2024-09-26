@@ -4,16 +4,17 @@ import { useSelector } from 'react-redux'
 import Emoji from '../emoji/Emoji'
 import styles from "./Comment.module.css"
 import Extraopt from './Extraopt'
+import { useNavigate } from 'react-router-dom'
 
 export default function Comment({ videoId,isshorts,toClose }) {
     const [isEmoji, setIsemoji] = useState(false)
     const [isComment, setisComment] = useState(false)
-    
     const [comment, setComment] = useState(undefined)
     const commentRef = useRef(null)
     const sign = useSelector((state) => state.sign?.value)
     const theme = useSelector((state) => state.theme.value);
     const [comments, setComments] = useState([])
+    const navigate=useNavigate()
 
     useEffect(() => {
         async function getComments() {
@@ -103,7 +104,7 @@ export default function Comment({ videoId,isshorts,toClose }) {
                 {
                     comments.map((data, index) =>
                         <div key={data._id} className={styles.singleComment}>
-                            <div className={styles.userIcon}>
+                            <div className={styles.userIcon} onClick={()=>navigate(`/channels/${data?.userId?._id}/featured`)}>
                                 <img src={data?.userId?.img} width="100%" height="100%" alt="thumbnail" />
                             </div>
                             <div className={styles.userComments}>
@@ -111,7 +112,8 @@ export default function Comment({ videoId,isshorts,toClose }) {
                                     @{data?.userId?.username}
                                 </div>
                                 <div className={styles.commentText}>
-                                    {data?.comment?.split("\n").map((line, index) =>
+                                    {data?.comment?.split("\n").map((line, index, arr) =>
+                                        (index==arr.length-1 ? line.trim()!=="" : true) &&
                                         <div key={index} className={styles.commLine}>{line}</div>
                                     )}
                                 </div>

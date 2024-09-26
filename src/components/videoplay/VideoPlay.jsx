@@ -372,7 +372,8 @@ export default function VideoPlay() {
                                 <div className={styles.desc}>
                                     <br />
                                     {videoData?.description ?
-                                        videoData?.description?.split("\n").map((line, index) =>
+                                        videoData?.description?.split("\n").map((line, index, arr) =>
+                                            (index===arr.length-1 ? line.trim()!=="" : true) &&
                                             <div key={index} className={styles.descLine}>{line}</div>
                                         )
                                         : "No Discription Available"}
