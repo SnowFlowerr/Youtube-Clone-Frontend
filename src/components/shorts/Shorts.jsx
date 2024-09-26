@@ -25,7 +25,6 @@ export default function Shorts() {
     const [skip, setSkip] = useState(0)
     const lastVid = useRef(null)
     const [last, setLast] = useState(false)
-    const [first, setFirst] = useState(true)
     const [noMore, setnoMore] = useState(false)
     const [url, setUrl] = useState("url");
 
