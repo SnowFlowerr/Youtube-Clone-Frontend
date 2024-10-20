@@ -69,7 +69,7 @@ export default function Shorts() {
                         videoData.pop()
                     }
                     // console.log(arr)
-                    setvideoData([...videoData, ...videosData.data,"Loading"])
+                    setvideoData([...videoData, ...videosData.data, "Loading"])
                     setLast(true)
                 }
                 else {
@@ -117,8 +117,8 @@ export default function Shorts() {
         <div className={styles.bigBox} style={theme ? darkTheme : lightTheme}>
             <div className={styles.mainLogo}>
                 <a href="/" className={styles.logoDetail} style={theme ? { color: "white" } : { color: "black" }}>
-                    <img src={logo} alt="logoImg" height="30px" />
-                    <span>StreamSphere</span>
+                    <img src={logo} alt="logoImg" height="25px" />
+                    <span>YouTube</span>
                 </a>
             </div>
             <div className={styles.nav}>
@@ -139,7 +139,6 @@ export default function Shorts() {
                                 <VideoCard data={shorts} index={index + 1} onPlay={handlePlay} length={length.length} noMore={noMore}></VideoCard>
                             </div>
                         )}
-                        
                     </div>
                 </div>
             </div>

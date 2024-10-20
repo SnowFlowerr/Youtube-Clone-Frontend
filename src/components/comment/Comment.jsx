@@ -1,10 +1,10 @@
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import Emoji from '../emoji/Emoji'
 import styles from "./Comment.module.css"
 import Extraopt from './Extraopt'
-import { useNavigate } from 'react-router-dom'
 
 export default function Comment({ videoId,isshorts,toClose }) {
     const [isEmoji, setIsemoji] = useState(false)

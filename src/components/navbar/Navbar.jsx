@@ -152,8 +152,8 @@ export default function Navbar() {
                                         <i className="fa-solid fa-bars" onClick={() => dispatch(showMenu())}></i>}
                                 </div>
                                 <a href="/" className={styles.logoDetail} style={theme ? darkTheme : lightTheme}>
-                                    <img src={logo} alt="logoImg" height="30px" />
-                                    <span>StreamSphere</span>
+                                    <img src={logo} alt="logoImg" height="25px" />
+                                    <span>YouTube</span>
                                 </a>
                             </div>
                             <div className={styles.search} >
