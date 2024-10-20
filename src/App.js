@@ -28,12 +28,12 @@ function App() {
   useEffect(() => {
     async function currentUser() {
         try {
-            const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get`,
+            const userD = await axios.get(`https://video-streaming-app-backend-production.up.railway.app/api/users/get`,
                 { withCredentials: true }
             )
             // console.log(userD)
             if(userD?.data?.success===false){
-              const userData = await axios.post("https://honest-stillness-production.up.railway.app/api/auth/logout", {}, { withCredentials: true });
+              const userData = await axios.post("https://video-streaming-app-backend-production.up.railway.app/api/auth/logout", {}, { withCredentials: true });
                 dispatch(setSignout())
             }
             else{

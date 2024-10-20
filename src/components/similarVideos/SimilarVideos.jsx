@@ -19,7 +19,7 @@ export default function SimilarVideos({ current }) {
     async function currentShorts() {
         try {
             const short = await axios.get(
-                `https://honest-stillness-production.up.railway.app/api/shorts/?limit=${6}&skip=${0}`,
+                `https://video-streaming-app-backend-production.up.railway.app/api/shorts/?limit=${6}&skip=${0}`,
                 { withCredentials: true }
             );
             setShorts(short.data);
@@ -31,7 +31,7 @@ export default function SimilarVideos({ current }) {
     async function currentVideos() {
         try {
             const short = await axios.get(
-                `https://honest-stillness-production.up.railway.app/api/videos/random/vid/?limit=${10}&skip=${0}`,
+                `https://video-streaming-app-backend-production.up.railway.app/api/videos/random/vid/?limit=${10}&skip=${0}`,
                 { withCredentials: true }
             );
             setVideos(short.data);

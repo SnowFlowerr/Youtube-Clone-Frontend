@@ -12,7 +12,7 @@ export default function Extraopt({comment}) {
             if(comment._id){
                 setOption(false)
                 try {
-                    await axios.delete(`https://honest-stillness-production.up.railway.app/api/comments/${comment._id}`,{withCredentials:true})
+                    await axios.delete(`https://video-streaming-app-backend-production.up.railway.app/api/comments/${comment._id}`,{withCredentials:true})
                 }
                 catch (err) {
                     console.log(err)

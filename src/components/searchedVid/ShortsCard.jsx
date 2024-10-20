@@ -34,7 +34,7 @@ export default function ShortsCard({ video, index }) {
     // useEffect(() => {
     //     async function currentUser() {
     //         try {
-    //             const userD = await axios.get(`https://honest-stillness-production.up.railway.app/api/users/get/${video?.userId}`,
+    //             const userD = await axios.get(`https://video-streaming-app-backend-production.up.railway.app/api/users/get/${video?.userId}`,
     //                 { withCredentials: true }
     //             )
     //             setUser(userD.data)

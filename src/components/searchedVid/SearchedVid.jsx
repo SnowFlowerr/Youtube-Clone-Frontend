@@ -21,7 +21,7 @@ export default function SearchedVid() {
     useEffect(() => {
         const fetchShorts = async () => {
             try {
-                const res = await axios.get(`https://honest-stillness-production.up.railway.app/api/shorts/search/${search}`)
+                const res = await axios.get(`https://video-streaming-app-backend-production.up.railway.app/api/shorts/search/${search}`)
                 // console.log(res.data)
                 setsearchedShorts(res.data)
             }
@@ -31,7 +31,7 @@ export default function SearchedVid() {
         }
         const fetchVideos = async () => {
             try {
-                const res = await axios.get(`https://honest-stillness-production.up.railway.app/api/videos/search/${search}`)
+                const res = await axios.get(`https://video-streaming-app-backend-production.up.railway.app/api/videos/search/${search}`)
                 // console.log(res.data)
                 setsearchedVideo(res.data)
             }

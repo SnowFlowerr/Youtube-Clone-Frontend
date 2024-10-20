@@ -8,7 +8,7 @@ export default function SearchHistory({ handleSuggestion,search,setSearch }) {
     useEffect(()=>{
         async function getSearch() {
             try {
-                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/users/getsearchHistory",
+                const userData = await axios.get("https://video-streaming-app-backend-production.up.railway.app/api/users/getsearchHistory",
                     { withCredentials: true });
                 // console.log(userData.data)
                 setSearch(userData?.data)
@@ -22,7 +22,7 @@ export default function SearchHistory({ handleSuggestion,search,setSearch }) {
 
     async function delSearch(ele) {
         try {
-            const userData = await axios.delete(`https://honest-stillness-production.up.railway.app/api/users/removesearchHistory/${ele}`,
+            const userData = await axios.delete(`https://video-streaming-app-backend-production.up.railway.app/api/users/removesearchHistory/${ele}`,
                 { withCredentials: true });
             // setSearch(userData?.data)
         }

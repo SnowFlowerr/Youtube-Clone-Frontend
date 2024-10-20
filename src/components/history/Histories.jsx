@@ -29,7 +29,7 @@ export default function Histories() {
         }
         async function fetchData() {
             try {
-                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/videos/history/get",
+                const userData = await axios.get("https://video-streaming-app-backend-production.up.railway.app/api/videos/history/get",
                     { withCredentials: true }
                 );
                 setvideoHistory(userData.data)
@@ -41,7 +41,7 @@ export default function Histories() {
         }
         async function fetchData2() {
             try {
-                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/shorts/history/get",
+                const userData = await axios.get("https://video-streaming-app-backend-production.up.railway.app/api/shorts/history/get",
                     { withCredentials: true }
                 );
                 setshortsHistory(userData.data)
@@ -53,7 +53,7 @@ export default function Histories() {
         }
         async function fetchData3() {
             try {
-                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/videos/liked/get",
+                const userData = await axios.get("https://video-streaming-app-backend-production.up.railway.app/api/videos/liked/get",
                     { withCredentials: true }
                 );
                 setvideoLiked(userData.data)
@@ -65,7 +65,7 @@ export default function Histories() {
         }
         async function fetchData4() {
             try {
-                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/shorts/liked/get",
+                const userData = await axios.get("https://video-streaming-app-backend-production.up.railway.app/api/shorts/liked/get",
                     { withCredentials: true }
                 );
                 setshortsLiked(userData.data)
@@ -77,7 +77,7 @@ export default function Histories() {
         }
         async function fetchData5() {
             try {
-                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/videos/disliked/get",
+                const userData = await axios.get("https://video-streaming-app-backend-production.up.railway.app/api/videos/disliked/get",
                     { withCredentials: true }
                 );
                 setvideoDisliked(userData.data)
@@ -89,7 +89,7 @@ export default function Histories() {
         }
         async function fetchData6() {
             try {
-                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/shorts/disliked/get",
+                const userData = await axios.get("https://video-streaming-app-backend-production.up.railway.app/api/shorts/disliked/get",
                     { withCredentials: true }
                 );
                 setshortsDisliked(userData.data)
@@ -101,7 +101,7 @@ export default function Histories() {
         }
         async function fetchData7() {
             try {
-                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/videos/saved/get",
+                const userData = await axios.get("https://video-streaming-app-backend-production.up.railway.app/api/videos/saved/get",
                     { withCredentials: true }
                 );
                 setvideoSaved(userData.data)
@@ -113,7 +113,7 @@ export default function Histories() {
         }
         async function fetchData8() {
             try {
-                const userData = await axios.get("https://honest-stillness-production.up.railway.app/api/shorts/saved/get",
+                const userData = await axios.get("https://video-streaming-app-backend-production.up.railway.app/api/shorts/saved/get",
                     { withCredentials: true }
                 );
                 setshortsSaved(userData.data)

@@ -14,7 +14,7 @@ export default function SubsCard({ channel }) {
     async function handleSubscribe() {
         try {
             if (isSubs) {
-                await axios.delete(`https://honest-stillness-production.up.railway.app/api/users/unsubscribe/${channel._id}`,
+                await axios.delete(`https://video-streaming-app-backend-production.up.railway.app/api/users/unsubscribe/${channel._id}`,
                     
                     { withCredentials: true }
                 );
@@ -22,7 +22,7 @@ export default function SubsCard({ channel }) {
                 console.log("Unsubscribe")
             }
             else {
-                await axios.put(`https://honest-stillness-production.up.railway.app/api/users/subscribe/${channel._id}`,
+                await axios.put(`https://video-streaming-app-backend-production.up.railway.app/api/users/subscribe/${channel._id}`,
                     {},
                     { withCredentials: true }
                 );

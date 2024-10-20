@@ -32,7 +32,7 @@ export default function Cards({ video }) {
     //     async function currentUser() {
     //         try {
     //             const userD = await axios.get(
-    //                 `https://honest-stillness-production.up.railway.app/api/users/get/${video?.userId}`,
+    //                 `https://video-streaming-app-backend-production.up.railway.app/api/users/get/${video?.userId}`,
     //                 { withCredentials: true }
     //             );
     //             setUser(userD.data);
