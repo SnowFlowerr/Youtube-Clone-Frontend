@@ -20,7 +20,7 @@ export default function Comment({ videoId,isshorts,toClose }) {
         async function getComments() {
             if(videoId){
                 try {
-                    const comm = await axios.get(`https://video-streaming-app-backend-production.up.railway.app/api/comments/${videoId}`)
+                    const comm = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/comments/${videoId}`)
                     console.log(comm.data)
                     setComments(comm.data)
                 }
@@ -43,7 +43,7 @@ export default function Comment({ videoId,isshorts,toClose }) {
         e.preventDefault()
         if (comment) {
             try {
-                await axios.post(`https://video-streaming-app-backend-production.up.railway.app/api/comments/add/${videoId}`, { comment: comment }, { withCredentials: true })
+                await axios.post(`https://video-streaming-app-backend-r6e3.onrender.com/api/comments/add/${videoId}`, { comment: comment }, { withCredentials: true })
             }
             catch (err) {
                 console.log(err)

@@ -65,7 +65,7 @@ export default function EditVideo({ data, isShort, setisEditing }) {
     async function handleSubmit() {
 
         try {
-            await axios.put(`https://video-streaming-app-backend-production.up.railway.app/api/${isShort ? "shorts" : "videos"}/${data._id}`, { title, description, imageUrl: thumbnail?.secure_url || "" }, { withCredentials: true })
+            await axios.put(`https://video-streaming-app-backend-r6e3.onrender.com/api/${isShort ? "shorts" : "videos"}/${data._id}`, { title, description, imageUrl: thumbnail?.secure_url || "" }, { withCredentials: true })
             window.location.reload()
         } catch (err) {
             console.log(err)
@@ -87,7 +87,7 @@ export default function EditVideo({ data, isShort, setisEditing }) {
 
     async function handleCancel() {
         try {
-            await axios.delete(`https://video-streaming-app-backend-production.up.railway.app/api/${isShort ? "shorts" : "videos"}/${data._id}`, { withCredentials: true })
+            await axios.delete(`https://video-streaming-app-backend-r6e3.onrender.com/api/${isShort ? "shorts" : "videos"}/${data._id}`, { withCredentials: true })
             console.log("Video Deleted")
             window.location.reload()
 

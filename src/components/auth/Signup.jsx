@@ -9,7 +9,6 @@ import Progress from "../upload/Progress"
 import styles from "./Signup.module.css"
 import { signInWithGooglePopup } from "./firebase"
 
-
 export default function Signup() {
     const [viewPass, setviewPass] = useState(false);
     const theme = useSelector((state) => state.theme.value)
@@ -22,11 +21,11 @@ export default function Signup() {
     const navigate = useNavigate()
     const [prog, setProg] = useState(0)
 
-
     function handleChange(e) {
         setUser({ ...user, [e.target.id]: e.target.value.trim() })
         setErr("")
     }
+
     async function uploadThumbnail(e) {
         const file = e.target.files[0]
         if (file) {
@@ -67,7 +66,7 @@ export default function Signup() {
             return setErr("Agree to the Terms and Policy")
         }
         try {
-            const userData = await axios.post("https://video-streaming-app-backend-production.up.railway.app/api/auth/signup", { name: user.name, username: user.username, email: user.email, password: user.password, img: icon?.secure_url }, { withCredentials: true });
+            const userData = await axios.post("https://video-streaming-app-backend-r6e3.onrender.com/api/auth/signup", { name: user.name, username: user.username, email: user.email, password: user.password, img: icon?.secure_url }, { withCredentials: true });
 
             dispatch(setSignin(userData.data))
             console.log("User signed up")
@@ -91,7 +90,7 @@ export default function Signup() {
     const GoogleLogin = async (data) => {
         try{
             setLoading(()=>true)
-            const response = await axios.post(`https://video-streaming-app-backend-production.up.railway.app/api/auth/googlelogin`,
+            const response = await axios.post(`https://video-streaming-app-backend-r6e3.onrender.com/api/auth/googlelogin`,
                 {name:data.displayName, username:data.displayName, email:data.email, img:data.photoURL},
                 {withCredentials:true},
             )
