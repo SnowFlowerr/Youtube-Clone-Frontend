@@ -346,8 +346,8 @@ export default function Channels() {
                                 }
                             </div>
                             <div className={styles.userLink}>
-                                <a href={`https://streamsphere-streaming.vercel.app/channels/${id}/featured`}>
-                                    streamsphere-streaming.vercel.app/channels/{id}/featured
+                                <a href={`https://youtube-clone-snowflowerr.vercel.app/channels/${id}/featured`}>
+                                    youtube-clone-snowflowerr.vercel.app/channels/{id}/featured
                                 </a>
                             </div>
                             <div className={styles.subscribe} style={theme ? isSubs ? { backgroundColor: "#2e2e2e" } : lightTheme : isSubs ? { backgroundColor: "rgb(220, 220, 220)" } : darkTheme} onClick={handleSubscribe}>

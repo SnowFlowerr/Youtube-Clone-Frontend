@@ -71,6 +71,7 @@
     padding: 5px;
 }
 
+
 .videoStatus {
     display: flex;
     justify-content: space-between;
@@ -229,6 +230,8 @@
     }
     .similarVideo{
         width: 100%;
+        padding: 0;
+        margin-top: 10px;
     }
 }
 
@@ -243,6 +246,7 @@
 
     .videoDetails{
         margin-bottom: 50px;
+        
     }
 
     .Sidenav2{
@@ -267,6 +271,7 @@
         min-width: 40px;
         border-radius: 100%;
     }
+    
 
     /* .name {
         font-size: 16px;

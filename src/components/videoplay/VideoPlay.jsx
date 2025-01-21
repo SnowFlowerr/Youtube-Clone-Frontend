@@ -8,6 +8,7 @@ import Comment from '../comment/Comment'
 import Navbar from '../navbar/Navbar'
 import Sidenav from '../navbar/Sidenav'
 import Player from '../player/Player'
+import Queue from '../queue/Queue'
 import SimilarVideos from '../similarVideos/SimilarVideos'
 import styles from "./VideoPlay.module.css"
 
@@ -29,8 +30,10 @@ export default function VideoPlay() {
     const [subs, setSubs] = useState(0)
     const [like, setLike] = useState(0)
     const [dislike, setDislike] = useState(0)
+    const [queue, setQueue] = useState([])
     const { id } = useParams();
     const navigate = useNavigate()
+
 
     useEffect(() => {
         async function fetchData() {
@@ -41,6 +44,9 @@ export default function VideoPlay() {
                 setDislike(() => vidData.data.dislikes)
                 setView(() => vidData.data.views)
                 setSubs(() => vidData.data.userId.followers)
+                if(queue.length==0){
+                    setQueue([vidData.data])
+                }
 
                 async function isSubscribed() {
                     try {
@@ -98,16 +104,7 @@ export default function VideoPlay() {
         isLiked()
         isDisliked()
         isSaved()
-    }, [])
-
-    // useEffect(() => {
-    //     if (menu) {
-    //         boxRef.current.style.filter = "brightness(0.8)";
-    //     }
-    //     else {
-    //         boxRef.current.style.filter = 'none'
-    //     }
-    // }, [menu])
+    }, [id])
 
     function handleSubscribe() {
         async function fetchData() {
@@ -130,8 +127,6 @@ export default function VideoPlay() {
                         );
                         console.log("Subscribe")
                     }
-                    // setisSubs(!isSubs)
-                    // console.log("err?.response?.data")
                 }
                 catch (err) {
                     console.log(err?.response?.data)
@@ -140,11 +135,8 @@ export default function VideoPlay() {
         }
         fetchData()
     }
-    async function handleLike() {
 
-        // else if(isLike===false && isDislike===true){
-        //     handleLike()
-        // }
+    async function handleLike() {
         try {
             if (isLike) {
                 setisLike(false)
@@ -166,8 +158,6 @@ export default function VideoPlay() {
                 );
                 console.log("likes")
             }
-            // setisLike(!isLike)
-            // console.log("err?.response?.data")
         }
         catch (err) {
             console.log(err?.response?.data)
@@ -195,8 +185,6 @@ export default function VideoPlay() {
                 );
                 console.log("dislikes")
             }
-            // setisDislike(!isDislike)
-            // console.log("err?.response?.data")
         }
         catch (err) {
             console.log(err?.response?.data)
@@ -386,9 +374,15 @@ export default function VideoPlay() {
                         {isComment ? <Comment videoId={id} toClose={setisComment}></Comment> : "Comment"}
                     </div>
                 </div>
+                
 
                 <div className={styles.similarVideo}>
-                    <SimilarVideos current={id}></SimilarVideos>
+                    {queue.length>1 &&
+                    <>
+                        <Queue queue={queue} id={id}/>
+                    <br />
+                    </>}
+                    <SimilarVideos current={id} queue={queue} setQueue={setQueue}></SimilarVideos>
                 </div>
             </div>
 

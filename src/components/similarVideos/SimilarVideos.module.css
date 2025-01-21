@@ -4,12 +4,13 @@
     overflow: auto;
 }
 .title{
-    padding:8px 20px;
+    padding:5px 17px;
     width: fit-content;
     background-color: rgb(48, 48, 48);
     border-radius: 5px;
     text-wrap: nowrap;
     cursor: pointer;
+    font-size: 100%;
 }
 .shortsStorage{
     width: 100%;

@@ -6,7 +6,7 @@ import { format } from "timeago.js";
 import { darkTheme, lightTheme } from "../../themes";
 import styles from "./Card.module.css";
 
-export default function Cards({ video, setQueue, queue }) {
+export default function Cards({ video }) {
     const theme = useSelector((state) => state.theme.value);
     const [user, setUser] = useState("");
     const videoRef = useRef();
@@ -26,18 +26,6 @@ export default function Cards({ video, setQueue, queue }) {
             return min + ":" + sec;
         } else {
             return min + ":" + sec;
-        }
-    }
-    function handleQueue() {
-        let isAvl=true;
-        for(let i=0;i<queue.length;i++){
-            if(queue[i]?._id == video?._id){
-                isAvl=false;
-                break;
-            }
-        }
-        if(isAvl){
-            setQueue([...queue,video])
         }
     }
 
@@ -162,9 +150,6 @@ export default function Cards({ video, setQueue, queue }) {
                 </div>
                 {/* } */}
                 <div className={styles.videoDetail} style={theme ? darkTheme : lightTheme}>
-                    <div className={styles.que} title="Add to Queue" onClick={handleQueue}>
-                        <i class="fa-solid fa-list"></i>
-                    </div>
                     <div className={styles.videoIconDet}>
                         <div className={styles.icon} onClick={()=>navigate(`/channels/${video.userId}/featured`)}>
                                 <img src={user?.img} width="100%" height="100%" alt="icon" />

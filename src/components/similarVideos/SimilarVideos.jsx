@@ -5,8 +5,8 @@ import Cards from './Cards'
 import ShortsCard from './ShortsCard'
 import styles from "./SimilarVideos.module.css"
 
-export default function SimilarVideos({ current }) {
-    const titles = ["All", "Similar to This Video",]
+export default function SimilarVideos({ current, setQueue, queue  }) {
+    const titles = ["All", "Similar to This Video","Etc"]
     const [shorts, setShorts] = useState([])
     const [videos, setVideos] = useState([])
     const theme = useSelector((state) => state.theme.value)
@@ -72,7 +72,7 @@ export default function SimilarVideos({ current }) {
                         {
                             videos.map((video, index) =>
                                 video?._id !==current &&
-                                    <Cards video={video} index={index} key={index}></Cards>
+                                    <Cards video={video} index={index} key={index} queue={queue} setQueue={setQueue}></Cards>
                             )
                         }
                     </div>

@@ -21,7 +21,7 @@ export default function Comment({ videoId,isshorts,toClose }) {
             if(videoId){
                 try {
                     const comm = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/comments/${videoId}`)
-                    console.log(comm.data)
+                    // console.log(comm.data)
                     setComments(comm.data)
                 }
                 catch (err) {

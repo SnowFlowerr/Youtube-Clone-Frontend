@@ -168,11 +168,11 @@ export default function EditVideo({ data, isShort, setisEditing }) {
                                         video
                                     </div>
                                     <div className={styles.link}>
-                                        <a href={`https://streamsphere-streaming.vercel.app/${isShort ? "shorts" : "player"}/${data?._id}`} style={{ color: "lightblue" }}>
+                                        <a href={`https://youtube-clone-snowflowerr.vercel.app/${isShort ? "shorts" : "player"}/${data?._id}`} style={{ color: "lightblue" }}>
                                             {`streamspherestreaming.vercel.app/${isShort ? "shorts" : "player"}/${data?._id}`}
                                         </a>
                                     </div>
-                                    <div className={styles.copyIcon} onClick={async () => { await navigator.clipboard.writeText(`https://streamsphere-streaming.vercel.app/${isShort ? "shorts" : "player"}/${data?._id}`); setCopied(true) }}>
+                                    <div className={styles.copyIcon} onClick={async () => { await navigator.clipboard.writeText(`https://youtube-clone-snowflowerr.vercel.app/${isShort ? "shorts" : "player"}/${data?._id}`); setCopied(true) }}>
                                         {copied ?
                                             <i className="fa-solid fa-circle-check"></i>
                                             :

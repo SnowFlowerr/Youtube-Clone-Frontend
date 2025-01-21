@@ -173,11 +173,11 @@ export default function VideoDetail({ progress, video, data, isShort }) {
                                         video
                                     </div>
                                     <div className={styles.link}>
-                                        <a href={`https://streamsphere-streaming.vercel.app/${isShort ? "shorts" : "player"}/${data?._id}`} style={{ color: "lightblue" }}>
-                                            {`streamspherestreaming.vercel.app/${isShort ? "shorts" : "player"}/${data?._id}`}
+                                        <a href={`https://youtube-clone-snowflowerr.vercel.app/${isShort ? "shorts" : "player"}/${data?._id}`} style={{ color: "lightblue" }}>
+                                            {`youtube-clone-snowflowerr.vercel.app/${isShort ? "shorts" : "player"}/${data?._id}`}
                                         </a>
                                     </div>
-                                    <div className={styles.copyIcon} onClick={async () => { await navigator.clipboard.writeText(`https://streamsphere-streaming.vercel.app/${isShort ? "shorts" : "player"}/${data?._id}`); setCopied(true) }}>
+                                    <div className={styles.copyIcon} onClick={async () => { await navigator.clipboard.writeText(`https://youtube-clone-snowflowerr.vercel.app/${isShort ? "shorts" : "player"}/${data?._id}`); setCopied(true) }}>
                                         {copied ?
                                             <i className="fa-solid fa-circle-check"></i>
                                             :
