@@ -34,11 +34,10 @@ export default function VideoPlay() {
     const { id } = useParams();
     const navigate = useNavigate()
 
-
     useEffect(() => {
         async function fetchData() {
             try {
-                const vidData = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/videos/${id}`)
+                const vidData = await axios.get(`http://localhost:8000/api/videos/${id}`)
                 setvideoData(() => vidData.data)
                 setLike(() => vidData.data.likes)
                 setDislike(() => vidData.data.dislikes)
@@ -50,7 +49,7 @@ export default function VideoPlay() {
 
                 async function isSubscribed() {
                     try {
-                        const userD = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/users/issubscribe/${vidData.data.userId._id}`,
+                        const userD = await axios.get(`http://localhost:8000/api/users/issubscribe/${vidData.data.userId._id}`,
                             { withCredentials: true }
                         )
                         setisSubs(userD.data)
@@ -68,7 +67,7 @@ export default function VideoPlay() {
         }
         async function isLiked() {
             try {
-                const userD = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/videos/isliked/${id}`,
+                const userD = await axios.get(`http://localhost:8000/api/videos/isliked/${id}`,
                     { withCredentials: true }
                 )
                 setisLike(userD.data)
@@ -80,7 +79,7 @@ export default function VideoPlay() {
 
         async function isDisliked() {
             try {
-                const userD = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/videos/isdisliked/${id}`,
+                const userD = await axios.get(`http://localhost:8000/api/videos/isdisliked/${id}`,
                     { withCredentials: true }
                 )
                 setisDislike(userD.data)
@@ -91,7 +90,7 @@ export default function VideoPlay() {
         }
         async function isSaved() {
             try {
-                const userD = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/videos/issaved/${id}`,
+                const userD = await axios.get(`http://localhost:8000/api/videos/issaved/${id}`,
                     { withCredentials: true }
                 )
                 setisSaved(userD.data)
@@ -113,7 +112,7 @@ export default function VideoPlay() {
                     if (isSubs) {
                         setisSubs(false)
                         setSubs(subs - 1)
-                        await axios.delete(`https://video-streaming-app-backend-r6e3.onrender.com/api/users/unsubscribe/${videoData?.userId?._id}`,
+                        await axios.delete(`http://localhost:8000/api/users/unsubscribe/${videoData?.userId?._id}`,
                             { withCredentials: true }
                         );
                         console.log("Unsubscribe")
@@ -121,7 +120,7 @@ export default function VideoPlay() {
                     else {
                         setisSubs(true)
                         setSubs(subs + 1)
-                        await axios.put(`https://video-streaming-app-backend-r6e3.onrender.com/api/users/subscribe/${videoData?.userId?._id}`,
+                        await axios.put(`http://localhost:8000/api/users/subscribe/${videoData?.userId?._id}`,
                             {},
                             { withCredentials: true }
                         );
@@ -141,7 +140,7 @@ export default function VideoPlay() {
             if (isLike) {
                 setisLike(false)
                 setLike(like - 1)
-                await axios.delete(`https://video-streaming-app-backend-r6e3.onrender.com/api/videos/unlike/${id}`,
+                await axios.delete(`http://localhost:8000/api/videos/unlike/${id}`,
                     { withCredentials: true }
                 );
                 console.log("unlikes")
@@ -152,7 +151,7 @@ export default function VideoPlay() {
                 }
                 setisLike(true)
                 setLike(like + 1)
-                await axios.put(`https://video-streaming-app-backend-r6e3.onrender.com/api/videos/like/${id}`,
+                await axios.put(`http://localhost:8000/api/videos/like/${id}`,
                     {},
                     { withCredentials: true }
                 );
@@ -168,7 +167,7 @@ export default function VideoPlay() {
             if (isDislike) {
                 setisDislike(false)
                 setDislike(dislike - 1)
-                await axios.delete(`https://video-streaming-app-backend-r6e3.onrender.com/api/videos/undislike/${id}`,
+                await axios.delete(`http://localhost:8000/api/videos/undislike/${id}`,
                     { withCredentials: true }
                 );
                 console.log("undislikes")
@@ -179,7 +178,7 @@ export default function VideoPlay() {
                 }
                 setisDislike(true)
                 setDislike(dislike + 1)
-                await axios.put(`https://video-streaming-app-backend-r6e3.onrender.com/api/videos/dislike/${id}`,
+                await axios.put(`http://localhost:8000/api/videos/dislike/${id}`,
                     {},
                     { withCredentials: true }
                 );
@@ -192,7 +191,7 @@ export default function VideoPlay() {
     }
     async function addView() {
         try {
-            await axios.put(`https://video-streaming-app-backend-r6e3.onrender.com/api/videos/view/${id}`)
+            await axios.put(`http://localhost:8000/api/videos/view/${id}`)
             setView(view + 1)
         }
         catch (err) {
@@ -201,7 +200,7 @@ export default function VideoPlay() {
     }
     async function addHistory() {
         try {
-            await axios.put(`https://video-streaming-app-backend-r6e3.onrender.com/api/videos/history/${id}`,
+            await axios.put(`http://localhost:8000/api/videos/history/${id}`,
                 {},
                 { withCredentials: true }
             );
@@ -239,14 +238,14 @@ export default function VideoPlay() {
         try {
             if (isSaved) {
                 setisSaved(false)
-                await axios.delete(`https://video-streaming-app-backend-r6e3.onrender.com/api/videos/unsave/${id}`,
+                await axios.delete(`http://localhost:8000/api/videos/unsave/${id}`,
                     { withCredentials: true }
                 );
                 console.log("removed")
             }
             else {
                 setisSaved(true)
-                await axios.put(`https://video-streaming-app-backend-r6e3.onrender.com/api/videos/save/${id}`,
+                await axios.put(`http://localhost:8000/api/videos/save/${id}`,
                     {},
                     { withCredentials: true }
                 );

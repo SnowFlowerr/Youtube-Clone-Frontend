@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from "./Queue.module.css"
 import Cards from './Cards'
 

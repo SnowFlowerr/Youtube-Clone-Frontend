@@ -185,6 +185,7 @@ video{
     align-items: center;
     font-size: 14px;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 .volume {
@@ -241,6 +242,7 @@ video{
 .second>div {
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 .setting{
     transform: rotate(90deg);

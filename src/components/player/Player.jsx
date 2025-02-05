@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './Player.module.css'
+import { useNavigate } from 'react-router-dom'
 
-export default function Player({ url, poster, videoRef, onduration }) {
+export default function Player({ url, poster, videoRef, onduration, queue }) {
     const [range, setRange] = useState(0)
     const [volume, setVolume] = useState(100)
     const [duration, setDuration] = useState(0)
@@ -17,6 +18,7 @@ export default function Player({ url, poster, videoRef, onduration }) {
     const [tooltipPosition, setTooltipPosition] = useState(0);
     // const videoRef = useRef(null)
     const playerRef = useRef(null)
+    const navigate = useNavigate()
 
     function handleRange(e) {
         setRange(e.target.value)
@@ -141,6 +143,9 @@ export default function Player({ url, poster, videoRef, onduration }) {
             }, 1000)
         }
     }
+    function handleNext() {
+        
+    }
 
     // function onControls(){
     //     setControls(()=>false)
@@ -239,7 +244,7 @@ export default function Player({ url, poster, videoRef, onduration }) {
                                     <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#e8eaed"><path d="M556.67-200v-560h170v560h-170Zm-323.34 0v-560h170v560h-170Z" /></svg>
                                 }
                             </div>
-                            <div>
+                            <div title='Next Video' onClick={handleNext}>
                                 <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#e8eaed"><path d="M673.33-240v-480H740v480h-66.67ZM220-240v-480l350.67 240L220-240Z" /></svg>
                             </div>
                             <div className={styles.volume}>
