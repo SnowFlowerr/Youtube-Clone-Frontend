@@ -54,7 +54,7 @@ export default function Navbar() {
         if(searchInput){
             async function setSearch1() {
                 try {
-                    const userData = await axios.put(`http://localhost:8000/api/users/addsearchHistory/${searchInput}`,
+                    const userData = await axios.put(`https://video-streaming-app-backend-r6e3.onrender.com/api/users/addsearchHistory/${searchInput}`,
                         {},
                         { withCredentials: true });
                         setSearch([userData?.data,...search])
@@ -102,7 +102,7 @@ export default function Navbar() {
         
         async function setSearch1() {
             try {
-                const userData = await axios.put(`http://localhost:8000/api/users/addsearchHistory/${ele}`,
+                const userData = await axios.put(`https://video-streaming-app-backend-r6e3.onrender.com/api/users/addsearchHistory/${ele}`,
                     {},
                     { withCredentials: true });
                 // console.log(userData.data)
@@ -128,7 +128,7 @@ export default function Navbar() {
     async function handleLogout() {
         // Cookies.remove('access_token', { path: '/' });
         try {
-            const userData = await axios.post("http://localhost:8000/api/auth/logout", {}, { withCredentials: true });
+            const userData = await axios.post("https://video-streaming-app-backend-r6e3.onrender.com/api/auth/logout", {}, { withCredentials: true });
 
             dispatch(setSignout())
             window.location.reload()
