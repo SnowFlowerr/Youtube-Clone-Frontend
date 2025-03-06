@@ -1,0 +1,23 @@
+.mainBox {
+    height: 100vh;
+    overflow: auto;
+}
+
+.bigBox {
+    display: flex;
+    /* height: 100%; */
+}
+.songs {
+    border: 2px solid white;
+    margin-top: 60px;
+    width: 100%;
+    padding: 10px;
+    /* height: 100%; */
+    /* padding-right: 5px; */
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    gap: 1vw;
+    row-gap: 1.5vw;
+    overflow: auto;
+}

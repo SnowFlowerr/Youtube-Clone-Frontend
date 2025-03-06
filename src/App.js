@@ -1,13 +1,16 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import styles from "./App.module.css";
 import Signin from "./components/auth/Signin";
 import Signup from "./components/auth/Signup";
 import Channels from "./components/Channels/Channels";
 import History from "./components/history/Histories";
 import Home from "./components/home/Home";
+import MusicHome from "./components/music/musicHome/Home";
+import Player from "./components/music/musicPlayer/Player";
+import MusicSearch from "./components/music/musicSearch/Home";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 import SearchedVid from "./components/searchedVid/SearchedVid";
 import Shorts from "./components/shorts/Shorts";
@@ -19,6 +22,8 @@ import { darkTheme, lightTheme } from "./themes";
 function App() {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.value)
+  const [playingVideoId, setPlayingVideoId] = useState(null);
+  const location = useLocation();
   
   useEffect(()=>{
     if(localStorage.getItem('theme')===null){
@@ -62,8 +67,11 @@ function App() {
           <Route path='/history' element={<History />} />
           <Route path='/subscribes' element={<Subscribes />} />
           <Route path='/channels/:id/:category' element={<Channels />} />
+          <Route path='/music' element={<MusicHome setPlayingVideoId={setPlayingVideoId}/>} />
+          <Route path='/music/:id' element={<MusicSearch />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
+        {location.pathname.includes('music') && <Player playingVideoId={playingVideoId}></Player>}
     </div>
   );
 }

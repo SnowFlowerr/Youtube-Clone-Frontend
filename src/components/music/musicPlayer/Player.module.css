@@ -1,0 +1,198 @@
+.mainBox{
+    /* border: 2px solid white; */
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    background-color: black;
+}
+.mainBox > div{
+    width: 100%;
+}
+.album{
+    height: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.cover{
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.cover > img{
+    object-fit: cover;
+}
+.controls{
+    /* border: 1px solid white; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.controls > div{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    min-width: 600px;
+    /* margin: auto; */
+}
+.btn{
+    aspect-ratio: 1;
+    font-size: 20px;
+    /* background-color: white; */
+    height: 45px;
+    text-align: center;
+    align-content: center;
+    aspect-ratio: 1;
+}
+.btn:hover{
+    aspect-ratio: 1;
+    color: rgb(255, 0, 0);
+}
+.controls > div > div:first-child, .controls > div > div:last-child{
+    aspect-ratio: 1;
+    font-size: 18px;
+}
+.controls > div > button{
+    border-radius: 100%;
+    height: 40px;
+    aspect-ratio: 1;
+    font-size: 20px;
+}
+.range {
+    position: relative;
+    /* border: 2px solid white; */
+    height: 10px;
+}
+
+.totalRange {
+    width: 100%;
+    /* Full-width */
+    height: 3px;
+    /* Specified height */
+    background: #858585;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.3s;
+}
+
+.buffRange {
+    /* Full-width */
+    height: 3px;
+    /* Specified height */
+    background: #bababa;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: height 0.3s;
+}
+
+.passedRange {
+    /* Full-width */
+    height: 3px;
+    /* Specified height */
+    background: #ffffff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: height 0.3s;
+}
+
+.pointRange {
+    height: 3px;
+    /* Specified height */
+    background: rgb(255, 255, 255, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    transition: height 0.3s;
+}
+
+.tooltip {
+    position: absolute;
+    top: -35px;
+    background: black;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    transform: translateX(-50%);
+    transition: none;
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;
+    /* Override default CSS styles */
+    appearance: none;
+    width: 100%;
+    /* Full-width */
+    height: 3px;
+    /* Specified height */
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: transparent;
+    outline: none;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Override default look */
+    appearance: none;
+    width: 3px;
+    /* transform: translate(-10%); */
+    /* Set a specific slider handle width */
+    height: 3px;
+    border-radius: 100%;
+    /* Slider handle height */
+    /* Green background */
+    cursor: pointer;
+    /* Cursor on hover */
+    transition: 0.3s;
+}
+
+.range:hover .totalRange {
+    height: 4px;
+}
+
+.range:hover .passedRange {
+    height: 4px;
+    background-color: #ff0000;
+}
+
+.range:hover .buffRange {
+    height: 4px;
+}
+
+.range:hover .pointRange {
+    height: 4px;
+}
+
+.range:hover .slider {
+    height: 4px;
+}
+
+.range:hover .slider::-webkit-slider-thumb {
+    width: 13px;
+    background: #ffffff;
+    /* Set a specific slider handle width */
+    height: 13px;
+}
+.extra{
+    width: 100%;
+    border: 1px solid white;
+}

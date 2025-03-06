@@ -14,6 +14,7 @@ export default function Sidenav() {
     const location = useLocation();
     const [home, setHome] = useState(false)
     const [shorts, setShorts] = useState(false)
+    const [music, setMusic] = useState(false)
     const [history, setHistory] = useState(false)
     const [subscribes, setSubscribes] = useState(false)
     const [isUpload, setisUpload] = useState(false)
@@ -26,6 +27,9 @@ export default function Sidenav() {
             }
             else if (path.includes('shorts')) {
                 setShorts(true)
+            }
+            else if (path.includes('music')) {
+                setMusic(true)
             }
             else if (path.includes('history')) {
                 setHistory(true)
@@ -51,9 +55,9 @@ export default function Sidenav() {
                             <span>Shorts</span>
                         </div>
                     </a>
-                    <Link to="/" className={styles.music} style={theme ? darkTheme : lightTheme}>
+                    <Link to="/music" className={styles.music} style={theme ? music ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : music ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme} >
                         <div className={styles.contain}>
-                            <i className="fa-solid fa-music"></i>
+                            {music ? <i className="fa-solid fa-music fa-bounce"></i> : <i className="fa-solid fa-music"></i>}
                             <span>Music</span>
                         </div>
                     </Link>
@@ -107,9 +111,9 @@ export default function Sidenav() {
                                 <span>Upload</span>
                             </div>
                         </div>
-                        <Link to="/" className={styles.music} style={theme ? darkTheme : lightTheme}>
+                        <Link to="/music" className={styles.music} style={theme ? music ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : music ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme}>
                             <div>
-                                <i className="fa-solid fa-music"></i>
+                            {music ? <i className="fa-solid fa-music fa-bounce"></i> : <i className="fa-solid fa-music"></i>}
                                 <br />
                                 <span>Music</span>
                             </div>
