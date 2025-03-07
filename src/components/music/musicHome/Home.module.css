@@ -8,7 +8,7 @@
     /* height: 100%; */
 }
 .songs {
-    border: 2px solid white;
+    /* border: 2px solid white; */
     margin-top: 60px;
     width: 100%;
     padding: 10px;
@@ -21,4 +21,91 @@
     row-gap: 1.5vw;
     overflow: auto;
     margin-bottom: 80px;
+}
+.fav{
+    /* border: 1px solid white; */
+    background: linear-gradient(rgb(107, 107, 165) , transparent);
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    justify-content: space-between;
+    /* height: 180px; */
+    padding: 20px;
+    gap: 10px;
+}
+.favItem{
+    flex-grow: 1;
+    /* border: 1px solid white; */
+    width: 30%;
+    min-width: 225px;
+    min-height: 40px;
+    max-height: 100px;
+    aspect-ratio: 100/18;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    /* gap: 10px; */
+    align-items: center;
+    position: relative;
+}
+.album{
+    height: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+}
+.album > img{
+    height: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+.title{
+    height: 100%;
+    align-content: center;
+    width: 100%;
+    font-size: 1vw;
+    padding: 10px;
+    background-color: rgba(89, 61, 116, 0.5);
+}
+.play{
+    display: none;
+    position: absolute;
+    right: 2%;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 100%;
+    height: 80%;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    cursor: pointer;
+    background-color: greenyellow;
+    transition: none;
+}
+.favItem:hover > .play{
+    display: block;
+}
+.favItem:hover > .title{
+    background-color: rgba(89, 61, 116, 0.8);
+}
+@media screen and (max-width:750px) {
+    .songs {
+        /* border: 2px solid white; */
+        margin-top: 0px;
+        width: 100%;
+        padding: 10px;
+        /* height: 100%; */
+        /* padding-right: 5px; */
+        display: flex;
+        flex-direction: row;
+        flex-flow: wrap;
+        gap: 1vw;
+        row-gap: 1.5vw;
+        overflow: auto;
+        margin-bottom: 80px;
+    }
+    .title{
+        font-size: 1.7vw;
+    }
 }

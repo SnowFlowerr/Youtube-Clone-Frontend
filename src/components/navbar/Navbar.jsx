@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { showMenu } from '../../redux/Data/menuSlice'
 import { offMic } from '../../redux/Data/micSlice'
 import { setSignout } from '../../redux/Data/signSlice'
@@ -30,6 +30,7 @@ export default function Navbar() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const [search,setSearch]=useState([]);
+    const location=useLocation()
 
     function handleSearch(e) {
         e.preventDefault();
@@ -64,7 +65,12 @@ export default function Navbar() {
                     }
                 }
                 setSearch1()
-                navigate(`/searchedvideo/${searchInput}`)
+                if(location.pathname.substring(0,6)=="/music"){
+                    navigate(`/music/${searchInput}`)
+                }
+                else{
+                    navigate(`/searchedvideo/${searchInput}`)
+                }
             }
     }
 

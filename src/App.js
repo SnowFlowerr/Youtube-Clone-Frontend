@@ -10,7 +10,7 @@ import History from "./components/history/Histories";
 import Home from "./components/home/Home";
 import MusicHome from "./components/music/musicHome/Home";
 import Player from "./components/music/musicPlayer/Player";
-import MusicSearch from "./components/music/musicSearch/Home";
+import MusicSearch from "./components/music/musicSearch/SearchMusic";
 import PageNotFound from "./components/pageNotFound/PageNotFound";
 import SearchedVid from "./components/searchedVid/SearchedVid";
 import Shorts from "./components/shorts/Shorts";
@@ -18,11 +18,13 @@ import Subscribes from "./components/subscribes/Subscribes";
 import VideoPlay from "./components/videoplay/VideoPlay";
 import { setSignin, setSignout } from "./redux/Data/signSlice";
 import { darkTheme, lightTheme } from "./themes";
+import FavMusic from "./components/music/musicFavorite/FavMusic";
 
 function App() {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.value)
   const [playingVideoId, setPlayingVideoId] = useState(null);
+  const [playing, setPlaying] = useState(false);
   const location = useLocation();
   
   useEffect(()=>{
@@ -67,11 +69,12 @@ function App() {
           <Route path='/history' element={<History />} />
           <Route path='/subscribes' element={<Subscribes />} />
           <Route path='/channels/:id/:category' element={<Channels />} />
-          <Route path='/music' element={<MusicHome setPlayingVideoId={setPlayingVideoId}/>} />
-          <Route path='/music/:id' element={<MusicSearch />} />
+          <Route path='/music' element={<MusicHome playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying}/>} />
+          <Route path='/music/:id' element={<MusicSearch playingVideoId={playingVideoId}  setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying}/>} />
+          <Route path='/music/favorite' element={<FavMusic playingVideoId={playingVideoId}  setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying}/>} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
-        {location.pathname.includes('music') && <Player playingVideoId={playingVideoId}></Player>}
+        {location.pathname.includes('music') && <Player playingVideoId={playingVideoId} playing={playing} setPlaying={setPlaying}></Player>}
     </div>
   );
 }
