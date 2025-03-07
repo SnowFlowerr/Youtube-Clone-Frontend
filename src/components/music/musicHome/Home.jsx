@@ -14,7 +14,7 @@ export default function Home({ playingVideoId, setPlayingVideoId, playing, setPl
     const BASE_URL = "https://www.googleapis.com/youtube/v3/search";
 
     useEffect(() => {
-        // searchMusic();
+        searchMusic();
     }, []);
 
     async function searchMusic() {
@@ -87,7 +87,8 @@ export default function Home({ playingVideoId, setPlayingVideoId, playing, setPl
                                         <div className={styles.title}>
                                             {item?.snippet?.title}
                                         </div>
-                                            <button className={styles.play} onClick={()=>handleBtn(item)}>{playingVideoId?.id?.videoId===item?.id?.videoId && playing?<i class="fa-solid fa-pause"></i>:<i class="fa-solid fa-play"></i>}</button>
+
+                                            {index!=0&&<button className={styles.play} onClick={()=>handleBtn(item)}>{playingVideoId?.id?.videoId===item?.id?.videoId && playing?<i class="fa-solid fa-pause"></i>:<i class="fa-solid fa-play"></i>}</button>}
                                     </div>
                                 )
                             }
