@@ -70,8 +70,8 @@ function App() {
           <Route path='/subscribes' element={<Subscribes />} />
           <Route path='/channels/:id/:category' element={<Channels />} />
           <Route path='/music' element={<MusicHome playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying}/>} />
-          <Route path='/music/:id' element={<MusicSearch playingVideoId={playingVideoId}  setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying}/>} />
-          <Route path='/music/favorite' element={<FavMusic playingVideoId={playingVideoId}  setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying}/>} />
+          <Route path='/music/:id' element={<MusicSearch playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying}/>} />
+          <Route path='/music/favorite/song' element={<FavMusic playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying}/>} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
         {location.pathname.includes('music') && <Player playingVideoId={playingVideoId} playing={playing} setPlaying={setPlaying}></Player>}

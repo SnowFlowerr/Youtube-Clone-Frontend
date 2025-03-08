@@ -10,20 +10,26 @@ export default function SearchMusic({ playingVideoId, setPlayingVideoId, playing
     const {id}=useParams()
 
     const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY
-    const API_KEY2 = process.env.REACT_APP_YOUTUBE_API_KEY2
-    const BASE_URL = "https://www.googleapis.com/youtube/v3/search";
+        const API_KEY2 = process.env.REACT_APP_YOUTUBE_API_KEY2
+        const API_KEY3 = process.env.REACT_APP_YOUTUBE_API_KEY3
+        const API_KEY4 = process.env.REACT_APP_YOUTUBE_API_KEY4
+        const BASE_URL = "https://www.googleapis.com/youtube/v3/search";
+        const keys=[API_KEY,API_KEY2,API_KEY3,API_KEY4]
+        useEffect(() => {
+            searchMusic(0);
+        }, [id]);
 
-    useEffect(()=>{
-        searchMusic()
-    },[id])
-    async function searchMusic() {
+    async function searchMusic(n) {
         if (!id) return;
+        if(n==keys.length){
+            return
+        }
 
         try {
             const response = await axios.get(BASE_URL, {
                 params: {
                     part: "snippet",
-                    q: id + " music",
+                    q: id + " song",
                     type: "video",
                     key: API_KEY,
                     maxResults: 10,
@@ -32,27 +38,8 @@ export default function SearchMusic({ playingVideoId, setPlayingVideoId, playing
 
             setResults(response.data.items);
         } catch (error) {
-            searchMusic2()
             console.error("Error fetching YouTube results:", error);
-        }
-    }
-    async function searchMusic2() {
-        if (!id) return;
-
-        try {
-            const response = await axios.get(BASE_URL, {
-                params: {
-                    part: "snippet",
-                    q: id + " music",
-                    type: "video",
-                    key: API_KEY2,
-                    maxResults: 10,
-                },
-            });
-
-            setResults(response.data.items);
-        } catch (error) {
-            console.error("Error fetching YouTube results:", error);
+            searchMusic(n+1)
         }
     }
     return (

@@ -4,48 +4,36 @@ import Sidenav from '../../navbar/Sidenav'
 import styles from './Home.module.css'
 import axios from 'axios'
 import Like from "./Like.webp"
+import { useNavigate } from 'react-router-dom'
+import MusicCategory from '../musicCategory/MusicCategory'
 
 export default function Home({ playingVideoId, setPlayingVideoId, playing, setPlaying }) {
     const [fav, setFav] = useState([{snippet:{thumbnails:{medium:{url:Like}},title:"Liked Songs"}}]);
     const [results, setResults] = useState([]);
+    const navigate=useNavigate()
 
     const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY
     const API_KEY2 = process.env.REACT_APP_YOUTUBE_API_KEY2
+    const API_KEY3 = process.env.REACT_APP_YOUTUBE_API_KEY3
+    const API_KEY4 = process.env.REACT_APP_YOUTUBE_API_KEY4
     const BASE_URL = "https://www.googleapis.com/youtube/v3/search";
-
+    const keys=[API_KEY,API_KEY2,API_KEY3,API_KEY4]
     useEffect(() => {
-        searchMusic();
+        searchMusic(0);
     }, []);
 
-    async function searchMusic() {
-        try {
-            const response = await axios.get(BASE_URL, {
-                params: {
-                    part: "snippet",
-                    q: "songs" + " music",
-                    type: "video",
-                    key: API_KEY,
-                    maxResults: 5,
-                    // regionCode:"US"
-                },
-            });
-            // console.log(response.data.items)
-
-            // setResults(response.data.items);
-            setFav([...fav,...response.data.items]);
-        } catch (error) {
-            searchMusic2();
-            console.error("Error fetching YouTube results:", error);
+    async function searchMusic(n) {
+        console.log(n)
+        if(n==keys.length){
+            return
         }
-    }
-    async function searchMusic2() {
         try {
             const response = await axios.get(BASE_URL, {
                 params: {
                     part: "snippet",
                     q: "songs" + " music",
                     type: "video",
-                    key: API_KEY2,
+                    key: keys[n],
                     maxResults: 5,
                     // regionCode:"US"
                 },
@@ -56,6 +44,7 @@ export default function Home({ playingVideoId, setPlayingVideoId, playing, setPl
             setFav([...fav,...response.data.items]);
         } catch (error) {
             console.error("Error fetching YouTube results:", error);
+            searchMusic(n+1)
         }
     }
     function handleBtn(item){
@@ -81,10 +70,10 @@ export default function Home({ playingVideoId, setPlayingVideoId, playing, setPl
                             {
                                 fav.map((item, index) =>
                                     <div key={index} className={styles.favItem}>
-                                        <div className={styles.album}>
+                                        <div className={styles.album} onClick={()=>index===0&&navigate("/music/favorite/song")}>
                                             <img src={item?.snippet?.thumbnails?.medium?.url} alt={item?.snippet?.title} />
                                         </div>
-                                        <div className={styles.title}>
+                                        <div className={styles.title} onClick={()=>index===0&&navigate("/music/favorite/song")}>
                                             {item?.snippet?.title}
                                         </div>
 
@@ -92,6 +81,28 @@ export default function Home({ playingVideoId, setPlayingVideoId, playing, setPl
                                     </div>
                                 )
                             }
+                        </div>
+                        <div className={styles.category}>
+                            <div>
+                            <h2>Pop Songs</h2>
+                            <br />
+                            <MusicCategory category={"Pop"} playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying}/>
+                            </div>
+                            <div>
+                            <h2>Dance Songs</h2>
+                            <br />
+                            <MusicCategory category={"Dance"} playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying}/>
+                            </div>
+                            <div>
+                            <h2>Rock Songs</h2>
+                            <br />
+                            <MusicCategory category={"Rock"} playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying}/>
+                            </div>
+                            <div>
+                            <h2>Raps Songs</h2>
+                            <br />
+                            <MusicCategory category={"Raps"} playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying}/>
+                            </div>
                         </div>
                     </div>
                 </div>

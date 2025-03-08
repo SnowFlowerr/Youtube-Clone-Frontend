@@ -214,9 +214,58 @@
     height: 13px;
 }
 .extras{
-    /* width: 100%; */
-    /* border: 1px solid white; */
     display: flex;
     justify-content: right;
     align-items: center;
+    
+}
+.extras > div{
+    padding: 10px;
+}
+.volume {
+    position: relative;
+    /* width: 25px; */
+    /* align-content: center; */
+    display: flex;
+    align-items: center;
+}
+
+.volume svg {
+    flex-shrink: 0;
+}
+
+.volume:hover {
+    /* width: 100px; */
+}
+
+.volume:hover .volumeRange {
+    /* width: 70px; */
+}
+
+.volume:hover .volumeRange::-webkit-slider-thumb {
+    width: 13px;
+    height: 13px;
+}
+
+.volumeRange {
+    -webkit-appearance: none;
+    /* Override default look */
+    appearance: none;
+    height: 3px;
+    width: 100px;
+    outline: none;
+    margin-left: 5px;
+
+}
+
+.volumeRange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Override default look */
+    appearance: none;
+    border-radius: 100%;
+    width: 0px;
+    background: #ffffff;
+    /* Set a specific slider handle width */
+    height: 0px;
+    transition: 0.5s;
 }
