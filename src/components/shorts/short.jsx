@@ -75,7 +75,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
 
     async function fetchUser() {
         try {
-            const user = await axios.get(`http://localhost:8000/api/users/get/${data?.userId}`)
+            const user = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/users/get/${data?.userId}`)
             setUserData(user.data)
             setSubs(user.data.followers)
 
@@ -88,7 +88,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
     async function isSubscribedfun() {
         if (data?.userId) {
             try {
-                const userD = await axios.get(`http://localhost:8000/api/users/issubscribe/${data.userId}`,
+                const userD = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/users/issubscribe/${data.userId}`,
                     { withCredentials: true }
                 )
                 setisSubs(userD.data)
@@ -101,7 +101,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
     async function isSavedfun() {
         if (data?._id) {
             try {
-                const userD = await axios.get(`http://localhost:8000/api/shorts/issaved/${data?._id}`,
+                const userD = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/issaved/${data?._id}`,
                     { withCredentials: true }
                 )
                 setisSaved(userD.data)
@@ -114,7 +114,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
     async function isLikedfun() {
         if (data?._id) {
             try {
-                const userD = await axios.get(`http://localhost:8000/api/shorts/isliked/${data?._id}`,
+                const userD = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/isliked/${data?._id}`,
                     { withCredentials: true }
                 )
                 setisLike(userD.data)
@@ -129,7 +129,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
     async function isDislikedfun() {
         if (data?._id) {
             try {
-                const userD = await axios.get(`http://localhost:8000/api/shorts/isdisliked/${data?._id}`,
+                const userD = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/isdisliked/${data?._id}`,
                     { withCredentials: true }
                 )
                 setisDislike(userD.data)
@@ -146,7 +146,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                     if (isSubs) {
                         setisSubs(false)
                         setSubs(subs - 1)
-                        await axios.delete(`http://localhost:8000/api/users/unsubscribe/${data?.userId}`,
+                        await axios.delete(`https://video-streaming-app-backend-r6e3.onrender.com/api/users/unsubscribe/${data?.userId}`,
                             
                             { withCredentials: true }
                         );
@@ -155,7 +155,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                     else {
                         setisSubs(true)
                         setSubs(subs + 1)
-                        await axios.put(`http://localhost:8000/api/users/subscribe/${data?.userId}`,
+                        await axios.put(`https://video-streaming-app-backend-r6e3.onrender.com/api/users/subscribe/${data?.userId}`,
                             {},
                             { withCredentials: true }
                         );
@@ -175,7 +175,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                 if (isLike) {
                     setisLike(false)
                     setLike(like - 1)
-                    await axios.delete(`http://localhost:8000/api/shorts/unlike/${data._id}`,
+                    await axios.delete(`https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/unlike/${data._id}`,
                         
                         { withCredentials: true }
                     );
@@ -187,7 +187,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                     }
                     setLike(like + 1)
                     setisLike(true)
-                    await axios.put(`http://localhost:8000/api/shorts/like/${data._id}`,
+                    await axios.put(`https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/like/${data._id}`,
                         {},
                         { withCredentials: true }
                     );
@@ -207,7 +207,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                 if (isDislike) {
                     setDislike(dislike - 1)
                     setisDislike(false)
-                    await axios.delete(`http://localhost:8000/api/shorts/undislike/${data._id}`,
+                    await axios.delete(`https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/undislike/${data._id}`,
                         
                         { withCredentials: true }
                     );
@@ -219,7 +219,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                     }
                     setisDislike(true)
                     setDislike(dislike + 1)
-                    await axios.put(`http://localhost:8000/api/shorts/dislike/${data._id}`,
+                    await axios.put(`https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/dislike/${data._id}`,
                         {},
                         { withCredentials: true }
                     );
@@ -235,7 +235,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
     }
     async function handleViews() {
         try {
-            await axios.put(`http://localhost:8000/api/shorts/view/${data._id}`)
+            await axios.put(`https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/view/${data._id}`)
             setView(view + 1)
             console.log("View added")
         }
@@ -247,7 +247,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
         if (data._id && hist) {
             setHist(()=>false)
             try {
-                await axios.put(`http://localhost:8000/api/shorts/history/${data._id}`,
+                await axios.put(`https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/history/${data._id}`,
                     {},
                     { withCredentials: true }
                 );
@@ -264,7 +264,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
             try {
                 if (isSaved) {
                     setisSaved(false)
-                    await axios.delete(`http://localhost:8000/api/shorts/unsave/${data?._id}`,
+                    await axios.delete(`https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/unsave/${data?._id}`,
                         
                         { withCredentials: true }
                     );
@@ -272,7 +272,7 @@ export const VideoCard = ({ data, onPlay, index, length, noMore }) => {
                 }
                 else {
                     setisSaved(true)
-                    await axios.put(`http://localhost:8000/api/shorts/save/${data?._id}`,
+                    await axios.put(`https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/save/${data?._id}`,
                         {},
                         { withCredentials: true }
                     );
