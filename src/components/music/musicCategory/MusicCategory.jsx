@@ -9,14 +9,14 @@ export default function MusicCategory({category, playingVideoId, playing, setPla
     const API_KEY2 = process.env.REACT_APP_YOUTUBE_API_KEY2
     const API_KEY3 = process.env.REACT_APP_YOUTUBE_API_KEY3
     const API_KEY4 = process.env.REACT_APP_YOUTUBE_API_KEY4
+    const API_KEY5 = process.env.REACT_APP_YOUTUBE_API_KEY5
     const BASE_URL = "https://www.googleapis.com/youtube/v3/search";
-    const keys=[API_KEY,API_KEY2,API_KEY3,API_KEY4]
+    const keys = [API_KEY, API_KEY2, API_KEY3, API_KEY4, API_KEY5]
     useEffect(() => {
         searchMusic(0);
     }, []);
 
     async function searchMusic(n) {
-        console.log(n)
         if(n==keys.length){
             return
         }
@@ -56,10 +56,13 @@ export default function MusicCategory({category, playingVideoId, playing, setPla
                     <div className={styles.cards}>
                         <div className={styles.album}>
                             <img src={item?.snippet?.thumbnails?.medium?.url} alt={item?.snippet?.title} />
-                            <button className={styles.play} onClick={()=>handleBtn(item)}>{playingVideoId?.id?.videoId===item?.id?.videoId && playing?<i class="fa-solid fa-pause"></i>:<i class="fa-solid fa-play"></i>}</button>
+                            <button className={styles.play} onClick={()=>handleBtn(item)}>{playingVideoId?.id?.videoId===item?.id?.videoId && playing?<i className="fa-solid fa-pause"></i>:<i className="fa-solid fa-play"></i>}</button>
                         </div>
                         <div className={styles.title}>
                             {item?.snippet?.title}
+                        </div>
+                        <div className={styles.Chtitle}>
+                            {item?.snippet?.channelTitle}
                         </div>
                     </div>
                 )

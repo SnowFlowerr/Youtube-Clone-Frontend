@@ -13,7 +13,7 @@ export default function Subscribes() {
     useEffect(() => {
         async function getSubs() {
             try {
-                const userData = await axios.get("https://video-streaming-app-backend-r6e3.onrender.com/api/users/getsubscriber",
+                const userData = await axios.get("http://localhost:8000/api/users/getsubscriber",
                     { withCredentials: true });
                 // console.log(userData.data)
                 setSubsc(userData.data)

@@ -8,6 +8,7 @@ import Signup from "./components/auth/Signup";
 import Channels from "./components/Channels/Channels";
 import History from "./components/history/Histories";
 import Home from "./components/home/Home";
+import FavMusic from "./components/music/musicFavorite/FavMusic";
 import MusicHome from "./components/music/musicHome/Home";
 import Player from "./components/music/musicPlayer/Player";
 import MusicSearch from "./components/music/musicSearch/SearchMusic";
@@ -18,7 +19,6 @@ import Subscribes from "./components/subscribes/Subscribes";
 import VideoPlay from "./components/videoplay/VideoPlay";
 import { setSignin, setSignout } from "./redux/Data/signSlice";
 import { darkTheme, lightTheme } from "./themes";
-import FavMusic from "./components/music/musicFavorite/FavMusic";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,12 +35,12 @@ function App() {
   useEffect(() => {
     async function currentUser() {
         try {
-            const userD = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/users/get`,
+            const userD = await axios.get(`http://localhost:8000/api/users/get`,
                 { withCredentials: true }
             )
             // console.log(userD)
             if(userD?.data?.success===false){
-              const userData = await axios.post("https://video-streaming-app-backend-r6e3.onrender.com/api/auth/logout", {}, { withCredentials: true });
+              const userData = await axios.post("http://localhost:8000/api/auth/logout", {}, { withCredentials: true });
                 dispatch(setSignout())
             }
             else{

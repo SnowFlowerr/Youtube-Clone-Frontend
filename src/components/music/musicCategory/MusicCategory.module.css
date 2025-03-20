@@ -34,6 +34,11 @@
     height: 40px;
     overflow: hidden;
 }
+.Chtitle{
+    font-size: small;
+    color: rgb(167, 167, 167);
+    margin-top: 5px;
+}
 .play{
     display: none;
     position: absolute;
@@ -58,21 +63,24 @@
         flex-shrink: 0;
         /* border: 1px solid white; */
         /* padding: 10px; */
-        width: 20vw;
+        width: 25vw;
         margin-right: 10px;
         /* height: 200px; */
         /* aspect-ratio: 1; */
     }
     .album{
-        height: 20vw;
-        min-height: 120px;
+        height: 25vw;
+        min-height: auto;
         aspect-ratio: 1;
         border-radius: 10px;
         overflow: hidden;
         position: relative;
     }
     .title{
-        height: 5vw;
-        font-size: 2vw;
+        /* max-width: 100%; */
+        /* border: 1px solid white; */
+        height: 5.5vw;
+        font-size: 2.5vw;
+        overflow: hidden;
     }
 }

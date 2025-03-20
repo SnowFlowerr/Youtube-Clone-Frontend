@@ -7,21 +7,22 @@ import { useParams } from 'react-router-dom'
 
 export default function SearchMusic({ playingVideoId, setPlayingVideoId, playing, setPlaying }) {
     const [results, setResults] = useState([]);
-    const {id}=useParams()
+    const { id } = useParams()
 
     const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY
-        const API_KEY2 = process.env.REACT_APP_YOUTUBE_API_KEY2
-        const API_KEY3 = process.env.REACT_APP_YOUTUBE_API_KEY3
-        const API_KEY4 = process.env.REACT_APP_YOUTUBE_API_KEY4
-        const BASE_URL = "https://www.googleapis.com/youtube/v3/search";
-        const keys=[API_KEY,API_KEY2,API_KEY3,API_KEY4]
-        useEffect(() => {
-            searchMusic(0);
-        }, [id]);
+    const API_KEY2 = process.env.REACT_APP_YOUTUBE_API_KEY2
+    const API_KEY3 = process.env.REACT_APP_YOUTUBE_API_KEY3
+    const API_KEY4 = process.env.REACT_APP_YOUTUBE_API_KEY4
+    const API_KEY5 = process.env.REACT_APP_YOUTUBE_API_KEY5
+    const BASE_URL = "https://www.googleapis.com/youtube/v3/search";
+    const keys = [API_KEY, API_KEY2, API_KEY3, API_KEY4, API_KEY5]
+    useEffect(() => {
+        searchMusic(0);
+    }, [id]);
 
     async function searchMusic(n) {
         if (!id) return;
-        if(n==keys.length){
+        if (n == keys.length) {
             return
         }
 
@@ -31,15 +32,16 @@ export default function SearchMusic({ playingVideoId, setPlayingVideoId, playing
                     part: "snippet",
                     q: id + " song",
                     type: "video",
-                    key: API_KEY,
+                    key: keys[n],
                     maxResults: 10,
                 },
             });
+            console.log(response.data.items)
 
             setResults(response.data.items);
         } catch (error) {
             console.error("Error fetching YouTube results:", error);
-            searchMusic(n+1)
+            searchMusic(n + 1)
         }
     }
     return (

@@ -12,7 +12,7 @@ export default function Extraopt({comment}) {
             if(comment._id){
                 setOption(false)
                 try {
-                    await axios.delete(`https://video-streaming-app-backend-r6e3.onrender.com/api/comments/${comment._id}`,{withCredentials:true})
+                    await axios.delete(`http://localhost:8000/api/comments/${comment._id}`,{withCredentials:true})
                 }
                 catch (err) {
                     console.log(err)

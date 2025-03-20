@@ -49,7 +49,7 @@ function Player({ playingVideoId, playing, setPlaying }) {
                         <img src={playingVideoId?.snippet.thumbnails.default.url} alt={playingVideoId?.snippet.title} height={"100%"} width={"100%"} />
                     </div>
                     <div className={styles.title}>
-                        {playingVideoId?.snippet.title}
+                        {playingVideoId?.snippet.title} ef awe fw ef wef aw ef we fv rs fvrs fv rsa
                     </div>
                 </div>
                 <div className={styles.controls}>
@@ -82,9 +82,6 @@ function Player({ playingVideoId, playing, setPlaying }) {
                                 <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 -960 960 960" width="25px" fill="#e8eaed"><path d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320Z" /></svg>
                         }
                         <input type="range" name="" id="" min={0} max={100} step={0.001} value={volume} className={styles.volumeRange} onChange={handleVolume} />
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-480H160v480Zm0 0v-480 480Zm280-40h320v-240H440v240Zm80-80v-80h160v80H520Z" /></svg>
                     </div>
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#e8eaed"><path d="M120-120v-320h80v184l504-504H520v-80h320v320h-80v-184L256-200h184v80H120Z" /></svg>
