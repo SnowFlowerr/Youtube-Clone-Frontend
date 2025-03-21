@@ -17,8 +17,9 @@ export default function Home({ playingVideoId, setPlayingVideoId, playing, setPl
     const API_KEY3 = process.env.REACT_APP_YOUTUBE_API_KEY3
     const API_KEY4 = process.env.REACT_APP_YOUTUBE_API_KEY4
     const API_KEY5 = process.env.REACT_APP_YOUTUBE_API_KEY5
+    const API_KEY6 = process.env.REACT_APP_YOUTUBE_API_KEY5
     const BASE_URL = "https://www.googleapis.com/youtube/v3/search";
-    const keys = [API_KEY, API_KEY2, API_KEY3, API_KEY4, API_KEY5]
+    const keys = [API_KEY, API_KEY2, API_KEY3, API_KEY4, API_KEY5, API_KEY6]
     useEffect(() => {
         searchMusic(0);
     }, []);
