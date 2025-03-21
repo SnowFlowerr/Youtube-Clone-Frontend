@@ -4,6 +4,7 @@ import Sidenav from '../../navbar/Sidenav'
 import styles from './SearchMusic.module.css'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
+import pic from "../musicHome/Like.webp"
 
 export default function SearchMusic({ playingVideoId, setPlayingVideoId, playing, setPlaying }) {
     const [results, setResults] = useState([]);

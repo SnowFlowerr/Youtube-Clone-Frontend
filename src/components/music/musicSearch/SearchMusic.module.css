@@ -113,17 +113,17 @@
     .songs {
         /* border: 2px solid white; */
         margin-top: 0px;
-        margin-bottom: 140px;
         width: 100%;
         padding: 10px;
         /* height: 100%; */
         /* padding-right: 5px; */
         display: flex;
-        /* flex-direction: row; */
-        /* flex-flow: wrap; */
+        flex-direction: row;
+        flex-flow: wrap;
         gap: 1vw;
         row-gap: 1.5vw;
         overflow: auto;
+        margin-bottom: 140px;
     }
     .fav{
         padding: 10px;
@@ -134,8 +134,8 @@
         width: 100%;
         min-width: 200px;
         min-height: 50px;
-        max-height: 100px;
-        aspect-ratio: 100/18;
+        max-height: 80px;
+        aspect-ratio: 100/38;
         border-radius: 10px;
         overflow: hidden;
         display: flex;
@@ -159,5 +159,10 @@
         /* border: 1px solid white; */
         overflow: hidden;
         color: rgb(205, 205, 205);
+    }
+    .album > img{
+        height: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
     }
 }
