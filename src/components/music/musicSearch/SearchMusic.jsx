@@ -3,11 +3,12 @@ import Navbar from '../../navbar/Navbar'
 import Sidenav from '../../navbar/Sidenav'
 import styles from './SearchMusic.module.css'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export default function SearchMusic({ playingVideoId, setPlayingVideoId, playing, setPlaying }) {
     const [results, setResults] = useState([]);
     const { id } = useParams()
+    const navigate = useNavigate()
 
     const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY
     const API_KEY2 = process.env.REACT_APP_YOUTUBE_API_KEY2
@@ -44,6 +45,14 @@ export default function SearchMusic({ playingVideoId, setPlayingVideoId, playing
             searchMusic(n + 1)
         }
     }
+    function handleBtn(item) {
+        if (!playingVideoId || playingVideoId?.id?.videoId !== item?.id?.videoId) {
+            setPlayingVideoId(item)
+        }
+        else {
+            setPlaying(!playing)
+        }
+    }
     return (
         <div>
             <div className={styles.mainBox} >
@@ -56,27 +65,29 @@ export default function SearchMusic({ playingVideoId, setPlayingVideoId, playing
                     </div>
                     <div className={styles.songs}>
                         <div>
-                            <div className="mt-6 w-full max-w-2xl">
-                                {results.length > 0 && (
-                                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        {results.map((video) => (
-                                            <li key={video.id.videoId} className="bg-gray-800 p-3 rounded-lg">
-                                                <img
-                                                    src={video.snippet.thumbnails.medium.url}
-                                                    alt={video.snippet.title}
-                                                    className="rounded-lg w-full"
-                                                />
-                                                <p className="mt-2 text-lg">{video.snippet.title}</p>
-                                                <button
-                                                    onClick={() => setPlayingVideoId(video)}
-                                                    className="mt-2 bg-green-500 px-4 py-2 rounded-lg hover:bg-green-700"
-                                                >
-                                                    Play ▶
-                                                </button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
+                            <div className={styles.fav}>
+                                {
+                                    results.map((item, index) =>
+                                        <div key={index} className={styles.favItem}>
+                                            <div className={styles.album}>
+                                                <img src={item?.snippet?.thumbnails?.medium?.url} alt={item?.snippet?.title} />
+                                            </div>
+                                            <div className={styles.chDetail}>
+
+                                                <div className={styles.title}>
+                                                    {item?.snippet?.title}
+                                                </div>
+                                                {/* {item?.snippet?.channelTitle && */}
+                                                <div className={styles.chtitle}>
+                                                    {item?.snippet?.channelTitle}
+                                                </div>
+                                                {/* } */}
+                                            </div>
+
+                                            <button className={styles.play} onClick={() => handleBtn(item)}>{playingVideoId?.id?.videoId === item?.id?.videoId && playing ? <i className="fa-solid fa-pause"></i> : <i className="fa-solid fa-play"></i>}</button>
+                                        </div>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>

@@ -122,6 +122,7 @@ hr{
         position: fixed;
         bottom: 0;
         left: 0;
+        z-index: 1;
     }
     .main3,.main4{
         width: 0;

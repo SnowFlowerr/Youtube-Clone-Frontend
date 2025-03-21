@@ -87,7 +87,7 @@ export default function Home({ playingVideoId, setPlayingVideoId, playing, setPl
                                             {/* } */}
                                         </div>
 
-                                        {index != 0 && <button className={styles.play} onClick={() => handleBtn(item)}>{playingVideoId?.id?.videoId === item?.id?.videoId && playing ? <i class="fa-solid fa-pause"></i> : <i class="fa-solid fa-play"></i>}</button>}
+                                        {index != 0 && <button className={styles.play} onClick={() => handleBtn(item)}>{playingVideoId?.id?.videoId === item?.id?.videoId && playing ? <i className="fa-solid fa-pause"></i> : <i className="fa-solid fa-play"></i>}</button>}
                                     </div>
                                 )
                             }
