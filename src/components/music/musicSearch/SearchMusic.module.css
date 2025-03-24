@@ -20,6 +20,7 @@
     gap: 1vw;
     row-gap: 1.5vw;
     overflow: auto;
+    margin-bottom: 80px;
 }
 .fav{
     /* border: 1px solid white; */

@@ -103,7 +103,7 @@ export default function Home() {
                         <div className={styles.loading}>
                             {noMore ?
                                 <div>
-                                    No more Shorts is Available
+                                    No more Videos is Available
                                 </div>
                                 :
                                 <div className={styles.loadingBar} style={theme ? {} : { borderColor: "black" }}>

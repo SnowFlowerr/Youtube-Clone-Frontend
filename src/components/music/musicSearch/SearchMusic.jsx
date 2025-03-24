@@ -71,10 +71,10 @@ export default function SearchMusic({ playingVideoId, setPlayingVideoId, playing
                                 {
                                     results.map((item, index) =>
                                         <div key={index} className={styles.favItem}>
-                                            <div className={styles.album}>
+                                            <div className={styles.album} onClick={() => handleBtn(item)}>
                                                 <img src={item?.snippet?.thumbnails?.medium?.url} alt={item?.snippet?.title} />
                                             </div>
-                                            <div className={styles.chDetail}>
+                                            <div className={styles.chDetail} onClick={() => handleBtn(item)}>
 
                                                 <div className={styles.title}>
                                                     {item?.snippet?.title}

@@ -119,7 +119,12 @@ export default function Navbar() {
             }
         }
         setSearch1()
-        navigate(`/searchedvideo/${ele}`)
+        if(location.pathname.substring(0,6)=="/music"){
+            navigate(`/music/${ele}`)
+        }
+        else{
+            navigate(`/searchedvideo/${ele}`)
+        }
     }
     function handleSignMenu() {
         setSignBtn(!signBtn)

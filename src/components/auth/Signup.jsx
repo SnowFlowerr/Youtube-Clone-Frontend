@@ -22,7 +22,12 @@ export default function Signup() {
     const [prog, setProg] = useState(0)
 
     function handleChange(e) {
-        setUser({ ...user, [e.target.id]: e.target.value.trim() })
+        if(e.target.id==="email"){
+            setUser({ ...user, [e.target.id]: e.target.value.trim().toLowerCase() })
+        }
+        else{
+            setUser({ ...user, [e.target.id]: e.target.value.trim() })
+        }
         setErr("")
     }
 
@@ -154,7 +159,7 @@ export default function Signup() {
                                 <div className={styles.email}>
                                     <label htmlFor="email">Email Address</label>
                                     <br />
-                                    <input type="email" id='email' placeholder='Enter Your Email Here' onChange={handleChange} required style={theme?{color:"white"}:{}}/>
+                                    <input type="email" id='email' placeholder='Enter Your Email Here' onChange={handleChange} required style={theme?{color:"white"}:{}} />
                                 </div>
                                 <div className={styles.password}>
                                     <div className={styles.forg}>

@@ -42,7 +42,7 @@
     /* border: 1px solid white; */
     width: 30%;
     /* min-width: 300px; */
-    /* min-height: 70px; */
+    min-height: 80px;
     max-height: 100px;
     aspect-ratio: 100/18;
     border-radius: 10px;

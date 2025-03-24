@@ -42,8 +42,17 @@
 .title{
     /* border: 1px solid white; */
     width: 100%;
-    max-height: 40px;
+    max-height: 35px;
     overflow: hidden;
+    font-size: 14px;
+}
+.chtitle{
+    /* border: 1px solid white; */
+    width: 100%;
+    max-height: 12px;
+    overflow: hidden;
+    font-size: 10px;
+    margin-top: 5px;
 }
 .cover{
     height: 100%;
@@ -51,12 +60,16 @@
     border-radius: 10px;
     overflow: hidden;
     flex-shrink: 0;
+    align-content: center;
+    border: 1px solid white;
 }
 .cover > img{
-    height: 100%;
+    height: 90px;
+    margin-top: -18%;
     aspect-ratio: 1;
     object-fit: cover;
 }
+
 .controls{
     /* border: 1px solid white; */
     display: flex;
@@ -95,10 +108,19 @@
     aspect-ratio: 1;
     font-size: 20px;
 }
+.time{
+    width: 100%;
+    font-size: 12px;
+    align-content: center;
+    /* border: 2px solid white; */
+    margin-top: -7px;
+}
 .range {
     position: relative;
     /* border: 2px solid white; */
+    width: 100%;
     height: 10px;
+    margin-top: 7px;
 }
 
 .totalRange {
@@ -244,28 +266,9 @@
     width: 13px;
     height: 13px;
 }
-
-.volumeRange {
-    -webkit-appearance: none;
-    /* Override default look */
-    appearance: none;
-    height: 3px;
+.volumes{
     width: 100px;
-    outline: none;
     margin-left: 5px;
-
-}
-
-.volumeRange::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    /* Override default look */
-    appearance: none;
-    border-radius: 100%;
-    width: 0px;
-    background: #ffffff;
-    /* Set a specific slider handle width */
-    height: 0px;
-    transition: 0.5s;
 }
 @media screen and (max-width:750px) {
     .mainBox{
@@ -304,7 +307,7 @@
         width: 150px;
         /* border: 1px solid white; */
     }
-    .controls > .range{
+    .controls > .time{
         display: none;
     }
     .controls > div > div:first-child, .controls > div > div:last-child{

@@ -40,6 +40,21 @@ function Player({ playingVideoId, playing, setPlaying }) {
         setPlayed(seekTo);
         playerRef.current.seekTo(seekTo);
     }
+    function getDuration(duration) {
+        duration = Math.floor(duration);
+        let sec = Math.floor(duration % 60);
+        let min = Math.floor((duration % 3600) / 60);
+        let hr = Math.floor(duration / 3600);
+        sec = sec <= 9 ? "0" + sec : sec;
+        min = min <= 9 ? "0" + min : min;
+        if (hr) {
+            return hr + ":" + min + ":" + sec;
+        } else if (min) {
+            return min + ":" + sec;
+        } else {
+            return min + ":" + sec;
+        }
+    }
 
     return (
         <>
@@ -48,8 +63,13 @@ function Player({ playingVideoId, playing, setPlaying }) {
                     <div className={styles.cover}>
                         <img src={playingVideoId?.snippet.thumbnails.default.url} alt={playingVideoId?.snippet.title} height={"100%"} width={"100%"} />
                     </div>
-                    <div className={styles.title}>
-                        {playingVideoId?.snippet.title} ef awe fw ef wef aw ef we fv rs fvrs fv rsa
+                    <div>
+                        <div className={styles.title}>
+                            {playingVideoId?.snippet.title}
+                        </div>
+                        <div className={styles.chtitle}>
+                            {playingVideoId?.snippet?.channelTitle}
+                        </div>
                     </div>
                 </div>
                 <div className={styles.controls}>
@@ -60,16 +80,20 @@ function Player({ playingVideoId, playing, setPlaying }) {
                         <div className={styles.btn}><i className="fa-solid fa-forward-step"></i></div>
                         <div className={styles.btn}><i className="fa-solid fa-repeat"></i></div>
                     </div>
-                    <div className={styles.range}>
-                        <div className={styles.totalRange}></div>
-                        <div className={styles.buffRange} style={{ width: `${(bufferedTime * 100) / duration}%` }}></div>
-                        {/* <div className={styles.pointRange} style={{ width: `${hoverTime !== null ? hoverTime : 0}%` }}></div> */}
-                        <div className={styles.passedRange} style={{ width: `${(played * 100) / duration}%` }}></div>
-                        <input type="range" name="" id="" min={0} max={duration} step={0.001} value={played} onChange={handleSeekChange} className={styles.slider} />
+                    <div className={styles.time}>
+                        {getDuration(played)}
+                        <div className={styles.range}>
+                            <div className={styles.totalRange}></div>
+                            <div className={styles.buffRange} style={{ width: `${(bufferedTime * 100) / duration}%` }}></div>
+                            {/* <div className={styles.pointRange} style={{ width: `${hoverTime !== null ? hoverTime : 0}%` }}></div> */}
+                            <div className={styles.passedRange} style={{ width: `${(played * 100) / duration}%` }}></div>
+                            <input type="range" name="" id="" min={0} max={duration} step={0.001} value={played} onChange={handleSeekChange} className={styles.slider} />
+                        </div>
+                        {getDuration(duration)}
                     </div>
                 </div>
                 <div className={styles.extras}>
-                    <div style={{marginTop:"2px"}}>
+                    <div style={{ marginTop: "2px" }}>
                         <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 -960 960 960" width="25px" fill="#e8eaed"><path d="M640-160q-50 0-85-35t-35-85q0-50 35-85t85-35q11 0 21 1.5t19 6.5v-328h200v80H760v360q0 50-35 85t-85 35ZM120-320v-80h320v80H120Zm0-160v-80h480v80H120Zm0-160v-80h480v80H120Z" /></svg>
                     </div>
                     <div className={styles.volume}>
@@ -81,7 +105,13 @@ function Player({ playingVideoId, playing, setPlaying }) {
                                 :
                                 <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 -960 960 960" width="25px" fill="#e8eaed"><path d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320Z" /></svg>
                         }
-                        <input type="range" name="" id="" min={0} max={100} step={0.001} value={volume} className={styles.volumeRange} onChange={handleVolume} />
+                        <div className={styles.volumes}>
+                            <div className={styles.range}>
+                                <div className={styles.totalRange}></div>
+                                <div className={styles.passedRange} style={{ width: `${(volume * 100) / 100}%` }}></div>
+                                <input type="range" name="" id="" min={0} max={100} step={0.001} value={volume} className={styles.slider} onChange={handleVolume} />
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#e8eaed"><path d="M120-120v-320h80v184l504-504H520v-80h320v320h-80v-184L256-200h184v80H120Z" /></svg>
@@ -92,7 +122,7 @@ function Player({ playingVideoId, playing, setPlaying }) {
                 ref={playerRef}
                 url={`https://www.youtube.com/watch?v=${playingVideoId?.id.videoId}`}
                 playing={playing}
-                volume={volume/100}
+                volume={volume / 100}
                 controls={false}
                 onPlay={() => setPlaying(true)}
                 onPause={() => setPlaying(false)}

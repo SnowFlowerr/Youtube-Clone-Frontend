@@ -73,19 +73,17 @@ export default function Home({ playingVideoId, setPlayingVideoId, playing, setPl
                             {
                                 fav.map((item, index) =>
                                     <div key={index} className={styles.favItem}>
-                                        <div className={styles.album} onClick={() => index === 0 && navigate("/music/favorite/song")}>
+                                        <div className={styles.album} onClick={() => index === 0 ? navigate("/music/favorite/song") : handleBtn(item)}>
                                             <img src={item?.snippet?.thumbnails?.medium?.url} alt={item?.snippet?.title} />
                                         </div>
-                                        <div className={styles.chDetail} onClick={() => index === 0 && navigate("/music/favorite/song")}>
+                                        <div className={styles.chDetail} onClick={() => index === 0 ? navigate("/music/favorite/song") : handleBtn(item)}>
 
                                             <div className={styles.title}>
                                                 {item?.snippet?.title}
                                             </div>
-                                            {/* {item?.snippet?.channelTitle && */}
-                                                <div className={styles.chtitle}>
-                                                    {item?.snippet?.channelTitle}
-                                                </div>
-                                            {/* } */}
+                                            <div className={styles.chtitle}>
+                                                {item?.snippet?.channelTitle}
+                                            </div>
                                         </div>
 
                                         {index != 0 && <button className={styles.play} onClick={() => handleBtn(item)}>{playingVideoId?.id?.videoId === item?.id?.videoId && playing ? <i className="fa-solid fa-pause"></i> : <i className="fa-solid fa-play"></i>}</button>}

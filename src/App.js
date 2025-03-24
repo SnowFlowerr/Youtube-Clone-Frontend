@@ -19,6 +19,7 @@ import Subscribes from "./components/subscribes/Subscribes";
 import VideoPlay from "./components/videoplay/VideoPlay";
 import { setSignin, setSignout } from "./redux/Data/signSlice";
 import { darkTheme, lightTheme } from "./themes";
+import { changeTheme } from "./redux/Data/themeSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,21 +27,27 @@ function App() {
   const [playingVideoId, setPlayingVideoId] = useState(null);
   const [playing, setPlaying] = useState(false);
   const location = useLocation();
+  const isDarkTheme = window.matchMedia("(prefers-color-scheme: dark)");
   
   useEffect(()=>{
     if(localStorage.getItem('theme')===null){
       localStorage.setItem('theme',true)
+
+      if (!isDarkTheme.matches) {
+        dispatch(changeTheme())
+      }
     }
+    
   },[])
   useEffect(() => {
     async function currentUser() {
         try {
-            const userD = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/users/get`,
+            const userD = await axios.get(`http://localhost:8000/api/users/get`,
                 { withCredentials: true }
             )
             // console.log(userD)
             if(userD?.data?.success===false){
-              const userData = await axios.post("https://video-streaming-app-backend-r6e3.onrender.com/api/auth/logout", {}, { withCredentials: true });
+              const userData = await axios.post("http://localhost:8000/api/auth/logout", {}, { withCredentials: true });
                 dispatch(setSignout())
             }
             else{

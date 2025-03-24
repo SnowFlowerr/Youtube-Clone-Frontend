@@ -54,7 +54,7 @@ export default function MusicCategory({category, playingVideoId, playing, setPla
         <div className={styles.mainBox}>
             {
                 songs.map((item, index) =>
-                    <div className={styles.cards}>
+                    <div className={styles.cards} onClick={()=>handleBtn(item)} key={index}>
                         <div className={styles.album}>
                             <img src={item?.snippet?.thumbnails?.medium?.url} alt={item?.snippet?.title} />
                             <button className={styles.play} onClick={()=>handleBtn(item)}>{playingVideoId?.id?.videoId===item?.id?.videoId && playing?<i className="fa-solid fa-pause"></i>:<i className="fa-solid fa-play"></i>}</button>

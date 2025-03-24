@@ -21,9 +21,10 @@
     margin-bottom: 30px;
 }
 .view{
-    font-size: 25px;
+    font-size: 24px;
     font-weight: 700;
     margin-bottom: 10px;
+    margin-top: 15px;
 }
 .userProfile{
     /* width: 100%; */
