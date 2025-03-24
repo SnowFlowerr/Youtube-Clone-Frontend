@@ -34,7 +34,7 @@ export default function ShortsCard({ video, index }) {
     // useEffect(() => {
     //     async function currentUser() {
     //         try {
-    //             const userD = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/users/get/${video?.userId}`,
+    //             const userD = await axios.get(`http://localhost:8000/api/users/get/${video?.userId}`,
     //                 { withCredentials: true }
     //             )
     //             setUser(userD.data)

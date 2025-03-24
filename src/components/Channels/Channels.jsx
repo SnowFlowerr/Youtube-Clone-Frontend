@@ -43,7 +43,7 @@ export default function Channels() {
     async function currentUser() {
         try {
             const userD = await axios.get(
-                `https://video-streaming-app-backend-r6e3.onrender.com/api/users/get/${id}`,
+                `http://localhost:8000/api/users/get/${id}`,
                 { withCredentials: true }
             );
             setUser(userD.data);
@@ -59,7 +59,7 @@ export default function Channels() {
 
     async function issubscribe() {
         try {
-            const userD = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/users/issubscribe/${id}`,
+            const userD = await axios.get(`http://localhost:8000/api/users/issubscribe/${id}`,
                 { withCredentials: true }
             )
             setisSubs(userD.data)
@@ -72,7 +72,7 @@ export default function Channels() {
     async function updateUser(url) {
         try {
             const userD = await axios.put(
-                `https://video-streaming-app-backend-r6e3.onrender.com/api/users/update/${id}`,
+                `http://localhost:8000/api/users/update/${id}`,
                 { bannerImg: url },
                 { withCredentials: true }
             );
@@ -86,7 +86,7 @@ export default function Channels() {
     async function updateIcon(url) {
         try {
             const userD = await axios.put(
-                `https://video-streaming-app-backend-r6e3.onrender.com/api/users/update/${id}`,
+                `http://localhost:8000/api/users/update/${id}`,
                 { img: url },
                 { withCredentials: true }
             );
@@ -101,7 +101,7 @@ export default function Channels() {
     async function currentShorts() {
         try {
             const short = await axios.get(
-                `https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/allcurrentshorts/${id}?limit=${20}`,
+                `http://localhost:8000/api/shorts/allcurrentshorts/${id}?limit=${20}`,
                 { withCredentials: true }
             );
             setShorts(short.data);
@@ -113,7 +113,7 @@ export default function Channels() {
     async function currentVideos() {
         try {
             const short = await axios.get(
-                `https://video-streaming-app-backend-r6e3.onrender.com/api/videos/allcurrentvideos/${id}?limit=${20}`,
+                `http://localhost:8000/api/videos/allcurrentvideos/${id}?limit=${20}`,
                 { withCredentials: true }
             );
             setVideos(short.data);
@@ -186,7 +186,7 @@ export default function Channels() {
         setisaboutChannel(false)
         try {
             const userD = await axios.put(
-                `https://video-streaming-app-backend-r6e3.onrender.com/api/users/update/${id}`,
+                `http://localhost:8000/api/users/update/${id}`,
                 { channelInfo: aboutChannel },
                 { withCredentials: true }
             );
@@ -202,7 +202,7 @@ export default function Channels() {
             if (isSubs) {
                 setisSubs(false)
                 setSubs(subs - 1)
-                await axios.delete(`https://video-streaming-app-backend-r6e3.onrender.com/api/users/unsubscribe/${id}`,
+                await axios.delete(`http://localhost:8000/api/users/unsubscribe/${id}`,
                     
                     { withCredentials: true }
                 );
@@ -211,7 +211,7 @@ export default function Channels() {
             else {
                 setisSubs(true)
                 setSubs(subs + 1)
-                await axios.put(`https://video-streaming-app-backend-r6e3.onrender.com/api/users/subscribe/${id}`,
+                await axios.put(`http://localhost:8000/api/users/subscribe/${id}`,
                     {},
                     { withCredentials: true }
                 );

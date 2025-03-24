@@ -19,7 +19,7 @@ export default function SimilarVideos({ current, setQueue, queue  }) {
     async function currentShorts() {
         try {
             const short = await axios.get(
-                `https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/?limit=${6}&skip=${0}`,
+                `http://localhost:8000/api/shorts/?limit=${6}&skip=${0}`,
                 { withCredentials: true }
             );
             setShorts(short.data);
@@ -31,7 +31,7 @@ export default function SimilarVideos({ current, setQueue, queue  }) {
     async function currentVideos() {
         try {
             const short = await axios.get(
-                `https://video-streaming-app-backend-r6e3.onrender.com/api/videos/random/vid/?limit=${10}&skip=${0}`,
+                `http://localhost:8000/api/videos/random/vid/?limit=${10}&skip=${0}`,
                 { withCredentials: true }
             );
             setVideos(short.data);

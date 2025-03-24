@@ -21,7 +21,7 @@ export default function SearchedVid() {
     useEffect(() => {
         const fetchShorts = async () => {
             try {
-                const res = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/search/${search}`)
+                const res = await axios.get(`http://localhost:8000/api/shorts/search/${search}`)
                 // console.log(res.data)
                 setsearchedShorts(res.data)
             }
@@ -31,7 +31,7 @@ export default function SearchedVid() {
         }
         const fetchVideos = async () => {
             try {
-                const res = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/videos/search/${search}`)
+                const res = await axios.get(`http://localhost:8000/api/videos/search/${search}`)
                 // console.log(res.data)
                 setsearchedVideo(res.data)
             }

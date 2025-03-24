@@ -23,7 +23,7 @@ export default function Home() {
     useEffect(() => {
         const fetchVideo = async () => {
             try {
-                const res = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/videos/?limit=${20}&skip=${skip}`)
+                const res = await axios.get(`http://localhost:8000/api/videos/?limit=${20}&skip=${skip}`)
                 // console.log(res.data)
                 if (res.data.length !== 0) {
                     setVideos([...videos, ...res.data])
@@ -44,7 +44,7 @@ export default function Home() {
     useEffect(() => {
         const fetchShorts = async () => {
             try {
-                const res = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/?limit=${6}&skip=${0}`)
+                const res = await axios.get(`http://localhost:8000/api/shorts/?limit=${6}&skip=${0}`)
                 // console.log(res.data)
                 setShorts(res.data)
             }

@@ -47,7 +47,7 @@ export default function Shorts() {
         async function fetchData1() {
             try {
                 if (id !== "url" && id) {
-                    const vidData = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/${id}`)
+                    const vidData = await axios.get(`http://localhost:8000/api/shorts/${id}`)
                     setvidData(vidData.data)
                 }
             }
@@ -61,7 +61,7 @@ export default function Shorts() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const videosData = await axios.get(`https://video-streaming-app-backend-r6e3.onrender.com/api/shorts/?limit=${5}&skip=${0}`)
+                const videosData = await axios.get(`http://localhost:8000/api/shorts/?limit=${5}&skip=${0}`)
 
                 // console.log(videosData.data)
                 if (videosData.data.length !== 0) {
