@@ -121,10 +121,12 @@
     font-size: 14px;
     display: flex;
     align-items: center;
-    margin-top: 24px;
+    /* border: 0.5px solid gray; */
+    /* margin-top: 24px; */
 }
 .tandc input{
     margin-right: 10px;
+    margin-top: 0px;
     width: 15px;
     height: 15px;
 }

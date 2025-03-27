@@ -16,6 +16,7 @@ export default function ForgetPass() {
     const [isOtp, setIsOtp] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
     const theme = useSelector((state) => state.theme.value)
+    const [viewPass, setviewPass] = useState(false);
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -104,7 +105,7 @@ export default function ForgetPass() {
                                     <label htmlFor="email">Email</label>
                                     <br />
                                     <input type="email" id='email' placeholder='Enter Your Email Here' onChange={handleChange} required style={theme ? { color: "white" } : {}} />
-                                    {resend && <div className={styles.submit}>
+                                    {resend && !isCorrect && <div className={styles.submit}>
                                         {err1 && <div className={styles.error}>{err1}</div>}
                                         <button type='submit' onClick={handleSubmitEmail}>Send OTP</button>
                                     </div>}
@@ -119,33 +120,38 @@ export default function ForgetPass() {
                                     </div>
                                 </div>}
                             </div>
-                            {isOtp && !isCorrect &&<div className={styles.submit}>
+                            {isOtp && !isCorrect && <div className={styles.submit}>
                                 {err2 && <div className={styles.error}>{err2}</div>}
                                 <button type='submit' onClick={handleSubmit}>Submit</button>
                             </div>}
                             {isCorrect && <>
-                            <div className={styles.inpData}>
-                                <div className={styles.username}>
-                                    <label htmlFor="pass">Password</label>
-                                    <br />
-                                    <input type="email" id='pass' placeholder='Enter Your Password Here' onChange={handlePassword} required style={theme ? { color: "white" } : {}} />
-                                    <div className={styles.submit}>
-                                    </div>
-                                    <div className={styles.password}>
-                                        <div className={styles.forg}>
-                                            <label htmlFor="cpass">Confirm Password</label>
-                                        </div>
+                                <div className={styles.inpData}>
+                                    <div className={styles.username}>
+                                        <label htmlFor="pass">Password</label>
                                         <br />
-                                        <div className={styles.viewPass}>
-                                            <input type="text" id='cpass' placeholder='Enter Your Confirm Password Here' onChange={handlePassword} required style={theme ? { color: "white" } : {}} />
+                                        <input type={viewPass?"text":"password"} id='pass' placeholder='Enter Your Password Here' onChange={handlePassword} required style={theme ? { color: "white" } : {}} />
+                                        <div className={styles.submit}>
                                         </div>
+                                        <div className={styles.password}>
+                                            <div className={styles.forg}>
+                                                <label htmlFor="cpass">Confirm Password</label>
+                                            </div>
+                                            <br />
+                                            <div className={styles.viewPass}>
+                                                <input type={viewPass?"text":"password"} id='cpass' placeholder='Enter Your Confirm Password Here' onChange={handlePassword} required style={theme ? { color: "white" } : {}} />
+                                                <button type='button' onClick={(e) => { e.preventDefault(); setviewPass(!viewPass) }}>{viewPass ? <i className="fa-solid fa-eye-slash"></i> : <i className="fa-solid fa-eye"></i>}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className={styles.tandc}>
+                                        <input type="checkbox" onClick={() => { setviewPass(!viewPass)}} />
+                                        <span>Show Password</span>
                                     </div>
                                 </div>
-                            </div>
-                            {isOtp && <div className={styles.submit}>
-                                {err3 && <div className={styles.error}>{err3}</div>}
-                                <button type='submit' onClick={handleFinalSubmit}>Submit</button>
-                            </div>}
+                                {isCorrect && <div className={styles.submit}>
+                                    {err3 && <div className={styles.error}>{err3}</div>}
+                                    <button type='submit' onClick={handleFinalSubmit}>Submit</button>
+                                </div>}
                             </>}
                         </form>
                     </div>

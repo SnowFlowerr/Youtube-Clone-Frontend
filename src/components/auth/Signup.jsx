@@ -168,7 +168,7 @@ export default function Signup() {
                                     <br />
                                     <div className={styles.viewPass}>
                                         <input type={viewPass ? "text" : "password"} id='password' placeholder='Enter Your Password Here' onChange={handleChange} required style={theme?{color:"white"}:{}}/>
-                                        <button type='button' onClick={(e) => { e.preventDefault(); setviewPass(!viewPass) }}>{viewPass ? <i className="fa-solid fa-eye-slash"></i> : <i className="fa-solid fa-eye"></i>}</button>
+                                        <button type='button' onClick={(e) => { e.preventDefault(); setviewPass(!viewPass) }}>{viewPass ? <i className="fa-solid fa-eye-slash" style={theme?{color:"white"}:{}}></i> : <i className="fa-solid fa-eye" style={theme?{color:"white"}:{}}></i>}</button>
                                     </div>
                                 </div>
                             </div>
