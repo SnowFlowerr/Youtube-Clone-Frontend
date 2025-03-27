@@ -32,7 +32,7 @@ export default function Cards({ video }) {
     //     async function currentUser() {
     //         try {
     //             const userD = await axios.get(
-    //                 `http://localhost:8000/api/users/get/${video?.userId}`,
+    //                 `https://video-streaming-app-backend-r6e3.onrender.com/api/users/get/${video?.userId}`,
     //                 { withCredentials: true }
     //             );
     //             setUser(userD.data);
