@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { darkTheme, lightTheme } from '../../themes'
 import Navbar from '../navbar/Navbar'
 import Sidenav from '../navbar/Sidenav'
@@ -15,6 +15,8 @@ export default function Histories() {
     const navigate = useNavigate()
     const [videoHistory, setvideoHistory] = useState([])
     const [videoLiked, setvideoLiked] = useState([])
+    const [musicHistory, setmusicHistory] = useState([])
+    const [musicLiked, setmusicLiked] = useState([])
     const [videoDisliked, setvideoDisliked] = useState([])
     const [videoSaved, setvideoSaved] = useState([])
     const [shortsHistory, setshortsHistory] = useState([])
@@ -22,6 +24,7 @@ export default function Histories() {
     const [shortsDisliked, setshortsDisliked] = useState([])
     const [shortsSaved, setshortsSaved] = useState([])
     const sign = useSelector((state) => state.sign.value)
+    let { category } = useParams();
 
     useEffect(() => {
         if(!sign){
@@ -162,12 +165,32 @@ export default function Histories() {
                         </div>
                     </div>
                     <div>
+                        <div className={styles.historyNav}>
+                            <div onClick={() => navigate("/history/videos")} style={theme ? category === "videos"?lightTheme:{borderBottom: "1px solid gray"} : category === "videos"?  darkTheme:{borderBottom: "1px solid gray"}} >
+                                Videos
+                            </div>
+                            <div onClick={() => navigate("/history/shorts")} style={theme ? category === "shorts"?lightTheme:{borderBottom: "1px solid gray"} : category === "shorts"?  darkTheme:{borderBottom: "1px solid gray"}} >
+                                Shorts
+                            </div>
+                            <div onClick={() => navigate("/history/music")} style={theme ? category === "music"?lightTheme:{borderBottom: "1px solid gray"} : category === "music"?  darkTheme:{borderBottom: "1px solid gray"}} >
+                                Music
+                            </div>
+                        </div>
                     {videoHistory?.length!==0 &&  <div>
                         <div className={styles.view}>Videos History ({videoHistory?.length})</div>
                         <History userData={videoHistory}></History>
                     </div>}
                     {shortsHistory?.length!==0 &&  <div>
                         <div className={styles.view}>Shorts History ({shortsHistory?.length})</div>
+                        <ShortsHistory userData={shortsHistory}/>
+                    </div>}
+
+                    {musicHistory?.length!==0 &&  <div>
+                        <div className={styles.view}>Music History ({videoHistory?.length})</div>
+                        <History userData={videoHistory}></History>
+                    </div>}
+                    {musicLiked?.length!==0 &&  <div>
+                        <div className={styles.view}>Music Liked ({shortsHistory?.length})</div>
                         <ShortsHistory userData={shortsHistory}/>
                     </div>}
 

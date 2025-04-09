@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { setSignin } from "../../redux/Data/signSlice";
 import logo from "../assets/Logo.png";
 import styles from "./ForgetPass.module.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function ForgetPass() {
     const [userInp, setUserInp] = useState({ email: "", otp: "" });
@@ -19,6 +21,40 @@ export default function ForgetPass() {
     const [viewPass, setviewPass] = useState(false);
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
+    const warning = (message) => {
+        toast.warning(message, {
+            position: "top-center",
+            autoClose: 500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    };
+    const error = (message) => {
+        toast.error(message, {
+            position: "top-center",
+            autoClose: 500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    };
+    const success = (message) => {
+        toast.success(message, {
+            position: "top-center",
+            autoClose: 500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    };
 
     function handleChange(e) {
         setUserInp({ ...userInp, [e.target.id]: e.target.value.trim() })
@@ -40,12 +76,14 @@ export default function ForgetPass() {
                 { withCredentials: true });
             setResend(false)
             setIsOtp(true)
+            success("OTP Sent to your Email")
             setTimeout(() => {
                 setResend(true)
             }, 60000)
         }
         catch (err) {
             setErr1(err?.response?.data?.message)
+            warning("Error to send OTP try again")
         }
     }
 
@@ -60,10 +98,12 @@ export default function ForgetPass() {
                 { withCredentials: true });
             setIsCorrect(true)
             dispatch(setSignin(userData.data))
+            success("OTP Matched User Signed In")
 
         }
         catch (err) {
             setErr2(err?.response?.data?.message)
+            error("Wrong OTP")
         }
     }
     async function handleFinalSubmit(e) {
@@ -79,12 +119,23 @@ export default function ForgetPass() {
         }
         catch (err) {
             setErr3(err?.response?.data?.message)
+            error(err?.response?.data?.message)
         }
     }
 
-
     return (
         <div className={styles.mainBox} style={theme ? { backgroundColor: "white" } : { backgroundColor: "black" }}>
+            <ToastContainer
+                position="top-center"
+                autoClose={500}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
             <div className={styles.bigBox} style={theme ? { backgroundColor: "black", color: "white" } : {}}>
                 <div className={styles.box}>
                     <div className={styles.logo}>

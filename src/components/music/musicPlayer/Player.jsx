@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import ReactPlayer from "react-player/youtube";
 import "./Player.module.css";
 
-function Player({ playingVideoId, playing, setPlaying }) {
+function Player({ playing, setPlaying, title, channel, thumbnail, id }) {
 
     const [volume, setVolume] = useState(50)
     const [played, setPlayed] = useState(0);
@@ -15,10 +15,10 @@ function Player({ playingVideoId, playing, setPlaying }) {
     const [bufferedTime, setBufferedTime] = useState(0);
 
     useEffect(() => {
-        if (playingVideoId) {
+        if (id) {
             setPlaying(true)
         }
-    }, [playingVideoId])
+    }, [id])
 
     async function togglePlayPause() {
         await setPlaying(!playing);
@@ -58,17 +58,17 @@ function Player({ playingVideoId, playing, setPlaying }) {
 
     return (
         <>
-            <div className={playingVideoId ? styles.mainBox : styles.mainBox2}>
+            <div className={id ? styles.mainBox : styles.mainBox2}>
                 <div className={styles.album}>
                     <div className={styles.cover}>
-                        <img src={playingVideoId?.snippet.thumbnails.default.url} alt={playingVideoId?.snippet.title} height={"100%"} width={"100%"} />
+                        <img src={thumbnail} alt={title} height={"100%"} width={"100%"} />
                     </div>
                     <div>
                         <div className={styles.title}>
-                            {playingVideoId?.snippet.title}
+                            {title}
                         </div>
                         <div className={styles.chtitle}>
-                            {playingVideoId?.snippet?.channelTitle}
+                            {channel}
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@ function Player({ playingVideoId, playing, setPlaying }) {
             </div>
             <ReactPlayer
                 ref={playerRef}
-                url={`https://www.youtube.com/watch?v=${playingVideoId?.id.videoId}`}
+                url={`https://www.youtube.com/watch?v=${id}`}
                 playing={playing}
                 volume={volume / 100}
                 controls={false}

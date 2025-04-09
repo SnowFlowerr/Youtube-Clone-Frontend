@@ -50,6 +50,14 @@ export default function MusicCategory({category, playingVideoId, playing, setPla
             setPlaying(!playing)
         }
     }
+    function handleFav(item){
+        if(!playingVideoId || playingVideoId?.id?.videoId!==item?.id?.videoId){
+            setPlayingVideoId(item)
+        }
+        else{
+            setPlaying(!playing)
+        }
+    }
     return (
         <div className={styles.mainBox}>
             {
@@ -58,6 +66,7 @@ export default function MusicCategory({category, playingVideoId, playing, setPla
                         <div className={styles.album}>
                             <img src={item?.snippet?.thumbnails?.medium?.url} alt={item?.snippet?.title} />
                             <button className={styles.play} onClick={()=>handleBtn(item)}>{playingVideoId?.id?.videoId===item?.id?.videoId && playing?<i className="fa-solid fa-pause"></i>:<i className="fa-solid fa-play"></i>}</button>
+                            <button className={styles.favorite} onClick={() => handleFav(item)}>{playingVideoId?.id?.videoId === item?.id?.videoId && playing ? <i className="fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>}</button>
                         </div>
                         <div className={styles.title}>
                             {item?.snippet?.title}

@@ -49,12 +49,12 @@ export default function Sidenav() {
                             <span>Home</span>
                         </div>
                     </Link>
-                    <a href="/shorts/url" className={styles.shorts} style={theme ? shorts ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : shorts ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme} >
+                    <Link to="/shorts/url" className={styles.shorts} style={theme ? shorts ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : shorts ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme} >
                         <div className={styles.contain}>
                             {shorts ? <i className="fa-solid fa-circle-play fa-bounce"></i> : <i className="fa-solid fa-circle-play"></i>}
                             <span>Shorts</span>
                         </div>
-                    </a>
+                    </Link>
                     <Link to="/music" className={styles.music} style={theme ? music ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : music ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme} >
                         <div className={styles.contain}>
                             {music ? <i className="fa-solid fa-music fa-bounce"></i> : <i className="fa-solid fa-music"></i>}
@@ -68,7 +68,7 @@ export default function Sidenav() {
                         </div>
                     </Link>
                     {sign &&
-                        <Link to="/history" style={theme ? history ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : history ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme} >
+                        <Link to="/history/videos" style={theme ? history ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : history ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme} >
                             <div className={styles.contain}>
                                 {history ? <i className="fa-solid fa-clock-rotate-left fa-bounce"></i> : <i className="fa-solid fa-clock-rotate-left"></i>}
                                 <span>History</span>
@@ -97,13 +97,13 @@ export default function Sidenav() {
                                 <span>Home</span>
                             </div>
                         </Link>
-                        <a href="/shorts/url" style={theme ? shorts ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : shorts ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme}>
+                        <Link to="/shorts/url" style={theme ? shorts ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : shorts ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme}>
                             <div>
                                 {shorts ? <i className="fa-solid fa-circle-play fa-bounce"></i> : <i className="fa-solid fa-circle-play"></i>}
                                 <br />
                                 <span>Shorts</span>
                             </div>
-                        </a>
+                        </Link>
                         <div className={styles.upload} style={theme ? darkTheme : lightTheme}>
                             <div onClick={() => setisUpload(true)}>
                                 <i className="fa-solid fa-upload"></i>
@@ -128,7 +128,7 @@ export default function Sidenav() {
                                 </div>
                             </Link>}
                         {sign &&
-                            <Link to="/history" className={styles.history} style={theme ? history ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : history ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme}>
+                            <Link to="/history/videos" className={styles.history} style={theme ? history ? { backgroundColor: "rgb(60, 60, 60)", color: "white" } : darkTheme : history ? { backgroundColor: "rgb(220, 220, 220)", color: "black" } : lightTheme}>
                                 <div>
                                     {history ? <i className="fa-solid fa-clock-rotate-left fa-bounce"></i> : <i className="fa-solid fa-clock-rotate-left"></i>}
                                     <br />

@@ -64,7 +64,6 @@ function App() {
     currentUser()
 }, [])
 
-
   return (
     <div className={styles.mainBox} style={theme?darkTheme:lightTheme}>
         <Routes>
@@ -75,7 +74,7 @@ function App() {
           <Route path='/player/:id' element={<VideoPlay />} />
           <Route path='/searchedvideo/:search' element={<SearchedVid />} />
           <Route path='/shorts/:id' element={<Shorts />} />
-          <Route path='/history' element={<History />} />
+          <Route path='/history/:category' element={<History />} />
           <Route path='/subscribes' element={<Subscribes />} />
           <Route path='/channels/:id/:category' element={<Channels />} />
           <Route path='/music' element={<MusicHome playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying}/>} />
@@ -83,7 +82,9 @@ function App() {
           <Route path='/music/favorite/song' element={<FavMusic playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying}/>} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
-        {location.pathname.includes('music') && <Player playingVideoId={playingVideoId} playing={playing} setPlaying={setPlaying}></Player>}
+        {/* {location.pathname.includes('music') &&  */}
+        <Player playingVideoId={playingVideoId} playing={playing} id={playingVideoId?.id.videoId} channel={playingVideoId?.snippet?.channelTitle} title={playingVideoId?.snippet.title} thumbnail={playingVideoId?.snippet.thumbnails.default.url} setPlaying={setPlaying}></Player>
+        {/* } */}
     </div>
   );
 }

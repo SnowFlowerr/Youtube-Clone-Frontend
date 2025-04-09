@@ -43,17 +43,12 @@ export default function ShortsHistory({userData}) {
                     userData?.map((video) =>
                         <div className={styles.Shortscontainer} key={video?._id} ref={widthRef}>
                             <div className={styles.shortsThumbnail} ref={thumbnailRef}>
-                                <a href={`shorts/${video?.videoId._id}`}>
+                                <a href={`/shorts/${video?.videoId._id}`}>
                                     <img src={video?.videoId.imageUrl} width="100%" height="100%" alt="thumbnail" />
                                 </a>
                                 <div className={styles.duration}>{getDuration(video?.videoId.duration)}</div>
                             </div>
                             <div className={styles.videoDetail} style={theme ? darkTheme : lightTheme}>
-                                {/* <div className={styles.icon}>
-                                    <a href="/userDetail/userid">
-                                        <img src={"https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0dXJlfGVufDB8MHwwfHx8MA%3D%3D"} width="100%" height="100%" alt="icon" />
-                                    </a>
-                                </div> */}
                                 <div className={styles.details}>
                                     <a href={`/shorts/${video?.videoId._id}`} style={theme ? { color: "white" } : { color: "black" }}>
                                         <div className={styles.title}>
