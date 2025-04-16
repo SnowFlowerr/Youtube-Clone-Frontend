@@ -15,6 +15,13 @@
     padding: 10px;
     position: relative;
 }
+.pro{
+    text-align: center;
+    align-content: center;
+    height: 100%;
+    font-size: 600%;
+    background-color: aqua;
+}
 .banner{
     width: 100%;
     aspect-ratio:50/9;
@@ -73,8 +80,9 @@
     font-size: 16px;
     cursor: pointer;
 }
-.userIcon:hover .addIcon{
+.userIcon:hover > .addIcon{
     display: block;
+    background-color: rgb(0, 0, 0,0.9);
 }
 .userIcon:hover img{
     opacity: 0.5;

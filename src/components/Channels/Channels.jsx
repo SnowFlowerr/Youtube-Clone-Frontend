@@ -194,7 +194,7 @@ export default function Channels() {
         } catch (err) {
             console.log(err);
         }
-        
+
     }
 
     async function handleSubscribe() {
@@ -203,7 +203,7 @@ export default function Channels() {
                 setisSubs(false)
                 setSubs(subs - 1)
                 await axios.delete(`https://video-streaming-app-backend-r6e3.onrender.com/api/users/unsubscribe/${id}`,
-                    
+
                     { withCredentials: true }
                 );
                 console.log("Unsubscribe")
@@ -277,26 +277,28 @@ export default function Channels() {
                     }
                     <div className={styles.userDetails}>
                         <div className={styles.userIcon}>
-                            <img src={icon} alt="userIcon" width="100%" height="100%" />
-                            {id===sign._id &&
+                            <div className={styles.pro}>{icon === "img" ? sign?.name.substr(0, 1) :
+                                <img src={icon} alt="userIcon" width="100%" height="100%" />}
+                            </div>
+                            {id === sign._id &&
                                 <div className={styles.addIcon}>
-                                <div>
-                                    <input type="file" accept='image/jpg, image/jpeg,, image/png, image/svg, image/webp, image/avif' className={styles.uploadThumb} id='icon' onChange={handleChangeIcon} />
-                                    <label htmlFor="icon">
-                                        <div className={styles.uploadIcon} style={theme ? {} : { outlineColor: "black", color: "black" }}>
+                                    <div>
+                                        <input type="file" accept='image/jpg, image/jpeg,, image/png, image/svg, image/webp, image/avif' className={styles.uploadThumb} id='icon' onChange={handleChangeIcon} />
+                                        <label htmlFor="icon">
+                                            <div className={styles.uploadIcon} style={theme ? {} : { outlineColor: "black", color: "black" }}>
 
-                                            <div className={styles.TextIcon}>
-                                                <i className="fa-regular fa-file-image"></i> {user?.img ? " Change Icon" : " Upload Icon"}
-                                            </div>
-                                            {progIcon !== 0 &&
-                                                <div className={styles.progressIcon}>
-                                                    <Progress progress={progIcon}></Progress>
+                                                <div className={styles.TextIcon}>
+                                                    <i className="fa-regular fa-file-image"></i> {user?.img ? " Change Icon" : " Upload Icon"}
                                                 </div>
-                                            }
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>}
+                                                {progIcon !== 0 &&
+                                                    <div className={styles.progressIcon}>
+                                                        <Progress progress={progIcon}></Progress>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>}
                         </div>
                         <div className={styles.userDet}>
                             <div className={styles.name}>
@@ -315,7 +317,7 @@ export default function Channels() {
                                             ref={textRef}
                                             onChange={textChange}
                                             value={aboutChannel}
-                                            style={theme?{}:{borderColor:"black",color:"black"}}
+                                            style={theme ? {} : { borderColor: "black", color: "black" }}
                                         />
                                         <div className={styles.textBtn}>
                                             <button onClick={() => { setisaboutChannel(false); setaboutChannel(user.channelInfo) }}>cancel</button>
@@ -334,7 +336,7 @@ export default function Channels() {
                                                     setisaboutChannel(() => true);
                                                     setTimeout(() => {
                                                         textRef.current &&
-                                                        textRef.current.focus()
+                                                            textRef.current.focus()
                                                         autosize();
                                                     }, 0)
                                                 }
@@ -382,7 +384,7 @@ export default function Channels() {
                                             {
                                                 shorts.map((video, index) =>
                                                     index < 6 &&
-                                                    <ShortsCard video={video} key={index} index={index} seteditingData={seteditingData} setisEditing={setisEditing} setisShorts={setisShorts} isfeatured={true}/>
+                                                    <ShortsCard video={video} key={index} index={index} seteditingData={seteditingData} setisEditing={setisEditing} setisShorts={setisShorts} isfeatured={true} />
                                                 )
                                             }
                                         </div>

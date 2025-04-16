@@ -2,11 +2,11 @@ import axios from "axios";
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { setSignin } from "../../redux/Data/signSlice";
 import logo from "../assets/Logo.png";
 import styles from "./ForgetPass.module.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 export default function ForgetPass() {
     const [userInp, setUserInp] = useState({ email: "", otp: "" });

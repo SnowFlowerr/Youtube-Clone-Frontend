@@ -22,14 +22,40 @@ export default function Signup() {
     const [prog, setProg] = useState(0)
 
     function handleChange(e) {
-        if(e.target.id==="email"){
+        if (e.target.id === "email") {
             setUser({ ...user, [e.target.id]: e.target.value.trim().toLowerCase() })
         }
-        else{
-            setUser({ ...user, [e.target.id]: e.target.value.trim() })
+        if (e.target.id === "password") {
+            setUser({ ...user, [e.target.id]: e.target.value.trim()})
+            validatePassword(e.target.value.trim())
         }
-        setErr("")
+        else {
+            setUser({ ...user, [e.target.id]: e.target.value.trim() })
+            setErr("")
+        }
     }
+    function validatePassword(password) {
+        if (password.length < 8) {
+            setErr("Password must be at least 8 characters long.");
+        }
+        else if (!/[a-z]/.test(password)) {
+            setErr("Password must contain at least one lowercase letter.");
+        }
+        else if (!/[A-Z]/.test(password)) {
+            setErr("Password must contain at least one uppercase letter.");
+        }
+        else if (!/\d/.test(password)) {
+            setErr("Password must contain at least one number.");
+        }
+        else if (!/[@$!%*?&#^]/.test(password)) {
+            setErr("Password must contain at least one special character (@$!%*?&#^).");
+        }
+        else{
+            setErr("")
+            return true
+        }
+    }
+
 
     async function uploadThumbnail(e) {
         const file = e.target.files[0]
@@ -70,6 +96,9 @@ export default function Signup() {
         else if (tc === false) {
             return setErr("Agree to the Terms and Policy")
         }
+        if(!validatePassword(user.password)){
+            return setErr("Password is not valid")
+        }
         try {
             const userData = await axios.post("https://video-streaming-app-backend-r6e3.onrender.com/api/auth/signup", { name: user.name, username: user.username, email: user.email, password: user.password, img: icon?.secure_url }, { withCredentials: true });
 
@@ -83,40 +112,40 @@ export default function Signup() {
     }
 
     const logGoogleUser = async () => {
-        try{
+        try {
             const response = await signInWithGooglePopup();
             // console.log(response.user);
             GoogleLogin(response.user)
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     }
     const GoogleLogin = async (data) => {
-        try{
-            setLoading(()=>true)
+        try {
+            setLoading(() => true)
             const response = await axios.post(`https://video-streaming-app-backend-r6e3.onrender.com/api/auth/googlelogin`,
-                {name:data.displayName, username:data.displayName, email:data.email, img:data.photoURL},
-                {withCredentials:true},
+                { name: data.displayName, username: data.displayName, email: data.email, img: data.photoURL },
+                { withCredentials: true },
             )
             dispatch(setSignin(response.data))
             console.log("User signed in")
             // console.log(userData)
             navigate("/")
-            setLoading(()=>false)
+            setLoading(() => false)
             // console.log(response.user);
 
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     }
 
     return (
-        <div className={styles.mainBox} style={theme?{backgroundColor:"white"}:{backgroundColor:"black"}}>
+        <div className={styles.mainBox} style={theme ? { backgroundColor: "white" } : { backgroundColor: "black" }}>
             {/* <Progress progress={prog}></Progress> */}
 
-            <div className={styles.bigBox} style={theme?{backgroundColor:"black",color:"white"}:{}}>
+            <div className={styles.bigBox} style={theme ? { backgroundColor: "black", color: "white" } : {}}>
                 <div className={styles.box}>
                     <div className={styles.logo}>
                         <img src={logo} alt="logo" height="50px" />
@@ -129,7 +158,7 @@ export default function Signup() {
                             <span className={styles.smallText}>Enter Your Details to create an Account</span>
                         </div>
                         <div className={styles.signBtn}>
-                            <button style={theme?{backgroundColor:"black",color:"white"}:{}} onClick={logGoogleUser}>
+                            <button style={theme ? { backgroundColor: "black", color: "white" } : {}} onClick={logGoogleUser}>
                                 <img src={google} alt="googleImg" height="50%" /> Sign In with Google</button>
                             <label htmlFor="channelIcon" className={styles.iconlabel}>
                                 {prog !== 0 &&
@@ -149,17 +178,17 @@ export default function Signup() {
                                 <div className={styles.name}>
                                     <label htmlFor="name">Name</label>
                                     <br />
-                                    <input type="text" id='name' placeholder='Enter Your Name Here' onChange={handleChange} required style={theme?{color:"white"}:{}}/>
+                                    <input type="text" id='name' placeholder='Enter Your Name Here' onChange={handleChange} required style={theme ? { color: "white" } : {}} />
                                 </div>
                                 <div className={styles.username}>
                                     <label htmlFor="username">Username</label>
                                     <br />
-                                    <input type="text" id='username' placeholder='Enter Your Username Here' onChange={handleChange} required style={theme?{color:"white"}:{}}/>
+                                    <input type="text" id='username' placeholder='Enter Your Username Here' onChange={handleChange} required style={theme ? { color: "white" } : {}} />
                                 </div>
                                 <div className={styles.email}>
                                     <label htmlFor="email">Email Address</label>
                                     <br />
-                                    <input type="email" id='email' placeholder='Enter Your Email Here' onChange={handleChange} required style={theme?{color:"white"}:{}} />
+                                    <input type="email" id='email' placeholder='Enter Your Email Here' onChange={handleChange} required style={theme ? { color: "white" } : {}} />
                                 </div>
                                 <div className={styles.password}>
                                     <div className={styles.forg}>
@@ -167,8 +196,8 @@ export default function Signup() {
                                     </div>
                                     <br />
                                     <div className={styles.viewPass}>
-                                        <input type={viewPass ? "text" : "password"} id='password' placeholder='Enter Your Password Here' onChange={handleChange} required style={theme?{color:"white"}:{}}/>
-                                        <button type='button' onClick={(e) => { e.preventDefault(); setviewPass(!viewPass) }}>{viewPass ? <i className="fa-solid fa-eye-slash" style={theme?{color:"white"}:{}}></i> : <i className="fa-solid fa-eye" style={theme?{color:"white"}:{}}></i>}</button>
+                                        <input type={viewPass ? "text" : "password"} id='password' placeholder='Enter Your Password Here' onChange={handleChange} required style={theme ? { color: "white" } : {}} />
+                                        <button type='button' onClick={(e) => { e.preventDefault(); setviewPass(!viewPass) }}>{viewPass ? <i className="fa-solid fa-eye-slash" style={theme ? { color: "white" } : {}}></i> : <i className="fa-solid fa-eye" style={theme ? { color: "white" } : {}}></i>}</button>
                                     </div>
                                 </div>
                             </div>
@@ -187,18 +216,18 @@ export default function Signup() {
                     </div>
                     <div className={styles.rights}>2024, All Rights Reserved</div>
                     {loading &&
-                <div className={styles.loading}>
-                    <div className={styles.loadingBar} style={theme?{}:{borderColor:"black"}}>
-                    </div>
-                        {loading}
-                </div>}
+                        <div className={styles.loading}>
+                            <div className={styles.loadingBar} style={theme ? {} : { borderColor: "black" }}>
+                            </div>
+                            {loading}
+                        </div>}
                 </div>
 
 
 
                 <div className={styles.detail}>
-                    <div className={styles.func} style={theme?{backgroundColor:"white",color:"black"}:{}}>
-                        
+                    <div className={styles.func} style={theme ? { backgroundColor: "white", color: "black" } : {}}>
+
                     </div>
                 </div>
             </div>
