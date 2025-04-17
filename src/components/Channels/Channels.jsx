@@ -277,7 +277,7 @@ export default function Channels() {
                     }
                     <div className={styles.userDetails}>
                         <div className={styles.userIcon}>
-                            <div className={styles.pro}>{icon === "img" ? sign?.name.substr(0, 1) :
+                            <div className={styles.pro}>{sign.img && icon === "img" ? sign?.name.substr(0, 1) :
                                 <img src={icon} alt="userIcon" width="100%" height="100%" />}
                             </div>
                             {id === sign._id &&
