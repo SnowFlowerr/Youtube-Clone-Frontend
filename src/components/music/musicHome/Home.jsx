@@ -96,22 +96,22 @@ export default function Home({ playingVideoId, setPlayingVideoId, playing, setPl
                             <div>
                                 <h2>Pop Songs</h2>
                                 <br />
-                                <MusicCategory category={"Pop"} playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying} />
+                                <MusicCategory category={"official Pop"} playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying} />
                             </div>
                             <div>
                                 <h2>Dance Songs</h2>
                                 <br />
-                                <MusicCategory category={"Dance"} playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying} />
+                                <MusicCategory category={"official Dance"} playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying} />
                             </div>
                             <div>
                                 <h2>Rock Songs</h2>
                                 <br />
-                                <MusicCategory category={"Rock"} playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying} />
+                                <MusicCategory category={"official Rock"} playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying} />
                             </div>
                             <div>
                                 <h2>Raps Songs</h2>
                                 <br />
-                                <MusicCategory category={"Raps"} playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying} />
+                                <MusicCategory category={"official Raps"} playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} playing={playing} setPlaying={setPlaying} />
                             </div>
                         </div>
                     </div>
